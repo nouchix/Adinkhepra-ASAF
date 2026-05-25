@@ -1,0 +1,13 @@
+# ASAF Release Checksums -- v0.1.0
+# Generated: 2026-05-25T22:42:38Z
+# Algorithm: SHA-256
+#
+# Verify on Windows:
+#   (Get-FileHash bin\adinkhepra-windows-amd64.exe -Algorithm SHA256).Hash
+# Verify on Linux:
+#   sha256sum bin/adinkhepra-windows-amd64.exe
+#
+# Build: GOEXPERIMENT=boringcrypto CGO_ENABLED=1 (FIPS 140-3)
+# Compiler: gcc 16.1.0 (x86_64-posix-seh-ucrt MinGW-W64)
+
+C327301BFD32FD67287B62AC90DCF0EC51FDCDB1880CA5FF135E2EC98C6166E5  bin/adinkhepra-windows-amd64.exe  (180181783 bytes)

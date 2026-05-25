@@ -1,0 +1,15 @@
+# Binaries are distributed as GitHub Release assets, not committed to the repo.
+# Download from: https://github.com/nouchix/Adinkhepra-ASAF/releases
+bin/*.exe
+bin/*.elf
+bin/adinkhepra-*
+bin/apiserver-*
+bin/licensemock-*
+
+# Build artifacts
+*.o
+*.a
+
+# Temp
+*.tmp
+*.log
