@@ -1,5 +1,5 @@
-# ASAF Release Checksums -- v0.1.0
-# Generated: 2026-05-25T22:42:38Z
+# ASAF Release Checksums -- v0.1.1
+# Generated: 2026-05-25T22:58:22Z
 # Algorithm: SHA-256
 #
 # Verify on Windows:
@@ -9,5 +9,6 @@
 #
 # Build: GOEXPERIMENT=boringcrypto CGO_ENABLED=1 (FIPS 140-3)
 # Compiler: gcc 16.1.0 (x86_64-posix-seh-ucrt MinGW-W64)
+# Fix: scan --target now defaults to local agent (sovereign) not cloud API
 
-C327301BFD32FD67287B62AC90DCF0EC51FDCDB1880CA5FF135E2EC98C6166E5  bin/adinkhepra-windows-amd64.exe  (180181783 bytes)
+487EFDC95BC83E002CD1F91BEF9A8B670CC6E07043EB985537CD528B64860BDB  bin/adinkhepra-windows-amd64.exe  (180215357 bytes)
