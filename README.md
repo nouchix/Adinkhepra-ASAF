@@ -6,7 +6,7 @@
 [![FIPS 140-3](https://img.shields.io/badge/FIPS-140--3_BoringCrypto-green?style=for-the-badge)](#build)
 [![Release](https://img.shields.io/badge/RELEASE-v0.1.0-brightgreen?style=for-the-badge)](#releases)
 
-**By NouchiX (Sacred Knowledge Inc)**  
+**By NouchiX (SecRed Knowledge Inc)**  
 **Stable release artifacts for the ASAF sovereign binary.**
 
 > Development branch: [EtherVerseCodeMate/giza-cyber-shield](https://github.com/EtherVerseCodeMate/giza-cyber-shield)  
