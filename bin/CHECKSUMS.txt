@@ -1,13 +1,10 @@
 # ASAF Release Checksums -- v0.1.2
-# Generated: 2026-05-25T23:11:37Z
+# Generated: 2026-05-25T23:17:11Z
 # Algorithm: SHA-256
 #
-# Verify on Windows:
-#   (Get-FileHash bin\adinkhepra-windows-amd64.exe -Algorithm SHA256).Hash
+# Verify: (Get-FileHash bin\adinkhepra-windows-amd64.exe -Algorithm SHA256).Hash
 #
-# Build: GOEXPERIMENT=boringcrypto CGO_ENABLED=1 (FIPS 140-3)
+# Build: GOEXPERIMENT=boringcrypto CGO_ENABLED=1 (FIPS 140-3 + NIST PQC FIPS 203/204)
 # Compiler: gcc 16.1.0 (x86_64-posix-seh-ucrt MinGW-W64)
-# Changes: validate now runs real crypto tests (ML-DSA-65, Kyber-1024, DAG, ASAF)
-#          run now starts HTTP agent on :45444 (was exiting immediately on Windows)
 
-824FA11AEC9AAEBDB048B9B54DDCDAE48E1C06628BEFF3301E7255C00361F781  bin/adinkhepra-windows-amd64.exe  (180226222 bytes)
+16A5C45A66B98865979366BB60BC3A00255A37110D9BE9BBB7DD78CE42184960  bin/adinkhepra-windows-amd64.exe  (180228749 bytes)
