@@ -1,10 +1,5 @@
-# ASAF Release Checksums -- v0.1.2
-# Generated: 2026-05-25T23:17:11Z
-# Algorithm: SHA-256
-#
-# Verify: (Get-FileHash bin\adinkhepra-windows-amd64.exe -Algorithm SHA256).Hash
-#
-# Build: GOEXPERIMENT=boringcrypto CGO_ENABLED=1 (FIPS 140-3 + NIST PQC FIPS 203/204)
-# Compiler: gcc 16.1.0 (x86_64-posix-seh-ucrt MinGW-W64)
+# ASAF Release Checksums -- v0.1.3
+# Generated: 2026-05-26T00:50:12Z
+# Fix: scan --target fully sovereign (ServeMux prefix route, fast port scan)
 
-16A5C45A66B98865979366BB60BC3A00255A37110D9BE9BBB7DD78CE42184960  bin/adinkhepra-windows-amd64.exe  (180228749 bytes)
+5530E2FC4A08F24D0D4A0ACC622909C836C15304E444CB2C493C7586142269E1  bin/adinkhepra-windows-amd64.exe  (180250928 bytes)
