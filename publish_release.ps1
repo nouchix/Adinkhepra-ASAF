@@ -1,6 +1,6 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 
-# ── Get GitHub token from git credential manager ──────────────────────────────
+# == Get GitHub token from git credential manager ==============================
 $proc = [System.Diagnostics.Process]::new()
 $proc.StartInfo.FileName = "git"
 $proc.StartInfo.Arguments = "credential fill"
@@ -18,7 +18,7 @@ $TOKEN = ($out -split "`n" | Where-Object { $_ -match "^password=" } |
     ForEach-Object { $_ -replace "^password=", "" } | Select-Object -First 1).Trim()
 if (-not $TOKEN) { Write-Error "No GitHub token found"; exit 1 }
 
-# ── Copy binary ───────────────────────────────────────────────────────────────
+# == Copy binary ===============================================================
 $SRC  = "C:\Users\intel\blackbox\khepra protocol\bin\adinkhepra.exe"
 $DEST = "C:\Users\intel\blackbox\Adinkhepra-ASAF\bin\adinkhepra-windows-amd64.exe"
 Copy-Item $SRC $DEST -Force
@@ -28,7 +28,7 @@ $HASH = (Get-FileHash $DEST -Algorithm SHA256).Hash
 $SIZE = (Get-Item $DEST).Length
 Write-Host "SHA-256: $HASH ($SIZE bytes)"
 
-# ── Write CHECKSUMS ───────────────────────────────────────────────────────────
+# == Write CHECKSUMS ===========================================================
 $TS = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 $CHECKSUMS = "# ASAF Release Checksums -- v0.1.3`n# Generated: $TS`n# Fix: scan --target fully sovereign`n`n$HASH  bin/adinkhepra-windows-amd64.exe  ($SIZE bytes)`n"
 [System.IO.File]::WriteAllText(
@@ -37,7 +37,7 @@ $CHECKSUMS = "# ASAF Release Checksums -- v0.1.3`n# Generated: $TS`n# Fix: scan 
     [System.Text.UTF8Encoding]::new($false)
 )
 
-# ── Commit + tag + push ───────────────────────────────────────────────────────
+# == Commit + tag + push =======================================================
 Set-Location "C:\Users\intel\blackbox\Adinkhepra-ASAF"
 git add bin/CHECKSUMS.txt
 git commit -m "release: v0.1.3 -- scan --target fully sovereign" 2>&1 | Write-Host
@@ -45,7 +45,7 @@ git tag -a v0.1.3 -m "v0.1.3 scan --target fully sovereign" 2>&1 | Write-Host
 git push origin main --tags 2>&1 | Write-Host
 Write-Host "Tagged and pushed v0.1.3"
 
-# ── Create GitHub release ─────────────────────────────────────────────────────
+# == Create GitHub release =====================================================
 $apiHeaders = @{
     Authorization  = "token $TOKEN"
     Accept         = "application/vnd.github+json"
@@ -65,7 +65,7 @@ $release = Invoke-RestMethod `
     -Method Post -Headers $apiHeaders -Body $releaseBody -UseBasicParsing
 Write-Host "Release: $($release.html_url)"
 
-# ── Upload binary ─────────────────────────────────────────────────────────────
+# == Upload binary =============================================================
 $uploadUrl = "https://uploads.github.com/repos/nouchix/Adinkhepra-ASAF/releases/$($release.id)/assets?name=adinkhepra-windows-amd64.exe"
 $uploadHeaders = @{
     Authorization  = "token $TOKEN"
