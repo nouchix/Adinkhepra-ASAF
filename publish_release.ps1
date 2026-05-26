@@ -29,7 +29,7 @@ Write-Host "SHA-256: $HASH ($SIZE bytes)"
 
 # Write CHECKSUMS
 $cs  = "# ASAF Release Checksums -- v0.1.3`n"
-$cs += "# Generated: $(Get-Date -Format 'yyyy-MM-ddTHH:mm:ssZ' -AsUTC)`n"
+$cs += "# Generated: $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ'))`n"
 $cs += "# Fix: scan --target fully sovereign (ServeMux prefix route, fast port scan)`n`n"
 $cs += "$HASH  bin/adinkhepra-windows-amd64.exe  ($SIZE bytes)`n"
 [System.IO.File]::WriteAllText("C:\Users\intel\blackbox\Adinkhepra-ASAF\bin\CHECKSUMS.txt", $cs, [System.Text.UTF8Encoding]::new($false))
