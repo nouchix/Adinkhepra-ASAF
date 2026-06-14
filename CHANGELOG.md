@@ -5,7 +5,7 @@
 ### What Changed
 
 - **scan --target now defaults to the local agent** (http://127.0.0.1:45444)
-  instead of the cloud SaaS (https://agent.souhimbou.org).
+  instead of the cloud SaaS (https://agent.souhimbou.ai).
   Sovereign Profile B users no longer need a cloud API key to run a scan.
 - **Clear pre-flight error** if the local agent isn't running:
   `
@@ -23,7 +23,7 @@
   # Terminal 2
   .\adinkhepra-windows-amd64.exe scan --target <host>
   `
-- To use the cloud SaaS explicitly set ASAF_API_URL=https://agent.souhimbou.org
+- To use the cloud SaaS explicitly set ASAF_API_URL=https://agent.souhimbou.ai
 
 **SHA-256:** 487EFDC95BC83E002CD1F91BEF9A8B670CC6E07043EB985537CD528B64860BDB
 
