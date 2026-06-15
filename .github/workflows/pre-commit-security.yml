@@ -1,0 +1,103 @@
+name: Pre-Commit Security Scan (ASAF Release)
+# Mirrors khepra-protocol pre-commit-security.yml adapted for a binary release repo.
+# Ensures no secrets or private keys are committed alongside release binaries.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security-scan:
+    name: Release Artifact Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog — detect committed secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+      - name: Check for private key files in commit
+        run: |
+          echo "🔍 Checking for private key files..."
+          PRIVATE_KEYS=$(find . \
+            -not -path "./.git/*" \
+            -not -name "*.pub" \
+            -not -name "*.adinkhepra.json" \
+            \( -name "*.pem" -o -name "*.key" -o -name "id_*" -o -name "*.sealed" -o -name "*.khepra" \) \
+            2>/dev/null || true)
+          if [ -n "$PRIVATE_KEYS" ]; then
+            echo "❌ Potential private key files found:"
+            echo "$PRIVATE_KEYS"
+            echo ""
+            echo "Only .pub files should be committed. Private keys must stay local."
+            exit 1
+          fi
+          echo "✅ No private key files in repository"
+
+      - name: Validate CHECKSUMS.txt format
+        run: |
+          if [ ! -f "bin/CHECKSUMS.txt" ]; then
+            echo "⚠️ bin/CHECKSUMS.txt missing — required for all binary releases"
+            exit 1
+          fi
+          python3 - <<'EOF'
+          import re, sys
+          sha256 = re.compile(r'^[0-9a-f]{64}\s{2}\S+$')
+          errors = []
+          with open("bin/CHECKSUMS.txt") as f:
+              for i, line in enumerate(f, 1):
+                  line = line.rstrip()
+                  if not line or line.startswith('#'): continue
+                  if not sha256.match(line):
+                      errors.append(f"Line {i}: bad format: {line!r}")
+          if errors:
+              for e in errors: print(f"❌ {e}")
+              sys.exit(1)
+          print("✅ CHECKSUMS.txt format valid")
+          EOF
+
+      - name: Verify binary checksums
+        run: |
+          echo "🔍 Verifying binary SHA-256 checksums..."
+          FAILURES=0
+          while IFS= read -r line; do
+            [[ -z "$line" || "$line" == \#* ]] && continue
+            HASH=$(echo "$line" | awk '{print $1}')
+            FILE=$(echo "$line" | awk '{print $2}')
+            if [ ! -f "bin/$FILE" ]; then
+              echo "⚠️ SKIP: bin/$FILE not present"
+              continue
+            fi
+            ACTUAL=$(sha256sum "bin/$FILE" | awk '{print $1}')
+            if [ "$HASH" = "$ACTUAL" ]; then
+              echo "✅ OK: $FILE"
+            else
+              echo "❌ TAMPERED: $FILE — expected $HASH, got $ACTUAL"
+              FAILURES=$((FAILURES+1))
+            fi
+          done < "bin/CHECKSUMS.txt"
+          if [ "$FAILURES" -gt 0 ]; then
+            echo "❌ $FAILURES checksum failure(s)"
+            exit 1
+          fi
+          echo "✅ All binary checksums verified"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo ""
+          echo "✅ ASAF release security scan complete"
+          echo "  - TruffleHog secret scan"
+          echo "  - Private key file detection"
+          echo "  - CHECKSUMS.txt format validation"
+          echo "  - Binary integrity verification"

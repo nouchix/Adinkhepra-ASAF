@@ -1,0 +1,137 @@
+name: Release Artifact Integrity Verification
+# OWASP SDLC Phase: Verification + Operation
+# Verifies SHA-256 checksums of all release binaries on every push.
+# Ensures supply chain integrity of distributed binaries.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "bin/**"
+      - "CHECKSUMS.txt"
+  pull_request:
+    branches: [main]
+    paths:
+      - "bin/**"
+      - "CHECKSUMS.txt"
+  workflow_dispatch:
+
+jobs:
+  # ── 1. Verify binary checksums ───────────────────────────────────────────────
+  verify-checksums:
+    name: Verify Binary SHA-256 Checksums
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify all binaries match CHECKSUMS.txt
+        run: |
+          echo "=== Verifying binary integrity against CHECKSUMS.txt ==="
+          if [ ! -f "bin/CHECKSUMS.txt" ]; then
+            echo "❌ FAIL: bin/CHECKSUMS.txt not found"
+            exit 1
+          fi
+
+          FAILURES=0
+          while IFS= read -r line; do
+            # Skip blank lines and comments
+            [[ -z "$line" || "$line" == \#* ]] && continue
+            
+            EXPECTED_HASH=$(echo "$line" | awk '{print $1}')
+            FILENAME=$(echo "$line" | awk '{print $2}')
+            
+            if [ ! -f "bin/$FILENAME" ]; then
+              echo "⚠️  SKIP: bin/$FILENAME not found in this checkout"
+              continue
+            fi
+            
+            ACTUAL_HASH=$(sha256sum "bin/$FILENAME" | awk '{print $1}')
+            
+            if [ "$EXPECTED_HASH" = "$ACTUAL_HASH" ]; then
+              echo "✅ OK: bin/$FILENAME"
+            else
+              echo "❌ TAMPERED: bin/$FILENAME"
+              echo "   Expected: $EXPECTED_HASH"
+              echo "   Got:      $ACTUAL_HASH"
+              FAILURES=$((FAILURES + 1))
+            fi
+          done < "bin/CHECKSUMS.txt"
+
+          if [ "$FAILURES" -gt 0 ]; then
+            echo ""
+            echo "❌ $FAILURES checksum verification failure(s) — binary tampering detected!"
+            exit 1
+          fi
+          echo ""
+          echo "✅ All checksums verified — supply chain integrity confirmed"
+
+  # ── 2. Secret scanning — ensure no keys landed in release artifacts ──────────
+  secret-scan:
+    name: Secret Scan (TruffleHog)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog — detect committed secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+  # ── 3. Verify CHECKSUMS.txt format and completeness ──────────────────────────
+  checksums-lint:
+    name: CHECKSUMS.txt Format Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate CHECKSUMS.txt format
+        run: |
+          python3 - <<'EOF'
+          import os, sys, hashlib, re
+
+          checksums_path = "bin/CHECKSUMS.txt"
+          bin_dir = "bin"
+
+          if not os.path.exists(checksums_path):
+              print(f"❌ FAIL: {checksums_path} missing")
+              sys.exit(1)
+
+          sha256_pattern = re.compile(r'^[0-9a-f]{64}$')
+          documented = set()
+          errors = []
+
+          with open(checksums_path) as f:
+              for i, line in enumerate(f, 1):
+                  line = line.strip()
+                  if not line or line.startswith('#'):
+                      continue
+                  parts = line.split()
+                  if len(parts) != 2:
+                      errors.append(f"Line {i}: invalid format (expected '<hash> <filename>')")
+                      continue
+                  hash_val, filename = parts
+                  if not sha256_pattern.match(hash_val):
+                      errors.append(f"Line {i}: invalid SHA-256 hash for {filename}")
+                  documented.add(filename)
+
+          # Find binaries not in CHECKSUMS.txt
+          for fname in os.listdir(bin_dir):
+              if fname == "CHECKSUMS.txt" or os.path.isdir(os.path.join(bin_dir, fname)):
+                  continue
+              if fname not in documented:
+                  errors.append(f"Binary '{fname}' exists in bin/ but is NOT in CHECKSUMS.txt")
+
+          if errors:
+              for e in errors: print(f"❌ {e}")
+              sys.exit(1)
+          else:
+              print(f"✅ CHECKSUMS.txt valid — {len(documented)} entries documented")
+          EOF
