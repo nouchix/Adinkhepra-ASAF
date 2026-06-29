@@ -1,0 +1,18 @@
+{
+  "id": "HOKTSMGNPHRMARYTGUEIASITSRHEPMAHEHGKOIUUHIYAKRGESGTLANMYMGHYSLKH",
+  "parents": [
+    "UALMOLSPSANSIRGUAKYRMTTOOEHGEETHEUARINMYAAPOMGTEGIMSMSNAASUPHOGK"
+  ],
+  "action": "ASAF_SESSION_END",
+  "symbol": "Eban",
+  "time": "2026-06-28T03:58:46Z",
+  "pqc_metadata": {
+    "action_count": "1",
+    "agent_id": "validate-agent",
+    "agent_type": "sovereign-self-test",
+    "duration_sec": "0",
+    "framework": "ASAF",
+    "session_id": "asaf-0d32472d4406e2d6104e86e5db078f82"
+  },
+  "hash": "HOKTSMGNPHRMARYTGUEIASITSRHEPMAHEHGKOIUUHIYAKRGESGTLANMYMGHYSLKH"
+}
