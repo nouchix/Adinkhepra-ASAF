@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --asaf-navy: #0A0E1A;
+  --asaf-dark: #0D1117;
+  --asaf-blue: #4EAEF5;
+  --asaf-blue-light: #7BC8FF;
+  --asaf-gold: #D4AF37;
+  --asaf-border: rgba(78, 174, 245, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--asaf-navy);
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Glow utility classes */
+.glow-blue {
+  box-shadow: 0 0 30px rgba(78, 174, 245, 0.3), 0 0 60px rgba(78, 174, 245, 0.1);
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(78, 174, 245, 0.5);
+}
+
+/* Animated scan line */
+.scan-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(78, 174, 245, 0.6), transparent);
+  animation: scanLine 4s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(78, 174, 245, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(78, 174, 245, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(78, 174, 245, 0.2);
+}
+
+/* Pricing card highlight */
+.card-featured {
+  background: linear-gradient(135deg, rgba(78, 174, 245, 0.08) 0%, rgba(78, 174, 245, 0.02) 100%);
+  border-color: rgba(78, 174, 245, 0.4) !important;
+}
+
+/* Button shimmer */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4EAEF5, #2D8FE0);
+  transition: all 0.3s ease;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::after {
+  left: 120%;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5BBEFF, #3A9FF0);
+  box-shadow: 0 0 30px rgba(78, 174, 245, 0.4);
+}
+
+/* Tier badge */
+.tier-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Section fade-in on scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0A0E1A; }
+::-webkit-scrollbar-thumb { background: rgba(78, 174, 245, 0.3); border-radius: 2px; }
