@@ -979,7 +979,7 @@ function PartnershipsSection() {
 function Footer() {
   return (
     <footer className="py-12 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 mb-8">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-8 mb-8">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-7 h-7 rounded-lg bg-[#4EAEF5]/10 border border-[#4EAEF5]/20 flex items-center justify-center">
@@ -992,24 +992,57 @@ function Footer() {
             Agentic Security Attestation Framework. Sovereign CMMC compliance for the DIB. Post-quantum certified. USPTO #73565085.
           </p>
           <p className="text-xs text-slate-800">
-            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · SDVOSB<br />
+            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · VOSB<br />
             IP exclusively licensed from Souhimbou Doh Kone LLC
           </p>
         </div>
         <div>
           <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">Compliance Docs</h4>
           <ul className="space-y-2">
-            {['PQC-01-STIG-V1R1 Whitepaper', 'PQC STIG Technical Brief', 'CNSA 2.0 Gap Analysis', 'OSCAL Evidence Package', 'Godfather Report Sample'].map(i => (
-              <li key={i}><a href="#" className="text-xs text-slate-700 hover:text-slate-400 transition-colors">{i}</a></li>
+            {[['PQC-01-STIG-V1R1 Whitepaper', '/whitepaper'], ['PQC STIG Technical Brief', '/whitepaper'], ['CNSA 2.0 Gap Analysis', '/whitepaper#timeline'], ['OSCAL Evidence Package', '#pricing'], ['Godfather Report Sample', '#findings']].map(([i, h]) => (
+              <li key={i}><Link href={h} className="text-xs text-slate-700 hover:text-slate-400 transition-colors">{i}</Link></li>
             ))}
           </ul>
         </div>
         <div>
           <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">Company</h4>
           <ul className="space-y-2">
-            {[['SDVOSB Contracting', 'mailto:sales@adinkhepra.com'], ['Security Policy', '#'], ['Patent #73565085', '#'], ['sales@adinkhepra.com', 'mailto:sales@adinkhepra.com']].map(([l, h]) => (
+            {[['SDVOSB Contracting', 'mailto:contact@nouchix.com'], ['Security Policy', '#'], ['Patent #73565085', '#'], ['contact@nouchix.com', 'mailto:contact@nouchix.com']].map(([l, h]) => (
               <li key={l}><a href={h} className="text-xs text-slate-700 hover:text-slate-400 transition-colors">{l}</a></li>
             ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">NouchiX Ecosystem</h4>
+          <ul className="space-y-3">
+            <li>
+              <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
+                 className="group flex flex-col gap-0.5">
+                <span className="text-xs text-slate-500 group-hover:text-[#1a9fe8] transition-colors font-semibold">nouchix.com ↗</span>
+                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">Parent company · SecRed Knowledge Inc.</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.souhimbou.ai" target="_blank" rel="noopener noreferrer"
+                 className="group flex flex-col gap-0.5">
+                <span className="text-xs text-slate-500 group-hover:text-[#818cf8] transition-colors font-semibold">souhimbou.ai ↗</span>
+                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">Agentic SOC platform · AI Security Architect</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://registry.modelcontextprotocol.io/?q=khepra" target="_blank" rel="noopener noreferrer"
+                 className="group flex flex-col gap-0.5">
+                <span className="text-xs text-slate-500 group-hover:text-[#e5a54b] transition-colors font-semibold">PQC-Khepra MCP ↗</span>
+                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">MCP Registry · Free community tier</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/nouchix" target="_blank" rel="noopener noreferrer"
+                 className="group flex flex-col gap-0.5">
+                <span className="text-xs text-slate-500 group-hover:text-[#0A66C2] transition-colors font-semibold">LinkedIn ↗</span>
+                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">NouchiX / SecRed Knowledge Inc.</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -1041,6 +1074,11 @@ export default function HomePage() {
             <div className="w-7 h-7 rounded-lg bg-[#1a9fe8]/10 border border-[#1a9fe8]/20 flex items-center justify-center">
               <Shield className="w-3.5 h-3.5 text-[#1a9fe8]" />
             </div>
+            <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
+               className="text-[9px] font-mono text-slate-600 hover:text-slate-400 transition-colors hidden sm:block">
+              nouchix.com
+            </a>
+            <span className="text-slate-800 text-xs hidden sm:block">/</span>
             <span className="text-white font-bold text-sm">AdinKhepra</span>
             <span className="text-[#1a9fe8] font-bold text-xs tracking-widest">ASAF</span>
           </div>
