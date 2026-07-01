@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 
 import { useState, useEffect, useRef } from 'react'
 import Script from 'next/script'
@@ -6,7 +7,7 @@ import {
   Shield, Lock, ArrowRight, ChevronDown, Award,
   AlertTriangle, CheckCircle, FileText, Zap,
   Network, Cpu, Globe, Building2, Key, Clock,
-  TrendingDown, DollarSign, ExternalLink
+  TrendingDown, DollarSign, ExternalLink, Terminal
 } from 'lucide-react'
 
 // ─── Canonical ASAF Stripe plans ───────────────────────────────────────────
@@ -564,11 +565,11 @@ function UrgencySection() {
               <div className="text-xs font-mono text-[#1a9fe8]">PQC-01-STIG-V1R1 — §1.1 The Policy Gap</div>
               <div className="text-xs text-slate-600">NouchiX / SecRed Knowledge Inc. · June 2026</div>
             </div>
-            <a href="#" className="flex items-center gap-1.5 text-xs font-mono text-[#1a9fe8] hover:text-white transition-colors border border-[#1a9fe8]/30 px-3 py-1.5 rounded-lg">
+            <Link href="/whitepaper" className="flex items-center gap-1.5 text-xs font-mono text-[#1a9fe8] hover:text-white transition-colors border border-[#1a9fe8]/30 px-3 py-1.5 rounded-lg">
               <FileText className="w-3 h-3" />
               Read Whitepaper
               <ExternalLink className="w-3 h-3" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -774,16 +775,199 @@ function PricingSection() {
           ))}
         </div>
 
-        {/* SDVOSB block */}
-        <div className="mt-10 p-5 rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/3 text-center">
-          <div className="flex items-center justify-center gap-2 mb-1.5">
-            <Award className="w-4 h-4 text-[#D4AF37]" />
-            <span className="text-[#D4AF37] font-bold text-sm">SDVOSB Sole-Source Available — Up to $5M</span>
+        {/* SDVOSB / Iron Bank block */}
+        <div className="mt-10 space-y-4">
+          {/* SDVOSB */}
+          <div className="p-5 rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/3 text-center">
+            <div className="flex items-center justify-center gap-2 mb-1.5">
+              <Award className="w-4 h-4 text-[#D4AF37]" />
+              <span className="text-[#D4AF37] font-bold text-sm">SDVOSB Sole-Source Pending Certification — Up to $5M</span>
+            </div>
+            <p className="text-xs text-slate-500 max-w-xl mx-auto">
+              SecRed Knowledge Inc. · Current VOSB · Army Signal Corps 25S SATCOM · Active Secret Clearance.
+              Pursuing sole-source contracts up to $5M under SBA regulations.{' '}
+              <a href="mailto:contact@nouchix.com" className="text-[#D4AF37] hover:underline">contact@nouchix.com</a>
+            </p>
           </div>
-          <p className="text-xs text-slate-500 max-w-xl mx-auto">
-            SecRed Knowledge Inc. · Certified SDVOSB · Army Signal Corps 25S SATCOM · Active Secret Clearance.
-            Sole-source contracts up to $5M under SBA regulations. <a href="mailto:sales@adinkhepra.com" className="text-[#D4AF37] hover:underline">sales@adinkhepra.com</a>
-          </p>
+
+          {/* Iron Bank CTA — direct blocker removal */}
+          <div className="p-6 rounded-2xl border border-[#cc2a36]/25 bg-[#cc2a36]/5">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Building2 className="w-4 h-4 text-[#cc2a36]" />
+                  <span className="text-[#cc2a36] font-bold text-sm uppercase tracking-wide">DoD Program Offices — We Need You</span>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  AdinKhepra ASAF is <strong className="text-white">Repo One account live</strong> (CAC authenticated, Souhimbou Doh Kone). Iron Bank certification requires a
+                  DoD Program Office or Prime Contractor as Mission Owner. If your program needs sovereign CMMC compliance tooling
+                  with PQC attestation, you can co-submit us — and get free pilot access in return.
+                  Primes, Subs, and Government Business POCs: this is the ask.
+                </p>
+              </div>
+              <div className="flex-shrink-0">
+                <a href="mailto:contact@nouchix.com?subject=Iron%20Bank%20Mission%20Owner%20Inquiry&body=I%20represent%20[Program%20Office%2FOrganization]%20and%20am%20interested%20in%20co-submitting%20AdinKhepra%20ASAF%20to%20Iron%20Bank%20as%20Mission%20Owner."
+                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm border border-[#cc2a36]/40 bg-[#cc2a36]/10 text-[#fca5a5] hover:bg-[#cc2a36]/20 transition-colors whitespace-nowrap">
+                  <Shield className="w-4 h-4" />
+                  Become Mission Owner
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** MCP Registry CTA */
+function MCPCtaSection() {
+  return (
+    <section className="py-14 px-6 bg-[#050c16] border-t border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="p-6 rounded-2xl border border-[#e5a54b]/20 bg-gradient-to-r from-[#0d1117] to-[#0a0e1a] flex flex-col md:flex-row items-center gap-6">
+          <div className="w-10 h-10 rounded-xl bg-[#e5a54b]/10 border border-[#e5a54b]/25 flex items-center justify-center flex-shrink-0">
+            <Terminal className="w-5 h-5 text-[#e5a54b]" />
+          </div>
+          <div className="flex-1 text-center md:text-left">
+            <div className="text-[9px] font-mono text-[#e5a54b]/70 uppercase tracking-widest mb-1">Anthropic MCP Registry</div>
+            <h3 className="text-white font-bold text-base mb-1">
+              Run <code className="text-[#e5a54b] bg-[#e5a54b]/10 px-1.5 py-0.5 rounded text-sm">pqc_stig</code> directly in Claude Desktop, Cursor, or any MCP client
+            </h3>
+            <p className="text-xs text-slate-500">
+              <span className="text-slate-400 font-mono">io.github.nouchix/pqc-khepra-mcp</span>
+              {' · '}Free Community tier · ML-DSA-65 signed · 36K+ mappings · Air-gappable
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
+            <a href="https://registry.modelcontextprotocol.io/?q=khepra"
+               target="_blank" rel="noopener noreferrer"
+               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5a54b]/30 bg-[#e5a54b]/8 text-xs font-bold text-[#e5a54b] hover:bg-[#e5a54b]/15 transition-colors whitespace-nowrap">
+              <ExternalLink className="w-3.5 h-3.5" />
+              MCP Registry
+            </a>
+            <Link href="/whitepaper"
+               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#1a9fe8]/30 bg-[#1a9fe8]/8 text-xs font-bold text-[#1a9fe8] hover:bg-[#1a9fe8]/15 transition-colors whitespace-nowrap">
+              <FileText className="w-3.5 h-3.5" />
+              PQC-01-STIG Whitepaper
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Business Advisor — Donnie Yancey */
+function AdvisorSection() {
+  return (
+    <section className="py-16 px-6 bg-[#080f1c] border-t border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mb-2">Validation</div>
+          <h2 className="text-2xl font-black text-white">Advisory Board</h2>
+        </div>
+
+        <div className="max-w-2xl mx-auto">
+          <div className="p-6 rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-900/60 to-slate-800/20 flex flex-col sm:flex-row gap-6">
+            {/* Photo placeholder — drop public/donnie-yancey.jpg to activate */}
+            <div className="flex-shrink-0 flex flex-col items-center">
+              <div className="w-24 h-24 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/donnie-yancey.jpg"
+                  alt="Donnie Yancey — Lead Business Advisor"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    const fallback = (e.target as HTMLImageElement).nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+                <div className="hidden w-full h-full items-center justify-center text-3xl font-black text-slate-600">DY</div>
+              </div>
+              <div className="mt-2 text-[8px] font-mono text-slate-600 uppercase tracking-widest text-center">Lead Business<br />Advisor</div>
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-xl font-black text-white mb-3">Donnie Yancey</h3>
+              <ul className="space-y-2 mb-4">
+                {[
+                  'COO who scaled a SaaS company from $0 to $15M ARR in 3 years.',
+                  'UNC Kenan-Flagler Business School.',
+                  'Assigned 1:1 Business Mentor through the OneDay MBA program (Williams Jewels College).',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                    <span className="w-1.5 h-1.5 bg-[#1a9fe8] rounded-full flex-shrink-0 mt-1.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-slate-500 italic">
+                Actively advising on GTM execution, operational scaling, and revenue systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Partnerships & Ecosystem */
+function PartnershipsSection() {
+  const partners = [
+    {
+      name: 'Anthropic',
+      badge: 'Claude Partner Network',
+      detail: 'Official partner. Core AI infrastructure for agentic security products. ASAF runs on Claude Sonnet-4 in commercial tier.',
+      color: 'text-[#e17b4f]',
+      border: 'border-[#e17b4f]/25',
+      bg: 'bg-[#e17b4f]/5',
+      logo: '🤖',
+    },
+    {
+      name: 'HPE',
+      badge: 'Partner Program — Tier 2',
+      detail: 'Hewlett Packard Enterprise Solutions Provider since early stage. Enterprise hardware & infrastructure channel. Effective 9/16/2024.',
+      color: 'text-[#00b388]',
+      border: 'border-[#00b388]/25',
+      bg: 'bg-[#00b388]/5',
+      logo: '🖥️',
+    },
+    {
+      name: 'NSF I-Corps Alumni',
+      badge: 'UAlbany Innovation Center',
+      detail: 'R&D by former operators from Sandia National Labs & NSA-affiliated programs. NSA Center of Academic Excellence in Cyber Defense Education (CAE-CDE).',
+      color: 'text-[#1a9fe8]',
+      border: 'border-[#1a9fe8]/25',
+      bg: 'bg-[#1a9fe8]/5',
+      logo: '🔬',
+    },
+  ]
+
+  return (
+    <section className="py-16 px-6 border-t border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mb-2">Ecosystem</div>
+          <h2 className="text-2xl font-black text-white">Partnerships & Ecosystem</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {partners.map((p) => (
+            <div key={p.name} className={`p-5 rounded-2xl border ${p.border} ${p.bg}`}>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">{p.logo}</span>
+                <div>
+                  <div className={`font-black text-sm ${p.color}`}>{p.name}</div>
+                  <div className={`text-[9px] font-mono uppercase tracking-widest ${p.color}/70`}>{p.badge}</div>
+                </div>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">{p.detail}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -791,6 +975,7 @@ function PricingSection() {
 }
 
 /** Footer */
+
 function Footer() {
   return (
     <footer className="py-12 px-6 border-t border-white/5">
@@ -860,8 +1045,8 @@ export default function HomePage() {
             <span className="text-[#1a9fe8] font-bold text-xs tracking-widest">ASAF</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
-            {[['Live Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Whitepaper', '#']].map(([l, h]) => (
-              <a key={l} href={h} className="text-xs text-slate-500 hover:text-white transition-colors">{l}</a>
+            {[['Live Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Whitepaper', '/whitepaper']].map(([l, h]) => (
+              <Link key={l} href={h} className="text-xs text-slate-500 hover:text-white transition-colors">{l}</Link>
             ))}
           </div>
           <a href="#pricing" className="btn-primary px-4 py-2 rounded-lg text-xs font-bold text-white flex items-center gap-1.5">
@@ -876,6 +1061,9 @@ export default function HomePage() {
         <UrgencySection />
         <div id="findings"><FindingsSection /></div>
         <PricingSection />
+        <MCPCtaSection />
+        <AdvisorSection />
+        <PartnershipsSection />
         <Footer />
       </div>
     </main>
