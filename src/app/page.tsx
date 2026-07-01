@@ -876,7 +876,7 @@ function AdvisorSection() {
               <div className="w-24 h-24 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/donnie-yancey.jpg"
+                  src="/donnie-yancey.jpg.png"
                   alt="Donnie Yancey — Lead Business Advisor"
                   className="w-full h-full object-cover"
                   onError={(e) => {
