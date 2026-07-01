@@ -1097,85 +1097,136 @@ function PartnershipsSection() {
 
 function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-8 mb-8">
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 rounded-lg bg-[#4EAEF5]/10 border border-[#4EAEF5]/20 flex items-center justify-center">
-              <Shield className="w-3.5 h-3.5 text-[#4EAEF5]" />
+    <footer className="py-12 px-6 border-t border-white/5 bg-[#040a14]">
+      <div className="max-w-7xl mx-auto">
+        {/* Top grid */}
+        <div className="grid md:grid-cols-5 gap-8 mb-10">
+          {/* Brand column */}
+          <div className="md:col-span-2 space-y-4">
+            {/* Logo image */}
+            <div className="flex items-center gap-3">
+              {/* SVG graph icon matching brand */}
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="36" height="36" rx="9" fill="url(#footerGrad)"/>
+                <rect x="14" y="5" width="8" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <circle cx="18" cy="9" r="1.5" fill="#4DB5FF"/>
+                <line x1="18" y1="13" x2="18" y2="19" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <line x1="18" y1="19" x2="9" y2="26" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <line x1="18" y1="19" x2="27" y2="26" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <rect x="4" y="23" width="10" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <rect x="22" y="23" width="10" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+                <defs>
+                  <linearGradient id="footerGrad" x1="0" y1="0" x2="36" y2="36">
+                    <stop offset="0%" stopColor="#0d1628"/>
+                    <stop offset="100%" stopColor="#1a2540"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-white font-black text-base tracking-tight">AdinKhepra</span>
+                  <span className="text-[#4DB5FF] font-black text-xs tracking-[0.2em]">ASAF</span>
+                </div>
+                <div className="text-[9px] text-slate-500 font-mono">Agentic Security Attestation Framework</div>
+              </div>
             </div>
-            <span className="text-white font-bold">AdinKhepra</span>
-            <span className="text-[#4EAEF5] font-bold text-sm tracking-widest">ASAF</span>
+            <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
+              Sovereign CMMC compliance for the Defense Industrial Base.
+              Post-quantum certified. Built on the patent-pending KHEPRA Protocol.
+            </p>
+            <div className="text-[10px] text-slate-500 space-y-0.5">
+              <div>© 2026 SecRed Knowledge Inc. · EIN 99-0529252</div>
+              <div>Current VOSB · Army Signal Corps 25S SATCOM · USPTO #73565085</div>
+              <div className="text-slate-600">IP licensed from Souhimbou Doh Kone LLC</div>
+            </div>
+            {/* SecRed seal */}
+            <div className="flex items-center gap-2">
+              <img src="/secred-seal.png" alt="SecRed Knowledge Inc." className="w-10 h-10 rounded-full opacity-60" />
+              <span className="text-[9px] font-mono text-slate-600">SecRed+ Knowledge Inc.<br/>Securely Unlocking Sacred In Knowledge</span>
+            </div>
           </div>
-          <p className="text-xs text-slate-400 max-w-xs leading-relaxed mb-2">
-            Agentic Security Attestation Framework. Sovereign CMMC compliance for the DIB. Post-quantum certified. USPTO #73565085.
-          </p>
-          <p className="text-xs text-slate-800">
-            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · VOSB<br />
-            IP exclusively licensed from Souhimbou Doh Kone LLC
-          </p>
+
+          {/* Compliance Docs */}
+          <div>
+            <h4 className="text-[9px] font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Compliance Docs</h4>
+            <ul className="space-y-2.5">
+              {[
+                ['PQC-01-STIG-V1R1 Whitepaper', '/whitepaper'],
+                ['CNSA 2.0 Gap Analysis', '/whitepaper#timeline'],
+                ['OSCAL Evidence Package', '#pricing'],
+                ['Godfather Report Sample', '#findings'],
+                ['KHEPRA Protocol Overview', '/whitepaper'],
+              ].map(([label, href]) => (
+                <li key={label}>
+                  <Link href={href} className="text-xs text-slate-400 hover:text-white transition-colors">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="text-[9px] font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Company</h4>
+            <ul className="space-y-2.5">
+              {[
+                ['VOSB Contracting', 'mailto:contact@nouchix.com'],
+                ['Patent #73565085', '#'],
+                ['Security Policy', '#'],
+                ['contact@nouchix.com', 'mailto:contact@nouchix.com'],
+              ].map(([label, href]) => (
+                <li key={label}>
+                  <a href={href} className="text-xs text-slate-400 hover:text-white transition-colors">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* NouchiX Ecosystem */}
+          <div>
+            <h4 className="text-[9px] font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">NouchiX Ecosystem</h4>
+            <ul className="space-y-3">
+              {[
+                { label: 'nouchix.com', sub: 'Parent company', href: 'https://nouchix.com', color: 'group-hover:text-[#1a9fe8]' },
+                { label: 'souhimbou.ai', sub: 'Agentic SOC platform', href: 'https://www.souhimbou.ai', color: 'group-hover:text-violet-400' },
+                { label: 'PQC-Khepra MCP', sub: 'MCP Registry · Free tier', href: 'https://registry.modelcontextprotocol.io/?q=khepra', color: 'group-hover:text-amber-400' },
+                { label: 'LinkedIn', sub: 'NouchiX / SecRed', href: 'https://www.linkedin.com/company/nouchix', color: 'group-hover:text-[#0A66C2]' },
+              ].map(({ label, sub, href, color }) => (
+                <li key={label}>
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="group flex flex-col gap-0.5">
+                    <span className={`text-xs font-semibold text-slate-400 transition-colors ${color}`}>{label} ↗</span>
+                    <span className="text-[9px] text-slate-500 group-hover:text-slate-400 transition-colors">{sub}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">Compliance Docs</h4>
-          <ul className="space-y-2">
-            {[['PQC-01-STIG-V1R1 Whitepaper', '/whitepaper'], ['PQC STIG Technical Brief', '/whitepaper'], ['CNSA 2.0 Gap Analysis', '/whitepaper#timeline'], ['OSCAL Evidence Package', '#pricing'], ['Godfather Report Sample', '#findings']].map(([i, h]) => (
-              <li key={i}><Link href={h} className="text-xs text-slate-400 hover:text-white transition-colors">{i}</Link></li>
+
+        {/* Bottom bar — matches nouchix.com style */}
+        <div className="border-t border-white/5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono text-slate-500">
+            {['ML-DSA-65 (FIPS 204)', 'ML-KEM-768 (FIPS 203)', 'KHEPRA Protocol™', 'USPTO #73565085', 'Zero Telemetry', 'Air-Gappable'].map((t, i, a) => (
+              <span key={t} className="flex items-center gap-3">
+                {t}{i < a.length - 1 && <span className="text-slate-700">·</span>}
+              </span>
             ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">Company</h4>
-          <ul className="space-y-2">
-            {[['SDVOSB Contracting', 'mailto:contact@nouchix.com'], ['Security Policy', '#'], ['Patent #73565085', '#'], ['contact@nouchix.com', 'mailto:contact@nouchix.com']].map(([l, h]) => (
-              <li key={l}><a href={h} className="text-xs text-slate-400 hover:text-white transition-colors">{l}</a></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">NouchiX Ecosystem</h4>
-          <ul className="space-y-3">
-            <li>
-              <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
-                 className="group flex flex-col gap-0.5">
-                <span className="text-xs text-slate-500 group-hover:text-[#1a9fe8] transition-colors font-semibold">nouchix.com ↗</span>
-                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">Parent company · SecRed Knowledge Inc.</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.souhimbou.ai" target="_blank" rel="noopener noreferrer"
-                 className="group flex flex-col gap-0.5">
-                <span className="text-xs text-slate-500 group-hover:text-[#818cf8] transition-colors font-semibold">souhimbou.ai ↗</span>
-                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">Agentic SOC platform · AI Security Architect</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://registry.modelcontextprotocol.io/?q=khepra" target="_blank" rel="noopener noreferrer"
-                 className="group flex flex-col gap-0.5">
-                <span className="text-xs text-slate-500 group-hover:text-[#e5a54b] transition-colors font-semibold">PQC-Khepra MCP ↗</span>
-                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">MCP Registry · Free community tier</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/company/nouchix" target="_blank" rel="noopener noreferrer"
-                 className="group flex flex-col gap-0.5">
-                <span className="text-xs text-slate-500 group-hover:text-[#0A66C2] transition-colors font-semibold">LinkedIn ↗</span>
-                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">NouchiX / SecRed Knowledge Inc.</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-white/5 pt-5 flex flex-col md:flex-row items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3 text-[9px] font-mono text-slate-800">
-          {['ML-DSA-65 (FIPS 204)', 'ML-KEM-768 (FIPS 203)', 'KHEPRA Protocol', 'USPTO #73565085', 'Zero Telemetry'].map((t, i, a) => (
-            <span key={t} className="flex items-center gap-3">
-              {t}{i < a.length - 1 && <span className="text-slate-900">·</span>}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center gap-2 text-[9px] font-mono text-slate-800">
-          <Lock className="w-3 h-3" />
-          <span>Sovereign deployment · Zero egress · Air-gappable</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://nouchix.com/anthropic"
+              target="_blank" rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded border border-white/10 bg-white/5 hover:bg-white/10 text-[9px] font-mono text-slate-400 hover:text-white uppercase tracking-widest transition-all"
+            >
+              Anthropic Partner Portal
+            </a>
+            <a
+              href="https://nouchix.com/hpe"
+              target="_blank" rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded border border-white/10 bg-white/5 hover:bg-white/10 text-[9px] font-mono text-slate-400 hover:text-white uppercase tracking-widest transition-all"
+            >
+              HPE Partner Agreement
+            </a>
+          </div>
         </div>
       </div>
     </footer>
@@ -1186,34 +1237,64 @@ function Footer() {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#050c16]">
-      {/* Sticky nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050c16]/95 backdrop-blur border-b border-[#1a9fe8]/10">
-        <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#1a9fe8]/10 border border-[#1a9fe8]/20 flex items-center justify-center">
-              <Shield className="w-3.5 h-3.5 text-[#1a9fe8]" />
+
+      {/* FOMO pilot program banner */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[#D4AF37] text-[#0a0e1a] py-2 px-4 flex items-center justify-center gap-3 text-xs font-semibold">
+        <span className="hidden sm:inline">🛡️</span>
+        <span>Founding Pilot Program — Q3 2026 · <strong>3 of 5 deployment slots remaining.</strong> First cohort receives Iron Bank nomination support + dedicated onboarding.</span>
+        <a href="#pricing" className="ml-2 px-3 py-0.5 rounded bg-[#0a0e1a] text-[#D4AF37] text-[10px] font-bold tracking-wide hover:bg-[#1a2540] transition-colors whitespace-nowrap">Reserve Slot →</a>
+      </div>
+
+      {/* Sticky nav — sits below FOMO banner */}
+      <nav className="fixed top-[36px] left-0 right-0 z-40 bg-[#050c16]/97 backdrop-blur-sm border-b border-[#1a9fe8]/10">
+        <div className="max-w-7xl mx-auto px-5 py-2.5 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="36" height="36" rx="9" fill="url(#navGrad)"/>
+              <rect x="14" y="5" width="8" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <circle cx="18" cy="9" r="1.5" fill="#4DB5FF"/>
+              <line x1="18" y1="13" x2="18" y2="19" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <line x1="18" y1="19" x2="9" y2="26" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <line x1="18" y1="19" x2="27" y2="26" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <rect x="4" y="23" width="10" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <rect x="22" y="23" width="10" height="8" rx="2" stroke="#4DB5FF" strokeWidth="1.5"/>
+              <defs>
+                <linearGradient id="navGrad" x1="0" y1="0" x2="36" y2="36">
+                  <stop offset="0%" stopColor="#0d1628"/>
+                  <stop offset="100%" stopColor="#1a2540"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="flex flex-col">
+              <div className="flex items-baseline gap-1.5">
+                <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
+                   className="text-[9px] font-mono text-slate-500 hover:text-white transition-colors hidden sm:inline">nouchix.com /</a>
+                <span className="text-white font-black text-sm tracking-tight">AdinKhepra</span>
+                <span className="text-[#4DB5FF] font-black text-xs tracking-[0.2em]">ASAF</span>
+              </div>
+              <div className="text-[8px] font-mono text-slate-600 hidden sm:block tracking-widest uppercase">
+                Anthropic Claude Partner · Current VOSB · HPE Partner
+              </div>
             </div>
-            <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
-               className="text-[9px] font-mono text-slate-500 hover:text-white transition-colors hidden sm:block">
-              nouchix.com
-            </a>
-            <span className="text-slate-400 text-xs hidden sm:block">/</span>
-            <span className="text-white font-bold text-sm">AdinKhepra</span>
-            <span className="text-[#1a9fe8] font-bold text-xs tracking-widest">ASAF</span>
           </div>
-          <div className="hidden md:flex items-center gap-6">
-            {[['Live Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Whitepaper', '/whitepaper']].map(([l, h]) => (
-              <Link key={l} href={h} className="text-xs text-slate-500 hover:text-white transition-colors">{l}</Link>
+
+          {/* Nav links */}
+          <div className="hidden md:flex items-center gap-5">
+            {[['Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Whitepaper', '/whitepaper']].map(([l, h]) => (
+              <Link key={l} href={h} className="text-xs font-medium text-slate-400 hover:text-white transition-colors tracking-wide">{l}</Link>
             ))}
           </div>
+
+          {/* CTA */}
           <a href="#pricing" className="btn-primary px-4 py-2 rounded-lg text-xs font-bold text-white flex items-center gap-1.5">
-            Get CMMC Baseline <ArrowRight className="w-3 h-3" />
+            Deploy Now <ArrowRight className="w-3 h-3" />
           </a>
         </div>
       </nav>
 
-      {/* Page sections — offset for fixed nav */}
-      <div className="pt-10">
+      {/* Page sections — offset for double nav (banner + sticky) */}
+      <div className="pt-[88px]">
         <DemoHero />
         <VideoStripSection />
         <UrgencySection />
