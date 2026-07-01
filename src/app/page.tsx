@@ -439,7 +439,7 @@ function DemoHero() {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="ciso@company.mil"
                 required
-                className="w-full px-3 py-2.5 bg-white/5 border border-[#1a9fe8]/20 rounded-lg text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#1a9fe8]/50 transition-all"
+                className="w-full px-3 py-2.5 bg-white/5 border border-[#1a9fe8]/20 rounded-lg text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#1a9fe8]/50 transition-all"
               />
               <button
                 type="submit"
@@ -452,7 +452,7 @@ function DemoHero() {
                 }
               </button>
             </form>
-            <p className="text-[10px] text-slate-600 mt-2 text-center">
+            <p className="text-[10px] text-slate-500 mt-2 text-center">
               $5K Advisory · credited 100% toward $45K Pilot Deployment
             </p>
           </div>
@@ -651,7 +651,7 @@ function FindingsSection() {
           <a href="#pricing" className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white">
             Scan My Network <ArrowRight className="w-4 h-4" />
           </a>
-          <p className="text-xs text-slate-600 mt-2">Starts with $5K Remediation Advisory · real scan · real SPRS score</p>
+          <p className="text-xs text-slate-500 mt-2">Starts with $5K Remediation Advisory · real scan · real SPRS score</p>
         </div>
       </div>
     </section>
@@ -697,7 +697,7 @@ function PricingSection() {
           <input
             type="email" value={activeEmail} onChange={e => setActiveEmail(e.target.value)}
             placeholder="your@company.com — pre-fills checkout"
-            className="flex-1 px-4 py-2.5 bg-white/5 border border-[#4EAEF5]/20 rounded-lg text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-[#4EAEF5]/40 transition-all"
+            className="flex-1 px-4 py-2.5 bg-white/5 border border-[#4EAEF5]/20 rounded-lg text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#4EAEF5]/40 transition-all"
           />
         </div>
 
@@ -765,11 +765,11 @@ function PricingSection() {
                     : <>{plan.cta}<ArrowRight className="w-3.5 h-3.5" /></>
                   }
                 </button>
-                {plan.key === 'advisory' && <p className="text-center text-[10px] text-slate-600 mt-1.5">→ Credited toward <button onClick={() => setExpanded('pilot')} className="text-[#4EAEF5] hover:underline">Pilot Deployment</button></p>}
-                {plan.key === 'pilot' && <p className="text-center text-[10px] text-slate-600 mt-1.5">→ Scales to <button onClick={() => setExpanded('program_std')} className="text-violet-400 hover:underline">Program Standard</button></p>}
-                {plan.key === 'program_std' && <p className="text-center text-[10px] text-slate-600 mt-1.5">→ Add SBOM/KEV with <button onClick={() => setExpanded('program_adv')} className="text-amber-400 hover:underline">Program Advanced</button></p>}
-                {plan.key === 'program_adv' && <p className="text-center text-[10px] text-slate-600 mt-1.5">→ Full autonomy with <button onClick={() => setExpanded('enterprise')} className="text-[#D4AF37] hover:underline">Enterprise</button></p>}
-                {plan.key === 'enterprise' && <p className="text-center text-[10px] text-slate-600 mt-1.5">→ Multi-site with <button onClick={() => setExpanded('enterprise_multi')} className="text-rose-400 hover:underline">Multi-Site</button></p>}
+                {plan.key === 'advisory' && <p className="text-center text-[10px] text-slate-500 mt-1.5">→ Credited toward <button onClick={() => setExpanded('pilot')} className="text-[#4EAEF5] hover:underline">Pilot Deployment</button></p>}
+                {plan.key === 'pilot' && <p className="text-center text-[10px] text-slate-500 mt-1.5">→ Scales to <button onClick={() => setExpanded('program_std')} className="text-violet-400 hover:underline">Program Standard</button></p>}
+                {plan.key === 'program_std' && <p className="text-center text-[10px] text-slate-500 mt-1.5">→ Add SBOM/KEV with <button onClick={() => setExpanded('program_adv')} className="text-amber-400 hover:underline">Program Advanced</button></p>}
+                {plan.key === 'program_adv' && <p className="text-center text-[10px] text-slate-500 mt-1.5">→ Full autonomy with <button onClick={() => setExpanded('enterprise')} className="text-[#D4AF37] hover:underline">Enterprise</button></p>}
+                {plan.key === 'enterprise' && <p className="text-center text-[10px] text-slate-500 mt-1.5">→ Multi-site with <button onClick={() => setExpanded('enterprise_multi')} className="text-rose-400 hover:underline">Multi-Site</button></p>}
               </div>
             </div>
           ))}
@@ -821,83 +821,118 @@ function PricingSection() {
   )
 }
 
-/** LinkedIn article + video embed */
-function SocialProofSection() {
+/** Compact LinkedIn video strip — sits right after DemoHero */
+function VideoStripSection() {
   return (
-    <section className="py-16 px-6 bg-[#050c16] border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mb-2">As Seen On LinkedIn</div>
-          <h2 className="text-2xl font-black text-white">The NSA Just Named the Gap. We Built the Fix.</h2>
-        </div>
-
-        <div className="flex flex-col xl:flex-row gap-8 items-start justify-center">
-          {/* Left: article card + context */}
-          <div className="flex-1 max-w-xl space-y-5">
-            {/* Article link card */}
+    <section className="border-t border-white/5 bg-gradient-to-b from-[#060d1a] to-[#050c16]">
+      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-8">
+        {/* Left: context */}
+        <div className="flex-1 space-y-4 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#0A66C2]/30 bg-[#0A66C2]/8 text-[9px] font-mono text-[#4DB5FF] uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4DB5FF] animate-pulse" />
+            As Published on LinkedIn Pulse
+          </div>
+          <h2 className="text-3xl font-black text-white leading-tight">
+            The NSA Named the Gap.<br />
+            <span className="text-[#4EAEF5]">We Filed the Framework.</span>
+          </h2>
+          <p className="text-sm text-slate-400 leading-relaxed max-w-md">
+            DISA has published zero post-quantum STIGs. We published PQC-01-STIG-V1R1 —
+            the world's first DoD-style PQC compliance checklist with 12 controls
+            mapped to CCI, NIST 800-53, and CNSA 2.0.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
             <a
               href="https://www.linkedin.com/pulse/nsa-just-flagged-ai-agents-security-gap-nobody-published-pqc-compliance-wldue/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-5 rounded-2xl border border-[#0A66C2]/25 bg-[#0A66C2]/5 hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/40 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#0A66C2]/40 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-xs text-[#4DB5FF] font-semibold transition-all"
             >
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-6 h-6 rounded flex items-center justify-center bg-[#0A66C2]">
-                  <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </div>
-                <span className="text-[9px] font-mono text-[#0A66C2] uppercase tracking-widest">LinkedIn Pulse Article</span>
-                <ExternalLink className="w-3 h-3 text-slate-600 ml-auto group-hover:text-[#0A66C2] transition-colors" />
-              </div>
-              <h3 className="text-white font-bold text-sm leading-snug mb-2 group-hover:text-[#4EAEF5] transition-colors">
-                NSA Just Flagged AI Agents Security Gap — Nobody Published a PQC Compliance Framework. We Did.
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                DISA has published zero post-quantum STIGs. NouchiX introduces PQC-01-STIG-V1R1 — the world's first DoD-style PQC compliance checklist,
-                with 12 controls mapped to CCI, NIST 800-53, and CNSA 2.0. Includes explainer video.
-              </p>
-              <div className="mt-3 flex items-center gap-2">
-                <span className="text-[9px] font-mono text-[#0A66C2]">Read on LinkedIn ↗</span>
-              </div>
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              Read the Article
             </a>
-
-            {/* Supporting context bullets */}
-            <div className="space-y-3">
-              {[
-                { icon: '🛡️', text: 'PQC-01-STIG-V1R1 fills the gap DISA has not. 12 controls. CCI-mapped. Production-implemented.' },
-                { icon: '🤖', text: 'AI agents are a new cryptographic attack surface. ASAF attests every tool call with ML-DSA-65.' },
-                { icon: '⏰', text: 'CNSA 2.0 deadline: 2026 for priority systems. 2030 for full NSS. The clock is running.' },
-              ].map(({ icon, text }, i) => (
-                <div key={i} className="flex items-start gap-3 text-xs text-slate-400">
-                  <span className="text-base leading-none mt-0.5 flex-shrink-0">{icon}</span>
-                  <span className="leading-relaxed">{text}</span>
-                </div>
-              ))}
-            </div>
+            <Link href="/whitepaper" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#1a9fe8]/30 text-xs text-slate-300 hover:text-white hover:border-[#1a9fe8]/60 transition-all">
+              <FileText className="w-3.5 h-3.5" /> Full Whitepaper
+            </Link>
           </div>
+        </div>
 
-          {/* Right: LinkedIn embed */}
-          <div className="flex-shrink-0 w-full xl:w-[504px]">
-            <div className="rounded-2xl overflow-hidden border border-[#0A66C2]/20 bg-[#080f1c]">
-              <div className="px-4 py-2.5 border-b border-[#0A66C2]/15 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#0A66C2]" />
-                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Embedded · LinkedIn · NouchiX</span>
-              </div>
-              <iframe
-                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7461635819917783041"
-                height={700}
-                width={504}
-                frameBorder={0}
-                allowFullScreen
-                title="NouchiX — NSA PQC AI Agents Explainer"
-                className="w-full max-w-full block"
-                style={{ minHeight: '600px' }}
-              />
+        {/* Right: compact video embed */}
+        <div className="flex-shrink-0 w-full max-w-[504px]">
+          <div className="rounded-2xl overflow-hidden border border-[#0A66C2]/25 shadow-2xl shadow-[#0A66C2]/10">
+            <div className="flex items-center gap-2 px-3 py-2 bg-[#0A66C2]/10 border-b border-[#0A66C2]/15">
+              <svg className="w-3 h-3 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              <span className="text-[9px] font-mono text-[#4DB5FF] uppercase tracking-widest">NouchiX · LinkedIn · Explainer</span>
             </div>
-            <p className="text-[9px] font-mono text-slate-700 text-center mt-2">
-              Scroll inside the post to see full content · <a href="https://www.linkedin.com/company/nouchix" target="_blank" rel="noopener noreferrer" className="hover:text-slate-500 transition-colors">Follow NouchiX on LinkedIn ↗</a>
+            <iframe
+              src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7461635819917783041?compact=1"
+              height={399}
+              width={504}
+              frameBorder={0}
+              allowFullScreen
+              title="NouchiX — NSA PQC AI Agents Explainer"
+              className="w-full block"
+            />
+          </div>
+          <p className="text-[9px] font-mono text-slate-500 text-center mt-2">
+            <a href="https://www.linkedin.com/company/nouchix" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">Follow NouchiX on LinkedIn ↗</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** LinkedIn article card — article link + CNSA context bullets */
+function SocialProofSection() {
+  return (
+    <section className="py-14 px-6 bg-[#050c16] border-t border-white/5">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          {/* Article card */}
+          <a
+            href="https://www.linkedin.com/pulse/nsa-just-flagged-ai-agents-security-gap-nobody-published-pqc-compliance-wldue/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex-1 block p-5 rounded-2xl border border-[#0A66C2]/25 bg-[#0A66C2]/5 hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/40 transition-all"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-6 h-6 rounded flex items-center justify-center bg-[#0A66C2]">
+                <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </div>
+              <span className="text-[9px] font-mono text-[#0A66C2] uppercase tracking-widest">LinkedIn Pulse</span>
+              <ExternalLink className="w-3 h-3 text-slate-500 ml-auto group-hover:text-[#0A66C2] transition-colors" />
+            </div>
+            <h3 className="text-white font-bold text-sm leading-snug mb-2 group-hover:text-[#4EAEF5] transition-colors">
+              NSA Just Flagged AI Agents Security Gap — Nobody Published a PQC Compliance Framework. We Did.
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              12 controls. CCI-mapped. CNSA 2.0 compliant. Production-deployed on RHEL 9.
             </p>
+            <span className="mt-3 inline-block text-[9px] font-mono text-[#0A66C2]">Read full article ↗</span>
+          </a>
+
+          {/* Context bullets */}
+          <div className="flex-1 space-y-4">
+            {[
+              { icon: '🛡️', label: 'First-mover framework', text: 'PQC-01-STIG-V1R1 fills the gap DISA has not. 12 controls. CCI-mapped. Production-implemented on RHEL 9.' },
+              { icon: '🤖', label: 'AI agent attack surface', text: 'Every AI tool call is a new cryptographic attack vector. ASAF attests them all with ML-DSA-65.' },
+              { icon: '⏰', label: 'CNSA 2.0 countdown', text: '2026 deadline for priority NSS systems. 2030 for full compliance. Harvest-now-decrypt-later starts today.' },
+            ].map(({ icon, label, text }, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="text-lg leading-none flex-shrink-0 mt-0.5">{icon}</span>
+                <div>
+                  <div className="text-xs font-semibold text-white mb-0.5">{label}</div>
+                  <div className="text-xs text-slate-400 leading-relaxed">{text}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -949,7 +984,7 @@ function AdvisorSection() {
     <section className="py-16 px-6 bg-[#080f1c] border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <div className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mb-2">Validation</div>
+          <div className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Validation</div>
           <h2 className="text-2xl font-black text-white">Advisory Board</h2>
         </div>
 
@@ -971,7 +1006,7 @@ function AdvisorSection() {
                 />
                 <div className="hidden w-full h-full items-center justify-center text-3xl font-black text-slate-600">DY</div>
               </div>
-              <div className="mt-2 text-[8px] font-mono text-slate-600 uppercase tracking-widest text-center">Lead Business<br />Advisor</div>
+              <div className="mt-2 text-[8px] font-mono text-slate-500 uppercase tracking-widest text-center">Lead Business<br />Advisor</div>
             </div>
 
             <div className="flex-1">
@@ -1035,7 +1070,7 @@ function PartnershipsSection() {
     <section className="py-16 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <div className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mb-2">Ecosystem</div>
+          <div className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Ecosystem</div>
           <h2 className="text-2xl font-black text-white">Partnerships & Ecosystem</h2>
         </div>
 
@@ -1072,7 +1107,7 @@ function Footer() {
             <span className="text-white font-bold">AdinKhepra</span>
             <span className="text-[#4EAEF5] font-bold text-sm tracking-widest">ASAF</span>
           </div>
-          <p className="text-xs text-slate-700 max-w-xs leading-relaxed mb-2">
+          <p className="text-xs text-slate-400 max-w-xs leading-relaxed mb-2">
             Agentic Security Attestation Framework. Sovereign CMMC compliance for the DIB. Post-quantum certified. USPTO #73565085.
           </p>
           <p className="text-xs text-slate-800">
@@ -1081,50 +1116,50 @@ function Footer() {
           </p>
         </div>
         <div>
-          <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">Compliance Docs</h4>
+          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">Compliance Docs</h4>
           <ul className="space-y-2">
             {[['PQC-01-STIG-V1R1 Whitepaper', '/whitepaper'], ['PQC STIG Technical Brief', '/whitepaper'], ['CNSA 2.0 Gap Analysis', '/whitepaper#timeline'], ['OSCAL Evidence Package', '#pricing'], ['Godfather Report Sample', '#findings']].map(([i, h]) => (
-              <li key={i}><Link href={h} className="text-xs text-slate-700 hover:text-slate-400 transition-colors">{i}</Link></li>
+              <li key={i}><Link href={h} className="text-xs text-slate-400 hover:text-white transition-colors">{i}</Link></li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">Company</h4>
+          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">Company</h4>
           <ul className="space-y-2">
             {[['SDVOSB Contracting', 'mailto:contact@nouchix.com'], ['Security Policy', '#'], ['Patent #73565085', '#'], ['contact@nouchix.com', 'mailto:contact@nouchix.com']].map(([l, h]) => (
-              <li key={l}><a href={h} className="text-xs text-slate-700 hover:text-slate-400 transition-colors">{l}</a></li>
+              <li key={l}><a href={h} className="text-xs text-slate-400 hover:text-white transition-colors">{l}</a></li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="text-[8px] font-mono text-slate-600 uppercase tracking-widest mb-3">NouchiX Ecosystem</h4>
+          <h4 className="text-[8px] font-mono text-slate-500 uppercase tracking-widest mb-3">NouchiX Ecosystem</h4>
           <ul className="space-y-3">
             <li>
               <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
                  className="group flex flex-col gap-0.5">
                 <span className="text-xs text-slate-500 group-hover:text-[#1a9fe8] transition-colors font-semibold">nouchix.com ↗</span>
-                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">Parent company · SecRed Knowledge Inc.</span>
+                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">Parent company · SecRed Knowledge Inc.</span>
               </a>
             </li>
             <li>
               <a href="https://www.souhimbou.ai" target="_blank" rel="noopener noreferrer"
                  className="group flex flex-col gap-0.5">
                 <span className="text-xs text-slate-500 group-hover:text-[#818cf8] transition-colors font-semibold">souhimbou.ai ↗</span>
-                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">Agentic SOC platform · AI Security Architect</span>
+                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">Agentic SOC platform · AI Security Architect</span>
               </a>
             </li>
             <li>
               <a href="https://registry.modelcontextprotocol.io/?q=khepra" target="_blank" rel="noopener noreferrer"
                  className="group flex flex-col gap-0.5">
                 <span className="text-xs text-slate-500 group-hover:text-[#e5a54b] transition-colors font-semibold">PQC-Khepra MCP ↗</span>
-                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">MCP Registry · Free community tier</span>
+                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">MCP Registry · Free community tier</span>
               </a>
             </li>
             <li>
               <a href="https://www.linkedin.com/company/nouchix" target="_blank" rel="noopener noreferrer"
                  className="group flex flex-col gap-0.5">
                 <span className="text-xs text-slate-500 group-hover:text-[#0A66C2] transition-colors font-semibold">LinkedIn ↗</span>
-                <span className="text-[9px] text-slate-700 group-hover:text-slate-500 transition-colors">NouchiX / SecRed Knowledge Inc.</span>
+                <span className="text-[9px] text-slate-400 group-hover:text-slate-300 transition-colors">NouchiX / SecRed Knowledge Inc.</span>
               </a>
             </li>
           </ul>
@@ -1159,10 +1194,10 @@ export default function HomePage() {
               <Shield className="w-3.5 h-3.5 text-[#1a9fe8]" />
             </div>
             <a href="https://nouchix.com" target="_blank" rel="noopener noreferrer"
-               className="text-[9px] font-mono text-slate-600 hover:text-slate-400 transition-colors hidden sm:block">
+               className="text-[9px] font-mono text-slate-500 hover:text-white transition-colors hidden sm:block">
               nouchix.com
             </a>
-            <span className="text-slate-800 text-xs hidden sm:block">/</span>
+            <span className="text-slate-400 text-xs hidden sm:block">/</span>
             <span className="text-white font-bold text-sm">AdinKhepra</span>
             <span className="text-[#1a9fe8] font-bold text-xs tracking-widest">ASAF</span>
           </div>
@@ -1180,6 +1215,7 @@ export default function HomePage() {
       {/* Page sections — offset for fixed nav */}
       <div className="pt-10">
         <DemoHero />
+        <VideoStripSection />
         <UrgencySection />
         <div id="findings"><FindingsSection /></div>
         <PricingSection />
