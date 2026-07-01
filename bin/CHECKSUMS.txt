@@ -1,5 +1,12 @@
-# ASAF Release Checksums -- v0.1.3
-# Generated: 2026-05-26T00:50:12Z
-# Fix: scan --target fully sovereign (ServeMux prefix route, fast port scan)
+# ASAF Release Checksums — v1.1.0
+# Generated: 2026-06-30
+# Algorithm: SHA-256
 
-5530E2FC4A08F24D0D4A0ACC622909C836C15304E444CB2C493C7586142269E1  bin/adinkhepra-windows-amd64.exe  (180250928 bytes)
+2833d345f63a2160c88606d786de4052cc48f312d8c987cb0bc5761d9e12a6b2  bin/adinkhepra-linux-amd64
+443ce04c34c2342bd0d778ab0faf50a505c23c334276031ddcbd80d130598839  bin/adinkhepra-windows-amd64.exe
+28c6bdc101a1df0c97ec371e7fd9fd5d8ddcc78156dac2cddb326ddfb9d2b960  bin/adinkhepra-darwin-arm64
+
+# Verify (Linux/macOS):
+#   sha256sum -c CHECKSUMS.txt
+# Verify (Windows PowerShell):
+#   Get-FileHash bin\adinkhepra-windows-amd64.exe -Algorithm SHA256
