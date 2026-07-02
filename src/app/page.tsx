@@ -783,7 +783,7 @@ function PricingSection() {
               <Award className="w-4 h-4 text-[#D4AF37]" />
               <span className="text-[#D4AF37] font-bold text-sm">SDVOSB Sole-Source Pending Certification — Up to $5M</span>
             </div>
-            <p className="text-xs text-slate-500 max-w-xl mx-auto">
+            <p className="text-xs text-slate-400 max-w-xl mx-auto">
               SecRed Knowledge Inc. · Current VOSB · Army Signal Corps 25S SATCOM · Active Secret Clearance.
               Pursuing sole-source contracts up to $5M under SBA regulations.{' '}
               <a href="mailto:contact@nouchix.com" className="text-[#D4AF37] hover:underline">contact@nouchix.com</a>
@@ -836,10 +836,10 @@ function VideoStripSection() {
             The NSA Named the Gap.<br />
             <span className="text-[#4EAEF5]">We Filed the Framework.</span>
           </h2>
-          <p className="text-sm text-slate-400 leading-relaxed max-w-md">
+          <p className="text-sm text-slate-300 leading-relaxed max-w-md">
             DISA has published zero post-quantum STIGs. We published PQC-01-STIG-V1R1 —
             the world's first DoD-style PQC compliance checklist with 12 controls
-            mapped to CCI, NIST 800-53, and CNSA 2.0.
+            mapped to CCI, NIST 800-53, and CNSA 2.0. Built on the KHEPRA Protocol™ (USPTO #73565085).
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
             <a
@@ -869,7 +869,7 @@ function VideoStripSection() {
               <span className="text-[9px] font-mono text-[#4DB5FF] uppercase tracking-widest">NouchiX · LinkedIn · Explainer</span>
             </div>
             <iframe
-              src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7461635819917783041?compact=1"
+              src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7461635819917783041"
               height={399}
               width={504}
               frameBorder={0}
@@ -912,7 +912,7 @@ function SocialProofSection() {
             <h3 className="text-white font-bold text-sm leading-snug mb-2 group-hover:text-[#4EAEF5] transition-colors">
               NSA Just Flagged AI Agents Security Gap — Nobody Published a PQC Compliance Framework. We Did.
             </h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               12 controls. CCI-mapped. CNSA 2.0 compliant. Production-deployed on RHEL 9.
             </p>
             <span className="mt-3 inline-block text-[9px] font-mono text-[#0A66C2]">Read full article ↗</span>
