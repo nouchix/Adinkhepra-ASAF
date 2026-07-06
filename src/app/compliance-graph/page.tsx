@@ -3,11 +3,12 @@
 import { useState, useEffect, useRef } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
-import { ArrowLeft, LayoutDashboard } from 'lucide-react'
+import { ArrowLeft, LayoutDashboard, Search, Settings } from 'lucide-react'
 
 import { PolicyEditor } from './policy-editor'
 import { StagingGate } from './staging-gate'
 import { EvidenceExport } from './evidence-export'
+import { EnrollmentWizard } from './enrollment-wizard'
 
 // ─── DAG demo data — real ASAF scan output ──────────────────────────────────
 const DEMO_DAG = {
@@ -75,7 +76,19 @@ function nodeVal(n: any) {
 function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => void, selectedNode: any }) {
   const mountRef = useRef<HTMLDivElement>(null)
   const graphRef = useRef<any>(null)
+  const selectedNodeRef = useRef<any>(null)
   const [ready, setReady] = useState(false)
+
+  // Keep ref in sync without triggering useEffect
+  useEffect(() => {
+    selectedNodeRef.current = selectedNode
+    // Force graph to re-evaluate node colors/sizes
+    if (graphRef.current) {
+      graphRef.current
+        .nodeColor(graphRef.current.nodeColor())
+        .nodeVal(graphRef.current.nodeVal())
+    }
+  }, [selectedNode])
 
   useEffect(() => {
     let attempts = 0
@@ -109,11 +122,11 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
         </div>`
       })
       .nodeColor((n: any) => {
-        const isSelected = selectedNode?.id === n.id
+        const isSelected = selectedNodeRef.current?.id === n.id
         return isSelected ? '#ffffff' : nodeColor(n)
       })
       .nodeVal((n: any) => {
-        const isSelected = selectedNode?.id === n.id
+        const isSelected = selectedNodeRef.current?.id === n.id
         return isSelected ? (nodeVal(n) * 1.5) : nodeVal(n)
       })
       .nodeOpacity(0.95)
@@ -142,7 +155,7 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
     const onResize = () => { if (graphRef.current) { g.width(el.clientWidth).height(el.clientHeight) } }
     window.addEventListener('resize', onResize)
     return () => { window.removeEventListener('resize', onResize); g._destructor?.() }
-  }, [ready, onNodeClick, selectedNode])
+  }, [ready, onNodeClick])
 
   return (
     <div ref={mountRef} className="w-full h-full">
@@ -160,6 +173,7 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
 
 export default function ComplianceGraphPage() {
   const [selectedNode, setSelectedNode] = useState<any>(null)
+  const [showConnectModal, setShowConnectModal] = useState(false)
 
   const handleApprove = () => {
     // In a real implementation, this would mark the finding as remediated
@@ -176,7 +190,7 @@ export default function ComplianceGraphPage() {
     <div className="min-h-screen bg-[#050c16] text-white flex flex-col font-sans">
       <Script
         src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
 
       {/* Top Navbar */}
@@ -196,13 +210,23 @@ export default function ComplianceGraphPage() {
         </div>
         
         <div className="flex items-center gap-6">
-          <div className="flex flex-col items-end">
+          <button 
+            onClick={() => setShowConnectModal(true)}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-[#1a9fe8]/10 hover:bg-[#1a9fe8]/20 border border-[#1a9fe8]/30 transition-colors text-sm font-bold text-[#4EAEF5]"
+          >
+            <Search className="w-4 h-4" />
+            Connect Environment
+          </button>
+          
+          <div className="h-6 w-px bg-slate-700/50 hidden md:block" />
+
+          <div className="flex flex-col items-end hidden md:flex">
             <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Total Exposure</span>
             <span className="font-black text-[#cc2a36]">${totalExposure.toLocaleString()}</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#22c55e]/30 bg-[#22c55e]/10">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#22c55e]/30 bg-[#22c55e]/10 hidden md:flex">
             <span className="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse" />
-            <span className="font-mono text-xs text-[#22c55e] font-bold">SOVEREIGN DAG CONNECTED</span>
+            <span className="font-mono text-xs text-[#22c55e] font-bold">SOVEREIGN DAG</span>
           </div>
         </div>
       </header>
@@ -237,6 +261,11 @@ export default function ComplianceGraphPage() {
           </div>
         </aside>
       </main>
+
+      {/* Connect Environment Modal - Replaced with Enrollment Wizard */}
+      {showConnectModal && (
+        <EnrollmentWizard onClose={() => setShowConnectModal(false)} />
+      )}
     </div>
   )
 }
