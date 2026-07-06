@@ -1281,7 +1281,7 @@ export default function HomePage() {
 
           {/* Nav links */}
           <div className="hidden md:flex items-center gap-5">
-            {[['Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Whitepaper', '/whitepaper']].map(([l, h]) => (
+            {[['Demo', '#'], ['Findings', '#findings'], ['Pricing', '#pricing'], ['Fleet', '/fleet'], ['Whitepaper', '/whitepaper']].map(([l, h]) => (
               <Link key={l} href={h} className="text-xs font-medium text-slate-400 hover:text-white transition-colors tracking-wide">{l}</Link>
             ))}
           </div>

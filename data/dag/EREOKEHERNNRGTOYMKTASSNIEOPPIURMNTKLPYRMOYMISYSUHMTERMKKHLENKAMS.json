@@ -1,0 +1,11 @@
+{
+  "id": "EREOKEHERNNRGTOYMKTASSNIEOPPIURMNTKLPYRMOYMISYSUHMTERMKKHLENKAMS",
+  "parents": null,
+  "action": "seshat-inscription",
+  "symbol": "maat-decision",
+  "time": "2026-07-04T15:26:02-04:00",
+  "pqc_metadata": {
+    "data": "map[action:observe autonomous:true isfet_id:56404ddc3c43b953ac68c7674ec1b069 kasa_wisdom:AVAILABLE DIRECTIVES:\n- SCAN: 'Run port scan' (AI-Enhanced perimeter sweep)\n- VULNHUNT: 'Hunt vulnerabilities' (Dependency SCA - Go/NPM/Python)\n- FIREWALL: 'Block port 80'\n- REMEDIATE: 'Fix vulnerabilities' / 'Apply TLS fixes'\n- REPORT: 'Show status' / 'Vulnerability report'\n- RAG QUERY: Ask complex security questions realm:duat severity:MODERATE]"
+  },
+  "hash": "EREOKEHERNNRGTOYMKTASSNIEOPPIURMNTKLPYRMOYMISYSUHMTERMKKHLENKAMS"
+}

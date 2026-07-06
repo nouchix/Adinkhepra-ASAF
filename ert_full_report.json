@@ -1,0 +1,236 @@
+{
+  "timestamp": "2026-07-04T05:11:02.7783544-04:00",
+  "tenant": "production",
+  "readiness": {
+    "strategy_docs": [],
+    "compliance_gaps": [
+      {
+        "framework": "CIS-RHEL-9-L1",
+        "control": "CIS-6.1.1",
+        "description": "Audit system file permissions",
+        "severity": "Medium"
+      },
+      {
+        "framework": "CIS-RHEL-9-L2",
+        "control": "CIS-6.1.1",
+        "description": "Audit system file permissions",
+        "severity": "Medium"
+      },
+      {
+        "framework": "NIST-800-53-Rev5",
+        "control": "NIST-800-53:AC-1",
+        "description": "Access Control Policy and Procedures",
+        "severity": "High"
+      },
+      {
+        "framework": "NIST-800-53-Rev5",
+        "control": "NIST-800-53:SC-13",
+        "description": "Cryptographic Protection",
+        "severity": "CAT I"
+      },
+      {
+        "framework": "NIST-800-171-Rev2",
+        "control": "NIST-800-171:3.13.11",
+        "description": "Employ FIPS-validated cryptography",
+        "severity": "CAT I"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-TLS-001",
+        "description": "TLS post-quantum readiness",
+        "severity": "High"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-SSH-001",
+        "description": "SSH post-quantum readiness",
+        "severity": "High"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-CERT-001",
+        "description": "X.509 certificate post-quantum readiness",
+        "severity": "Medium"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-VPN-001",
+        "description": "VPN post-quantum readiness",
+        "severity": "High"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-SIGN-001",
+        "description": "Code signing post-quantum readiness",
+        "severity": "Medium"
+      },
+      {
+        "framework": "PQC-Readiness",
+        "control": "PQC-INVENTORY-SUMMARY",
+        "description": "Post-Quantum Cryptography Readiness Summary",
+        "severity": "High"
+      },
+      {
+        "framework": "PQC-01-STIG-V1R1",
+        "control": "PQC-010010",
+        "description": "Systems SHALL use only NIST-approved PQC algorithms (FIPS 203/204/205)",
+        "severity": "CAT I"
+      },
+      {
+        "framework": "PQC-01-STIG-V1R1",
+        "control": "PQC-010040",
+        "description": "Systems SHALL NOT use deprecated, withdrawn, or broken PQC algorithms",
+        "severity": "CAT I"
+      },
+      {
+        "framework": "PQC-01-STIG-V1R1",
+        "control": "PQC-020020",
+        "description": "PQC private keys MUST be protected at rest with equivalent classical protections",
+        "severity": "CAT II"
+      },
+      {
+        "framework": "PQC-01-STIG-V1R1",
+        "control": "PQC-020040",
+        "description": "Certificate chains SHALL include PQC signatures alongside or in place of classical signatures",
+        "severity": "CAT II"
+      },
+      {
+        "framework": "PQC-01-STIG-V1R1",
+        "control": "PQC-030010",
+        "description": "PQC algorithm usage SHALL be logged for quantum readiness audits",
+        "severity": "CAT III"
+      },
+      {
+        "framework": "RHEL-09-STIG-V1R3",
+        "control": "SV-257777r925318_rule",
+        "description": "",
+        "severity": "medium"
+      },
+      {
+        "framework": "RHEL-09-STIG-V1R3",
+        "control": "SV-257778r925321_rule",
+        "description": "SCAP Security Guide package installed",
+        "severity": "CAT II"
+      },
+      {
+        "framework": "RHEL-09-STIG-V1R3",
+        "control": "SV-257779r925324_rule",
+        "description": "firewalld package installed and active",
+        "severity": "CAT II"
+      },
+      {
+        "framework": "RHEL-09-STIG-V1R3",
+        "control": "SV-258001r926022_rule",
+        "description": "SELinux configured to enforce access control",
+        "severity": "CAT I"
+      }
+    ],
+    "regulatory_conflicts": [
+      "CMMC Level 2: FIPS 140-3 cryptography required but not detected",
+      "NIST 800-171 3.5.3: Multi-factor authentication required but not implemented"
+    ],
+    "stig_score": 86,
+    "alignment_score": 60,
+    "roadmap": [
+      {
+        "priority": "URGENT",
+        "action": "Resolve regulatory conflicts",
+        "impact": "Prevents compliance violations and fines",
+        "timeline": "60 days"
+      },
+      {
+        "priority": "STRATEGIC",
+        "action": "Initiate Post-Quantum Cryptography Migration",
+        "impact": "Future-proofs security, avoids re-audit costs",
+        "timeline": "6 months"
+      }
+    ]
+  },
+  "architecture": {
+    "dependency_graph": {},
+    "vulnerable_deps": [],
+    "module_count": 0,
+    "file_count": 31,
+    "shadow_it": [
+      "No vendor directory: dependencies may not be pinned",
+      "JavaScript dependencies detected: requires separate CVE scanning"
+    ],
+    "friction_points": [
+      {
+        "category": "CI/CD",
+        "description": "CI/CD pipeline exists but test coverage is missing",
+        "impact": "Deployment quality cannot be verified automatically"
+      }
+    ]
+  },
+  "crypto": {
+    "source_hashes": [
+      "251ecddd4672c9cf467547e3dc535de00ad2129df26e7e7ae728fa4e5ac45fc5",
+      "8a546ca93bee34bc47d1c97529575a6a251176cc39169040a2c003ccaf770022"
+    ],
+    "crypto_usage": {
+      "rsa": 0,
+      "ecdsa": 0,
+      "aes": 0,
+      "sha": 0,
+      "kyber": 0,
+      "dilithium": 0,
+      "has_legacy": false,
+      "has_pqc": false
+    },
+    "ip_lineage": {
+      "proprietary_pct": 100,
+      "oss_pct": 0,
+      "gpl_pct": 0,
+      "clean": true
+    },
+    "pqc_readiness": "UNKNOWN"
+  },
+  "godfather": {
+    "timestamp": "2026-07-04T05:11:10.971728-04:00",
+    "risk_level": "MODERATE",
+    "causal_chain": [
+      {
+        "step": 1,
+        "type": "GOAL",
+        "description": "Strategic Goal: Expand into Regulated Markets (Healthcare/Finance)"
+      },
+      {
+        "step": 2,
+        "type": "ENABLER",
+        "description": "AND -\u003e Security posture exceeds industry baseline"
+      },
+      {
+        "step": 3,
+        "type": "CONSEQUENCE",
+        "description": "THEREFORE -\u003e Go-to-Market timeline accelerated by 2 quarters"
+      }
+    ],
+    "recommendations": [
+      {
+        "priority": "STRATEGIC",
+        "action": "Implement AdinKhepra PQC (Kyber-1024 + Dilithium-3)",
+        "impact": "Establishes quantum-resistant security baseline",
+        "cost": "$100K implementation",
+        "roi": "Future-proof certification"
+      },
+      {
+        "priority": "FOUNDATIONAL",
+        "action": "Establish Continuous Compliance Monitoring (AdinKhepra Agent)",
+        "impact": "Real-time drift detection, automated POA\u0026M generation",
+        "cost": "$75K/year",
+        "roi": "Reduces audit preparation time by 80%"
+      }
+    ],
+    "business_impact": {
+      "revenue_at_risk": "$0 (compliant)",
+      "compliance_cost": "$200K (remediation + audit)",
+      "mitigation_cost": "$75K",
+      "time_to_compliance": "30 days (minor gaps)",
+      "key_risks": [
+        "Contract renewal blocked by compliance failures",
+        "Architectural friction slows deployment velocity by 40%"
+      ]
+    }
+  }
+}
