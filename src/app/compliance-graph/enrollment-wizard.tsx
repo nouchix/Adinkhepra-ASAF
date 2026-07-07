@@ -56,6 +56,40 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
     ))
   }
 
+  const handleSelectAll = () => {
+    const allSelected = discoveredHosts.every(h => h.selected)
+    setDiscoveredHosts(hosts => hosts.map(h => ({ ...h, selected: !allSelected })))
+  }
+
+  const handleEnroll = async () => {
+    const selectedHosts = discoveredHosts.filter(h => h.selected)
+    if (selectedHosts.length === 0) return
+
+    setScanStatus(`Enrolling ${selectedHosts.length} asset(s) to ASAF DAG...`)
+    setIsScanning(true)
+
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:45444'
+      const res = await fetch(`${baseUrl}/api/v1/fleet/enclaves/local/enroll`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hosts: selectedHosts }),
+      })
+      
+      const data = await res.json()
+      
+      if (data.error) {
+        setScanStatus(`Enrollment failed: ${data.error}`)
+      } else {
+        setScanStatus(`✅ Successfully enrolled ${data.enrolled} assets to the DAG.`)
+      }
+    } catch (e: any) {
+      setScanStatus(`Connection error during enrollment. (${e.message})`)
+    } finally {
+      setIsScanning(false)
+    }
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="bg-[#050c16] border border-[#1a9fe8]/30 rounded-xl w-[900px] max-h-[85vh] shadow-2xl flex flex-col overflow-hidden">
@@ -149,10 +183,21 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
                 >
                   <X className="w-4 h-4" /> Stop
                 </button>
-                <button className="flex items-center gap-2 bg-[#1a9fe8] hover:bg-[#4EAEF5] text-white font-bold py-1.5 px-4 rounded text-sm transition-colors ml-4">
+                <button 
+                  onClick={handleSelectAll}
+                  className="flex items-center gap-2 bg-[#1a9fe8] hover:bg-[#4EAEF5] text-white font-bold py-1.5 px-4 rounded text-sm transition-colors ml-4"
+                >
                   Select All
                 </button>
-                <button className="flex items-center gap-2 bg-transparent text-[#22c55e] border border-[#22c55e] hover:bg-[#22c55e]/10 font-bold py-1.5 px-4 rounded text-sm transition-colors">
+                <button 
+                  onClick={handleEnroll}
+                  disabled={isScanning || discoveredHosts.filter(h => h.selected).length === 0}
+                  className={`flex items-center gap-2 font-bold py-1.5 px-4 rounded text-sm transition-colors ${
+                    isScanning || discoveredHosts.filter(h => h.selected).length === 0
+                      ? 'bg-transparent text-slate-500 border border-slate-700 cursor-not-allowed'
+                      : 'bg-transparent text-[#22c55e] border border-[#22c55e] hover:bg-[#22c55e]/10'
+                  }`}
+                >
                   <Check className="w-4 h-4" /> Enroll Selected
                 </button>
               </div>
