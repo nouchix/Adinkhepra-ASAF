@@ -10,7 +10,10 @@ import { StagingGate } from './staging-gate'
 import { EvidenceExport } from './evidence-export'
 import { EnrollmentWizard } from './enrollment-wizard'
 
-// ─── DAG demo data — real ASAF scan output ──────────────────────────────────
+// ─── Sample DAG data for UI demonstration purposes ──────────────────────────
+// This is synthetic/illustrative data, NOT real ASAF scan output. It exists
+// so the Compliance Graph UI can be previewed without a live backend
+// connection. Every number, finding, and timestamp below is hand-authored.
 const DEMO_DAG = {
   meta: { tool_calls: 7, attestations: 7, findings: 4, controls_mapped: 12, session_id: 'asaf-demo-2026' },
   nodes: [
@@ -176,9 +179,13 @@ export default function ComplianceGraphPage() {
   const [showConnectModal, setShowConnectModal] = useState(false)
 
   const handleApprove = () => {
-    // In a real implementation, this would mark the finding as remediated
-    // and update the DAG visualization and node colors.
-    alert(`Remediation for ${selectedNode?.label} applied to production!`)
+    // This is a UI preview interaction only — no real remediation runs and
+    // nothing is applied to any environment. A production build would call
+    // a real remediation API here and update the DAG from its response.
+    alert(
+      `Demo interaction only: no real remediation was applied for ${selectedNode?.label}. ` +
+      'This preview does not connect to a live ASAF System Daemon.'
+    )
   }
 
   // Calculate total exposure
@@ -205,6 +212,9 @@ export default function ComplianceGraphPage() {
             <h1 className="font-bold text-lg tracking-tight">Compliance Graph UI</h1>
             <span className="ml-3 px-2 py-0.5 rounded text-[10px] font-mono text-[#1a9fe8] border border-[#1a9fe8]/30 bg-[#1a9fe8]/10">
               v1.5
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold text-[#e5a54b] border border-[#e5a54b]/40 bg-[#e5a54b]/10">
+              SAMPLE DATA — UI PREVIEW, NOT LIVE OUTPUT
             </span>
           </div>
         </div>
