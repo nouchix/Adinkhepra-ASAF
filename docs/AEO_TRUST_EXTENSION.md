@@ -148,7 +148,48 @@ AEOs wrapping Imhotep's Eye forensic host snapshots
 condition and the entity that observed it are sealed into one verifiable
 record.
 
-## 7. Pipeline summary
+## 7. The Agent Passport (`khepra-passport/1.0`)
+
+The `citizenship` package composes an agent's full record into one portable,
+registrar-signed credential — the passport of Digital Citizenship:
+
+```json
+{
+  "spec": "khepra-passport/1.0",
+  "agent_id": "did:khepra:…",
+  "issued_at": "2026-07-24T00:00:00Z",
+  "events": 42,
+  "chain_tip": "…hash of the latest AEO…",
+  "first_seen": "…genesis timestamp…",
+  "last_seen": "…tip timestamp…",
+  "behavior_baseline": "…tool-graph hash of the tip AEO…",
+  "trust_score": 97,
+  "integrity_score": 100,
+  "consistency_score": 94,
+  "intent_score": 100,
+  "registrar": "KHEPRA Registrar",
+  "registrar_id": "did:khepra:…issuer…",
+  "hash": "…content address…",
+  "attestation": { "algorithm": "ML-DSA-65", "public_key": "…", "signature": "…" }
+}
+```
+
+Rules of issue:
+
+- **Citizenship is earned by record, not asserted** — a passport is only
+  issued after the agent's entire AEO chain replays and verifies end to end.
+  Agents with no history are refused.
+- **Two verification paths** — `Verify()` checks the document (hash,
+  ML-DSA-65 signature, registrar identity binding) for relying parties that
+  trust the registrar; `VerifyAgainstLedger()` re-derives every claim from
+  the evidence for parties that don't.
+- **Stale-but-honest** — a passport whose chain tip has since advanced still
+  verifies against the ledger as long as its tip appears at the claimed
+  position in the verified chain.
+- **Revocation** — only the issuing registrar can re-issue with the revoked
+  flag; relying parties honor the newest registrar-signed statement.
+
+## 8. Pipeline summary
 
 ```
 [Agent task / forensic snapshot]
