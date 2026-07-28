@@ -10,7 +10,10 @@ export function EvidenceExport({ dagState }: { dagState: any }) {
     setExporting(format)
     setTimeout(() => {
       setExporting(null)
-      alert(`${format.toUpperCase()} Evidence Package exported successfully (Signed via ML-DSA-65)`)
+      alert(
+        `Demo interaction only: no ${format.toUpperCase()} package was generated or signed. ` +
+        'This preview does not connect to a real evidence export or ML-DSA-65 signing service.'
+      )
     }, 1500)
   }
 

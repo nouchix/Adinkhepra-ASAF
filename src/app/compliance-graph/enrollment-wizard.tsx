@@ -278,20 +278,20 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
           {activeTab === 'cloud' && (
             <div className="space-y-4">
               <h2 className="text-white font-bold text-lg mb-1">Cloud Asset Discovery</h2>
-              <p className="text-[#22c55e] font-bold text-xs uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span> Active
+              <p className="text-[#e5a54b] font-bold text-xs uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#e5a54b]"></span> Not Yet Implemented
               </p>
-              
+
               <div className="bg-[#cc2a36]/10 border border-[#cc2a36]/30 rounded p-4 mb-6 flex gap-3">
                 <ShieldAlert className="w-5 h-5 text-[#cc2a36] flex-shrink-0" />
                 <div className="text-sm text-slate-300 leading-relaxed">
-                  <strong className="text-white">SEKHEM Gateway Encapsulation Required:</strong> All cloud discovery and polymophic API connections are routed exclusively through the PQC-WAF Blackhole-VPN. 
+                  <strong className="text-white">SEKHEM Gateway Encapsulation Required:</strong> All cloud discovery and polymophic API connections are routed exclusively through the PQC-WAF Blackhole-VPN.
                   No data leaves your perimeter — the connector makes read-only API calls from your sovereign environment using your own credentials.
                 </div>
               </div>
 
               <div className="text-sm text-slate-300 leading-relaxed space-y-3 mb-6">
-                <p>The <strong>Omnibus Polymorphic API Connector</strong> is active. Select your target environment below to authenticate. The connector will auto-map instances to enclaves, detect the OS, and assign STIG profiles.</p>
+                <p>The <strong>Omnibus Polymorphic API Connector</strong> is planned but not yet wired up — the buttons below are not connected to a real backend. Once implemented, it will auto-map instances to enclaves, detect the OS, and assign STIG profiles.</p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

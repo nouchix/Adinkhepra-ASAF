@@ -63,15 +63,15 @@ export function StagingGate({ node, onApprove }: { node: any | null; onApprove: 
               onClick={handleStage}
               className="w-full py-2.5 rounded-lg font-bold text-sm text-[#050c16] bg-[#e5a54b] hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2"
             >
-              <Play className="w-4 h-4" /> Stage to Mirror Environment
+              <Play className="w-4 h-4" /> Stage to Mirror Environment (Demo)
             </button>
           ) : (
             <div className="space-y-3">
-              <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/30 rounded-lg flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-[#22c55e] flex-shrink-0 mt-0.5" />
+              <div className="p-3 bg-[#e5a54b]/10 border border-[#e5a54b]/30 rounded-lg flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-[#e5a54b] flex-shrink-0 mt-0.5" />
                 <div>
-                  <div className="text-xs font-bold text-white mb-1">Staging Successful</div>
-                  <div className="text-[10px] text-slate-400">Zero breaking changes detected. All integration tests passed in the isolated mirror.</div>
+                  <div className="text-xs font-bold text-white mb-1">UI Preview Only</div>
+                  <div className="text-[10px] text-slate-400">This is a demo interaction — no mirror environment was staged and no tests were run.</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -95,7 +95,7 @@ export function StagingGate({ node, onApprove }: { node: any | null; onApprove: 
                 </button>
               </div>
               <p className="text-[9px] font-mono text-center text-slate-500 mt-2">
-                Approving will apply the change via ASAF System Daemon and commit an ML-DSA-65 attestation to the DAG.
+                Demo only — approving here does not call the ASAF System Daemon or commit anything to a real DAG.
               </p>
             </div>
           )}
