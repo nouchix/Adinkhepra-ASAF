@@ -154,6 +154,33 @@ export default function EvidencePage() {
           </div>
         </section>
 
+        {/* Interactive 3D DAGs */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+             <div className="w-8 h-8 rounded-lg bg-[#1a9fe8]/10 border border-[#1a9fe8]/30 flex items-center justify-center">
+              <Network className="w-4 h-4 text-[#1a9fe8]"/>
+            </div>
+            Part V: Interactive FAIR Risk DAGs
+          </h2>
+          <p className="text-slate-400 text-sm">
+             Interact with the full forensic chains of custody below. Click, drag, and rotate the nodes. Hover over events to view cryptographic details.
+          </p>
+          <div className="space-y-8">
+            <div className="rounded-2xl border border-slate-800 bg-[#080f1c] overflow-hidden aspect-video">
+              <div className="bg-slate-800/50 p-2 text-xs font-mono text-center text-slate-300 border-b border-slate-800">Target 1: DVWS (Control)</div>
+              <iframe src="/dvws-fair-dag.html" className="w-full h-full border-0" />
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-[#080f1c] overflow-hidden aspect-video">
+              <div className="bg-slate-800/50 p-2 text-xs font-mono text-center text-slate-300 border-b border-slate-800">Target 2: PentestGPT Incident</div>
+              <iframe src="/pentestgpt-fair-dag.html" className="w-full h-full border-0" />
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-[#080f1c] overflow-hidden aspect-video">
+              <div className="bg-slate-800/50 p-2 text-xs font-mono text-center text-slate-300 border-b border-slate-800">Target 3: HackGPT Prompt Security</div>
+              <iframe src="/hackgpt-fair-dag.html" className="w-full h-full border-0" />
+            </div>
+          </div>
+        </section>
+
         {/* JSON Display */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold flex items-center gap-3">
