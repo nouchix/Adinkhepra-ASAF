@@ -647,11 +647,16 @@ function FindingsSection() {
           </table>
         </div>
 
-        <div className="text-center mt-8">
-          <a href="#pricing" className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white">
-            Scan My Network <ArrowRight className="w-4 h-4" />
-          </a>
-          <p className="text-xs text-slate-500 mt-2">Starts with $5K Remediation Advisory · real scan · real SPRS score</p>
+        <div className="text-center mt-8 flex flex-col items-center gap-4">
+          <div className="flex gap-4 justify-center">
+            <a href="#pricing" className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white">
+              Scan My Network <ArrowRight className="w-4 h-4" />
+            </a>
+            <Link href="/evidence" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold border border-[#1a9fe8]/30 text-[#1a9fe8] hover:bg-[#1a9fe8]/10 transition-colors">
+              View Forensic Chain of Custody <FileText className="w-4 h-4" />
+            </Link>
+          </div>
+          <p className="text-xs text-slate-500">Starts with $5K Remediation Advisory · real scan · real SPRS score</p>
         </div>
       </div>
     </section>

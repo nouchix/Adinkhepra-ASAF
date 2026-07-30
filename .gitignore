@@ -33,3 +33,9 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Local environment variables
+.env.*
+
+# Ignore environment files
+*.env
