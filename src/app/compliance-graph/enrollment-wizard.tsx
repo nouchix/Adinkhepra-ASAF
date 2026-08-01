@@ -32,7 +32,7 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
       }
       
       const mappedHosts = (data.discovered || []).map((host: any) => ({
-        id: Math.random().toString(),
+        id: crypto.randomUUID(),
         ip: host.ip || host.address || 'Unknown',
         hostname: host.hostname || 'unknown-host',
         os: host.os || 'Unknown',

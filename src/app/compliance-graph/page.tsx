@@ -10,50 +10,9 @@ import { StagingGate } from './staging-gate'
 import { EvidenceExport } from './evidence-export'
 import { EnrollmentWizard } from './enrollment-wizard'
 
-// ─── Sample DAG data for UI demonstration purposes ──────────────────────────
-// This is synthetic/illustrative data, NOT real ASAF scan output. It exists
-// so the Compliance Graph UI can be previewed without a live backend
-// connection. Every number, finding, and timestamp below is hand-authored.
-const DEMO_DAG = {
-  meta: { tool_calls: 7, attestations: 7, findings: 4, controls_mapped: 12, session_id: 'asaf-demo-2026' },
-  nodes: [
-    { id:'p1', label:'ASAF Baseline Scan', type:'prompt', val:22, desc:'AdinKhepra ASAF initiated full Phase 4 assessment', ts:'02:43:01' },
-    { id:'t1', label:'ert_scan', type:'tool', val:14, desc:'Enterprise Risk & Threat — STIG + NIST + CMMC', ts:'02:43:02', tool_args:{ target:'/etc', frameworks:['STIG','NIST800-53','CMMC'], output_format:'godfather' } },
-    { id:'t2', label:'pqc_stig', type:'tool', val:12, desc:'PQC-01-STIG-V1R1 post-quantum readiness scan', ts:'02:43:04', tool_args:{ scan_path:'/etc', profile:'full' } },
-    { id:'t3', label:'nist_map', type:'tool', val:10, desc:'Map findings → NIST 800-53 Rev 5 controls', ts:'02:43:05' },
-    { id:'t4', label:'godfather_report', type:'tool', val:11, desc:'Godfather Report — dollar-denominated business impact', ts:'02:43:07' },
-    { id:'t5', label:'cmmc_assess', type:'tool', val:10, desc:'CMMC Level 2 — 110 practice assessment', ts:'02:43:06' },
-    { id:'f1', label:'RHEL-09-212030', type:'finding', severity:'CAT_I', val:18, desc:'No FIPS-validated crypto — exposed to Harvest-Now-Decrypt-Later', ts:'02:43:03', impact:'$2,400,000', remediation_cost:'$800', roi:'3000x', control: 'AC-17' },
-    { id:'f2', label:'RHEL-09-431030', type:'finding', severity:'CAT_II', val:12, desc:'Audit logs not centrally collected — AU-2 FAIL', ts:'02:43:03', impact:'$420,000', remediation_cost:'$200', roi:'2100x', control: 'AU-2' },
-    { id:'f3', label:'PQC-01-000010', type:'finding', severity:'CAT_I', val:16, desc:'ML-DSA-65 not implemented — CNSA 2.0 non-compliant', ts:'02:43:05', impact:'$3,800,000', remediation_cost:'$12,000', roi:'317x', control: 'SC-13' },
-    { id:'f4', label:'PQC-01-000040', type:'finding', severity:'CAT_II', val:10, desc:'No hybrid classical/PQC key exchange during transition period', ts:'02:43:05', impact:'$890,000', remediation_cost:'$4,000', roi:'222x', control: 'SC-8' },
-    { id:'c1', label:'NIST AC-17', type:'control', val:8, desc:'Remote Access controls', framework:'NIST 800-53 Rev 5' },
-    { id:'c2', label:'NIST AU-2', type:'control', val:8, desc:'Audit Events — continuous monitoring', framework:'NIST 800-53 Rev 5' },
-    { id:'c3', label:'NIST SC-13', type:'control', val:8, desc:'Cryptographic Protection — CNSA 2.0', framework:'NIST 800-53 Rev 5' },
-    { id:'c4', label:'CMMC CA.2.158', type:'control', val:7, desc:'Periodically assess security controls', framework:'CMMC Level 2' },
-    { id:'c5', label:'CNSA 2.0 ML-DSA', type:'control', val:9, desc:'NSA CNSA 2.0 — ML-DSA-65 required by 2030', framework:'NSA CNSA 2.0' },
-    { id:'c6', label:'FIPS 204', type:'control', val:8, desc:'Module-Lattice Digital Signature Standard', framework:'NIST FIPS 204' },
-    { id:'c7', label:'NIST SC-8', type:'control', val:7, desc:'Transmission Confidentiality and Integrity', framework:'NIST 800-53 Rev 5' },
-    { id:'a1', label:'ML-DSA-65 · ert_scan', type:'attest', val:6, desc:'Attestation on ert_scan', sig:'3d7f2a9b1e4c8f0a6b2d5e8f1a3c7b9d2e5f8a1b4c6d9e2f', ts:'02:43:02' },
-    { id:'a2', label:'ML-DSA-65 · pqc_stig', type:'attest', val:6, desc:'Attestation on pqc_stig', sig:'8f1a3c7b9d2e5f8a1b3d7f2a9b1e4c8f0a6b2d5e8c1f3a7', ts:'02:43:04' },
-    { id:'a3', label:'ML-DSA-65 · godfather', type:'attest', val:6, desc:'Attestation on Godfather Report', sig:'1b3d7f2a9b1e4c8f0a6b2d5e8f1a3c7b9d2e5f8a4c7b2e9', ts:'02:43:07' },
-  ],
-  links: [
-    { source:'p1', target:'t1', w:3 }, { source:'p1', target:'t2', w:2 },
-    { source:'t1', target:'f1', w:2 }, { source:'t1', target:'f2', w:2 },
-    { source:'t2', target:'f3', w:2 }, { source:'t2', target:'f4', w:2 },
-    { source:'t1', target:'t3', w:1 }, { source:'t3', target:'c1', w:1 },
-    { source:'t3', target:'c2', w:1 }, { source:'t3', target:'c7', w:1 },
-    { source:'t2', target:'c3', w:2 }, { source:'t2', target:'c5', w:2 },
-    { source:'t2', target:'c6', w:2 }, { source:'f1', target:'c1', w:1 },
-    { source:'f2', target:'c2', w:1 }, { source:'f3', target:'c5', w:2 },
-    { source:'f4', target:'c3', w:1 }, { source:'t4', target:'f1', w:1 },
-    { source:'t4', target:'f2', w:1 }, { source:'t4', target:'f3', w:1 },
-    { source:'t1', target:'t4', w:1 }, { source:'t5', target:'c4', w:1 },
-    { source:'t1', target:'a1', w:1 }, { source:'t2', target:'a2', w:1 },
-    { source:'t4', target:'a3', w:1 }, { source:'f3', target:'c6', w:1 },
-  ]
-}
+// ─── DAG demo data — real ASAF scan output ──────────────────────────────────
+// DAG data is fetched dynamically from the ASAF API backend
+
 
 const NODE_COLORS: Record<string, string> = {
   prompt:          '#818cf8',
@@ -76,7 +35,7 @@ function nodeVal(n: any) {
   return n.val ?? 6
 }
 
-function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => void, selectedNode: any }) {
+function LiveDAGDemo({ onNodeClick, selectedNode, dagData }: { onNodeClick: (n: any) => void, selectedNode: any, dagData: any }) {
   const mountRef = useRef<HTMLDivElement>(null)
   const graphRef = useRef<any>(null)
   const selectedNodeRef = useRef<any>(null)
@@ -103,6 +62,12 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
   }, [])
 
   useEffect(() => {
+    if (graphRef.current && dagData) {
+      graphRef.current.graphData({ nodes: dagData.nodes, links: dagData.links })
+    }
+  }, [dagData])
+
+  useEffect(() => {
     if (!ready || !mountRef.current) return
     const FG = (window as any).ForceGraph3D
 
@@ -113,7 +78,7 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
       .backgroundColor('rgba(0,0,0,0)')
       .width(el.clientWidth)
       .height(el.clientHeight)
-      .graphData({ nodes: DEMO_DAG.nodes, links: DEMO_DAG.links })
+      .graphData({ nodes: dagData?.nodes || [], links: dagData?.links || [] })
       .nodeId('id')
       .nodeLabel((n: any) => {
         const col = nodeColor(n)
@@ -177,6 +142,51 @@ function LiveDAGDemo({ onNodeClick, selectedNode }: { onNodeClick: (n: any) => v
 export default function ComplianceGraphPage() {
   const [selectedNode, setSelectedNode] = useState<any>(null)
   const [showConnectModal, setShowConnectModal] = useState(false)
+  const [dagData, setDagData] = useState<{nodes: any[], links: any[], meta: any}>({
+    nodes: [], links: [], meta: { tool_calls: 0, attestations: 0, findings: 0, controls_mapped: 0, session_id: '' }
+  })
+
+  useEffect(() => {
+    const fetchDAG = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/dag/nodes')
+        if (!res.ok) return
+        const data = await res.json()
+        if (!Array.isArray(data)) return
+        
+        const nodes = data.map((n: any) => ({
+          id: n.node_id,
+          label: n.data?.label || n.type,
+          type: n.type,
+          val: n.data?.val || 6,
+          desc: n.data?.desc,
+          severity: n.data?.severity,
+          impact: n.data?.impact,
+          remediation_cost: n.data?.remediation_cost,
+          roi: n.data?.roi,
+          control: n.data?.control,
+          framework: n.data?.framework,
+          sig: n.pqc_signature,
+          ts: n.timestamp,
+        }))
+        
+        const links = data.flatMap((n: any) => 
+          (n.parents || []).map((p: string) => ({ source: p, target: n.node_id, w: 1 }))
+        )
+        
+        const meta = {
+          tool_calls: nodes.filter(n => n.type === 'tool').length,
+          attestations: nodes.filter(n => n.type === 'attest').length,
+          findings: nodes.filter(n => n.type === 'finding').length,
+          controls_mapped: nodes.filter(n => n.type === 'control').length,
+        }
+        setDagData({ nodes, links, meta })
+      } catch (err) {
+        console.error("Failed to fetch DAG from local ASAF API:", err)
+      }
+    }
+    fetchDAG()
+  }, [])
 
   const handleApprove = () => {
     // This is a UI preview interaction only — no real remediation runs and
@@ -189,7 +199,7 @@ export default function ComplianceGraphPage() {
   }
 
   // Calculate total exposure
-  const totalExposure = DEMO_DAG.nodes
+  const totalExposure = dagData.nodes
     .filter(n => n.type === 'finding' && (n as any).impact)
     .reduce((sum, n) => sum + parseInt(((n as any).impact).replace(/\$|,/g, '')), 0)
 
@@ -247,18 +257,18 @@ export default function ComplianceGraphPage() {
         <aside className="w-80 border-r border-[#1a9fe8]/20 bg-[#080f1c]/60 flex flex-col z-20 overflow-y-auto">
           <div className="p-5 flex-1 flex flex-col gap-5">
             <StagingGate node={selectedNode} onApprove={handleApprove} />
-            <EvidenceExport dagState={DEMO_DAG} />
+            <EvidenceExport dagState={dagData} />
           </div>
         </aside>
 
         {/* Center: 3D Graph */}
         <div className="flex-1 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0d1c33] via-[#050c16] to-[#050c16]">
-          <LiveDAGDemo onNodeClick={setSelectedNode} selectedNode={selectedNode} />
+          <LiveDAGDemo onNodeClick={setSelectedNode} selectedNode={selectedNode} dagData={dagData} />
           
           <div className="absolute bottom-6 left-6 pointer-events-none bg-[#050c16]/80 backdrop-blur p-3 rounded-xl border border-slate-800">
             <div className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Controls Mapped</div>
             <div className="flex items-center gap-2">
-              <span className="text-[#06b6d4] font-bold text-lg">{DEMO_DAG.meta.controls_mapped}</span>
+              <span className="text-[#06b6d4] font-bold text-lg">{dagData.meta.controls_mapped}</span>
               <span className="text-slate-400 text-xs">/ 110 (CMMC L2)</span>
             </div>
           </div>
