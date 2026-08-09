@@ -438,11 +438,10 @@ function DemoHero() {
             </div>
 
             <h2 className="text-white font-black text-lg leading-tight mb-1">
-              Is your network in the graph?
+              Khepra Stargate
             </h2>
             <p className="text-slate-400 text-xs mb-4 leading-relaxed">
-              This is a real ASAF scan output. Your infrastructure generates findings like these every day.
-              Get your SPRS score before your C3PAO does.
+              The CMMC Compliance Autopilot Engine. Stargate is the Hub & Fleet deployment surface of the Khepra Protocol, built for DoD/ATO strict requirements. Monitor, actuate, and attest across your entire fleet.
             </p>
 
             <form onSubmit={onSubmit} className="space-y-2">
