@@ -30,13 +30,7 @@ func (m *Manager) GetEnclaves() []Enclave {
 	for _, e := range m.enclaves {
 		result = append(result, e)
 	}
-	// Return some mock data if empty for the dashboard UI
-	if len(result) == 0 {
-		return []Enclave{
-			{ID: "enc-alpha", Name: "Alpha Zone", Asset: 3, Status: "Healthy", RiskScore: 8},
-			{ID: "enc-bravo", Name: "Bravo DMZ", Asset: 5, Status: "Warning", RiskScore: 45},
-		}
-	}
+	// No mock data - return actual enclaves
 	return result
 }
 
@@ -62,8 +56,8 @@ func (m *Manager) GetLastScan() *FleetScanSummary {
 	return m.lastScan
 }
 
-// DiscoverEnclave simulates enclave discovery.
-func (m *Manager) DiscoverEnclave(ctx context.Context, id string) error {
+// DiscoverEnclave registers an edge node (Sentinel).
+func (m *Manager) DiscoverEnclave(ctx context.Context, id string, status string) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
@@ -73,9 +67,9 @@ func (m *Manager) DiscoverEnclave(ctx context.Context, id string) error {
 
 	m.enclaves[id] = Enclave{
 		ID:        id,
-		Name:      "Discovered " + id,
+		Name:      "Sentinel Node: " + id,
 		Asset:     1,
-		Status:    "Pending",
+		Status:    status,
 		RiskScore: 0,
 	}
 	return nil

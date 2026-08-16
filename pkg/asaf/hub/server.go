@@ -56,6 +56,10 @@ func (s *Server) registerRoutes() {
 	// HITL Approval endpoints for testing
 	s.mux.HandleFunc("/api/v1/hub/approve", s.handleHITLApprove)
 	s.mux.HandleFunc("/api/v1/hub/revoke", s.handleHITLRevoke)
+
+	// Sentinel Edge Node Endpoints (Bolt execution model)
+	s.mux.HandleFunc("/api/v1/hub/register", s.handleSentinelRegister)
+	s.mux.HandleFunc("/api/v1/hub/stream", s.handleSentinelStream)
 }
 
 func (s *Server) handleGetEnclaves(w http.ResponseWriter, r *http.Request) {
@@ -118,3 +122,37 @@ func (s *Server) handleHITLRevoke(w http.ResponseWriter, r *http.Request) {
 	s.hitl.Revoke()
 	w.Write([]byte(`{"status": "revoked", "hitl": false}`))
 }
+
+func (s *Server) handleSentinelRegister(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	var req struct {
+		AgentID string `json:"agent_id"`
+		Status  string `json:"status"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
+	
+	s.manager.DiscoverEnclave(r.Context(), req.AgentID, req.Status)
+	w.WriteHeader(http.StatusOK)
+}
+
+func (s *Server) handleSentinelStream(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	
+	// In a real implementation, we would pass this result to the manager
+	// and aggregate it into the FleetScanSummary.
+	var res fleet.FleetScanResult
+	if err := json.NewDecoder(r.Body).Decode(&res); err == nil {
+		fmt.Printf("[Hub] Received scan result from %s: %s\n", res.Host, res.Issue)
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
