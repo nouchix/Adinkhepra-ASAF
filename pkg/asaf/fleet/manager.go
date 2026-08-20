@@ -2,35 +2,68 @@ package fleet
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
+
+	"go.etcd.io/bbolt"
 )
 
 // Manager handles fleet orchestration and state.
 type Manager struct {
 	mu       sync.RWMutex
-	enclaves map[string]Enclave
-	lastScan *FleetScanSummary
+	db       *bbolt.DB
 }
 
-// NewManager creates a new fleet manager instance.
-func NewManager() *Manager {
-	return &Manager{
-		enclaves: make(map[string]Enclave),
+// NewManager creates a new fleet manager instance with BoltDB.
+func NewManager(dbPath string) (*Manager, error) {
+	db, err := bbolt.Open(dbPath, 0600, &bbolt.Options{Timeout: 1 * time.Second})
+	if err != nil {
+		return nil, err
 	}
+
+	// Ensure buckets exist
+	err = db.Update(func(tx *bbolt.Tx) error {
+		_, err := tx.CreateBucketIfNotExists([]byte("enclaves"))
+		if err != nil {
+			return err
+		}
+		_, err = tx.CreateBucketIfNotExists([]byte("scans"))
+		return err
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Manager{
+		db: db,
+	}, nil
 }
 
-// GetEnclaves returns all managed enclaves.
+// Close closes the underlying BoltDB connection.
+func (m *Manager) Close() error {
+	return m.db.Close()
+}
+
+// GetEnclaves returns all managed enclaves from the database.
 func (m *Manager) GetEnclaves() []Enclave {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 
 	var result []Enclave
-	for _, e := range m.enclaves {
-		result = append(result, e)
-	}
-	// No mock data - return actual enclaves
+	m.db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("enclaves"))
+		b.ForEach(func(k, v []byte) error {
+			var e Enclave
+			if err := json.Unmarshal(v, &e); err == nil {
+				result = append(result, e)
+			}
+			return nil
+		})
+		return nil
+	})
 	return result
 }
 
@@ -41,19 +74,32 @@ func (m *Manager) GetSPRSSummary() *FleetSPRSSummary {
 	}
 }
 
-// GetLastScan returns the results of the last fleet scan.
+// GetLastScan returns the results of the last fleet scan from the database.
 func (m *Manager) GetLastScan() *FleetScanSummary {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 
-	if m.lastScan == nil {
+	var summary *FleetScanSummary
+	m.db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("scans"))
+		v := b.Get([]byte("lastScan"))
+		if v != nil {
+			var s FleetScanSummary
+			if err := json.Unmarshal(v, &s); err == nil {
+				summary = &s
+			}
+		}
+		return nil
+	})
+
+	if summary == nil {
 		return &FleetScanSummary{
 			Status:    "None",
 			Total:     0,
 			FleetSPRS: 0,
 		}
 	}
-	return m.lastScan
+	return summary
 }
 
 // DiscoverEnclave registers an edge node (Sentinel).
@@ -65,14 +111,23 @@ func (m *Manager) DiscoverEnclave(ctx context.Context, id string, status string)
 		return fmt.Errorf("invalid enclave ID")
 	}
 
-	m.enclaves[id] = Enclave{
+	e := Enclave{
 		ID:        id,
 		Name:      "Sentinel Node: " + id,
 		Asset:     1,
 		Status:    status,
 		RiskScore: 0,
 	}
-	return nil
+
+	data, err := json.Marshal(e)
+	if err != nil {
+		return err
+	}
+
+	return m.db.Update(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("enclaves"))
+		return b.Put([]byte(id), data)
+	})
 }
 
 // StartScan initiates a simulated scan across the fleet, streaming results to a channel.
@@ -101,7 +156,14 @@ func (m *Manager) StartScan(ctx context.Context, results chan<- interface{}) {
 	}
 
 	m.mu.Lock()
-	m.lastScan = summary
+	m.db.Update(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("scans"))
+		data, err := json.Marshal(summary)
+		if err == nil {
+			b.Put([]byte("lastScan"), data)
+		}
+		return nil
+	})
 	m.mu.Unlock()
 
 	results <- summary

@@ -13,7 +13,11 @@ func main() {
 	log.Println("Starting Khepra Stargate (Hub & Fleet) Backend...")
 	
 	// Enforce TRL 10 Architecture - Must initialize a guarded instance
-	fleetManager := fleet.NewManager()
+	fleetManager, err := fleet.NewManager("hub.db")
+	if err != nil {
+		log.Fatalf("Failed to initialize fleet manager database: %v", err)
+	}
+	defer fleetManager.Close()
 	hitlGuard := hub.NewHITLGuard()
 	
 	// Create the hub server wrapping the HITL enforcement
