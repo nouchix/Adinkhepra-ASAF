@@ -48,7 +48,7 @@ const PLANS = [
     key: 'enterprise', tier: 'Khepra', name: 'Enterprise',
     price: '$150,000', suffix: '/year', tagline: 'Unlimited endpoints · single prime',
     description: 'ASAF System Daemon for autonomous remediation, HSM signing, C3PAO interview prep, white-glove onboarding.',
-    features: ['Everything in Program Adv', 'ASAF System Daemon (autonomous)', 'HSM signing (FIPS 140-3)', 'Custom Adinkra policy bindings', 'C3PAO interview prep sessions', 'White-glove onboarding (5 days)', 'Dedicated Sr. compliance architect', 'SDVOSB co-deployment support'],
+    features: ['Everything in Program Adv', 'ASAF System Daemon (autonomous)', 'HSM signing (FIPS 140-3-validated HSM)', 'Custom Adinkra policy bindings', 'C3PAO interview prep sessions', 'White-glove onboarding (5 days)', 'Dedicated Sr. compliance architect', 'SDVOSB co-deployment support'],
     cta: 'Contact Enterprise', highlight: false, badge: 'Prime Contractor',
     badgeColor: 'text-[#D4AF37] border-[#D4AF37]/40 bg-[#D4AF37]/10', accentColor: 'text-[#D4AF37]', borderColor: 'border-slate-700/60', icon: Award,
   },
