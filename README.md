@@ -3,7 +3,7 @@
 [![Patent Pending](https://img.shields.io/badge/PATENT-PENDING-blue?style=for-the-badge)](https://nouchix.com)
 [![NouchiX / Sacred Knowledge Inc](https://img.shields.io/badge/BY-NouchiX-gold?style=for-the-badge)](https://nouchix.com)
 [![ADINKHEPRA Certified](https://img.shields.io/badge/ADINKHEPRA-POST--QUANTUM_CERTIFIED-cyan?style=for-the-badge)](#certification)
-[![FIPS 140-3](https://img.shields.io/badge/FIPS-140--3_BoringCrypto-green?style=for-the-badge)](#build)
+[![FIPS-mode build](https://img.shields.io/badge/FIPS--mode_build-BoringCrypto-blue?style=for-the-badge)](#build)
 [![Release](https://img.shields.io/badge/RELEASE-v0.1.0-brightgreen?style=for-the-badge)](#releases)
 
 **By NouchiX (SecRed Knowledge Inc)**  
@@ -25,7 +25,7 @@ ASAF ships in two distinct profiles. Choose the one that matches your compliance
 | **Data egress** | Cloud-hosted dashboard | Zero external calls — fully air-gap capable |
 | **Compliance posture** | SMB / developer self-serve | DIB / CMMC / FedRAMP / air-gapped |
 | **Sovereign claim** | ❌ Not applicable | ✅ On your metal, no cloud, no token meter |
-| **FIPS 140-3 binary** | ❌ Standard build | ✅ `GOEXPERIMENT=boringcrypto` — BoringCrypto |
+| **FIPS-mode build** | ❌ Standard build | ✅ `GOEXPERIMENT=boringcrypto` (BoringCrypto) — not a CMVP-validated module |
 | **Pricing** | `$0 / $99 / $499 /mo` → [adinkhepra.com](https://app.nouchix.com) | `$25K – $250K / year` flat annual |
 | **Target buyer** | Developer / security engineer | Prime contractor, DIB, C3PAO, enterprise |
 
@@ -58,7 +58,7 @@ no license key required, no cloud, no telemetry.
 - **Godfather Report** — Dollar-denominated findings export for C3PAO / ISSM intake
 - **Tamper-evident DAG** — Provenance chain anchoring all attestation nodes; mathematically verifiable
 - **MCP tool-call scanner** — Audits Model Context Protocol tool surfaces for security posture
-- **FIPS 140-3** — Built with `GOEXPERIMENT=boringcrypto` (BoringCrypto); all crypto goes through the FIPS-validated module
+- **FIPS-mode build** — Compiled with `GOEXPERIMENT=boringcrypto` (BoringCrypto). This is a FIPS-mode *build*, not a CMVP-validated module: no FIPS 140-3 certificate is held. For federal use, deploy on a CMVP-validated base module (Iron Bank / RHEL / Amazon Linux) and inherit its certificate for FIPS-approved algorithms. PQC (ML-DSA-65 / ML-KEM-768) implements FIPS 204/203 algorithms; CAVP validation in progress, module validation not yet held.
 
 ---
 

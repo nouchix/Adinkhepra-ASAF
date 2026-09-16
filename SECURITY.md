@@ -7,9 +7,9 @@
 
 | SDLC Phase | Implementation |
 |---|---|
-| **Requirements** | ASVS Level 2 target; CMMC 3.0 Level 2/3; NIST 800-53; FIPS 140-3 |
+| **Requirements** | ASVS Level 2 target; CMMC 3.0 Level 2/3; NIST 800-53; FIPS 140-3 (target — validated-module inheritance planned, no CMVP certificate held yet) |
 | **Design** | PQC-first architecture (ML-DSA-65 + Kyber); tamper-evident DAG provenance |
-| **Implementation** | FIPS 140-3 BoringCrypto build; code generated from [EtherVerseCodeMate/giza-cyber-shield](https://github.com/EtherVerseCodeMate/giza-cyber-shield) — see that repo's security posture |
+| **Implementation** | FIPS-mode build (BoringCrypto, `GOEXPERIMENT=boringcrypto`) — not a CMVP-validated module; code generated from [EtherVerseCodeMate/giza-cyber-shield](https://github.com/EtherVerseCodeMate/giza-cyber-shield) — see that repo's security posture |
 | **Verification** | SHA-256 checksums for all binaries; CodeQL + Trivy in development repo CI |
 | **Operation** | Tamper-evident attestation chain; PQC-signed binary releases |
 
@@ -92,7 +92,7 @@ See full terms: `LICENSE`
 
 | Standard | Level / Claim |
 |---|---|
-| FIPS 140-3 | BoringCrypto build (`GOEXPERIMENT=boringcrypto`) |
+| FIPS 140-3 | FIPS-mode build (BoringCrypto, `GOEXPERIMENT=boringcrypto`) — no CMVP certificate held; validated-module inheritance (Iron Bank / RHEL) planned |
 | NIST 800-53 | Continuous monitoring (CA-7), System Integrity (SI-7) |
 | CMMC 3.0 | Level 2 target; Level 3 for sovereign deployments |
 | NIST PQC | ML-DSA-65 (FIPS 204) + Kyber (FIPS 203) |

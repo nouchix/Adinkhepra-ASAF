@@ -82,7 +82,7 @@ determines its cryptographic path and the compliance impact levels it can suppor
 |---|---|---|---|
 | **Community** | Evaluation, OSS, non-commercial | Standard TLS | Standard |
 | **Sovereign** | DoD networks, air-gapped / SCIF, contractor systems | ML-DSA-65 offline license validation | **Zero egress** — all ops on operator infrastructure, no external calls |
-| **Pharaoh / Iron Bank** | FedRAMP / IL4 / IL5 production | **FIPS 140-3 validated** path | Air-gapped binary, DoD Iron Bank provenance |
+| **Pharaoh / Iron Bank** | FedRAMP / IL4 / IL5 production | FIPS-approved algorithms via CMVP-validated base module `[CMVP cert # — base module TBD]`; PQC validation pending | Air-gapped binary, DoD Iron Bank provenance |
 
 Proprietary (Sovereign / Pharaoh) features require a valid license key validated
 **offline** via an ML-DSA-65 signed `license.adinkhepra` file. No external validation
@@ -94,8 +94,8 @@ back to Community functionality only.
 | Target | Required tier | Crypto |
 |---|---|---|
 | FedRAMP Low | Community | Standard TLS |
-| FedRAMP Moderate | Sovereign or Iron Bank | FIPS 140-3 (Iron Bank) |
-| FedRAMP High / IL4–IL5 | Iron Bank | FIPS 140-3 + NSA-approved algorithms, air-gapped |
+| FedRAMP Moderate | Sovereign or Iron Bank | FIPS-approved algorithms via CMVP-validated base module (Iron Bank) `[cert # TBD]` |
+| FedRAMP High / IL4–IL5 | Iron Bank | CMVP-validated base module `[cert # TBD]` + CNSA 2.0-aligned algorithms, air-gapped |
 
 ---
 
@@ -112,7 +112,7 @@ back to Community functionality only.
 | **NIST SP 800-171 Rev 2** | 🟡 In progress | Self-assessment + SPRS score in progress; mapping complete (roadmap §3) |
 | **NIST SP 800-53 Rev 5** | 🟡 In progress | Control mapping complete; used as FedRAMP baseline source |
 | **PQC-01-STIG-V1R1** (NouchiX internal PQC STIG) | ✅ Defined & self-scanned | Enforced against own infrastructure via `pqc_stig`; CAT I remediation ongoing |
-| **FIPS 140-3** | 🟡 Path available | Validated crypto path in Iron Bank tier; module validation status per build |
+| **FIPS 140-3** | 🟡 Not validated | FIPS-mode build today (BoringCrypto). No CMVP certificate held. Path: inherit a CMVP-validated base module (Iron Bank / RHEL / Amazon Linux) for FIPS-approved algorithms `[cert # TBD]`. Per internal control PQC-01-000090, "Implementation Under Test" / "review pending" status is **not** compliant — only an active CMVP certificate is. PQC (FIPS 203/204) CAVP validation in progress. |
 | **ISO/IEC 27001** | 🟡 Aligned, not certified | `SECURITY.md` controls align to ISO 27001 Annex A; certification not pursued yet |
 | **NSM-10 / CNSA 2.0 (PQC mandate)** | ✅ On track | PQC transition posture ahead of 2026 priority / 2030 deadline |
 
@@ -164,7 +164,12 @@ them into the SSP and Security Assessment Report. See `docs/AUDIT_ENCLAVE_PROPOS
 | Key encapsulation | **ML-KEM** (Kyber) | FIPS 203 |
 | Hashing | SHA-256 / SHA3-256 | FIPS 180-4 / 202 |
 | Transport | TLS 1.3 minimum | — |
-| At rest (Iron Bank) | FIPS 140-3 validated path | FIPS 140-3 |
+| At rest (Iron Bank) | AES via CMVP-validated base module `[cert # TBD]` | FIPS 140-3 |
+
+> **FIPS posture (read before citing).** Three distinct tiers, do not conflate:
+> (1) *FIPS-mode build* — BoringCrypto (`GOEXPERIMENT=boringcrypto`); a build, not a certificate.
+> (2) *Validated-module inheritance* — FIPS-approved classical algorithms (AES/SHA/RNG) run inside a CMVP-validated base module (Iron Bank / RHEL / Amazon Linux); cite that module's certificate `[cert # TBD]`.
+> (3) *PQC* — ML-DSA-65 / ML-KEM implement FIPS 204 / 203 **algorithms**; CAVP algorithm validation is in progress and **no validated module is held**. "FIPS 140-3 validated" is used only against an active CMVP certificate number.
 
 - **Public root keys** (auditable): `adinkhepra_master_dilithium.pub`,
   `adinkhepra_master_kyber.pub`. Only public keys are ever published or shared with
@@ -188,7 +193,7 @@ them into the SSP and Security Assessment Report. See `docs/AUDIT_ENCLAVE_PROPOS
 | Data classification | Public / Internal / Confidential / CUI — policy: `SECURITY.md` (expansion tracked in roadmap CC1) |
 | Data residency | Operator-controlled in Sovereign/Iron Bank; <!-- confirm hosting region(s) for any managed/Community services --> |
 | Encryption in transit | TLS 1.3 minimum |
-| Encryption at rest | FIPS 140-3 path (Iron Bank); <!-- confirm at-rest posture for managed services --> |
+| Encryption at rest | FIPS-approved AES via CMVP-validated base module (Iron Bank) `[cert # TBD]`; <!-- confirm at-rest posture for managed services --> |
 | Retention | Evidence: SOC 2 → 7 yr, CMMC/FedRAMP → 3 yr (or ATO+3). Customer data: per contract/DPA |
 | Privacy regulations | <!-- confirm applicability: GDPR/CCPA/etc. based on customer base --> |
 | DPA availability | Available on request (contact@nouchix.com) |

@@ -18,7 +18,7 @@
 ### B. For New Binary Releases
 
 - [ ] Binary is PQC-signed (ML-DSA-65) — signature verified before publishing
-- [ ] FIPS 140-3 build confirmed: compiled with `GOEXPERIMENT=boringcrypto`
+- [ ] FIPS-mode build confirmed: compiled with `GOEXPERIMENT=boringcrypto` (BoringCrypto — a FIPS-mode build, not a CMVP-validated module)
 - [ ] Binary has been scanned with Grype/Trivy before publishing (attach scan artifact)
 - [ ] Version number follows semver: `vMAJOR.MINOR.PATCH`
 - [ ] `publish_release.ps1` script has been dry-run successfully before merging
