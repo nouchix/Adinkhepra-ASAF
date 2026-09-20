@@ -141,12 +141,12 @@ export default function EvidencePage() {
                { e: "EVENT 6", desc: "Session Isolation & Credential Revocation" },
                { e: "EVENT 7", desc: "Cryptographic Attestation & Passport Update" }
              ].map((evt, idx) => (
-                <div key={idx} className={\`p-4 rounded-xl border flex items-center gap-4 \${evt.isRed ? 'border-[#cc2a36]/30 bg-[#cc2a36]/10 text-white' : 'border-slate-800 bg-[#080f1c]'}\`}>
-                   <div className={\`w-12 h-12 shrink-0 rounded-full flex items-center justify-center border text-xs font-bold font-mono \${evt.isRed ? 'border-[#cc2a36] bg-[#cc2a36]/20 text-[#fca5a5]' : 'border-slate-700 bg-slate-800/50 text-slate-300'}\`}>
+                <div key={idx} className={`p-4 rounded-xl border flex items-center gap-4 ${evt.isRed ? 'border-[#cc2a36]/30 bg-[#cc2a36]/10 text-white' : 'border-slate-800 bg-[#080f1c]'}`}>
+                   <div className={`w-12 h-12 shrink-0 rounded-full flex items-center justify-center border text-xs font-bold font-mono ${evt.isRed ? 'border-[#cc2a36] bg-[#cc2a36]/20 text-[#fca5a5]' : 'border-slate-700 bg-slate-800/50 text-slate-300'}`}>
                       {idx}
                    </div>
                    <div>
-                     <div className={\`font-mono text-[10px] uppercase tracking-widest \${evt.isRed ? 'text-[#fca5a5]' : 'text-slate-500'}\`}>{evt.e}</div>
+                     <div className={`font-mono text-[10px] uppercase tracking-widest ${evt.isRed ? 'text-[#fca5a5]' : 'text-slate-500'}`}>{evt.e}</div>
                      <div className="font-semibold text-sm mt-0.5">{evt.desc}</div>
                    </div>
                 </div>
@@ -193,7 +193,7 @@ export default function EvidencePage() {
              Our cryptographic evidence chains are fully exportable to standard defense-grade compliance formats.
           </p>
           <div className="p-6 bg-[#080f1c] rounded-2xl border border-slate-800 text-emerald-400 font-mono text-[11px] overflow-x-auto whitespace-pre leading-relaxed shadow-inner">
-{\`{
+{`{
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
   "serialNumber": "urn:uuid:3e242ca3-08e0-454e-9400-043f140d39e9",
@@ -218,7 +218,7 @@ export default function EvidencePage() {
       ]
     }
   ]
-}\`}
+}`}
           </div>
         </section>
 

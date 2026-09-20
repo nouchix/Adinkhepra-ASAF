@@ -1,10 +1,24 @@
 # Binaries are distributed as GitHub Release assets, not committed to the repo.
 # Download from: https://github.com/nouchix/Adinkhepra-ASAF/releases
-bin/*.exe
-bin/*.elf
-bin/adinkhepra-*
-bin/apiserver-*
-bin/licensemock-*
+bin/
+asaf-hub
+*.exe
+*.exe~
+*~
+*.elf
+
+# Keys and Cryptographic material
+bin/keys/
+keys/
+*.pub
+*.key
+
+# Local databases and DAG attestation stores
+hub.db
+*.db
+data/dag/
+data/vulnerabilities.db
+
 
 # Build artifacts
 *.o
