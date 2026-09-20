@@ -18,6 +18,9 @@ hub.db
 *.db
 data/dag/
 data/vulnerabilities.db
+test-results/
+playwright-report/
+
 
 
 # Build artifacts

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, FileText, Monitor, Plus, X, Folder, Play, Check, ShieldAlert } from 'lucide-react'
+import { Search, FileText, Monitor, Plus, X, Folder, Play, Check, ShieldAlert, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react'
 
 export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<'subnet' | 'csv' | 'cloud' | 'manual'>('subnet')
@@ -9,6 +9,95 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
   const [scanStatus, setScanStatus] = useState('Ready.')
   const [discoveredHosts, setDiscoveredHosts] = useState<any[]>([])
   const [cidrValue, setCidrValue] = useState('')
+
+  // Mode D Manual State
+  const [protocol, setProtocol] = useState<'ssh' | 'winrm'>('ssh')
+  const [host, setHost] = useState('2.24.105.170')
+  const [port, setPort] = useState('22')
+  const [authMethod, setAuthMethod] = useState<'Password' | 'SSH Key'>('Password')
+  const [username, setUsername] = useState('root')
+  const [password, setPassword] = useState('')
+  const [sshKeyPath, setSshKeyPath] = useState('~/.ssh/vps_new')
+  const [targetEnclave, setTargetEnclave] = useState('Local Enclave')
+
+  const [testStatus, setTestStatus] = useState<'idle' | 'testing' | 'success' | 'failed'>('idle')
+  const [testMessage, setTestMessage] = useState('')
+  const [enrollStatus, setEnrollStatus] = useState<'idle' | 'enrolling' | 'success' | 'failed'>('idle')
+  const [enrollMessage, setEnrollMessage] = useState('')
+
+  const handleTestConnection = async () => {
+    if (!host) {
+      setTestStatus('failed')
+      setTestMessage('Host / IP address is required.')
+      return
+    }
+    setTestStatus('testing')
+    setTestMessage(`Testing reachability to ${host}:${port} via ${protocol.toUpperCase()}...`)
+
+    try {
+      const res = await fetch('/api/fleet/test-connection', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          protocol,
+          host,
+          port,
+          authMethod,
+          username,
+          password,
+          sshKeyPath,
+        }),
+      })
+
+      const data = await res.json()
+      if (data.ok) {
+        setTestStatus('success')
+        setTestMessage(data.message || `Verified reachability to ${host}:${port}. Ready for enrollment.`)
+      } else {
+        setTestStatus('failed')
+        setTestMessage(data.message || data.error || `Connection to ${host}:${port} failed.`)
+      }
+    } catch (e: any) {
+      setTestStatus('failed')
+      setTestMessage(`Connection test error: ${e.message}`)
+    }
+  }
+
+  const handleManualEnroll = async () => {
+    if (!host) return
+    setEnrollStatus('enrolling')
+    setEnrollMessage(`Enrolling ${host} to ASAF DAG...`)
+
+    try {
+      const res = await fetch('/api/fleet/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          host,
+          port,
+          protocol,
+          authMethod,
+          username,
+          targetEnclave,
+        }),
+      })
+
+      const data = await res.json()
+      if (data.ok) {
+        setEnrollStatus('success')
+        setEnrollMessage(data.message || `Asset ${host} successfully enrolled.`)
+        setTimeout(() => {
+          onClose()
+        }, 1500)
+      } else {
+        setEnrollStatus('failed')
+        setEnrollMessage(data.message || data.error || 'Enrollment failed.')
+      }
+    } catch (e: any) {
+      setEnrollStatus('failed')
+      setEnrollMessage(`Enrollment error: ${e.message}`)
+    }
+  }
 
   const handleScan = async () => {
     if (!cidrValue) return
@@ -369,61 +458,187 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Protocol</label>
                   <div className="flex-1 flex items-center gap-6 text-sm text-slate-300">
                     <label className="flex items-center gap-2 cursor-pointer">
-                      <input type="radio" name="protocol" defaultChecked className="accent-[#1a9fe8]" /> SSH (Linux / Unix)
+                      <input 
+                        type="radio" 
+                        name="protocol" 
+                        checked={protocol === 'ssh'} 
+                        onChange={() => setProtocol('ssh')} 
+                        className="accent-[#1a9fe8]" 
+                      /> SSH (Linux / Unix)
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
-                      <input type="radio" name="protocol" className="accent-[#1a9fe8]" /> WinRM (Windows)
+                      <input 
+                        type="radio" 
+                        name="protocol" 
+                        checked={protocol === 'winrm'} 
+                        onChange={() => setProtocol('winrm')} 
+                        className="accent-[#1a9fe8]" 
+                      /> WinRM (Windows)
                     </label>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-4">
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Host / IP</label>
-                  <input type="text" placeholder="hostname or IP address" className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" />
+                  <input 
+                    type="text" 
+                    value={host}
+                    onChange={(e) => {
+                      setHost(e.target.value)
+                      setTestStatus('idle')
+                    }}
+                    placeholder="hostname or IP address (e.g. 2.24.105.170)" 
+                    className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" 
+                  />
                 </div>
                 
                 <div className="flex items-center gap-4">
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Port</label>
-                  <input type="text" defaultValue="22" className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" />
+                  <input 
+                    type="text" 
+                    value={port}
+                    onChange={(e) => setPort(e.target.value)}
+                    className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" 
+                  />
                 </div>
                 
                 <div className="flex items-center gap-4">
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Auth Method</label>
-                  <select className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none">
-                    <option>Password</option>
-                    <option>SSH Key</option>
+                  <select 
+                    value={authMethod}
+                    onChange={(e) => setAuthMethod(e.target.value as any)}
+                    className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none"
+                  >
+                    <option value="Password">Password</option>
+                    <option value="SSH Key">SSH Key</option>
                   </select>
                 </div>
                 
                 <div className="flex items-center gap-4">
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Username</label>
-                  <input type="text" placeholder="e.g. admin" className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" />
+                  <input 
+                    type="text" 
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="e.g. root" 
+                    className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" 
+                  />
                 </div>
                 
-                <div className="flex items-center gap-4">
-                  <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Password / Passphrase</label>
-                  <input type="password" placeholder="password or passphrase" className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" />
-                </div>
-                
-                <div className="flex items-center gap-4">
-                  <label className="w-40 text-sm font-bold text-white shrink-0 text-right">SSH Key Path</label>
-                  <input type="text" className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" />
-                </div>
+                {authMethod === 'Password' ? (
+                  <div className="flex items-center gap-4">
+                    <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Password / Passphrase</label>
+                    <input 
+                      type="password" 
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="password or passphrase" 
+                      className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" 
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <label className="w-40 text-sm font-bold text-white shrink-0 text-right">SSH Key Path</label>
+                    <input 
+                      type="text" 
+                      value={sshKeyPath}
+                      onChange={(e) => setSshKeyPath(e.target.value)}
+                      placeholder="e.g. ~/.ssh/vps_new" 
+                      className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none" 
+                    />
+                  </div>
+                )}
                 
                 <div className="flex items-center gap-4">
                   <label className="w-40 text-sm font-bold text-white shrink-0 text-right">Target Enclave</label>
-                  <select className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none">
-                    <option>Local Enclave</option>
+                  <select 
+                    value={targetEnclave}
+                    onChange={(e) => setTargetEnclave(e.target.value)}
+                    className="flex-1 bg-[#0a1526] border border-slate-700 rounded p-2 text-sm text-white focus:border-[#4EAEF5] focus:outline-none"
+                  >
+                    <option value="Local Enclave">Local Enclave</option>
+                    <option value="Alpha Zone">Alpha Zone (Production)</option>
+                    <option value="Bravo DMZ">Bravo DMZ (Sovereign Mirror)</option>
                   </select>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-6">
-                <button className="flex items-center gap-2 bg-[#1a9fe8] hover:bg-[#4EAEF5] text-white font-bold py-2 px-5 rounded text-sm transition-colors">
-                  <Play className="w-4 h-4 fill-current" /> Test Connection
+              {/* Status / Feedback Banner */}
+              {testStatus === 'testing' && (
+                <div className="p-3 bg-[#0a1526] border border-[#1a9fe8]/40 rounded-lg flex items-center gap-3 text-sm text-[#4EAEF5]">
+                  <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                  <span>{testMessage}</span>
+                </div>
+              )}
+
+              {testStatus === 'success' && (
+                <div className="p-3 bg-emerald-950/40 border border-emerald-500/50 rounded-lg flex items-center gap-3 text-sm text-emerald-300">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <div className="font-bold text-emerald-200">Connection Verified</div>
+                    <div className="text-xs text-emerald-400/90">{testMessage}</div>
+                  </div>
+                </div>
+              )}
+
+              {testStatus === 'failed' && (
+                <div className="p-3 bg-red-950/40 border border-red-500/50 rounded-lg flex items-center gap-3 text-sm text-red-300">
+                  <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+                  <div>
+                    <div className="font-bold text-red-200">Connection Check Failed</div>
+                    <div className="text-xs text-red-300/90">{testMessage}</div>
+                  </div>
+                </div>
+              )}
+
+              {enrollStatus === 'enrolling' && (
+                <div className="p-3 bg-amber-950/40 border border-amber-500/50 rounded-lg flex items-center gap-3 text-sm text-amber-300">
+                  <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                  <span>{enrollMessage}</span>
+                </div>
+              )}
+
+              {enrollStatus === 'success' && (
+                <div className="p-3 bg-emerald-950/40 border border-emerald-500/50 rounded-lg flex items-center gap-3 text-sm text-emerald-300">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <span>{enrollMessage}</span>
+                </div>
+              )}
+
+              <div className="flex items-center gap-3 mt-6">
+                <button 
+                  onClick={handleTestConnection}
+                  disabled={testStatus === 'testing' || enrollStatus === 'enrolling'}
+                  className="flex items-center gap-2 bg-[#1a9fe8] hover:bg-[#4EAEF5] disabled:opacity-50 text-white font-bold py-2 px-5 rounded text-sm transition-colors cursor-pointer shadow-md"
+                >
+                  {testStatus === 'testing' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" /> Testing...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-4 h-4 fill-current" /> Test Connection
+                    </>
+                  )}
                 </button>
-                <button className="flex items-center gap-2 bg-slate-800/80 text-slate-500 font-bold py-2 px-5 rounded text-sm cursor-not-allowed">
-                  <Check className="w-4 h-4" /> Enroll Asset
+                <button 
+                  onClick={handleManualEnroll}
+                  disabled={testStatus !== 'success' || enrollStatus === 'enrolling'}
+                  className={`flex items-center gap-2 font-bold py-2 px-5 rounded text-sm transition-all ${
+                    testStatus === 'success' 
+                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer shadow-[0_0_12px_rgba(16,185,129,0.4)]' 
+                      : 'bg-slate-800/80 text-slate-500 cursor-not-allowed'
+                  }`}
+                >
+                  {enrollStatus === 'enrolling' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" /> Enrolling...
+                    </>
+                  ) : (
+                    <>
+                      <Check className="w-4 h-4" /> Enroll Asset
+                    </>
+                  )}
                 </button>
               </div>
             </div>
