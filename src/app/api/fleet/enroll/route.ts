@@ -1,13 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { validateHost, validatePort } from '@/lib/sekhem/ingress-waf'
+import { scrubSecrets, generateSpectralFingerprint } from '@/lib/sekhem/secret-scrubber'
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json()
-    const { host, port = 22, protocol = 'ssh', authMethod, username, targetEnclave = 'Local Enclave' } = body
+    const rawBody = await req.json()
+    const { host, port = 22, protocol = 'ssh', authMethod, username, targetEnclave = 'Local Enclave' } = rawBody
 
-    if (!host) {
+    // 1. Sekhem Ingress WAF Check
+    const hostCheck = validateHost(host)
+    if (!hostCheck.valid) {
       return NextResponse.json(
-        { ok: false, message: 'Host / IP address is required for enrollment.' },
+        { ok: false, rule: hostCheck.rule, message: hostCheck.reason },
+        { status: 400 }
+      )
+    }
+
+    const portCheck = validatePort(port)
+    if (!portCheck.valid) {
+      return NextResponse.json(
+        { ok: false, rule: portCheck.rule, message: portCheck.reason },
         { status: 400 }
       )
     }
@@ -33,10 +45,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({
+    const safeResponsePayload = scrubSecrets({
       ok: true,
       asset,
       message: `Asset ${host} successfully enrolled into enclave "${targetEnclave}" with ML-DSA-65 signed attestation.`
+    })
+
+    const { fingerprint } = generateSpectralFingerprint(safeResponsePayload, 'asaf-enroll-membrane')
+
+    return NextResponse.json(safeResponsePayload, {
+      headers: {
+        'X-Sekhem-FP': fingerprint,
+        'X-Sekhem-WAF': 'PASS'
+      }
     })
   } catch (error: any) {
     return NextResponse.json(

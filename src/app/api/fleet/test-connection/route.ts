@@ -1,22 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server'
 import net from 'net'
+import { validateHost, validatePort, validateFilePath } from '@/lib/sekhem/ingress-waf'
+import { scrubSecrets, generateSpectralFingerprint } from '@/lib/sekhem/secret-scrubber'
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json()
-    const { protocol = 'ssh', host, port = 22, authMethod, username, password, sshKeyPath } = body
+    const rawBody = await req.json()
+    const { protocol = 'ssh', host, port = 22, authMethod, username, password, sshKeyPath } = rawBody
 
-    if (!host || typeof host !== 'string') {
+    // ─── SEKHEM INGRESS WAF MEMBRANE ──────────────────────────────────────────
+    // ASAF-001 (Command Injection) & ASAF-003 (SSRF Metadata Protection)
+    const hostValidation = validateHost(host)
+    if (!hostValidation.valid) {
       return NextResponse.json(
-        { ok: false, message: 'Host / IP address is required.' },
+        {
+          ok: false,
+          rule: hostValidation.rule,
+          error: hostValidation.reason,
+          message: hostValidation.reason
+        },
         { status: 400 }
       )
     }
 
-    const portNum = parseInt(String(port), 10) || 22
-    const targetHost = host.trim()
+    // ASAF-004 (Port Boundary Limits)
+    const portValidation = validatePort(port)
+    if (!portValidation.valid) {
+      return NextResponse.json(
+        {
+          ok: false,
+          rule: portValidation.rule,
+          error: portValidation.reason,
+          message: portValidation.reason
+        },
+        { status: 400 }
+      )
+    }
 
-    // Perform real TCP probe with banner grab
+    // ASAF-002 (Path Traversal Protection)
+    const pathValidation = validateFilePath(sshKeyPath)
+    if (!pathValidation.valid) {
+      return NextResponse.json(
+        {
+          ok: false,
+          rule: pathValidation.rule,
+          error: pathValidation.reason,
+          message: pathValidation.reason
+        },
+        { status: 400 }
+      )
+    }
+
+    const portNum = parseInt(String(port), 10)
+    const targetHost = String(host).trim()
+
+    // Generate Spectral Request Fingerprint (X-Sekhem-FP)
+    const { fingerprint } = generateSpectralFingerprint(
+      { targetHost, portNum, protocol, username: username || 'root' },
+      'asaf-ingress-membrane'
+    )
+
+    // ─── ENCAPSULATED PROBE EXECUTION ─────────────────────────────────────────
     const startTime = Date.now()
     const probeResult = await new Promise<{ ok: boolean; banner?: string; latencyMs: number; error?: string }>((resolve) => {
       const socket = new net.Socket()
@@ -34,7 +78,6 @@ export async function POST(req: NextRequest) {
       socket.setTimeout(4500)
 
       socket.on('connect', () => {
-        // TCP Handshake succeeded! Wait briefly for SSH banner if available
         bannerTimer = setTimeout(() => {
           if (!resolved) {
             resolved = true
@@ -86,8 +129,9 @@ export async function POST(req: NextRequest) {
       }
     })
 
+    // ─── SEKHEM EGRESS SECRET SCRUBBER ────────────────────────────────────────
     if (!probeResult.ok) {
-      return NextResponse.json({
+      const errorResponse = scrubSecrets({
         ok: false,
         host: targetHost,
         port: portNum,
@@ -96,9 +140,13 @@ export async function POST(req: NextRequest) {
         error: probeResult.error,
         message: `Connection to ${targetHost}:${portNum} failed: ${probeResult.error}. Verify network path, firewall, or VPN configuration.`
       })
+
+      const res = NextResponse.json(errorResponse)
+      res.headers.set('X-Sekhem-FP', fingerprint)
+      return res
     }
 
-    return NextResponse.json({
+    const successResponse = scrubSecrets({
       ok: true,
       host: targetHost,
       port: portNum,
@@ -107,10 +155,15 @@ export async function POST(req: NextRequest) {
       latencyMs: probeResult.latencyMs,
       message: `Verified reachability to ${targetHost}:${portNum} (${probeResult.banner || 'Port open'}, latency: ${probeResult.latencyMs}ms). Ready for enrollment.`
     })
+
+    const res = NextResponse.json(successResponse)
+    res.headers.set('X-Sekhem-FP', fingerprint)
+    return res
   } catch (error: any) {
-    return NextResponse.json(
-      { ok: false, error: error.message || 'Internal server error during connection test' },
-      { status: 500 }
-    )
+    const errPayload = scrubSecrets({
+      ok: false,
+      error: error.message || 'Internal server error during connection test'
+    })
+    return NextResponse.json(errPayload, { status: 500 })
   }
 }
