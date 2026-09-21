@@ -20,6 +20,7 @@ data/dag/
 data/vulnerabilities.db
 test-results/
 playwright-report/
+.khepra/
 
 
 
