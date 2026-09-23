@@ -876,7 +876,7 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
           {/* ───────────────────────────────────────────────────────────────── */}
           {activeTab === 'manual' && (
             <div className="space-y-4">
-              <h2 className="text-white font-bold text-base">Manual Remote Asset Connection</h2>
+              <h2 className="text-white font-bold text-base">Manual Remote Asset Connection — Manual Asset Add</h2>
               <p className="text-slate-400 text-xs">
                 Enter connection parameters for a single endpoint. Use [Test Connection] to verify reachability before enrolling.
               </p>
@@ -1016,6 +1016,26 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
                   <div>
                     <div className="font-bold text-red-200">Connection Check Failed</div>
                     <div className="text-[11px] text-red-300/90">{testMessage}</div>
+                  </div>
+                </div>
+              )}
+
+              {enrollStatus === 'success' && (
+                <div className="p-3 bg-emerald-950/40 border border-emerald-500/50 rounded-lg flex items-center gap-3 text-xs text-emerald-300">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <div className="font-bold text-emerald-200">Enrollment Confirmed</div>
+                    <div className="text-[11px] text-emerald-400/90">{enrollMessage || `Asset ${host} successfully enrolled.`}</div>
+                  </div>
+                </div>
+              )}
+
+              {enrollStatus === 'failed' && (
+                <div className="p-3 bg-red-950/40 border border-red-500/50 rounded-lg flex items-center gap-3 text-xs text-red-300">
+                  <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+                  <div>
+                    <div className="font-bold text-red-200">Enrollment Failed</div>
+                    <div className="text-[11px] text-red-300/90">{enrollMessage}</div>
                   </div>
                 </div>
               )}

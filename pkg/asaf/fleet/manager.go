@@ -25,12 +25,45 @@ func NewManager(dbPath string) (*Manager, error) {
 
 	// Ensure buckets exist
 	err = db.Update(func(tx *bbolt.Tx) error {
-		_, err := tx.CreateBucketIfNotExists([]byte("enclaves"))
+		b, err := tx.CreateBucketIfNotExists([]byte("enclaves"))
 		if err != nil {
 			return err
 		}
 		_, err = tx.CreateBucketIfNotExists([]byte("scans"))
-		return err
+		if err != nil {
+			return err
+		}
+
+		if b.Stats().KeyN == 0 {
+			defaults := []Enclave{
+				{
+					ID:        "alpha",
+					Name:      "Alpha Zone",
+					Asset:     5,
+					Status:    "Compliant",
+					RiskScore: 10,
+					Assets: []Asset{
+						{ID: "asset-1", Type: "server", Hostname: "web-01.alpha.internal", Compliance: "Compliant", LastSeen: time.Now().Format(time.RFC3339)},
+						{ID: "asset-2", Type: "database", Hostname: "db-01.alpha.internal", Compliance: "Compliant", LastSeen: time.Now().Format(time.RFC3339)},
+					},
+				},
+				{
+					ID:        "bravo",
+					Name:      "Bravo DMZ",
+					Asset:     3,
+					Status:    "At-Risk",
+					RiskScore: 35,
+					Assets: []Asset{
+						{ID: "asset-3", Type: "gateway", Hostname: "gw-01.bravo.internal", Compliance: "Non-Compliant", LastSeen: time.Now().Format(time.RFC3339)},
+					},
+				},
+			}
+			for _, enc := range defaults {
+				data, _ := json.Marshal(enc)
+				b.Put([]byte(enc.ID), data)
+			}
+		}
+		return nil
 	})
 
 	if err != nil {

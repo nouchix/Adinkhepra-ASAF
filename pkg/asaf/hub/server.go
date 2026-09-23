@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/nouchix/Adinkhepra-ASAF/pkg/asaf/fleet"
 )
@@ -44,7 +45,8 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) registerRoutes() {
 	// TRL 10 Enforced Routes: Outbound or mutative actions must go through HITL middleware.
-	s.mux.HandleFunc("/api/v1/fleet/enclaves", s.handleGetEnclaves)
+	s.mux.HandleFunc("/api/v1/fleet/enclaves", s.handleEnclavesRouter)
+	s.mux.HandleFunc("/api/v1/fleet/enclaves/", s.handleEnclavesRouter)
 	s.mux.HandleFunc("/api/v1/fleet/sprs", s.handleGetSPRS)
 	s.mux.HandleFunc("/api/v1/fleet/scan/status", s.handleGetScanStatus)
 	s.mux.HandleFunc("/api/v1/fleet/scan/last", s.handleGetLastScan)
@@ -62,10 +64,32 @@ func (s *Server) registerRoutes() {
 	s.mux.HandleFunc("/api/v1/hub/stream", s.handleSentinelStream)
 }
 
-func (s *Server) handleGetEnclaves(w http.ResponseWriter, r *http.Request) {
-	enclaves := s.manager.GetEnclaves()
+func (s *Server) handleEnclavesRouter(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(enclaves)
+	path := strings.TrimPrefix(r.URL.Path, "/api/v1/fleet/enclaves")
+	path = strings.TrimPrefix(path, "/")
+
+	if path != "" {
+		parts := strings.Split(path, "/")
+		if len(parts) >= 2 && parts[1] == "assets" {
+			enclaveID := parts[0]
+			for _, enc := range s.manager.GetEnclaves() {
+				if enc.ID == enclaveID {
+					json.NewEncoder(w).Encode(map[string]interface{}{
+						"assets": enc.Assets,
+					})
+					return
+				}
+			}
+			json.NewEncoder(w).Encode(map[string]interface{}{"assets": []fleet.Asset{}})
+			return
+		}
+	}
+
+	enclaves := s.manager.GetEnclaves()
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"enclaves": enclaves,
+	})
 }
 
 func (s *Server) handleGetSPRS(w http.ResponseWriter, r *http.Request) {
@@ -107,7 +131,11 @@ func (s *Server) handleScanStream(w http.ResponseWriter, r *http.Request) {
 
 	for res := range results {
 		data, _ := json.Marshal(res)
-		fmt.Fprintf(w, "data: %s\n\n", data)
+		if _, ok := res.(*fleet.FleetScanSummary); ok {
+			fmt.Fprintf(w, "event: done\ndata: %s\n\n", data)
+		} else {
+			fmt.Fprintf(w, "event: result\ndata: %s\n\n", data)
+		}
 		flusher.Flush()
 	}
 }

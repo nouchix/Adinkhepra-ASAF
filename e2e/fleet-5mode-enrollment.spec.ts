@@ -24,7 +24,7 @@ test.describe('AdinKhepra ASAF — 5-Mode Fleet Management & Sovereign Agent E2E
 
     // Expect scan completion feedback and discovered hosts table
     await expect(page.getByText(/Scan complete/i)).toBeVisible({ timeout: 10000 })
-    await expect(page.getByText('10.200.1.10')).toBeVisible()
+    await expect(page.getByRole('cell', { name: '10.200.1.10', exact: true })).toBeVisible()
 
     // Verify Enroll Selected button
     const enrollSelectedBtn = page.getByRole('button', { name: /Enroll Selected/i })
@@ -47,9 +47,9 @@ test.describe('AdinKhepra ASAF — 5-Mode Fleet Management & Sovereign Agent E2E
 
     // Verify success banner and CMMC Scoping cards appear
     await expect(page.getByText(/Enrolled all 25 MSP lab assets with ML-DSA-65 attestation/i)).toBeVisible({ timeout: 10000 })
-    await expect(page.getByText('CUI Assets')).toBeVisible()
-    await expect(page.getByText('Security Protection')).toBeVisible()
-    await expect(page.getByText('Max SPRS Deduction')).toBeVisible()
+    await expect(page.getByText('CUI Assets', { exact: true })).toBeVisible()
+    await expect(page.getByText('Security Protection', { exact: true })).toBeVisible()
+    await expect(page.getByText('Max SPRS Deduction', { exact: true })).toBeVisible()
 
     // Verify lab endpoints are visible in the preview table
     await expect(page.getByText('DC-PRIMARY-01')).toBeVisible()

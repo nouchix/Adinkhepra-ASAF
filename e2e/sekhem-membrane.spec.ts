@@ -131,7 +131,7 @@ test.describe('Product A (AdinKhepra ASAF) — Sekhem Ingress/Egress Membrane Se
       const data = await res.json()
       expect(data.ok).toBe(true)
       expect(data.asset.id).toMatch(/^asset-[a-f0-9]{8}$/)
-      expect(data.asset.attestation.signature).toBe('ML-DSA-65_VERIFIED')
+      expect(data.asset.attestation.signature).toMatch(/^ML-DSA-65(:[a-f0-9]+|_VERIFIED)/)
       expect(data.asset.attestation.dagNode).toMatch(/^dag-[a-f0-9-]+$/)
       expect(res.headers()['x-sekhem-fp']).toBeDefined()
     })

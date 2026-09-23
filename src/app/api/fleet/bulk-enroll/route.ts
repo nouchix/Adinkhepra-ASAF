@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createHash } from 'crypto'
 import { validateHost, validatePort } from '@/lib/sekhem/ingress-waf'
 import { scrubSecrets, generateSpectralFingerprint } from '@/lib/sekhem/secret-scrubber'
 import {
@@ -11,6 +12,7 @@ import {
 } from '@/lib/fleet/fleet-store'
 
 export interface EndpointInput {
+  name?: string
   host: string
   port?: number | string
   protocol?: string
@@ -99,7 +101,8 @@ export async function POST(req: NextRequest) {
         continue
       }
 
-      const assetId = `asset-${cleanHost.replace(/[^a-zA-Z0-9]/g, '-')}-${cleanPort}`
+      const hostHash = createHash('sha256').update(`${cleanHost}:${cleanPort}`).digest('hex').slice(0, 8)
+      const assetId = `asset-${hostHash}`
       const attestation = generatePqcAttestation(
         {
           assetId,
@@ -113,7 +116,7 @@ export async function POST(req: NextRequest) {
 
       enrolledAssets.push({
         id: assetId,
-        name: ep.hostname ? ep.hostname.split('.')[0].toUpperCase() : `NODE-${cleanHost.replace(/\./g, '-')}`,
+        name: ep.name || (ep.hostname ? ep.hostname.split('.')[0].toUpperCase() : `NODE-${cleanHost.replace(/\./g, '-')}`),
         host: cleanHost,
         port: cleanPort,
         hostname: ep.hostname ? ep.hostname.trim() : `lab-host-${cleanHost.replace(/\./g, '-')}`,

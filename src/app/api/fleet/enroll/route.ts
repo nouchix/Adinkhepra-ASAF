@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createHash } from 'crypto'
 import { validateHost, validatePort } from '@/lib/sekhem/ingress-waf'
 import { scrubSecrets, generateSpectralFingerprint } from '@/lib/sekhem/secret-scrubber'
 import { addAssets, generatePqcAttestation, FleetAsset } from '@/lib/fleet/fleet-store'
@@ -27,7 +28,8 @@ export async function POST(req: NextRequest) {
 
     const cleanHost = String(host).trim()
     const cleanPort = Number(port) || 22
-    const assetId = `asset-${cleanHost.replace(/[^a-zA-Z0-9]/g, '-')}-${cleanPort}`
+    const hostHash = createHash('sha256').update(`${cleanHost}:${cleanPort}`).digest('hex').slice(0, 8)
+    const assetId = `asset-${hostHash}`
     
     // TRL 10 Cryptographic PQC Attestation
     const attestation = generatePqcAttestation(

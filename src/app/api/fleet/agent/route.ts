@@ -73,11 +73,19 @@ const SEED_AGENTS: FleetAgentNode[] = [
 ]
 
 export async function GET() {
-  let agents = getAgents()
-  if (agents.length === 0) {
-    saveAgents(SEED_AGENTS)
-    agents = SEED_AGENTS
+  const storedAgents = getAgents()
+  const agentMap = new Map<string, FleetAgentNode>()
+
+  // Always seed baseline Groff MSP lab agents
+  for (const s of SEED_AGENTS) {
+    agentMap.set(s.hostname, s)
   }
+  for (const a of storedAgents) {
+    agentMap.set(a.hostname, a)
+  }
+
+  const agents = Array.from(agentMap.values())
+  saveAgents(agents)
 
   // Update real-time online status based on 120-second heartbeat window
   const now = Date.now()
