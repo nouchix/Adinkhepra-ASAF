@@ -856,7 +856,7 @@ function VideoStripSection() {
           <p className="text-sm text-slate-300 leading-relaxed max-w-md">
             DISA has published zero post-quantum STIGs. We published PQC-01-STIG-V1R1 —
             the world's first DoD-style PQC compliance checklist with 12 controls
-            mapped to CCI, NIST 800-53, and CNSA 2.0. Built on the KHEPRA Protocol™ (USPTO #73565085).
+            mapped to CCI, NIST 800-53, and CNSA 2.0. Built on the KHEPRA Protocol™ (Patent Pending).
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
             <a
@@ -1153,7 +1153,7 @@ function Footer() {
             </p>
             <div className="text-[10px] text-slate-500 space-y-0.5">
               <div>© 2026 SecRed Knowledge Inc. · EIN 99-0529252</div>
-              <div>Current VOSB · Army Signal Corps 25S SATCOM · USPTO #73565085</div>
+              <div>Current VOSB · Army Signal Corps 25S SATCOM · Patent Pending</div>
               <div className="text-slate-600">IP licensed from Souhimbou Doh Kone LLC</div>
             </div>
             {/* SecRed seal */}
@@ -1187,7 +1187,7 @@ function Footer() {
             <ul className="space-y-2.5">
               {[
                 ['VOSB Contracting', 'mailto:contact@nouchix.com'],
-                ['Patent #73565085', '#'],
+                ['Patent Pending', '#'],
                 ['Security Policy', '#'],
                 ['contact@nouchix.com', 'mailto:contact@nouchix.com'],
               ].map(([label, href]) => (
@@ -1222,7 +1222,7 @@ function Footer() {
         {/* Bottom bar — matches nouchix.com style */}
         <div className="border-t border-white/5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono text-slate-500">
-            {['ML-DSA-65 (FIPS 204)', 'ML-KEM-768 (FIPS 203)', 'KHEPRA Protocol™', 'USPTO #73565085', 'Zero Telemetry', 'Air-Gappable'].map((t, i, a) => (
+            {['ML-DSA-65 (FIPS 204)', 'ML-KEM-768 (FIPS 203)', 'KHEPRA Protocol™', 'Patent Pending', 'Zero Telemetry', 'Air-Gappable'].map((t, i, a) => (
               <span key={t} className="flex items-center gap-3">
                 {t}{i < a.length - 1 && <span className="text-slate-700">·</span>}
               </span>

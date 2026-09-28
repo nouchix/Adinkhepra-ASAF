@@ -404,7 +404,7 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
                 Connect Assets — Enrollment Wizard
               </div>
               <div className="text-[11px] text-slate-400 font-mono">
-                Groff Networks MSP Lab Edition | USPTO #73565085
+                Groff Networks MSP Lab Edition | Patent Pending
               </div>
             </div>
           </div>
@@ -1212,7 +1212,7 @@ export function EnrollmentWizard({ onClose }: { onClose: () => void }) {
 
         {/* Footer */}
         <div className="bg-[#050c16] border-t border-slate-800 px-4 py-2 flex items-center justify-between text-[11px] text-slate-500 font-mono">
-          <div>USPTO #73565085 | SecRed Knowledge Inc. | SDVOSB 25S</div>
+          <div>Patent Pending | SecRed Knowledge Inc. | SDVOSB 25S</div>
           <div className="flex items-center gap-3">
             <span className="text-emerald-400 flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SEKHEM WAF Active

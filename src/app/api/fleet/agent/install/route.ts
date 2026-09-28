@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   if (osType.toLowerCase() === 'windows') {
     const psScript = `# ==============================================================================
 # NouchiX-Fleet — Sovereign Agent Deployment (Windows)
-# Enclave: Groff-MSP-Enclave | USPTO #73565085
+# Enclave: Groff-MSP-Enclave | Patent Pending
 # ==============================================================================
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ErrorActionPreference = "Stop"
@@ -58,7 +58,7 @@ try {
   const shScript = `#!/usr/bin/env bash
 # ==============================================================================
 # NouchiX-Fleet — Sovereign Agent Deployment (Linux / macOS)
-# Enclave: Groff-MSP-Enclave | USPTO #73565085
+# Enclave: Groff-MSP-Enclave | Patent Pending
 # ==============================================================================
 set -euo pipefail
 
