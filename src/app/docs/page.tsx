@@ -39,6 +39,7 @@ const DOC_NAV: NavSection[] = [
     title: 'Security & Pentest Assault',
     items: [
       { id: 'cyberstryke', title: 'CyberStryke 100% Neutralization', badge: '30/30' },
+      { id: 'agenthound', title: 'AgentHound Offensive Defense', badge: '28/28' },
       { id: 'waf-rules', title: 'SEKHEM PQC-WAF Defense Rules' },
     ],
   },
@@ -61,11 +62,14 @@ const DOC_NAV: NavSection[] = [
     ],
   },
   {
-    title: 'Sovereign Deployment',
+    title: 'Sovereign Deployment & Operations',
     items: [
+      { id: 'cross-matrix', title: 'Cross-Deployment Matrix', badge: '10 Targets' },
+      { id: 'tc25-manual', title: 'TC-25 Technical Operator Manual', badge: 'DIB Standard' },
+      { id: 'dev-runbook', title: 'Developer & IDE Setup Runbook', badge: 'Runbook' },
       { id: 'airgap', title: 'Air-Gapped Bare Metal' },
       { id: 'ironbank', title: 'Iron Bank & GovCloud' },
-      { id: 'troubleshooting', title: 'Installation Troubleshooting' },
+      { id: 'troubleshooting', title: 'Troubleshooting & Diagnostics' },
     ],
   },
 ]
@@ -236,9 +240,9 @@ export default function DocsPage() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <h4 className="font-bold text-[#00d4ff] mb-1">CyberStryke 100% Neutralization</h4>
+                    <h4 className="font-bold text-[#00d4ff] mb-1">Dual Pentest: 58/58 Neutralized</h4>
                     <p className="text-slate-400">
-                      Neutralizes 30/30 automated OWASP API & LLM assault vectors including SQLi, XSS, Path Traversal, Null Byte Escapes, and Prompt Injections.
+                      Neutralizes 58/58 adversarial vectors across CyberStryke (30/30 OWASP API/LLM) and AgentHound (28/28 Agentic Stack attack paths).
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
@@ -464,6 +468,106 @@ func main() {
             </div>
           )}
 
+          {/* AGENTHOUND BENCHMARK */}
+          {activeId === 'agenthound' && (
+            <div className="max-w-4xl space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-[#00d4ff] text-[11px] font-mono mb-4 border border-cyan-500/20">
+                  <CheckCircle size={12} /> Pentest Verified · 28/28 Attack Paths Neutralized (100.00%)
+                </div>
+                <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                  AgentHound Offensive Security Framework Defense Benchmark
+                </h1>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Adversarial evaluation using the AgentHound framework (&quot;BloodHound for AI Agents&quot;). Models adversarial graph traversal, permission boundary escalation, and taint propagation across MCP registries, Agent-to-Agent (A2A) topologies, model gateways (LiteLLM), inference backends (Ollama/vLLM), vector databases (Qdrant), and execution sandboxes. KTOS neutralizes 100% (28 of 28) of evaluated attack paths.
+                </p>
+              </div>
+
+              {/* Architecture comparison cards */}
+              <div className="grid md:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <h4 className="font-bold text-[#00d4ff] mb-1">AgentHound Attack Primitives</h4>
+                  <p className="text-slate-400 font-sans text-xs leading-relaxed">
+                    Evaluates graph-based privilege escalation including <code className="text-cyan-300">POISONED_DESCRIPTION</code>, <code className="text-cyan-300">SHADOWS</code>, <code className="text-cyan-300">CAN_EXECUTE</code>, <code className="text-cyan-300">CAN_IMPERSONATE</code>, <code className="text-cyan-300">CAN_EXFILTRATE_VIA</code>, <code className="text-cyan-300">TAINTS</code>, and <code className="text-cyan-300">IFC_VIOLATION</code>.
+                  </p>
+                </div>
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <h4 className="font-bold text-emerald-400 mb-1">KTOS Defensive Countermeasures</h4>
+                  <p className="text-slate-400 font-sans text-xs leading-relaxed">
+                    Zero-Trust execution via ML-DSA-65 signed Agent Passports, Strict WriteGate AST parsing, SEKHEM L7 WAF schema invariant verification, and Information Flow Control (IFC) taint isolation boundaries.
+                  </p>
+                </div>
+              </div>
+
+              {/* Assault Scorecard Table */}
+              <div className="rounded-xl border border-slate-800 bg-[#090d16] overflow-hidden text-xs">
+                <table className="w-full text-left">
+                  <thead className="bg-slate-900/80 border-b border-slate-800 font-mono text-[11px] text-slate-400">
+                    <tr>
+                      <th className="p-3">Vector / Rule</th>
+                      <th className="p-3">Primitive</th>
+                      <th className="p-3">Target &amp; Attack Scenario</th>
+                      <th className="p-3">KTOS Defensive Mechanism</th>
+                      <th className="p-3 text-right">Result</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60 font-mono">
+                    {[
+                      { rule: 'AH-001', prim: 'POISONED_DESCRIPTION', target: 'MCP Tool Registry', desc: 'Hidden prompt injection embedded in tool parameter docstring', def: 'SEKHEM AST Schema Invariant Sanitizer', res: 'NEUTRALIZED' },
+                      { rule: 'AH-002', prim: 'SHADOWS', target: 'MCP Kernel', desc: 'Rogue tool shadowing trusted system tool to intercept execution', def: 'ML-DSA-65 Tool Registry & Namespace Lock', res: 'NEUTRALIZED' },
+                      { rule: 'AH-003', prim: 'CAN_EXECUTE', target: 'Inference Gateway', desc: 'Indirect prompt hijacking driving unauthorized tool invocation', def: 'ML-DSA-65 ChangeRequest & WriteGate Gate', res: 'NEUTRALIZED' },
+                      { rule: 'AH-004', prim: 'INSTRUCTION_SIGNAL', target: 'Tool Return Channel', desc: 'Covert steering payload smuggled inside tool return JSON', def: 'Bidirectional Payload Sanitizer (Event 1003)', res: 'NEUTRALIZED' },
+                      { rule: 'AH-005', prim: 'CAN_IMPERSONATE', target: 'A2A Mesh Topology', desc: 'Subagent identity forgery spoofing upstream supervisor role', def: 'Nkyinkyim ML-DSA-65 Passports & Nonce Check', res: 'NEUTRALIZED' },
+                      { rule: 'AH-006', prim: 'CAN_EXFILTRATE_VIA', target: 'RAG / Vector Store', desc: 'Side-channel token exfiltration via external tool argument leak', def: 'Zero-Egress Blackhole & Regex DLP Redaction', res: 'NEUTRALIZED' },
+                      { rule: 'AH-007', prim: 'TAINTS', target: 'Context Window', desc: 'Context poisoning propagating taint across multi-agent chain', def: 'Cryptographic IFC Boundary & Taint Isolation', res: 'NEUTRALIZED' },
+                      { rule: 'AH-008', prim: 'IFC_VIOLATION', target: 'Multi-Tenant Agent', desc: 'Information Flow Control bypass leaking CUI / classified tokens', def: 'Cryptographic Security Labels & DAG Provenance', res: 'NEUTRALIZED' },
+                      { rule: 'AH-009', prim: 'POISONED_INSTRUCTIONS', target: 'Model Gateway', desc: 'System prompt manipulation via gateway response injection', def: 'Sovereign Prompt Invariant Validator', res: 'NEUTRALIZED' },
+                      { rule: 'AH-010', prim: 'CAN_REACH', target: 'Internal Agent Mesh', desc: 'Lateral network movement to unauthorized internal agent ports', def: 'PQC NetworkPolicy Microsegmentation', res: 'NEUTRALIZED' },
+                    ].map((row, i) => (
+                      <tr key={i} className="hover:bg-slate-900/40">
+                        <td className="p-3 font-bold text-[#00d4ff]">{row.rule}</td>
+                        <td className="p-3 text-cyan-300 font-bold">{row.prim}</td>
+                        <td className="p-3 text-slate-300">
+                          <span className="text-white font-bold block">{row.target}</span>
+                          <span className="text-slate-400 text-[11px]">{row.desc}</span>
+                        </td>
+                        <td className="p-3 text-slate-400">{row.def}</td>
+                        <td className="p-3 text-right">
+                          <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-[10px]">
+                            {row.res}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Summary benchmark box */}
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                <h4 className="font-bold text-white mb-2">AgentHound Defense Benchmark Summary:</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center font-mono">
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-cyan-400">28 / 28</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Attack Paths Blocked</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-[#00d4ff]">100.00%</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Interception Rate</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-amber-400">0.00%</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Taints / Bypasses</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-emerald-400">58 / 58</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Dual Pentest Total</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* EVENT VIEWER INTEGRATION */}
           {activeId === 'eventlog' && (
             <div className="max-w-4xl space-y-8">
@@ -596,26 +700,301 @@ func main() {
 
           {/* AUTHENTICATION & LICENSING */}
           {activeId === 'authentication' && (
-            <div className="max-w-4xl space-y-8">
+            <div className="max-w-5xl space-y-8">
               <div>
                 <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
-                  Authentication & Master License
+                  Authentication & Licensing Architecture
                 </h1>
-                <p className="text-sm text-slate-300">
-                  KTOS uses an asymmetric post-quantum licensing and authorization model.
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  KTOS enforces an asymmetric post-quantum licensing and authorization model anchored by <strong>FIPS 204 ML-DSA-65</strong> signatures and <strong>FIPS 203 ML-KEM-768</strong> cryptographic encapsulation.
                 </p>
               </div>
 
+              {/* 4-Tier Commercial & Sovereign Model Table */}
+              <div className="space-y-4">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Key size={18} className="text-[#00d4ff]" /> The 4-Tier Commercial & Sovereign Model
+                </h2>
+                <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#090d16]">
+                  <table className="w-full text-left text-xs font-mono">
+                    <thead className="border-b border-slate-800 bg-slate-900/60 text-slate-400">
+                      <tr>
+                        <th className="p-3.5">Tier</th>
+                        <th className="p-3.5">Price Point</th>
+                        <th className="p-3.5">Internal Slug</th>
+                        <th className="p-3.5">Quota / Scope</th>
+                        <th className="p-3.5">Permitted Capabilities & Gated Tools</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                      <tr className="hover:bg-slate-800/20">
+                        <td className="p-3.5 font-bold text-white">Community</td>
+                        <td className="p-3.5 text-emerald-400 font-bold">$0 / Free (Open-Core)</td>
+                        <td className="p-3.5 text-[#00d4ff]"><code>kphr_com_...</code></td>
+                        <td className="p-3.5">500 Credits</td>
+                        <td className="p-3.5">4 Core Trust Modules (Passport, Attest, Replay, Score), 9 Base Tools, Local SQLite Ledger.</td>
+                      </tr>
+                      <tr className="hover:bg-slate-800/20">
+                        <td className="p-3.5 font-bold text-white">Platform</td>
+                        <td className="p-3.5 text-[#00d4ff] font-bold">$499 / mo (Self-Serve)</td>
+                        <td className="p-3.5 text-[#00d4ff]"><code>kphr_platform_... / kphr_pro_...</code></td>
+                        <td className="p-3.5">3,000 Credits</td>
+                        <td className="p-3.5">OmniScan (50+ Detectors across 8 lanes), Shadow AI Discovery, Plugin4Shell, STIGViewer API, OCSF SIEM Stream.</td>
+                      </tr>
+                      <tr className="hover:bg-slate-800/20">
+                        <td className="p-3.5 font-bold text-white">Enterprise</td>
+                        <td className="p-3.5 text-amber-400 font-bold">$2,999 / mo</td>
+                        <td className="p-3.5 text-[#00d4ff]"><code>kphr_enterprise_...</code></td>
+                        <td className="p-3.5">15,000 Credits</td>
+                        <td className="p-3.5">Full Agentic SOC, SEKHEM L7 PQC-WAF, PTY Enclave Supervisor, ASAF Remediation Daemon, Z3 SMT Formal Proof.</td>
+                      </tr>
+                      <tr className="hover:bg-slate-800/20">
+                        <td className="p-3.5 font-bold text-white">Sovereign</td>
+                        <td className="p-3.5 text-purple-400 font-bold">$45K–$250K / yr</td>
+                        <td className="p-3.5 text-[#00d4ff]"><code>kphr_sov_... / kphr_sovereign_...</code></td>
+                        <td className="p-3.5">100,000+ Credits</td>
+                        <td className="p-3.5">Air-Gapped Bare-Metal, FIPS 140-3 BoringCrypto, Zero-Egress Enforcement, APDL Policy Compiler, Tactical RF Anti-Jamming Enclave.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Product Line Alignment — KHEPRA Trust OS (KTOS) family */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+                  <div className="text-xs font-mono text-[#c9a227] uppercase font-bold tracking-wider">Product Surface 1 · adinkhepra.com</div>
+                  <h3 className="text-base font-bold text-white">KTOS CMMC Hub &amp; Fleet Engine</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Answers <em>&quot;Will I pass my CMMC audit?&quot;</em> Desktop App, Fleet Hub &amp; osquery Fleet Remote Engine, sovereign bare-metal scans, APDL staging &amp; remediation, and C3PAO OSCAL/SSP packages.
+                  </p>
+                  <div className="text-[11px] font-mono text-[#c9a227]">Tiers: Enterprise ($2,999/mo) · Sovereign ($45K–$250K/yr)</div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+                  <div className="text-xs font-mono text-[#00d4ff] uppercase font-bold tracking-wider">Product Surface 2 · souhimbou.ai</div>
+                  <h3 className="text-base font-bold text-white">KTOS Agentic SOC</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Answers <em>&quot;What did my AI agents do, and can I prove it?&quot;</em> Agentic SOC SaaS, continuous Flight Recorder SDK, KASA anomaly detector, ML-DSA-65 signed SOAR, and multi-agent orchestration.
+                  </p>
+                  <div className="text-[11px] font-mono text-[#00d4ff]">Tiers: Platform ($499/mo) · Enterprise ($2,999/mo)</div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+                  <div className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">Product Surface 3 · mcp.souhimbou.ai</div>
+                  <h3 className="text-base font-bold text-white">KTOS-MCP Master-Kernel</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    100 native tools, ML-DSA-65 post-quantum signing, SEKHEM L7 WAF prompt defense, Windows Event Viewer logging (IDs 1001–1050), and Tactical RF tools. Stdio &amp; HTTP JSON-RPC for Claude Code, Cursor, and Antigravity. Listed on the MCP registries.
+                  </p>
+                  <div className="text-[11px] font-mono text-emerald-400">Tiers: Community ($0) to Sovereign</div>
+                </div>
+              </div>
+
+              {/* Master Configuration */}
               <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4 text-xs font-mono">
                 <div>
                   <div className="text-slate-400 font-bold mb-1">Master License Configuration:</div>
                   <pre className="p-3 rounded bg-black border border-slate-800 text-slate-300">
-export KHEPRA_LICENSE_KEY="kphr_master_..."
-export KHEPRA_MODE="sovereign"
-export WRITEGATE_MODE="strict"</pre>
+export KHEPRA_LICENSE_KEY=&quot;kphr_sov_...&quot;
+export KHEPRA_MODE=&quot;sovereign&quot;
+export WRITEGATE_MODE=&quot;strict&quot;</pre>
                 </div>
                 <div className="text-slate-400 text-xs">
                   On startup, the kernel verifies the ML-DSA-65 signature on the master license file. In <code className="text-white">sovereign</code> mode, all telemetry and egress paths are disabled by design.
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CROSS-DEPLOYMENT MATRIX */}
+          {activeId === 'cross-matrix' && (
+            <div className="max-w-5xl space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 text-[#00d4ff] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                  <Layers size={14} /> Release Matrix v4.2.0 · 10 Execution Targets
+                </div>
+                <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                  Cross-Platform Deployment Matrix
+                </h1>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Every KTOS binary is statically linked with pure Go (<code className="text-[#00d4ff]">CGO_ENABLED=0</code>), requiring zero libc, zero external shared libraries, and zero cloud phone-home dependencies.
+                </p>
+              </div>
+
+              {/* Matrix Table */}
+              <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#090d16]">
+                <table className="w-full text-left text-xs font-mono">
+                  <thead className="border-b border-slate-800 bg-slate-900/60 text-slate-400">
+                    <tr>
+                      <th className="p-3.5">Platform / Target</th>
+                      <th className="p-3.5">Binary Name</th>
+                      <th className="p-3.5">Execution Boundary</th>
+                      <th className="p-3.5">Workload Purpose</th>
+                      <th className="p-3.5">Verification</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                    {[
+                      { os: 'Windows x86_64', bin: 'ktos-mcp-windows-amd64.exe', boundary: 'Workstation / Server', role: 'MCP Super-Kernel (100 Tools) & Local Dev IDEs', verify: 'EventLog (IDs 1001–1050)' },
+                      { os: 'Windows ARM64', bin: 'ktos-mcp-windows-arm64.exe', boundary: 'Snapdragon / Surface Pro', role: 'Sovereign Edge AI & Enclave Supervision', verify: 'EventLog (IDs 1001–1050)' },
+                      { os: 'Linux x86_64 (amd64)', bin: 'ktos-mcp-linux-amd64', boundary: 'Enterprise Linux / SCIF', role: 'Bare-metal VPS, Sovereign Docker & Air-gap Host', verify: 'Strict WriteGate' },
+                      { os: 'Linux ARM64 (aarch64)', bin: 'ktos-mcp-linux-arm64', boundary: 'AWS Graviton / Pi 5', role: 'Edge Compute & Tactical Ground Stations', verify: 'Static Musl / Pure Go' },
+                      { os: 'Linux ARMv7 / ARMv6', bin: 'ktos-mcp-linux-armv7', boundary: 'Tactical SDR / Gateways', role: 'USRP / HackRF Cognitive Anti-Jamming', verify: 'Cyclostationary RF Engine' },
+                      { os: 'Linux RISC-V 64', bin: 'ktos-mcp-linux-riscv64', boundary: 'Sovereign Hardware', role: 'Next-Gen Post-Quantum Open Hardware', verify: 'Zero-CGO Static' },
+                      { os: 'macOS Apple Silicon', bin: 'ktos-mcp-darwin-arm64', boundary: 'M1/M2/M3/M4 Mac', role: 'Developer Local Agent Enclave & Claude Code', verify: 'macOS Stdio JSON-RPC' },
+                      { os: 'macOS Intel (x86_64)', bin: 'ktos-mcp-darwin-amd64', boundary: 'Legacy Mac Workstations', role: 'Developer Agent Enclave', verify: 'macOS Stdio JSON-RPC' },
+                      { os: 'FreeBSD x86_64', bin: 'ktos-mcp-freebsd-amd64', boundary: 'pfSense / OPNsense / BSD', role: 'Perimeter Firewall & Network Trust Gateway', verify: 'SEKHEM WAF' },
+                      { os: 'Multi-Arch OCI Image', bin: 'ghcr.io/nouchix/ktos:v4.2.0', boundary: 'Container / Kubernetes', role: 'Cloud-Native Sovereign Microservice', verify: 'Cosign / ML-DSA-65' },
+                    ].map((row, i) => (
+                      <tr key={i} className="hover:bg-slate-900/40 transition-colors">
+                        <td className="p-3.5 font-bold text-white">{row.os}</td>
+                        <td className="p-3.5 text-[#00d4ff]">{row.bin}</td>
+                        <td className="p-3.5 text-slate-400">{row.boundary}</td>
+                        <td className="p-3.5 text-slate-300">{row.role}</td>
+                        <td className="p-3.5 text-[#22c55e] font-semibold">{row.verify}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* TC-25 TECHNICAL OPERATOR MANUAL */}
+          {activeId === 'tc25-manual' && (
+            <div className="max-w-4xl space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                  <Shield size={14} /> Training Circular No. 25-KTOS-001 · DIB Operator Standard
+                </div>
+                <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                  TC-25 Technical Operator Manual
+                </h1>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Official operational procedures and organizational maintenance instructions for the KHEPRA Trust OS (KTOS) Sovereign AI, OT & Tactical RF Trust Membrane.
+                </p>
+              </div>
+
+              <div className="space-y-6 text-xs font-mono">
+                {/* Chapter 1 */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
+                    <span className="text-[#00d4ff]">Chapter 1:</span> Four-Layer Sovereign Architecture
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed font-sans">
+                    KTOS enforces strict sovereign separation across Layer 4 (KTOS-MCP Master-Kernel), Layer 3a (KTOS CMMC Hub &amp; Fleet Engine), Layer 3b (KTOS Agentic SOC), Layer 2 (Shared Trust Substrate with 36,195 STIG/CMMC mappings), and Layer 1 (KHEPRA Protocol, USPTO #73565085).
+                  </p>
+                </div>
+
+                {/* Chapter 2 */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
+                    <span className="text-[#c9a227]">Chapter 2:</span> Tactical RF &amp; Anti-Jamming Operations
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                    <div className="p-3 rounded bg-black/60 border border-slate-800">
+                      <div className="text-[#00d4ff] font-bold">rf_anti_jam_enable</div>
+                      <p className="text-slate-400 mt-1 font-sans">Activates agile frequency-hopping spread spectrum (FHSS) and direct sequence mitigation across tactical SDRs.</p>
+                    </div>
+                    <div className="p-3 rounded bg-black/60 border border-slate-800">
+                      <div className="text-[#00d4ff] font-bold">rf_scan_spectrum</div>
+                      <p className="text-slate-400 mt-1 font-sans">Performs wideband spectral surveillance (70 MHz – 6 GHz) for non-cooperative tactical emissions.</p>
+                    </div>
+                    <div className="p-3 rounded bg-black/60 border border-slate-800">
+                      <div className="text-[#00d4ff] font-bold">rf_spoof_detect</div>
+                      <p className="text-slate-400 mt-1 font-sans">Detects transmitter spoofing and constellation desynchronization via cyclostationary feature analysis.</p>
+                    </div>
+                    <div className="p-3 rounded bg-black/60 border border-slate-800">
+                      <div className="text-[#00d4ff] font-bold">rf_attest_emission</div>
+                      <p className="text-slate-400 mt-1 font-sans">Calculates Lorentz invariant RF tensor and signs emission fingerprint with FIPS 204 ML-DSA-65.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chapter 3 */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
+                    <span className="text-[#22c55e]">Chapter 3:</span> Windows Native EventLog Hierarchy (IDs 1001–1050)
+                  </h3>
+                  <p className="text-slate-400 font-sans leading-relaxed">
+                    All tool executions, WriteGate blocks, and RF alerts write natively to Windows Event Viewer under:
+                    <br /><code className="text-[#00d4ff]">Applications and Services Logs &gt; KhepraTrustOS</code>
+                  </p>
+                </div>
+
+                {/* Chapter 4 */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
+                    <span className="text-purple-400">Chapter 4:</span> Dual-Engine Pentest Neutralization (58/58 Verified)
+                  </h3>
+                  <p className="text-slate-400 font-sans leading-relaxed">
+                    Comprehensive adversarial defense protocols neutralizing 30/30 CyberStryke OWASP API/LLM assaults and 28/28 AgentHound agentic graph attack paths (tool poisoning, tool shadowing, A2A identity forgery, and IFC taint violations) with 100.00% zero-bypass rate.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* DEVELOPER RUNBOOK */}
+          {activeId === 'dev-runbook' && (
+            <div className="max-w-4xl space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 text-[#00d4ff] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                  <Terminal size={14} /> Developer Installation & Setup Runbook
+                </div>
+                <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                  Developer & IDE Runbook
+                </h1>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  End-to-end setup guide for local development machines, Antigravity IDE, Claude Code, and sovereign VPS deployment.
+                </p>
+              </div>
+
+              <div className="space-y-6 text-xs font-mono">
+                {/* 1-Liner Install */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-sm font-bold text-white font-sans">Universal 1-Liner Installation</h3>
+                  <div className="space-y-2">
+                    <div className="text-slate-400 font-sans">Linux / macOS (curl bash):</div>
+                    <pre className="p-3 rounded bg-black border border-slate-800 text-slate-300">curl -fsSL https://raw.githubusercontent.com/nouchix/khepra-trust-os/main/deploy/packaging/install.sh | bash</pre>
+                    <div className="text-slate-400 font-sans pt-2">Windows (PowerShell iwr):</div>
+                    <pre className="p-3 rounded bg-black border border-slate-800 text-slate-300">iwr -useb https://raw.githubusercontent.com/nouchix/khepra-trust-os/main/deploy/packaging/install.ps1 | iex</pre>
+                  </div>
+                </div>
+
+                {/* Antigravity Config */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-sm font-bold text-white font-sans">Antigravity IDE (~/.gemini/config/mcp_config.json)</h3>
+                  <pre className="p-3 rounded bg-black border border-slate-800 text-slate-300 overflow-x-auto">&#123;
+  "mcpServers": &#123;
+    "ktos-mcp": &#123;
+      "command": "C:\\Users\\intel\\blackbox\\khepra-trust-os\\core\\ktos-mcp.exe",
+      "env": &#123;
+        "KHEPRA_MODE": "sovereign",
+        "WRITEGATE_MODE": "strict",
+        "KHEPRA_LICENSE_KEY": "kphr_sov_..."
+      &#125;
+    &#125;
+  &#125;
+&#125;</pre>
+                </div>
+
+                {/* Claude Code Config */}
+                <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
+                  <h3 className="text-sm font-bold text-white font-sans">Claude Code Global Config (~/.claude.json)</h3>
+                  <pre className="p-3 rounded bg-black border border-slate-800 text-slate-300 overflow-x-auto">&#123;
+  "mcpServers": &#123;
+    "ktos-mcp": &#123;
+      "command": "C:\\Users\\intel\\blackbox\\khepra-trust-os\\core\\ktos-mcp.exe",
+      "args": [],
+      "env": &#123;
+        "KHEPRA_MODE": "sovereign",
+        "WRITEGATE_MODE": "strict",
+        "KHEPRA_LICENSE_KEY": "kphr_sov_..."
+      &#125;
+    &#125;
+  &#125;
+&#125;</pre>
                 </div>
               </div>
             </div>
@@ -629,28 +1008,48 @@ export WRITEGATE_MODE="strict"</pre>
                   Installation & Developer Troubleshooting
                 </h1>
                 <p className="text-sm text-slate-300">
-                  Common setup resolutions for Windows, Linux VPS, and air-gapped environments.
+                  Comprehensive diagnostic checklist and error code resolutions for Windows, Linux VPS, and air-gapped environments.
                 </p>
               </div>
 
               <div className="space-y-4 text-xs font-mono">
                 <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <div className="text-[#00d4ff] font-bold mb-1">Issue: Windows EventLog access denied (Error 1001)</div>
+                  <div className="text-[#00d4ff] font-bold mb-1">KTOS-ERR-001: Invalid or Missing Master License Key</div>
                   <p className="text-slate-400 mb-2">
-                    Running in an unprivileged shell prevents registering the KhepraTrustOS event source in Windows Event Viewer.
+                    Kernel fails to initialize because KHEPRA_LICENSE_KEY is not set or signature is invalid.
                   </p>
                   <div className="p-2 rounded bg-black text-slate-300">
-                    Fix: Launch your terminal or IDE as Administrator once, or KTOS automatically falls back to stderr JSON logging.
+                    Fix: Export valid ML-DSA-65 signed key: export KHEPRA_LICENSE_KEY="kphr_sov_..."
                   </div>
                 </div>
 
                 <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <div className="text-[#00d4ff] font-bold mb-1">Issue: Tool count reported as 30 instead of 100</div>
+                  <div className="text-[#00d4ff] font-bold mb-1">KTOS-ERR-002: WriteGate Destructive Operation Blocked</div>
                   <p className="text-slate-400 mb-2">
-                    An older legacy build of ktos-mcp was referenced in your MCP configuration.
+                    WriteGate in `strict` mode blocked an unauthorized filesystem or kernel modification.
                   </p>
                   <div className="p-2 rounded bg-black text-slate-300">
-                    Fix: Point mcp_config.json to C:\Users\intel\blackbox\khepra-trust-os\core\ktos-mcp.exe (v4.2 master super-kernel).
+                    Fix: Supply a valid ML-DSA-65 signed permit token or run in `audit` mode for staging testing.
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <div className="text-[#00d4ff] font-bold mb-1">KTOS-ERR-003: Windows EventLog Registry Access Denied</div>
+                  <p className="text-slate-400 mb-2">
+                    Unprivileged execution cannot register Event Source in Windows Event Viewer registry.
+                  </p>
+                  <div className="p-2 rounded bg-black text-slate-300">
+                    Fix: Launch terminal once as Administrator to initialize registry subkey for KhepraTrustOS.
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <div className="text-[#00d4ff] font-bold mb-1">KTOS-ERR-004: Tactical RF SDR Interface Offline</div>
+                  <p className="text-slate-400 mb-2">
+                    Unable to claim USB/PCIe endpoint for USRP/HackRF transceiver during rf_anti_jam_enable.
+                  </p>
+                  <div className="p-2 rounded bg-black text-slate-300">
+                    Fix: Verify USB cable and run uhd_find_devices or hackrf_info to confirm SDR device enumeration.
                   </div>
                 </div>
               </div>

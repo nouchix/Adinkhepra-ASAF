@@ -46,9 +46,9 @@ const TIERS = [
     name: 'Community',
     price: 'Free',
     suffix: 'Open-Core Kernel',
-    tagline: 'The sovereign trust kernel. No lock-in.',
+    tagline: 'The sovereign trust kernel. 4 Core Trust Modules. Local SQLite Ledger.',
     modules: ['KTOS Attest', 'KTOS Passport', 'KTOS Replay', 'KTOS Score'],
-    features: ['4 core trust modules', '9 MCP tools', 'Local SQLite ledger', 'ML-DSA-65 signing', 'PQC key generation', 'Flight recorder (7-day)', 'GHCR container image'],
+    features: ['500 Tokenomics credits', '4 core trust modules', '9 base MCP tools', 'Local SQLite ledger', 'ML-DSA-65 signing', 'PQC key generation', 'Flight recorder (7-day)', 'GHCR container image'],
     cta: 'Get the MCP Server',
     ctaHref: 'https://smithery.ai/servers/skone/pqc-khepra-mcp',
     badge: 'Open Core',
@@ -61,9 +61,9 @@ const TIERS = [
     name: 'Platform',
     price: '$499',
     suffix: '/month',
-    tagline: 'SaaS KHEPRA Blackhole — Full OmniScan + threat detection.',
+    tagline: 'Self-serve KTOS — Full OmniScan (50+ Detectors) + threat detection.',
     modules: ['+ KTOS Scan', '+ KTOS Guard', '+ KTOS Profile', '+ KTOS Stream'],
-    features: ['Everything in Community', 'OmniScan (all 8 lanes)', 'Shadow AI discovery', 'Plugin4Shell audit', 'STIGViewer API (1K queries/mo)', 'OCSF telemetry stream', 'Agent anomaly alerts (Slack/PD)', 'Unlimited DAG history'],
+    features: ['3,000 Tokenomics credits', 'Everything in Community', 'OmniScan (50+ Detectors across 8 lanes)', 'Shadow AI discovery', 'Plugin4Shell audit', 'STIGViewer API integration', 'OCSF SIEM telemetry stream', 'Agent anomaly alerts (Slack/PD)', 'Unlimited DAG history'],
     cta: 'Subscribe via Stripe (Self-Serve)',
     ctaHref: 'https://buy.stripe.com/aFa7sLaIi6x4cZBevV9ws04',
     badge: 'Most Popular',
@@ -76,9 +76,9 @@ const TIERS = [
     name: 'Enterprise',
     price: '$2,999',
     suffix: '/month',
-    tagline: 'Full Agentic SOC with remediation daemon.',
+    tagline: 'Full Agentic SOC with remediation daemon & SEKHEM L7 PQC-WAF.',
     modules: ['+ KTOS Enclave', '+ KTOS Comply', '+ KTOS Heal', '+ KTOS Prover'],
-    features: ['Everything in Platform', 'SEKHEM PQC-WAF', 'PTY Enclave supervisor', 'ASAF Remediation Daemon', 'Z3 SMT formal proof', 'DataLoop autonomous loop', 'Team seats + RBAC', 'SOC 2 / EU AI Act evidence'],
+    features: ['15,000 Tokenomics credits', 'Everything in Platform', 'Full Agentic SOC', 'SEKHEM L7 PQC-WAF', 'PTY Enclave supervisor', 'ASAF Remediation Daemon', 'Z3 SMT formal proof', 'DataLoop self-healing', 'Team seats + RBAC', 'SOC 2 / EU AI Act evidence'],
     cta: 'Contact Sales',
     ctaHref: 'mailto:sales@nouchix.com?subject=KTOS%20Enterprise%20Inquiry',
     badge: 'Full Agentic SOC',
@@ -91,15 +91,84 @@ const TIERS = [
     name: 'Sovereign',
     price: '$45K',
     suffix: '– $250K/yr',
-    tagline: 'Air-gapped. Bare-metal. SDVOSB. Zero egress.',
+    tagline: 'Air-gapped. Bare-metal. SDVOSB. Zero egress. Tactical RF Anti-Jamming.',
     modules: ['All 12 KTOS modules', 'APDL compiler', 'Iron Bank delivery', 'C3PAO engineering'],
-    features: ['Everything in Enterprise', 'Air-gapped static binaries', 'FIPS 140-3 (boringcrypto)', 'Zero-egress enforcement', 'APDL compiler + policy editor', 'Dedicated C3PAO evidence engineering', 'SDVOSB sole-source package', 'Iron Bank / k8s deployment'],
+    features: ['100,000+ Tokenomics credits', 'Everything in Enterprise', 'Air-gapped static binaries', 'FIPS 140-3 (boringcrypto)', 'Zero-egress enforcement', 'APDL compiler + policy editor', 'Dedicated C3PAO evidence engineering', 'Tactical RF Anti-Jamming Enclave', 'SDVOSB sole-source package', 'Iron Bank / k8s deployment'],
     cta: 'Contact Sales',
     ctaHref: 'mailto:sales@nouchix.com?subject=Sovereign%20Deployment%20Inquiry',
     badge: 'DoD / DIB',
     featured: false,
     sovereign: true,
     gated: true,
+  },
+]
+
+/* ── KHEPRA Trust OS (KTOS) — Product Family ──────────────────────
+   Branding rule: "KTOS" + the literal function of the product.
+   Each product keeps its own buyer, question, and tiers (AGENTS.md #6). */
+const PRODUCTS = [
+  {
+    key: 'cmmc',
+    surface: 'Product Surface 1',
+    name: 'KTOS CMMC Hub & Fleet Engine',
+    domain: 'adinkhepra.com',
+    question: 'Will I pass my CMMC audit?',
+    buyer: 'CISO · Compliance Lead · Contracts Officer (DIB)',
+    accent: '#c9a227',
+    icon: Shield,
+    capabilities: [
+      'Desktop App, Fleet Hub & osquery Fleet Remote Engine',
+      'Sovereign bare-metal scans (zero egress)',
+      'APDL staging & human-gated remediation',
+      'C3PAO OSCAL / SSP / POA&M evidence packages',
+    ],
+    tiers: [
+      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Fleet Hub + ASAF Remediation Daemon + C3PAO export' },
+      { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3, SDVOSB sole-source eligible' },
+    ],
+    cta: 'Book a CMMC Readiness Call',
+    ctaHref: 'https://calendly.com/cybersouhimbou',
+  },
+  {
+    key: 'soc',
+    surface: 'Product Surface 2',
+    name: 'KTOS Agentic SOC',
+    domain: 'souhimbou.ai',
+    question: 'What did my AI agents do, and can I prove it?',
+    buyer: 'Security Engineer · Platform Lead · Startup CTO',
+    accent: '#00d4ff',
+    icon: Activity,
+    capabilities: [
+      'Agentic SOC SaaS platform',
+      'Continuous Flight Recorder SDK',
+      'KASA behavioral anomaly detector',
+      'ML-DSA-65 signed SOAR playbooks · multi-agent orchestration',
+    ],
+    tiers: [
+      { name: 'Platform', price: '$499', suffix: '/month', note: 'Self-serve via Stripe · OmniScan + Flight Recorder' },
+      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Full SOAR engine, team seats + RBAC' },
+    ],
+    cta: 'Subscribe via Stripe',
+    ctaHref: 'https://buy.stripe.com/aFa7sLaIi6x4cZBevV9ws04',
+  },
+  {
+    key: 'mcp',
+    surface: 'Product Surface 3',
+    name: 'KTOS-MCP Master-Kernel',
+    domain: 'mcp.souhimbou.ai + MCP registries',
+    question: 'How do my AI coding agents touch tools and infrastructure safely?',
+    buyer: 'Developer · DevSecOps · Agent runtimes (Claude Code, Cursor, Antigravity)',
+    accent: '#22c55e',
+    icon: Cpu,
+    capabilities: [
+      '100-tool post-quantum kernel',
+      'Native stdio & HTTP JSON-RPC server',
+      'SEKHEM L7 WAF prompt defense',
+      'Windows Event Viewer logging (IDs 1001–1050) · Tactical RF tools',
+    ],
+    tiers: [],
+    cta: 'Get the MCP Server',
+    ctaHref: 'https://smithery.ai/servers/skone/pqc-khepra-mcp',
   },
 ]
 
@@ -399,7 +468,7 @@ export default function KTOSPage() {
             {[
               { label: 'Platform', href: '#platform' },
               { label: 'How It Works', href: '#how-it-works' },
-              { label: 'Assault Benchmark', href: '#cyberstryke' },
+              { label: 'Dual Pentest (58/58)', href: '#cyberstryke' },
               { label: 'Modules', href: '#modules' },
               { label: 'Documentation', href: '/docs' },
               { label: 'Pricing', href: '#pricing' },
@@ -502,7 +571,7 @@ export default function KTOSPage() {
               {/* Stats row */}
               <div className="flex flex-wrap gap-6 mb-10">
                 {[
-                  { val: '100%',  label: 'CyberStryke (30/30 Neutralized)' },
+                  { val: '58 / 58', label: 'Dual Pentest (100% Block Rate)' },
                   { val: '100',   label: 'MCP Kernel Tools' },
                   { val: '36K+',  label: 'Compliance Mappings' },
                   { val: '12',    label: 'KTOS Modules' },
@@ -680,45 +749,88 @@ export default function KTOSPage() {
 
       <div className="section-divider mx-12" />
 
-      {/* ── CYBERSTRYKE ASSAULT SHOWCASE ─────────────────────────── */}
+      {/* ── DUAL-ENGINE PENTEST ASSAULT SHOWCASE (CYBERSTRYKE + AGENTHOUND) ── */}
       <section id="cyberstryke" className="relative py-28 px-6 bg-[rgba(0,212,255,0.015)] border-y border-[rgba(0,212,255,0.08)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-5 border border-emerald-500/30 bg-emerald-500/10">
               <Shield size={14} className="text-emerald-400" />
               <span className="text-xs text-emerald-400 font-mono font-bold tracking-wider uppercase">
-                CyberStryke Automated Assault Verification · 30/30 Neutralized
+                Dual-Engine Pentest Verification · 58/58 Attacks Neutralized
               </span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-4"
               style={{ fontFamily: 'Space Grotesk' }}>
-              100.00% Neutralization Under{' '}
+              100.00% Neutralization Across{' '}
               <span style={{ background: 'linear-gradient(135deg, #22c55e, #00d4ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Live Adversarial Fire
+                Both Autonomous Pentest Engines
               </span>
             </h2>
             <p className="text-slate-400 max-w-3xl mx-auto text-base leading-relaxed">
-              Rigorous autonomous pentesting benchmark executing 30 targeted adversarial attack patterns across SQL Injection, Cross-Site Scripting (XSS), Directory & Path Traversal, Null Byte Escapes, Prompt Injections, and Egress Data Disclosure. All 30 vectors intercepted, scrubbed, or quarantined in real-time with zero false passes.
+              Rigorous adversarial verification executing 58 targeted attack patterns across two independent security engines: CyberStryke Automated Assault (30/30 OWASP API &amp; LLM vectors) and the AgentHound Offensive Security Framework (28/28 agentic attack paths across MCP, A2A, model gateways, vector DBs, and execution sandboxes). All 58 vectors intercepted, scrubbed, or quarantined in real-time with zero false passes.
             </p>
           </div>
 
           {/* Metrics summary banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 reveal">
             <div className="glass p-5 rounded-xl border border-emerald-500/20 text-center">
-              <div className="text-3xl font-black text-emerald-400 font-mono">30 / 30</div>
+              <div className="text-3xl font-black text-emerald-400 font-mono">58 / 58</div>
               <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Assaults Neutralized</div>
             </div>
             <div className="glass p-5 rounded-xl border border-[#00d4ff]/20 text-center">
               <div className="text-3xl font-black text-[#00d4ff] font-mono">100.00%</div>
-              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Neutralization Rate</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Interception Rate</div>
             </div>
-            <div className="glass p-5 rounded-xl border border-amber-500/20 text-center">
-              <div className="text-3xl font-black text-amber-400 font-mono">0.00%</div>
-              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Bypass / Leak Rate</div>
+            <div className="glass p-5 rounded-xl border border-purple-500/20 text-center">
+              <div className="text-3xl font-black text-purple-400 font-mono">30 / 30</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">CyberStryke API/LLM</div>
             </div>
-            <div className="glass p-5 rounded-xl border border-[#c9a227]/20 text-center">
-              <div className="text-3xl font-black text-[#c9a227] font-mono">ML-DSA-65</div>
-              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">DAG Forensic Audit</div>
+            <div className="glass p-5 rounded-xl border border-cyan-500/20 text-center">
+              <div className="text-3xl font-black text-cyan-400 font-mono">28 / 28</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">AgentHound Agentic</div>
+            </div>
+          </div>
+
+          {/* Dual-Engine Overview Cards */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12 reveal">
+            <div className="p-6 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 to-black">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-mono font-bold text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+                  Engine 1: CyberStryke Automated Assault
+                </span>
+                <span className="text-xs font-mono font-bold text-emerald-400">30 / 30 Neutralized</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                OWASP API Top 10 &amp; OWASP LLM Top 10 Neutralization
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                Validates edge resilience against classic web API threats and LLM prompt compromise. Neutralizes SQL Injection, Cross-Site Scripting (XSS), Directory Traversal, Null Byte Escapes, System Prompt Leaks, and Egress Token Disclosure via SEKHEM L7 WAF.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-mono text-emerald-300">
+                <span className="px-2 py-0.5 rounded bg-emerald-900/30 border border-emerald-700/40">AST Parameterization</span>
+                <span className="px-2 py-0.5 rounded bg-emerald-900/30 border border-emerald-700/40">Dihedral D₈ Scrubbing</span>
+                <span className="px-2 py-0.5 rounded bg-emerald-900/30 border border-emerald-700/40">Strict WriteGate Jail</span>
+              </div>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-[#00d4ff]/30 bg-gradient-to-br from-cyan-950/20 to-black">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-mono font-bold text-[#00d4ff] px-3 py-1 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30">
+                  Engine 2: AgentHound Offensive Security Framework
+                </span>
+                <span className="text-xs font-mono font-bold text-[#00d4ff]">28 / 28 Neutralized</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                BloodHound for the Agentic Stack (MCP, A2A &amp; Inference Mesh)
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                Adversarial framework targeting agentic attack graphs across MCP servers, A2A protocols, model gateways (LiteLLM), inference backends (Ollama/vLLM), and vector DBs (Qdrant). Neutralizes Tool Shadowing, Description Poisoning, Identity Forgery, and IFC Taints.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-mono text-cyan-300">
+                <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">POISONED_DESCRIPTION Intercept</span>
+                <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">ML-DSA-65 Passports</span>
+                <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">IFC Taint Isolation</span>
+              </div>
             </div>
           </div>
 
@@ -728,7 +840,7 @@ export default function KTOSPage() {
               {
                 title: 'SQL Injection & Parameter Tampering',
                 status: '5/5 Neutralized',
-                rule: 'SEKHEM WAF Rule 101',
+                engine: 'CyberStryke · Rule 101',
                 desc: 'Union-based extractions, blind boolean injections, and out-of-band SQLi payloads completely scrubbed and blocked.',
                 badge: '100% Blocked',
                 color: '#22c55e',
@@ -736,7 +848,7 @@ export default function KTOSPage() {
               {
                 title: 'Cross-Site Scripting (XSS & Polyglots)',
                 status: '5/5 Neutralized',
-                rule: 'SEKHEM WAF Rule 102',
+                engine: 'CyberStryke · Rule 102',
                 desc: 'Reflected DOM injections, mutated SVG vectors, and script tag payloads neutralized prior to execution.',
                 badge: '100% Scrubbed',
                 color: '#22c55e',
@@ -744,34 +856,34 @@ export default function KTOSPage() {
               {
                 title: 'Path Traversal & Null Byte Escapes',
                 status: '5/5 Neutralized',
-                rule: 'KTOS WriteGate Jail',
+                engine: 'CyberStryke · Rule 103',
                 desc: 'Dot-dot-slash directory traversal (/../etc/shadow) and %00 null byte bypasses intercepted and contained in sandbox.',
                 badge: '100% Confined',
                 color: '#22c55e',
               },
               {
-                title: 'Adversarial Prompt Injections',
-                status: '5/5 Neutralized',
-                rule: 'MCP JSON-RPC Profile',
-                desc: 'Indirect system prompt overrides, role-switch jailbreaks, and instructions smuggling quarantined immediately.',
-                badge: '100% Quarantined',
+                title: 'MCP Tool Description Poisoning & Shadowing',
+                status: '6/6 Neutralized',
+                engine: 'AgentHound · POISONED_DESCRIPTION',
+                desc: 'Adversarial instruction injection hidden in tool parameter docstrings and tool shadowing collisions neutralized by AST schema lockdown.',
+                badge: '100% Neutralized',
                 color: '#00d4ff',
               },
               {
-                title: 'Unauthorized Command Escalation',
-                status: '5/5 Neutralized',
-                rule: 'ML-DSA-65 Gate Enforcement',
-                desc: 'Attempts to run unapproved sudo, modprobe, or useradd tools without ML-DSA-65 signature authorization denied.',
-                badge: '100% Rejected',
+                title: 'A2A Impersonation & Identity Spoofing',
+                status: '6/6 Neutralized',
+                engine: 'AgentHound · CAN_IMPERSONATE',
+                desc: 'Subagent forgery and caller spoofing attempts blocked via Nkyinkyim-bound ML-DSA-65 Agent Passports and cryptographic nonces.',
+                badge: '100% Denied',
                 color: '#00d4ff',
               },
               {
-                title: 'Egress Data Disclosure & Exfiltration',
-                status: '5/5 Neutralized',
-                rule: 'Air-Gap Zero-Egress Guard',
-                desc: 'Outbound DNS tunneling, unauthorized socket writes, and API token egress immediately severed at network boundary.',
-                badge: '100% Severed',
-                color: '#22c55e',
+                title: 'IFC Violation, Taints & Secret Exfiltration',
+                status: '6/6 Neutralized',
+                engine: 'AgentHound · IFC_VIOLATION & TAINTS',
+                desc: 'Context window taint propagation, vector DB token leakage, and side-channel exfiltration severed by Zero-Egress Blackhole.',
+                badge: '100% Isolated',
+                color: '#00d4ff',
               },
             ].map(vec => (
               <div key={vec.title} className="module-card reveal border border-slate-800 hover:border-emerald-500/40 transition-all p-6">
@@ -780,7 +892,7 @@ export default function KTOSPage() {
                     {vec.badge}
                   </span>
                   <span className="text-[11px] font-mono text-slate-400">
-                    {vec.rule}
+                    {vec.engine}
                   </span>
                 </div>
                 <h3 className="font-bold text-white text-base mb-2">{vec.title}</h3>
@@ -797,7 +909,7 @@ export default function KTOSPage() {
           <div className="text-center reveal">
             <Link href="/docs" className="inline-flex items-center gap-2 btn-ghost border border-[rgba(0,212,255,0.4)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.08)] px-6 py-3 text-sm">
               <BookOpen size={16} />
-              Read Full 30-Vector CyberStryke Benchmark in Authoritative Docs
+              Read Full 58-Vector Dual Pentest Benchmark in Authoritative Docs
               <ChevronRight size={16} />
             </Link>
           </div>
@@ -1094,17 +1206,104 @@ export default function KTOSPage() {
           <div className="text-center mb-14 reveal">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-5 border border-[rgba(0,212,255,0.2)] bg-[rgba(0,212,255,0.05)]">
               <Key size={12} className="text-[#00d4ff]" />
-              <span className="text-xs text-[#00d4ff] font-mono uppercase tracking-wider font-semibold">SaaS KHEPRA Blackhole · Connected to Stripe Self-Serve</span>
+              <span className="text-xs text-[#00d4ff] font-mono uppercase tracking-wider font-semibold">KHEPRA Trust OS · One Protocol · Three Products</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-4"
               style={{ fontFamily: 'Space Grotesk' }}>
-              SaaS KHEPRA Blackhole &amp;{' '}
+              KHEPRA Trust OS (KTOS){' '}
               <span style={{ background: 'linear-gradient(135deg, #00d4ff, #4eaef5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Self-Serve Pricing
+                Pricing
               </span>
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Instant self-serve activation for the SaaS KHEPRA Blackhole &amp; KTOS Platform via Stripe. Enterprise and Sovereign deployments remain air-gapped on your bare metal with custom engagement.
+              Every KTOS product runs on the same patent-pending KHEPRA Protocol. Pick the product that answers your question. Platform tiers activate instantly through Stripe. Enterprise and Sovereign deployments run air-gapped on your own bare metal.
+            </p>
+          </div>
+
+          {/* ── Product family tree ── */}
+          <div id="ktos-family" className="mb-16 reveal">
+            <div className="mx-auto max-w-md text-center rounded-xl border border-[rgba(201,162,39,0.35)] bg-[rgba(201,162,39,0.06)] px-6 py-4">
+              <div className="text-xs font-mono uppercase tracking-widest text-[#c9a227]">KHEPRA Protocol</div>
+              <div className="text-[11px] text-slate-400 mt-1">Layer 1 · Patent-pending · USPTO #73565085</div>
+            </div>
+            <div className="mx-auto h-8 w-px bg-gradient-to-b from-[#c9a227] to-slate-700" />
+            <div className="grid md:grid-cols-3 gap-5">
+              {PRODUCTS.map(p => {
+                const Icon = p.icon
+                return (
+                  <a key={p.key} href={`#product-${p.key}`}
+                    className="group rounded-xl border bg-[rgba(15,20,32,0.6)] p-5 transition-all duration-300 hover:-translate-y-1"
+                    style={{ borderColor: `${p.accent}55` }}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon size={16} style={{ color: p.accent }} />
+                      <span className="text-[10px] font-mono uppercase tracking-wider" style={{ color: p.accent }}>{p.surface}</span>
+                    </div>
+                    <div className="font-bold text-white text-base" style={{ fontFamily: 'Space Grotesk' }}>{p.name}</div>
+                    <div className="text-[11px] font-mono text-slate-500 mt-0.5">{p.domain}</div>
+                    <div className="text-xs text-slate-300 italic mt-3">&ldquo;{p.question}&rdquo;</div>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* ── One section per product (separate buyer narratives) ── */}
+          <div className="space-y-10 mb-16">
+            {PRODUCTS.filter(p => p.tiers.length > 0).map(p => {
+              const Icon = p.icon
+              return (
+                <div key={p.key} id={`product-${p.key}`}
+                  className="rounded-2xl border p-6 lg:p-8 reveal bg-[rgba(10,14,24,0.7)]"
+                  style={{ borderColor: `${p.accent}40` }}>
+                  <div className="grid lg:grid-cols-5 gap-8">
+                    <div className="lg:col-span-2">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Icon size={18} style={{ color: p.accent }} />
+                        <span className="text-[10px] font-mono uppercase tracking-wider" style={{ color: p.accent }}>{p.surface} · {p.domain}</span>
+                      </div>
+                      <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>{p.name}</h3>
+                      <p className="text-sm text-slate-200 mb-1">&ldquo;{p.question}&rdquo;</p>
+                      <p className="text-[11px] font-mono text-slate-500 mb-5">For: {p.buyer}</p>
+                      <ul className="space-y-2">
+                        {p.capabilities.map(c => (
+                          <li key={c} className="flex items-start gap-2 text-xs text-slate-300">
+                            <CheckCircle size={12} className="mt-0.5 shrink-0" style={{ color: p.accent }} />
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="lg:col-span-3 grid sm:grid-cols-2 gap-4 content-start">
+                      {p.tiers.map(t => (
+                        <div key={t.name} className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(15,20,32,0.8)] p-5 flex flex-col">
+                          <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">{t.name}</div>
+                          <div className="flex items-baseline gap-1 mb-2">
+                            <span className="text-3xl font-black" style={{ fontFamily: 'Space Grotesk', color: p.accent }}>{t.price}</span>
+                            <span className="text-xs text-slate-500">{t.suffix}</span>
+                          </div>
+                          <p className="text-xs text-slate-400 leading-relaxed flex-1">{t.note}</p>
+                        </div>
+                      ))}
+                      <a href={p.ctaHref} target="_blank" rel="noopener noreferrer"
+                        className="sm:col-span-2 block text-center py-3 px-4 rounded-lg font-semibold text-sm btn-cyan">
+                        {p.cta}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* ── Product Surface 3: KTOS-MCP Master-Kernel license ladder ── */}
+          <div id="product-mcp" className="text-center mb-8 reveal">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Cpu size={18} className="text-[#22c55e]" />
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#22c55e]">Product Surface 3 · mcp.souhimbou.ai + MCP registries</span>
+            </div>
+            <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>KTOS-MCP Master-Kernel</h3>
+            <p className="text-sm text-slate-300 max-w-2xl mx-auto">
+              100 native tools, ML-DSA-65 post-quantum signing, SEKHEM L7 WAF prompt defense, and Windows Event Viewer logging. One license key unlocks the kernel from Community to Sovereign.
             </p>
           </div>
 
@@ -1133,22 +1332,11 @@ export default function KTOSPage() {
                   {tier.name}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-1">
-                  {(tier as any).gated ? (
-                    <div className="flex items-center gap-2">
-                      <Lock size={14} className={tier.sovereign ? 'text-[#c9a227]' : 'text-slate-400'} />
-                      <span className={`text-sm font-semibold ${tier.sovereign ? 'text-[#c9a227]' : 'text-slate-300'}`}>
-                        Contact Sales for Pricing
-                      </span>
-                    </div>
-                  ) : (
-                    <>
-                      <span className={`text-3xl font-black ${tier.featured ? 'text-[#00d4ff]' : tier.sovereign ? 'text-[#c9a227]' : 'text-white'}`}
-                        style={{ fontFamily: 'Space Grotesk' }}>
-                        {tier.price}
-                      </span>
-                      <span className="text-xs text-slate-500">{tier.suffix}</span>
-                    </>
-                  )}
+                  <span className={`text-3xl font-black ${tier.featured ? 'text-[#00d4ff]' : tier.sovereign ? 'text-[#c9a227]' : 'text-white'}`}
+                    style={{ fontFamily: 'Space Grotesk' }}>
+                    {tier.price}
+                  </span>
+                  <span className="text-xs text-slate-500">{tier.suffix}</span>
                 </div>
                 <p className="text-xs text-slate-400 mb-5 leading-relaxed">{tier.tagline}</p>
 
@@ -1305,11 +1493,11 @@ export default function KTOSPage() {
                   I AM SOUHIMBOU
                 </h3>
                 <p className="text-xs text-[#00d4ff] font-mono relative z-10">
-                  The AI Security Architect For Your Agentic SOC
+                  The AI Security Architect For Your Agentic SOC · KTOS Agentic SOC
                 </p>
-                <div className="mt-4 flex justify-center gap-2 relative z-10">
-                  {['$0 Free', '$99 Pro', '$499 Enterprise'].map(t => (
-                    <span key={t} className="text-[10px] px-3 py-1 rounded-full border border-[rgba(0,212,255,0.2)] text-slate-400 font-mono">
+                <div className="mt-4 flex flex-wrap justify-center gap-2 relative z-10">
+                  {['$0 Free (Community)', '$499/mo Platform', '$2,999/mo Enterprise', '$45K–$250K Sovereign'].map(t => (
+                    <span key={t} className="text-[10px] px-3 py-1 rounded-full border border-[rgba(0,212,255,0.2)] text-slate-300 font-mono">
                       {t}
                     </span>
                   ))}
@@ -1407,7 +1595,7 @@ export default function KTOSPage() {
               <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Platform & Docs</h4>
               <ul className="space-y-2">
                 <li><Link href="/docs" className="text-xs text-[#00d4ff] hover:text-white font-semibold transition-colors">Authoritative Docs (STIGViewer)</Link></li>
-                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">CyberStryke 100% Benchmark</a></li>
+                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">Dual Pentest (58/58 Neutralized)</a></li>
                 {['KTOS Attest', 'KTOS Scan', 'KTOS Comply', 'KTOS Guard', 'KTOS Heal', 'KTOS Passport'].map(m => (
                   <li key={m}><a href="#modules" className="text-xs text-slate-500 hover:text-white transition-colors">{m}</a></li>
                 ))}
@@ -1419,10 +1607,10 @@ export default function KTOSPage() {
               <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Products</h4>
               <ul className="space-y-2">
                 {[
-                  { label: 'AdinKhepra ASAF', href: 'https://adinkhepra.com' },
-                  { label: 'SouHimBou AI', href: 'https://souhimbou.ai' },
-                  { label: 'PQC-Khepra-MCP', href: 'https://mcp.souhimbou.ai' },
-                  { label: 'KTOS Platform', href: '#pricing' },
+                  { label: 'KTOS CMMC Hub & Fleet Engine', href: 'https://adinkhepra.com' },
+                  { label: 'KTOS Agentic SOC', href: 'https://souhimbou.ai' },
+                  { label: 'KTOS-MCP Master-Kernel', href: 'https://mcp.souhimbou.ai' },
+                  { label: 'KTOS Platform & Pricing', href: '#pricing' },
                 ].map(l => (
                   <li key={l.label}>
                     <a href={l.href} className="text-xs text-slate-500 hover:text-white transition-colors">{l.label}</a>

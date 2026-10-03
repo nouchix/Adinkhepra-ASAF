@@ -26,8 +26,8 @@ ASAF ships in two distinct profiles. Choose the one that matches your compliance
 | **Compliance posture** | SMB / developer self-serve | DIB / CMMC / FedRAMP / air-gapped |
 | **Sovereign claim** | ❌ Not applicable | ✅ On your metal, no cloud, no token meter |
 | **FIPS-mode build** | ❌ Standard build | ✅ `GOEXPERIMENT=boringcrypto` (BoringCrypto) — not a CMVP-validated module |
-| **Pricing** | `$0 / $99 / $499 /mo` → [adinkhepra.com](https://app.nouchix.com) | `$25K – $250K / year` flat annual |
-| **Target buyer** | Developer / security engineer | Prime contractor, DIB, C3PAO, enterprise |
+| **Pricing** | `$0 Free / $499 Platform / $2,999 Enterprise` | `$45K – $250K / year` flat annual |
+| **Target buyer** | Developer / Security Engineer / Enterprise SOC | Prime contractor, DIB, C3PAO, Sovereign Enclave |
 
 > **If you are a DIB contractor, prime, or C3PAO evaluator: use Profile B.**  
 > Profile A does not satisfy CUI handling, DFARS 252.204-7021, or CMMC Level 2 requirements.
@@ -110,3 +110,23 @@ Active development, feature branches, and PRs live in:
 The core Khepra MCP (`PQC-Khepra-MCP`) has been successfully decoupled from all proprietary orchestration and security planes (Adinkra, Sekhem, Giza). Through the introduction of the `kernelports` dependency injection boundary, the `khepra-kernel` now builds and operates in complete isolation. All legacy internal tools continue to compile seamlessly against the original repository. 
 
 *This paves the way for the formal Apache-2.0 open-source release of the standalone PQC-Khepra-MCP kernel!*
+
+---
+
+## 📋 TC-25 Operator Manual & Developer Runbook
+
+ASAF is part of the KHEPRA Trust OS (KTOS) product family and adheres to DIB operator standards:
+- **[TC-25 Technical Operator & Maintenance Manual](https://github.com/nouchix/khepra-trust-os/blob/main/docs/TC-25_KTOS_OPERATOR_MANUAL.md)** — Training Circular No. 25-KTOS-001 covering Four-Layer Sovereign Architecture, osquery Fleet Management, Windows Event Viewer hierarchy (IDs 1001–1050), and Dual-Engine Adversarial Neutralization (58/58 Verified).
+- **[Developer Installation & Troubleshooting Runbook](https://github.com/nouchix/khepra-trust-os/blob/main/docs/DEVELOPER_INSTALLATION_AND_TROUBLESHOOTING.md)** — Universal installation runbook for Master Dev Machines, Antigravity IDE, Claude Code, and Bare-Metal Linux VPS.
+
+### Unified KTOS Product Surfaces
+- **Layer 4 — KTOS-MCP Master-Kernel** (`mcp.souhimbou.ai`): 100 native tools, ML-DSA-65 post-quantum signing, SEKHEM L7 WAF prompt defense, Event Viewer logging, Tactical RF suite.
+- **Layer 3a — KTOS CMMC Hub & Fleet Engine** (`adinkhepra.com`): Sovereign bare-metal & osquery Fleet Manager for CMMC/STIG compliance audits.
+- **Layer 3b — KTOS Agentic SOC** (`souhimbou.ai`): Cloud Agentic SOC & AI Security Architect with autonomous Flight Recorder SDK and KASA threat detector.
+- **Layer 2 — Shared Trust Substrate**: 36,195 cross-framework compliance mappings, ML-DSA-65 / ML-KEM-1024, immutable DAG attestation.
+- **Layer 1 — KHEPRA Protocol**: Patent-pending non-linear cryptographic attestation (USPTO #73565085).
+
+### Dual-Engine Pentest Neutralization (58/58 Verified · 100.00% Zero-Bypass Rate)
+- **CyberStryke Automated Assault (30/30)**: SQLi, XSS, Path Traversal, Null Byte Escapes, Prompt Injections, Egress Data Disclosure neutralized.
+- **AgentHound Offensive Security Framework (28/28)**: MCP Tool Description Poisoning (`POISONED_DESCRIPTION`), Tool Shadowing (`SHADOWS`), A2A Impersonation (`CAN_IMPERSONATE`), Indirect Tool Execution (`CAN_EXECUTE`), Context Window Taint (`TAINTS`), and Information Flow Control Violations (`IFC_VIOLATION`) neutralized.
+
