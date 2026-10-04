@@ -30,7 +30,7 @@ test.describe('KTOS Product Surfaces & 4-Tier Commercial Model E2E', () => {
 
     const cmmc = page.locator('#product-cmmc')
     await expect(cmmc.getByRole('heading', { name: 'KTOS CMMC Hub & Fleet Engine' })).toBeVisible()
-    await expect(cmmc.getByText('Will I pass my CMMC audit?')).toBeVisible()
+    await expect(cmmc.getByText('Can I prove what I attested?')).toBeVisible()
     await expect(cmmc.getByText('$2,999')).toBeVisible()
     await expect(cmmc.getByText('$45K')).toBeVisible()
 

@@ -57,7 +57,7 @@ const DOC_NAV: NavSection[] = [
       { id: 'domain-evidence', title: 'Domain 8: Evidence & eMASS', badge: '10 tools' },
       { id: 'domain-forensics', title: 'Domain 9: Forensics & Quantum', badge: '6 tools' },
       { id: 'domain-system', title: 'Domain 10: System Execution', badge: '6 tools' },
-      { id: 'domain-rf', title: 'Tactical RF & Anti-Jamming', badge: '4 tools' },
+      { id: 'domain-rf', title: 'Tactical RF Spectrum & SDR', badge: '4 tools' },
       { id: 'domain-lanes', title: 'Audit Lane Scanners', badge: '8 tools' },
     ],
   },
@@ -220,7 +220,7 @@ export default function DocsPage() {
                 <AlertTriangle size={18} className="text-[#00d4ff] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white">Canonical Super-Kernel Status:</strong> KTOS v4.2 registers exactly{' '}
-                  <span className="text-[#00d4ff] font-mono font-bold">100 active tools</span> across 10 functional domains, plus native Tactical RF anti-jamming and Windows EventLog telemetry.
+                  <span className="text-[#00d4ff] font-mono font-bold">100 active tools</span> across 10 functional domains, plus native Tactical RF resilient spectrum operations and Windows EventLog telemetry.
                 </div>
               </div>
 
@@ -234,15 +234,15 @@ export default function DocsPage() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <h4 className="font-bold text-[#00d4ff] mb-1">C3PAO Examination-Ready</h4>
+                    <h4 className="font-bold text-[#00d4ff] mb-1">Assessment-Ready Evidence</h4>
                     <p className="text-slate-400">
-                      Generates complete OSCAL-compliant System Security Plans (SSP), CAT I NON-POA&M analyses, and cryptographic traceability matrices.
+                      Generates complete OSCAL-compliant System Security Plans (SSP), CAT I NON-POA&M analyses, and cryptographic traceability matrices for self-assessment or C3PAO review.
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <h4 className="font-bold text-[#00d4ff] mb-1">Dual Pentest: 58/58 Neutralized</h4>
+                    <h4 className="font-bold text-[#00d4ff] mb-1">Internal Adversarial Tests: 58/58 Blocked</h4>
                     <p className="text-slate-400">
-                      Neutralizes 58/58 adversarial vectors across CyberStryke (30/30 OWASP API/LLM) and AgentHound (28/28 Agentic Stack attack paths).
+                      Neutralizes 58/58 adversarial vectors across CyberStryke (30/30 OWASP API/LLM) and AgentHound (28/28 Agentic Stack attack paths) in internal team testing. Not a third-party audit.
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
@@ -635,7 +635,7 @@ func main() {
                   {activeId === 'domain-evidence' && 'Domain 8: Compliance Evidence & eMASS'}
                   {activeId === 'domain-forensics' && 'Domain 9: Forensics, Hardening & Quantum'}
                   {activeId === 'domain-system' && 'Domain 10: System Execution, DRBC & Modeling'}
-                  {activeId === 'domain-rf' && 'Tactical RF & Anti-Jamming Suite'}
+                  {activeId === 'domain-rf' && 'Tactical RF Spectrum & SDR Suite'}
                   {activeId === 'domain-lanes' && 'Audit Lane Scanners'}
                   {activeId === 'mcp-overview' && 'MCP Super-Kernel Architecture'}
                 </h1>
@@ -647,10 +647,10 @@ func main() {
                   {activeId === 'domain-ouroboros' && 'Continuous automated eyes monitoring file integrity (FIM), WAF traffic, STIG posture, and behavioral drift.'}
                   {activeId === 'domain-soar' && 'Executive Godfather business impact reports, autonomous SOAR playbook execution, and evolutionary incident response.'}
                   {activeId === 'domain-pqc' && 'NIST FIPS 204 ML-DSA-65 post-quantum keygen, signing, verification, and immutable content-addressed DAG ledger.'}
-                  {activeId === 'domain-evidence' && 'C3PAO-ready eMASS package sync, CycloneDX SBOM generation, OSCAL SSP export, and autonomous Flight Recorder.'}
+                  {activeId === 'domain-evidence' && 'Assessment-ready eMASS package sync, CycloneDX SBOM generation, OSCAL SSP export, and autonomous Flight Recorder.'}
                   {activeId === 'domain-forensics' && 'Point-in-time volatile memory snapshots, MITRE ATT&CK correlation, and Ising Hamiltonian quantum gate actuation.'}
                   {activeId === 'domain-system' && 'Privileged OS command execution, Disaster Recovery / Business Continuity (DRBC) backup, and threat modeling.'}
-                  {activeId === 'domain-rf' && 'Tactical anti-jamming mitigation, Lorentz invariant tensor emission attestation, and RF spectrum spoof detection.'}
+                  {activeId === 'domain-rf' && 'Tactical resilient spectrum mitigation, Lorentz invariant tensor emission attestation, and RF spectrum spoof detection.'}
                   {activeId === 'domain-lanes' && 'High-speed specialized audit lanes inspecting identity, ports, FIPS compliance, tampering, and LLM postures.'}
                   {activeId === 'mcp-overview' && 'Single statically linked binary exposing 100 tools over stdio JSON-RPC or secure mTLS SSE transport.'}
                 </p>
@@ -753,7 +753,7 @@ func main() {
                         <td className="p-3.5 text-purple-400 font-bold">$45K–$250K / yr</td>
                         <td className="p-3.5 text-[#00d4ff]"><code>kphr_sov_... / kphr_sovereign_...</code></td>
                         <td className="p-3.5">100,000+ Credits</td>
-                        <td className="p-3.5">Air-Gapped Bare-Metal, FIPS 140-3 BoringCrypto, Zero-Egress Enforcement, APDL Policy Compiler, Tactical RF Anti-Jamming Enclave.</td>
+                        <td className="p-3.5">Air-Gapped Bare-Metal, FIPS 140-3 BoringCrypto, Zero-Egress Enforcement, APDL Policy Compiler, Tactical RF Spectrum &amp; SDR Enclave.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -766,7 +766,7 @@ func main() {
                   <div className="text-xs font-mono text-[#c9a227] uppercase font-bold tracking-wider">Product Surface 1 · adinkhepra.com</div>
                   <h3 className="text-base font-bold text-white">KTOS CMMC Hub &amp; Fleet Engine</h3>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Answers <em>&quot;Will I pass my CMMC audit?&quot;</em> Desktop App, Fleet Hub &amp; osquery Fleet Remote Engine, sovereign bare-metal scans, APDL staging &amp; remediation, and C3PAO OSCAL/SSP packages.
+                    Answers <em>&quot;Can I prove what I attested?&quot;</em> Desktop App, Fleet Hub &amp; osquery Fleet Remote Engine, sovereign bare-metal scans, APDL staging &amp; remediation, and assessment-ready OSCAL/SSP packages.
                   </p>
                   <div className="text-[11px] font-mono text-[#c9a227]">Tiers: Enterprise ($2,999/mo) · Sovereign ($45K–$250K/yr)</div>
                 </div>
@@ -839,7 +839,7 @@ export WRITEGATE_MODE=&quot;strict&quot;</pre>
                       { os: 'Windows ARM64', bin: 'ktos-mcp-windows-arm64.exe', boundary: 'Snapdragon / Surface Pro', role: 'Sovereign Edge AI & Enclave Supervision', verify: 'EventLog (IDs 1001–1050)' },
                       { os: 'Linux x86_64 (amd64)', bin: 'ktos-mcp-linux-amd64', boundary: 'Enterprise Linux / SCIF', role: 'Bare-metal VPS, Sovereign Docker & Air-gap Host', verify: 'Strict WriteGate' },
                       { os: 'Linux ARM64 (aarch64)', bin: 'ktos-mcp-linux-arm64', boundary: 'AWS Graviton / Pi 5', role: 'Edge Compute & Tactical Ground Stations', verify: 'Static Musl / Pure Go' },
-                      { os: 'Linux ARMv7 / ARMv6', bin: 'ktos-mcp-linux-armv7', boundary: 'Tactical SDR / Gateways', role: 'USRP / HackRF Cognitive Anti-Jamming', verify: 'Cyclostationary RF Engine' },
+                      { os: 'Linux ARMv7 / ARMv6', bin: 'ktos-mcp-linux-armv7', boundary: 'Tactical SDR / Gateways', role: 'USRP / HackRF Cognitive RF Spectrum Operations', verify: 'Cyclostationary RF Engine' },
                       { os: 'Linux RISC-V 64', bin: 'ktos-mcp-linux-riscv64', boundary: 'Sovereign Hardware', role: 'Next-Gen Post-Quantum Open Hardware', verify: 'Zero-CGO Static' },
                       { os: 'macOS Apple Silicon', bin: 'ktos-mcp-darwin-arm64', boundary: 'M1/M2/M3/M4 Mac', role: 'Developer Local Agent Enclave & Claude Code', verify: 'macOS Stdio JSON-RPC' },
                       { os: 'macOS Intel (x86_64)', bin: 'ktos-mcp-darwin-amd64', boundary: 'Legacy Mac Workstations', role: 'Developer Agent Enclave', verify: 'macOS Stdio JSON-RPC' },
@@ -889,7 +889,7 @@ export WRITEGATE_MODE=&quot;strict&quot;</pre>
                 {/* Chapter 2 */}
                 <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
                   <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
-                    <span className="text-[#c9a227]">Chapter 2:</span> Tactical RF &amp; Anti-Jamming Operations
+                    <span className="text-[#c9a227]">Chapter 2:</span> Tactical RF Spectrum &amp; Resilient Operations
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-3 pt-2">
                     <div className="p-3 rounded bg-black/60 border border-slate-800">
@@ -1073,8 +1073,8 @@ export WRITEGATE_MODE=&quot;strict&quot;</pre>
           </ul>
 
           <div className="mt-12 p-3.5 rounded-xl bg-[#00d4ff]/5 border border-[#00d4ff]/15 text-[11px] font-mono text-slate-400">
-            <div className="text-white font-bold mb-1">Need C3PAO Audit Support?</div>
-            <p className="text-slate-400 mb-2">Deploy ASAF in your enclave for one-click compliance.</p>
+            <div className="text-white font-bold mb-1">Need Assessment-Ready Support?</div>
+            <p className="text-slate-400 mb-2">Deploy ASAF in your enclave for verifiable compliance (self-assessment or C3PAO).</p>
             <a href="mailto:sales@nouchix.com" className="text-[#00d4ff] hover:underline flex items-center gap-1">
               Contact Sales <ChevronRight size={10} />
             </a>

@@ -27,7 +27,7 @@ const MODULES = [
   { id: 'profile',  group: 'detect',    icon: Radio,       name: 'KTOS Profile',  tagline: 'MCP protocol inspection',   desc: 'Deep packet inspection of MCP JSON-RPC sessions. Flags prompt injections, indirect tool abuse, and cross-agent privilege escalation.', color: 'amber' },
   { id: 'enclave',  group: 'detect',    icon: Lock,        name: 'KTOS Enclave',  tagline: 'PTY sandbox supervisor',    desc: 'Canonical PTY supervisor wrapping every AI agent shell session. Keystroke attestation + isolation boundary enforcement.', color: 'amber' },
   // Actuation & Governance
-  { id: 'comply',   group: 'govern',    icon: BookOpen,    name: 'KTOS Comply',   tagline: 'CMMC/STIG/Residue',         desc: '110 CMMC L2 practices + 36,195 cross-framework mappings. APDL policy declarations compile to Ansible. C3PAO evidence in one click.', color: 'gold'  },
+  { id: 'comply',   group: 'govern',    icon: BookOpen,    name: 'KTOS Comply',   tagline: 'CMMC/STIG/Residue',         desc: '110 CMMC L2 practices + 36,195 cross-framework mappings. APDL policy declarations compile to Ansible. Assessment-ready evidence (self-assessment or C3PAO).', color: 'gold'  },
   { id: 'heal',     group: 'govern',    icon: Zap,         name: 'KTOS Heal',     tagline: 'ASAF Remediation Daemon',   desc: 'ML-DSA-65 authorized kernel-level remediation: sysctl, PAM, SELinux, GRUB FIPS. Human gate required. DAG-attested on execution.', color: 'gold'  },
   { id: 'prover',   group: 'govern',    icon: Database,    name: 'KTOS Prover',   tagline: 'Z3 SMT formal proof',       desc: 'Formal mathematical verification of compliance policies using Z3 SMT solver. Proves policy satisfiability before deployment.', color: 'gold'  },
   { id: 'stream',   group: 'govern',    icon: Activity,    name: 'KTOS Stream',   tagline: 'OCSF SIEM integration',     desc: 'Real-time OCSF 1.0 event stream to Splunk HEC, Elastic/Filebeat, and Axonius DSPM. Every DAG event surfaces in your SOC.', color: 'gold'  },
@@ -91,9 +91,20 @@ const TIERS = [
     name: 'Sovereign',
     price: '$45K',
     suffix: '– $250K/yr',
-    tagline: 'Air-gapped. Bare-metal. SDVOSB. Zero egress. Tactical RF Anti-Jamming.',
-    modules: ['All 12 KTOS modules', 'APDL compiler', 'Iron Bank delivery', 'C3PAO engineering'],
-    features: ['100,000+ Tokenomics credits', 'Everything in Enterprise', 'Air-gapped static binaries', 'FIPS 140-3 (boringcrypto)', 'Zero-egress enforcement', 'APDL compiler + policy editor', 'Dedicated C3PAO evidence engineering', 'Tactical RF Anti-Jamming Enclave', 'SDVOSB sole-source package', 'Iron Bank / k8s deployment'],
+    tagline: 'Air-gapped. Bare-metal. SDVOSB. Zero egress.',
+    modules: ['All 12 KTOS modules', 'APDL compiler', 'Iron Bank delivery', 'Assessment evidence engineering'],
+    features: [
+      '100,000+ Tokenomics credits',
+      'Everything in Enterprise',
+      'Air-gapped static binaries',
+      'FIPS 140-3 (boringcrypto)',
+      'Zero-egress enforcement',
+      'APDL compiler + policy editor',
+      'Dedicated assessment evidence engineering',
+      /* Tactical RF Anti-Jamming: Removed from public copy; available on request. */
+      'SDVOSB sole-source package',
+      'Iron Bank / k8s deployment',
+    ],
     cta: 'Contact Sales',
     ctaHref: 'mailto:sales@nouchix.com?subject=Sovereign%20Deployment%20Inquiry',
     badge: 'DoD / DIB',
@@ -112,7 +123,7 @@ const PRODUCTS = [
     surface: 'Product Surface 1',
     name: 'KTOS CMMC Hub & Fleet Engine',
     domain: 'adinkhepra.com',
-    question: 'Will I pass my CMMC audit?',
+    question: 'Can I prove what I attested?',
     buyer: 'CISO · Compliance Lead · Contracts Officer (DIB)',
     accent: '#c9a227',
     icon: Shield,
@@ -120,10 +131,10 @@ const PRODUCTS = [
       'Desktop App, Fleet Hub & osquery Fleet Remote Engine',
       'Sovereign bare-metal scans (zero egress)',
       'APDL staging & human-gated remediation',
-      'C3PAO OSCAL / SSP / POA&M evidence packages',
+      'Assessment-ready OSCAL / SSP / POA&M evidence packages',
     ],
     tiers: [
-      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Fleet Hub + ASAF Remediation Daemon + C3PAO export' },
+      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Fleet Hub + ASAF Remediation Daemon + assessment export' },
       { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3, SDVOSB sole-source eligible' },
     ],
     cta: 'Book a CMMC Readiness Call',
@@ -195,11 +206,12 @@ const MOAT_ROWS: MoatRow[] = [
   { capability: 'MCP Protocol Mediation',     sub: 'deep JSON-RPC + PTY inspection',                   ktos: true, lineation: 'partial', paloalto: false, sentinel: 'partial', snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: true },
   { capability: 'Host / Terminal Enclave',    sub: 'PTY enclave, subprocess, PAM/sysctl',              ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: true,  drata: false, patero: false, nvidia: true },
   { capability: 'Human-in-the-Loop Gating',   sub: 'isolated staging mirror → signed apply',           ktos: true, lineation: 'partial', paloalto: false, sentinel: 'partial', snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
-  { capability: 'Audit Trail Architecture',   sub: 'immutable content-addressed DAG',                  ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'Audit Trail Architecture',   sub: 'immutable content-addressed DAG',                  ktos: true, lineation: 'partial', paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: false, nvidia: 'partial' },
   { capability: 'Cryptographic Verifiability',sub: 'FIPS 204 ML-DSA-65 (vendor-independent)',        ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
-  { capability: 'Air-Gap / Zero-Egress',      sub: 'native sovereign bare-metal (zero external APIs)',  ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: true,  nvidia: 'partial' },
+  { capability: 'Air-Gap / Zero-Egress',      sub: 'native sovereign bare-metal (zero external APIs)',  ktos: true, lineation: 'partial', paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: true,  nvidia: 'partial' },
   { capability: 'DoD / CMMC / FCA Defense',   sub: '36,195 STIG/CMMC mappings + signed AEO',          ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: true,  drata: false, patero: false, nvidia: false },
-  { capability: 'Open Verification CLI',      sub: 'npx @souhimbou/verify & offline verifier',         ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  // TODO: Restore npx @souhimbou/verify wording after npm publish.
+  { capability: 'Offline Verifier',           sub: 'available to design partners',                      ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
   { capability: 'Shadow AI Discovery',        sub: 'Ollama, vLLM, rogue LLM endpoints',                ktos: true, lineation: 'partial', paloalto: 'partial', sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
   { capability: 'SIEM / OCSF Stream',         sub: 'Splunk HEC, Elastic, Axonius DSPM',                ktos: true, lineation: 'partial', paloalto: true,  sentinel: true,  snyk: false, wiz: true,  steel: false, drata: false, patero: false, nvidia: false },
 ]
@@ -393,6 +405,236 @@ function AnimatedPipeline() {
   )
 }
 
+function EcosystemIntegrations() {
+  const categories = [
+    {
+      label: 'Agent Frameworks & IDEs',
+      items: [
+        { name: 'Anthropic Claude Code', badge: 'Stdio & SSE' },
+        { name: 'Cursor Pro & Agent IDE', badge: 'PTY Enclave' },
+        { name: 'Google Antigravity IDE', badge: 'Native MCP' },
+        { name: 'Cline & OpenHands', badge: 'Zero-Egress' },
+      ],
+    },
+    {
+      label: 'Frontier & Sovereign LLMs',
+      items: [
+        { name: 'Anthropic Claude 3.7', badge: 'JSON-RPC' },
+        { name: 'OpenAI GPT-4o / o1', badge: 'Mediated' },
+        { name: 'Google Gemini 2.0', badge: 'Attested' },
+        { name: 'Ollama Sovereign (Local)', badge: 'Air-Gap' },
+      ],
+    },
+    {
+      label: 'Enclaves, Cloud & SIEM',
+      items: [
+        { name: 'Model Context Protocol (MCP)', badge: '100 Tools' },
+        { name: 'SEKHEM PQC-WAF', badge: 'ML-KEM-1024' },
+        { name: 'Linux PTY / Windows Server', badge: 'Signed Exec' },
+        { name: 'Splunk HEC & Axonius DSPM', badge: 'OCSF Stream' },
+      ],
+    },
+  ]
+
+  return (
+    <div className="relative py-12 px-6 bg-[rgba(0,212,255,0.02)] border-b border-[rgba(0,212,255,0.08)]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(0,212,255,0.08)] border border-[rgba(0,212,255,0.2)] text-[#00d4ff] text-[11px] font-mono uppercase font-bold tracking-wider mb-2">
+              <Network size={12} /> Ecosystem Interoperability
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white" style={{ fontFamily: 'Space Grotesk' }}>
+              Works Across Your Existing Agent Stack
+            </h3>
+          </div>
+          <p className="text-xs text-slate-400 max-w-md leading-relaxed">
+            KTOS mediates agent execution without replacing your tools or forcing cloud lock-in. Encapsulates runtime tools, terminal commands, and LLM calls into verifiable cryptographic artifacts.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {categories.map((cat, idx) => (
+            <div key={idx} className="p-5 rounded-xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-colors">
+              <div className="text-xs font-mono text-slate-400 font-semibold mb-4 uppercase tracking-wider flex items-center justify-between">
+                <span>{cat.label}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]/60" />
+              </div>
+              <div className="space-y-2.5">
+                {cat.items.map((item, i) => (
+                  <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-slate-800/50 text-xs">
+                    <span className="text-slate-200 font-medium">{item.name}</span>
+                    <span className="px-2 py-0.5 rounded font-mono text-[10px] bg-slate-800/80 text-[#00d4ff] border border-slate-700/60">
+                      {item.badge}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-[11px] text-slate-500 font-mono">
+            * All third-party trademarks and logos belong to their respective owners. KTOS connects as an independent, non-intrusive execution membrane.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function FourLayerArchitectureDiagram() {
+  return (
+    <div className="mt-20 pt-16 border-t border-[rgba(0,212,255,0.08)]">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+          <Layers size={14} /> Canonical Architecture · USPTO #73565085
+        </div>
+        <h3 className="text-3xl lg:text-4xl font-black text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+          The Four-Layer Sovereign Architecture
+        </h3>
+        <p className="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          How KTOS separates untrusted agent reasoning from authoritative system execution. Every layer is isolated, air-gappable, and cryptographically anchored.
+        </p>
+      </div>
+
+      <div className="max-w-5xl mx-auto space-y-4">
+        {/* Layer 4 */}
+        <div className="relative p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 to-[#07090f] border border-cyan-500/30 shadow-[0_0_25px_rgba(0,212,255,0.08)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded bg-[#00d4ff]/10 border border-[#00d4ff]/30 text-[#00d4ff] font-mono text-xs font-bold">
+                LAYER 4
+              </span>
+              <h4 className="text-lg font-bold text-white font-sans">
+                KTOS-MCP Master-Kernel
+              </h4>
+              <span className="text-xs font-mono text-slate-400 hidden md:inline">· Agent Channel &amp; Execution Gate</span>
+            </div>
+            <span className="text-[11px] font-mono text-[#00d4ff]">mcp.souhimbou.ai · 100 Tools</span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed mb-3">
+            The MCP server surface connecting Claude Code, Cursor, Antigravity, and autonomous sub-agents. Intercepts every tool call, validates parameters against schema and injection policies, and routes requests to sovereign execution backends.
+          </p>
+          <div className="flex flex-wrap gap-2 text-[11px] font-mono">
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Stdio &amp; mTLS SSE Transport</span>
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Non-Human Identity (NHI) Passports</span>
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Polymorphic D₈ Argument Scrubbing</span>
+          </div>
+        </div>
+
+        {/* Directional Arrow */}
+        <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-500 py-1">
+          <ArrowRight className="rotate-90 text-[#00d4ff]" size={14} />
+          <span>Execution Gate Enforcement &amp; Staging Approval</span>
+          <ArrowRight className="rotate-90 text-[#00d4ff]" size={14} />
+        </div>
+
+        {/* Layer 3: Dual Product Engines */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Layer 3a */}
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0c1220] to-[#07090f] border border-[#c9a227]/30">
+            <div className="flex items-center justify-between mb-3">
+              <span className="px-2.5 py-1 rounded bg-[#c9a227]/10 border border-[#c9a227]/30 text-[#c9a227] font-mono text-xs font-bold">
+                LAYER 3a
+              </span>
+              <span className="text-[11px] font-mono text-[#c9a227]">adinkhepra.com</span>
+            </div>
+            <h4 className="text-base font-bold text-white mb-1">
+              AdinKhepra ASAF (Compliance Autopilot)
+            </h4>
+            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+              Sovereign bare-metal compliance engine. Evaluates 110 CMMC L2 controls, generates APDL remediations, runs mirror staging dry-runs, and issues assessment-ready evidence packages.
+            </p>
+            <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-slate-300">
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">Zero-Egress Host Scan</span>
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">APDL Policy Compiler</span>
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">Human Approval Gate</span>
+            </div>
+          </div>
+
+          {/* Layer 3b */}
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0a1525] to-[#07090f] border border-[#00d4ff]/30">
+            <div className="flex items-center justify-between mb-3">
+              <span className="px-2.5 py-1 rounded bg-[#00d4ff]/10 border border-[#00d4ff]/30 text-[#00d4ff] font-mono text-xs font-bold">
+                LAYER 3b
+              </span>
+              <span className="text-[11px] font-mono text-[#00d4ff]">souhimbou.ai</span>
+            </div>
+            <h4 className="text-base font-bold text-white mb-1">
+              KTOS Agentic SOC (SouHimBou AI)
+            </h4>
+            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+              Autonomous AI Security Architect. Supervises terminal commands inside canonical PTY enclaves, detects behavioral anomalies, triggers signed SOAR playbooks, and records real-time agent flight logs.
+            </p>
+            <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-slate-300">
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">SEKHEM PQC-WAF</span>
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">Autonomous Flight Recorder</span>
+              <span className="px-2 py-0.5 rounded bg-black/40 border border-slate-800">PTY Sandbox Supervisor</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Directional Arrow */}
+        <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-500 py-1">
+          <ArrowRight className="rotate-90 text-[#a78bfa]" size={14} />
+          <span>FIPS 204 ML-DSA-65 Attestation &amp; Evidence Object Packaging</span>
+          <ArrowRight className="rotate-90 text-[#a78bfa]" size={14} />
+        </div>
+
+        {/* Layer 2 */}
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 to-[#07090f] border border-purple-500/30">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono text-xs font-bold">
+                LAYER 2
+              </span>
+              <h4 className="text-lg font-bold text-white font-sans">
+                Shared Trust &amp; Compliance Substrate
+              </h4>
+            </div>
+            <span className="text-[11px] font-mono text-purple-400">36,195 Embedded Mappings · ML-DSA-65</span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed mb-3">
+            The mathematical foundation shared by all surfaces: embedded DISA STIG to CCI to NIST SP 800-53/171 to CMMC crosswalk database, FIPS 204 ML-DSA-65 digital signatures, FIPS 203 ML-KEM encapsulation, and an immutable content-addressed DAG ledger.
+          </p>
+          <div className="flex flex-wrap gap-2 text-[11px] font-mono">
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Immutable Content-Addressed DAG</span>
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Cloudflare CIRCL Post-Quantum Primitives</span>
+            <span className="px-2.5 py-0.5 rounded bg-black/50 border border-slate-800 text-slate-300">Z3 SMT Formal Policy Proofs</span>
+          </div>
+        </div>
+
+        {/* Directional Arrow */}
+        <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-500 py-1">
+          <ArrowRight className="rotate-90 text-amber-500" size={14} />
+          <span>Cryptographic Root Anchor</span>
+          <ArrowRight className="rotate-90 text-amber-500" size={14} />
+        </div>
+
+        {/* Layer 1 */}
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-[#140e06] to-[#07090f] border border-amber-500/40">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold">
+                LAYER 1
+              </span>
+              <h4 className="text-lg font-bold text-white font-sans">
+                KHEPRA Protocol — Patent-Pending IP
+              </h4>
+            </div>
+            <span className="text-[11px] font-mono text-amber-400">USPTO #73565085 · Sovereign Root of Trust</span>
+          </div>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            The sovereign moat underlying everything. Never sold directly. Binds cryptographic machine identity to hardware roots of trust, providing mathematical non-repudiation for all upstream decisions, agent actions, and attestation objects.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function useReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -567,7 +809,7 @@ export default function KTOSPage() {
               {/* Stats row */}
               <div className="flex flex-wrap gap-6 mb-10">
                 {[
-                  { val: '58 / 58', label: 'Dual Pentest (100% Block Rate)' },
+                  { val: '58 / 58', label: 'Internal Adversarial Tests Blocked' },
                   { val: '100',   label: 'MCP Kernel Tools' },
                   { val: '36K+',  label: 'Compliance Mappings' },
                   { val: '12',    label: 'KTOS Modules' },
@@ -661,6 +903,9 @@ export default function KTOSPage() {
         <style>{`@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-33.33%)} }`}</style>
       </div>
 
+      {/* ── ECOSYSTEM INTEGRATIONS MARQUEE ──────────────────────── */}
+      <EcosystemIntegrations />
+
       {/* ── HOW KTOS OPERATES ────────────────────────────────────── */}
       <section id="how-it-works" className="relative py-28 px-6">
         <div className="absolute inset-0 grid-overlay opacity-30" />
@@ -718,7 +963,7 @@ export default function KTOSPage() {
                 n: '05', icon: Database, color: '#c9a227',
                 title: 'Attest',
                 sub: 'KTOS Attest & Stream',
-                body: 'Every state change anchored in ML-DSA-65 signed DAG ledger. Streaming OCSF findings to Splunk and Axonius. C3PAO evidence in one click.',
+                body: 'Every state change anchored in ML-DSA-65 signed DAG ledger. Streaming OCSF findings to Splunk and Axonius. Assessment-ready evidence (self-assessment or C3PAO).',
               },
             ].map((step) => {
               const Icon = step.icon
@@ -740,6 +985,9 @@ export default function KTOSPage() {
               )
             })}
           </div>
+
+          {/* Canonical 4-Layer Architecture Diagram */}
+          <FourLayerArchitectureDiagram />
         </div>
       </section>
 
@@ -762,6 +1010,9 @@ export default function KTOSPage() {
                 Both Autonomous Pentest Engines
               </span>
             </h2>
+            <p className="text-xs text-slate-400 font-mono mb-4 tracking-wide">
+              Internal adversarial testing by the NouchiX team using CyberStryke and AgentHound. Not a third-party audit.
+            </p>
             <p className="text-slate-400 max-w-3xl mx-auto text-base leading-relaxed">
               Rigorous adversarial verification executing 58 targeted attack patterns across two independent security engines: CyberStryke Automated Assault (30/30 OWASP API &amp; LLM vectors) and the AgentHound Offensive Security Framework (28/28 agentic attack paths across MCP, A2A, model gateways, vector DBs, and execution sandboxes). All 58 vectors intercepted, scrubbed, or quarantined in real-time with zero false passes.
             </p>
@@ -1099,9 +1350,7 @@ export default function KTOSPage() {
               width={80} height={80} className="rounded-full object-cover border-2 border-[rgba(201,162,39,0.4)] shrink-0" />
             <div>
               <p className="text-slate-200 text-sm leading-relaxed italic">
-                &ldquo;87% of CMMC assessments and agent audits fail — not because companies aren&apos;t secure,
-                but because they can&apos;t prove it. KTOS closes that gap: ML-DSA-65 signed, DAG-attested,
-                automatically mapped to every CMMC control and OWASP agent risk. Anyone can verify the proof offline in seconds.&rdquo;
+                &ldquo;78% of organizations have already had an AI security incident<sup><a href="#source-1" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[1]</a></sup>, and nearly half can&apos;t trace what their AI did<sup><a href="#source-2" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[2]</a></sup>. When an AI agent changes production, &apos;trust our logs&apos; isn&apos;t an answer. Proof is. KTOS signs every agent action at the moment it happens, so anyone can verify what happened — without trusting us.&rdquo;
               </p>
               <div className="mt-3 flex items-center gap-3">
                 <div>
@@ -1138,12 +1387,21 @@ export default function KTOSPage() {
             {[
               {
                 letter: 'A',
-                title: "The Auditor's Wormhole",
+                title: 'Defensible Self-Attestation',
                 modules: 'Attest + Scan + Comply',
                 color: '#00d4ff',
-                desc: "One-click generation of a C3PAO-ready evidence package: OSCAL-formatted SSP, POAM analysis (CAT I flagged NON-POA&M), traceability matrix, and ML-DSA-65 signed manifest. The C3PAO walks in and the audit is done.",
+                desc: 'Every SPRS score and self-assessment backed by signed, independently verifiable evidence: OSCAL-formatted SSP, POA&M analysis, traceability matrix, and a signed manifest. Ready for a C3PAO the day your prime or contract requires one.',
                 icon: FileText,
-                stat: '87% of CMMC audits fail on evidence — not security',
+                stat: (
+                  <span>
+                    DOJ&apos;s cyber-fraud resolutions have more than tripled in each of the past two years. Self-attestation without proof is liability.<sup><a href="#source-3" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[3]</a></sup>
+                  </span>
+                ),
+                note: (
+                  <span className="block mt-2 text-[10px] text-slate-500 font-mono">
+                    In an independent 2022 study, 87% of defense contractors scored below 70 on SPRS, the DoD&apos;s own measure of cybersecurity compliance.<sup><a href="#source-4" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[4]</a></sup>
+                  </span>
+                ),
               },
               {
                 letter: 'B',
@@ -1153,6 +1411,7 @@ export default function KTOSPage() {
                 desc: "Enterprise security teams wrap their Claude, Cursor, and Antigravity agent fleets with KTOS. Every tool call attested. Anomaly scores computed. Incidents replayed forensically. SOAR playbooks staged for human approval.",
                 icon: Activity,
                 stat: 'Zero trust for AI agents — at the cryptographic layer',
+                note: null,
               },
               {
                 letter: 'C',
@@ -1162,6 +1421,7 @@ export default function KTOSPage() {
                 desc: "Sovereign air-gapped compliance autopilot. APDL declarations compile to Ansible. PAM, SELinux, kernel FIPS enforced autonomously under a human approval gate. DAG-attested on every execution. Zero telemetry. Bare-metal.",
                 icon: Shield,
                 stat: 'Full CMMC L2 remediation — no cloud, no egress',
+                note: null,
               },
             ].map((s) => {
               const Icon = s.icon
@@ -1186,6 +1446,7 @@ export default function KTOSPage() {
                       <Icon size={12} style={{ color: s.color, marginTop: 2 }} className="shrink-0" />
                       <span className="text-xs text-slate-500 italic">{s.stat}</span>
                     </div>
+                    {s.note}
                   </div>
                 </div>
               )
@@ -1397,7 +1658,7 @@ export default function KTOSPage() {
             <div className="flex-1">
               <div className="font-semibold text-white text-sm">Remediation Advisory &amp; Diagnostic Session (100% Credited to Pilot)</div>
               <div className="text-xs text-slate-400 mt-1 leading-relaxed">
-                Book a 1-on-1 session with founder Souhimbou &quot;SuperSoldier&quot; Kone (Army Signal Corps 25S SATCOM) or order the full Godfather Report walkthrough + SPRS projection.
+                Book a 1-on-1 session with founder Souhimbou &quot;Cyber&quot; Doh Kone (Army Signal Corps 25S SATCOM) or order the full Godfather Report walkthrough + SPRS projection.
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 shrink-0">
@@ -1432,7 +1693,7 @@ export default function KTOSPage() {
                 style={{ fontFamily: 'Space Grotesk' }}>
                 Built by a Veteran.
                 <br />
-                <span style={{ color: '#c9a227' }}>Engineered for War.</span>
+                <span style={{ color: '#c9a227' }}>Engineered for Proof.</span>
               </h2>
               <p className="text-slate-300 leading-relaxed mb-4">
                 <strong>SecRed Knowledge Inc. d/b/a NouchiX</strong> is a Service-Disabled
@@ -1542,7 +1803,7 @@ export default function KTOSPage() {
           </h2>
           <p className="text-slate-300 text-lg mb-10 leading-relaxed">
             Schedule a sovereign demo. See your AI agent activity attested in real time.
-            Get your SPRS score projection. Walk away with a C3PAO-ready evidence package.
+            Get your SPRS score projection. Walk away with an assessment-ready evidence package.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a href="mailto:cybersouhimbou@secredknowledgeinc.tech?subject=KTOS%20Demo%20Request"
@@ -1593,7 +1854,7 @@ export default function KTOSPage() {
               <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Platform & Docs</h4>
               <ul className="space-y-2">
                 <li><Link href="/docs" className="text-xs text-[#00d4ff] hover:text-white font-semibold transition-colors">Authoritative Docs (STIGViewer)</Link></li>
-                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">Dual Pentest (58/58 Neutralized)</a></li>
+                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">Internal Adversarial Tests (58/58 Blocked)</a></li>
                 {['KTOS Attest', 'KTOS Scan', 'KTOS Comply', 'KTOS Guard', 'KTOS Heal', 'KTOS Passport'].map(m => (
                   <li key={m}><a href="#modules" className="text-xs text-slate-500 hover:text-white transition-colors">{m}</a></li>
                 ))}
@@ -1631,6 +1892,48 @@ export default function KTOSPage() {
                 <li>CMMC 2.0 Level 2</li>
               </ul>
             </div>
+          </div>
+
+          {/* Sources Section */}
+          <div id="sources" className="section-divider my-8" />
+          <div className="mb-10 p-6 rounded-xl bg-slate-900/40 border border-slate-800/80">
+            <h5 className="text-xs font-mono text-slate-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+              <span className="text-[#00d4ff]">Reference Sources</span> · Independent Research &amp; Legal Citations
+            </h5>
+            <ol className="space-y-2.5 text-xs text-slate-500 font-sans leading-relaxed">
+              <li id="source-1" className="scroll-mt-24">
+                <span className="font-mono text-slate-400 font-semibold">[1]</span> DigiCert, &ldquo;AI Trust Pulse&rdquo; (survey of 1,001 IT and security leaders, May 2026):{' '}
+                <a href="https://www.digicert.com/content/dam/digicert/pdfs/report/ai-trust-pulse.pdf"
+                   target="_blank" rel="noopener noreferrer"
+                   className="text-slate-400 hover:text-[#00d4ff] underline break-all">
+                  https://www.digicert.com/content/dam/digicert/pdfs/report/ai-trust-pulse.pdf
+                </a>
+              </li>
+              <li id="source-2" className="scroll-mt-24">
+                <span className="font-mono text-slate-400 font-semibold">[2]</span> Cloud Security Alliance / Token Security, &ldquo;Autonomous but Not Controlled: AI Agent Incidents Now Common in Enterprises&rdquo; (Apr 2026):{' '}
+                <a href="https://cloudsecurityalliance.org/artifacts/autonomous-but-not-controlled-ai-agent-incidents-now-common-in-enterprises"
+                   target="_blank" rel="noopener noreferrer"
+                   className="text-slate-400 hover:text-[#00d4ff] underline break-all">
+                  https://cloudsecurityalliance.org/artifacts/autonomous-but-not-controlled-ai-agent-incidents-now-common-in-enterprises
+                </a>
+              </li>
+              <li id="source-3" className="scroll-mt-24">
+                <span className="font-mono text-slate-400 font-semibold">[3]</span> U.S. Department of Justice FY2025 False Claims Act statistics, as summarized by Norton Rose Fulbright (2026):{' '}
+                <a href="https://www.dataprotectionreport.com/?p=6772"
+                   target="_blank" rel="noopener noreferrer"
+                   className="text-slate-400 hover:text-[#00d4ff] underline break-all">
+                  https://www.dataprotectionreport.com/?p=6772
+                </a>
+              </li>
+              <li id="source-4" className="scroll-mt-24">
+                <span className="font-mono text-slate-400 font-semibold">[4]</span> Merrill Research / CyberSheath, DIB cybersecurity study &ldquo;More Than 87% of Pentagon Supply Chain Fails Basic Cybersecurity Minimums&rdquo; (2022):{' '}
+                <a href="https://www.businesswire.com/news/home/20221130005061/en/More-than-87-of-Pentagon-Supply-Chain-Fails-Basic-Cybersecurity-Minimums"
+                   target="_blank" rel="noopener noreferrer"
+                   className="text-slate-400 hover:text-[#00d4ff] underline break-all">
+                  https://www.businesswire.com/news/home/20221130005061/en/More-than-87-of-Pentagon-Supply-Chain-Fails-Basic-Cybersecurity-Minimums
+                </a>
+              </li>
+            </ol>
           </div>
 
           {/* Bottom bar */}
