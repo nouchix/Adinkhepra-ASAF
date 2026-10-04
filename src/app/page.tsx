@@ -179,30 +179,29 @@ interface MoatRow {
   capability: string
   sub: string
   ktos: MoatVal
-  nvidia: MoatVal
-  crogl: MoatVal
+  lineation: MoatVal
+  paloalto: MoatVal
+  sentinel: MoatVal
+  snyk: MoatVal
   wiz: MoatVal
-  drata: MoatVal
-  purview: MoatVal
   steel: MoatVal
-  tenable: MoatVal
-  axonius: MoatVal
+  drata: MoatVal
+  patero: MoatVal
+  nvidia: MoatVal
 }
 const MOAT_ROWS: MoatRow[] = [
-  //                                                                                     KTOS        NVIDIA OpenShell  Crogl/EDR    Wiz/CSPM     Drata/Vanta  MS Purview   SteelCloud   Tenable/Dragos  Axonius
-  { capability: 'AI Agent Attestation',      sub: 'ML-DSA-65 signed every tool call',  ktos: true, nvidia: 'partial', crogl: false, wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'Post-Quantum Signing',      sub: 'FIPS 204 ML-DSA-65 / FIPS 203 ML-KEM', ktos: true, nvidia: 'partial', crogl: false, wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'Immutable DAG Audit Chain', sub: 'tamper-evident, content-addressed', ktos: true, nvidia: true,      crogl: false, wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'CMMC L2 Automated Comply', sub: '110 practices, OSCAL, C3PAO-ready', ktos: true, nvidia: false,     crogl: false, wiz: false, drata: 'partial', purview: 'partial', steel: true, tenable: false, axonius: false },
-  { capability: 'Kernel-Level Remediation',  sub: 'PAM, SELinux, sysctl, GRUB FIPS',  ktos: true, nvidia: false,     crogl: false, wiz: false, drata: false, purview: false, steel: 'partial', tenable: false, axonius: false },
-  { capability: 'Shadow AI Discovery',       sub: 'Ollama, vLLM, rogue LLM endpoints',ktos: true, nvidia: 'partial', crogl: false, wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: 'partial' },
-  { capability: 'MCP Protocol Inspection',   sub: 'JSON-RPC deep packet, PTY sandbox', ktos: true, nvidia: true,      crogl: true,  wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'Agent PTY Supervisor',      sub: 'canonical enclave, keystroke attest',ktos: true, nvidia: true,     crogl: 'partial', wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'Bounded Human Gate',        sub: 'stage → approve → deny per action', ktos: true, nvidia: 'partial', crogl: false, wiz: false, drata: false, purview: false, steel: false, tenable: false, axonius: false },
-  { capability: 'Air-Gap / Zero-Egress',     sub: 'bare-metal, no phone-home, FIPS',   ktos: true, nvidia: false,     crogl: false, wiz: false, drata: false, purview: false, steel: 'partial', tenable: false, axonius: false },
-  { capability: 'EDR / Threat Detection',    sub: 'drift, anomaly, behavioral score',   ktos: true, nvidia: 'partial', crogl: true, wiz: false, drata: false, purview: false, steel: false, tenable: true, axonius: false },
-  { capability: 'Cloud Infra Scanning',      sub: 'CSPM, misconfig, IaC drift',         ktos: 'partial', nvidia: false, crogl: false, wiz: true, drata: 'partial', purview: 'partial', steel: false, tenable: 'partial', axonius: true },
-  { capability: 'SIEM / OCSF Stream',        sub: 'Splunk HEC, Elastic, Axonius DSPM', ktos: true, nvidia: false,     crogl: false, wiz: false, drata: false, purview: true, steel: false, tenable: true, axonius: true },
+  //                                                                                                  KTOS        Lineation   PaloAlto    Sentinel    Snyk        Wiz         SteelCloud  Drata/Vanta Patero      NVIDIA
+  { capability: 'Primary Focus',              sub: 'autonomous agent execution vs legacy tooling',     ktos: true, lineation: 'partial', paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'MCP Protocol Mediation',     sub: 'deep JSON-RPC + PTY inspection',                   ktos: true, lineation: 'partial', paloalto: false, sentinel: 'partial', snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: true },
+  { capability: 'Host / Terminal Enclave',    sub: 'PTY enclave, subprocess, PAM/sysctl',              ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: true,  drata: false, patero: false, nvidia: true },
+  { capability: 'Human-in-the-Loop Gating',   sub: 'isolated staging mirror → signed apply',           ktos: true, lineation: 'partial', paloalto: false, sentinel: 'partial', snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'Audit Trail Architecture',   sub: 'immutable content-addressed DAG',                  ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'Cryptographic Verifiability',sub: 'FIPS 204 ML-DSA-65 (vendor-independent)',        ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'Air-Gap / Zero-Egress',      sub: 'native sovereign bare-metal (zero external APIs)',  ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: 'partial', drata: false, patero: true,  nvidia: 'partial' },
+  { capability: 'DoD / CMMC / FCA Defense',   sub: '36,195 STIG/CMMC mappings + signed AEO',          ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: true,  drata: false, patero: false, nvidia: false },
+  { capability: 'Open Verification CLI',      sub: 'npx @souhimbou/verify & offline verifier',         ktos: true, lineation: false,     paloalto: false, sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'Shadow AI Discovery',        sub: 'Ollama, vLLM, rogue LLM endpoints',                ktos: true, lineation: 'partial', paloalto: 'partial', sentinel: false, snyk: false, wiz: false, steel: false, drata: false, patero: false, nvidia: 'partial' },
+  { capability: 'SIEM / OCSF Stream',         sub: 'Splunk HEC, Elastic, Axonius DSPM',                ktos: true, lineation: 'partial', paloalto: true,  sentinel: true,  snyk: false, wiz: true,  steel: false, drata: false, patero: false, nvidia: false },
 ]
 
 /* ── Terminal demo lines ──────────────────────────────────────── */
@@ -544,28 +543,25 @@ export default function KTOSPage() {
             <div>
               {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 border border-[rgba(0,212,255,0.15)]">
-                <span className="status-live text-xs text-slate-300 font-mono">Patent-Pending · USPTO #73565085</span>
+                <span className="status-live text-xs text-slate-300 font-mono">AUTONOMOUS AGENT EXECUTION & POST-QUANTUM ATTESTATION · USPTO #73565085</span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-6"
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.02] tracking-tight mb-6"
                 style={{ fontFamily: 'Space Grotesk' }}>
-                <span className="text-white">Defend.</span>{' '}
-                <span className="text-white">Comply.</span>
+                <span className="text-white">Proof Over Promises</span>
                 <br />
                 <span style={{
                   background: 'linear-gradient(135deg, #00d4ff, #c9a227)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                }}>Thrive.</span>
+                }}>for AI Agents That Touch Production.</span>
               </h1>
 
               <p className="text-lg text-slate-300 leading-relaxed mb-4 max-w-xl">
-                <strong className="text-white">KTOS (Khepra Trust OS)</strong> is the proof-and-actuation operating system
-                for autonomous AI agents and regulated defense infrastructure.
+                <strong className="text-white">The Cryptographic Proof & Execution Gate for AI Agents.</strong> Your AI agents write production code, run shell commands, query live databases, and invoke remote MCP tools while your teams trust their output.
               </p>
               <p className="text-base text-slate-400 leading-relaxed mb-8 max-w-xl">
-                Sovereign. Post-quantum. Mathematically verifiable. The only platform that
-                <em className="text-[#00d4ff]"> closes the loop</em> — detect, prevent, remediate with proof.
+                KTOS provides an uncompromising execution membrane: zero-trust agent passports, runtime MCP mediation, host-level PTY enclaves, and cryptographic evidence objects (AEOs) your auditors and regulators can verify independently—without trusting our servers.
               </p>
 
               {/* Stats row */}
@@ -599,7 +595,7 @@ export default function KTOSPage() {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-3 mt-8">
-                {['CMMC L2', 'NIST 800-171', 'FIPS 203/204', 'CNSA 2.0', 'SDVOSB'].map(b => (
+                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Dual-Engine Pentest 58/58', 'CMMC & False Claims Act Defensible', 'SDVOSB'].map(b => (
                   <span key={b} className="tier-badge px-3 py-1 rounded border text-[10px] text-slate-400 border-slate-700/50">
                     {b}
                   </span>
@@ -1002,7 +998,7 @@ export default function KTOSPage() {
           <div className="text-center mb-12 reveal">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-5 border border-[rgba(201,162,39,0.15)]">
               <Award size={12} className="text-[#c9a227]" />
-              <span className="text-xs text-slate-400 font-mono">The Empty Lane</span>
+              <span className="text-xs text-slate-400 font-mono">Honest Competitive Matrix</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-4"
               style={{ fontFamily: 'Space Grotesk' }}>
@@ -1011,9 +1007,9 @@ export default function KTOSPage() {
                 Closes the Loop
               </span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              EDRs detect. CSPMs scan. SIEMs alert. KTOS does all of it — and then
-              <em className="text-[#00d4ff]"> proves it with post-quantum math</em>.
+            <p className="text-slate-400 max-w-3xl mx-auto">
+              SaaS proxies trap logs in vendor clouds. Cloud scanners ignore agent keystrokes. GRC checklists verify paperwork.
+              KTOS is the only platform providing <em className="text-[#00d4ff]">host execution gating and vendor-independent post-quantum proof</em>.
             </p>
           </div>
 
@@ -1033,20 +1029,21 @@ export default function KTOSPage() {
 
           <div className="glass rounded-2xl overflow-hidden reveal">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[900px]">
+              <table className="w-full min-w-[1100px]">
                 <thead>
                   <tr className="border-b border-[rgba(0,212,255,0.08)]">
                     <th className="text-left px-5 py-4 text-xs text-slate-500 font-mono uppercase tracking-widest min-w-[200px]">Capability ↓ / Vendor →</th>
                     {[
-                      { label: 'KTOS',            sub: 'trust os',          highlight: true  },
+                      { label: 'KTOS',            sub: 'NouchiX',           highlight: true  },
+                      { label: 'Lineation',       sub: 'Agent Gateway',     highlight: false },
+                      { label: 'Palo Alto',       sub: 'Protect AI',        highlight: false },
+                      { label: 'SentinelOne',     sub: 'Prompt Sec',        highlight: false },
+                      { label: 'Snyk',            sub: 'Invariant',         highlight: false },
+                      { label: 'Wiz',             sub: 'Cloud CSPM',        highlight: false },
+                      { label: 'SteelCloud',      sub: 'ConfigOS',          highlight: false },
+                      { label: 'Vanta / Drata',   sub: 'GRC Checklists',    highlight: false },
+                      { label: 'Patero',          sub: 'Packet Encrypt',    highlight: false },
                       { label: 'NVIDIA',          sub: 'OpenShell',         highlight: false },
-                      { label: 'Crogl',           sub: 'MCP EDR',           highlight: false },
-                      { label: 'Wiz',             sub: 'CSPM',              highlight: false },
-                      { label: 'Drata',           sub: 'GRC / Vanta',       highlight: false },
-                      { label: 'MS Purview',      sub: 'Gov',               highlight: false },
-                      { label: 'SteelCloud',      sub: 'STIG configs',      highlight: false },
-                      { label: 'Tenable',         sub: 'Dragos / OT',       highlight: false },
-                      { label: 'Axonius',         sub: 'DSPM',              highlight: false },
                     ].map(h => (
                       <th key={h.label}
                         className={`text-center px-3 py-4 font-bold whitespace-nowrap ${
@@ -1074,14 +1071,15 @@ export default function KTOSPage() {
                         <td className="px-3 py-3 text-center bg-[rgba(0,212,255,0.02)] group-hover:bg-[rgba(0,212,255,0.04)]">
                           <Cell val={row.ktos} isKtos />
                         </td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.nvidia} /></td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.crogl} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.lineation} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.paloalto} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.sentinel} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.snyk} /></td>
                         <td className="px-3 py-3 text-center"><Cell val={row.wiz} /></td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.drata} /></td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.purview} /></td>
                         <td className="px-3 py-3 text-center"><Cell val={row.steel} /></td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.tenable} /></td>
-                        <td className="px-3 py-3 text-center"><Cell val={row.axonius} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.drata} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.patero} /></td>
+                        <td className="px-3 py-3 text-center"><Cell val={row.nvidia} /></td>
                       </tr>
                     )
                   })}
@@ -1101,9 +1099,9 @@ export default function KTOSPage() {
               width={80} height={80} className="rounded-full object-cover border-2 border-[rgba(201,162,39,0.4)] shrink-0" />
             <div>
               <p className="text-slate-200 text-sm leading-relaxed italic">
-                &ldquo;87% of CMMC assessments fail first attempt — not because companies aren&apos;t secure,
-                but because they can&apos;t prove it. ASAF closes that gap: ML-DSA-65 signed, DAG-attested,
-                automatically mapped to every CMMC control. The C3PAO walks in and the audit is done.&rdquo;
+                &ldquo;87% of CMMC assessments and agent audits fail — not because companies aren&apos;t secure,
+                but because they can&apos;t prove it. KTOS closes that gap: ML-DSA-65 signed, DAG-attested,
+                automatically mapped to every CMMC control and OWASP agent risk. Anyone can verify the proof offline in seconds.&rdquo;
               </p>
               <div className="mt-3 flex items-center gap-3">
                 <div>

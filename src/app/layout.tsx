@@ -2,21 +2,21 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'KTOS — Khepra Trust OS | NouchiX',
-  description: 'The proof-and-actuation operating system for autonomous AI agents and regulated defense infrastructure. Sovereign, post-quantum, and mathematically verifiable.',
-  keywords: 'KTOS, Khepra Trust OS, CMMC, STIG, NIST 800-171, AI agent security, post-quantum, ML-DSA-65, sovereign, SecRed, NouchiX, AdinKhepra ASAF, SouHimBou AI',
+  title: 'KTOS — Proof Over Promises for AI Agents That Touch Production | NouchiX',
+  description: 'The Cryptographic Proof & Execution Gate for AI Agents. Zero-trust agent passports, PQC-MCP runtime mediation, host-level PTY enclaves, and ML-DSA-65 signed evidence objects (AEOs) verified independently.',
+  keywords: 'KTOS, Khepra Trust OS, AI agent execution gate, PQC-MCP, MCP security, post-quantum, ML-DSA-65, FIPS 204, agentic SOC, CMMC, NIST 800-171, False Claims Act, sovereign bare-metal, SecRed, NouchiX, AdinKhepra ASAF, SouHimBou AI',
   authors: [{ name: 'SecRed Knowledge Inc. d/b/a NouchiX', url: 'https://nouchix.com' }],
   openGraph: {
-    title: 'KTOS — Khepra Trust OS | The Sovereign AI Trust Platform',
-    description: 'Detect. Prove. Remediate. Every AI agent action mathematically attested with ML-DSA-65. The only platform that closes the loop across AI agents AND bare-metal infrastructure.',
+    title: 'Proof Over Promises for AI Agents That Touch Production | KTOS',
+    description: 'The Cryptographic Proof & Execution Gate for AI Agents. Zero-trust agent passports, PQC-MCP runtime mediation, host-level PTY enclaves, and ML-DSA-65 signed evidence objects (AEOs).',
     url: 'https://adinkhepra.com',
     siteName: 'NouchiX — KTOS',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KTOS — Khepra Trust OS | NouchiX',
-    description: 'Post-quantum AI trust. Sovereign by design. Patent-pending KHEPRA Protocol.',
+    title: 'KTOS — Proof Over Promises for AI Agents That Touch Production',
+    description: 'The Cryptographic Proof & Execution Gate for AI Agents. Post-quantum AI trust. Sovereign by design. Patent-pending KHEPRA Protocol.',
   },
   robots: {
     index: true,

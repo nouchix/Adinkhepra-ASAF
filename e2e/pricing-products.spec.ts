@@ -111,5 +111,21 @@ test.describe('KTOS Product Surfaces & 4-Tier Commercial Model E2E', () => {
     await expect(page.getByText('POISONED_DESCRIPTION').first()).toBeVisible()
     await expect(page.getByText('CAN_IMPERSONATE').first()).toBeVisible()
   })
+
+  test('should render Proof Over Promises hero headline and 10-vendor comparison matrix', async ({ page }) => {
+    await page.goto('/')
+    
+    // Check Proof Over Promises hero
+    await expect(page.getByRole('heading', { name: /Proof Over Promises/i })).toBeVisible({ timeout: 10000 })
+    await expect(page.getByText('The Cryptographic Proof & Execution Gate for AI Agents')).toBeVisible()
+
+    // Check Honest Competitive Matrix
+    await expect(page.getByText('Honest Competitive Matrix')).toBeVisible()
+    const vendors = ['KTOS', 'Lineation', 'Palo Alto', 'SentinelOne', 'Snyk', 'Wiz', 'SteelCloud', 'Vanta / Drata', 'Patero', 'NVIDIA']
+    for (const vendor of vendors) {
+      await expect(page.getByRole('columnheader', { name: new RegExp(vendor, 'i') })).toBeVisible()
+    }
+  })
 })
+
 
