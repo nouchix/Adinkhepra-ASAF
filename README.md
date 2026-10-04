@@ -2,7 +2,7 @@
 
 [![USPTO Patent Pending #73565085](https://img.shields.io/badge/USPTO_PATENT-PENDING_%2373565085-blue?style=for-the-badge)](https://nouchix.com)
 [![NouchiX / SecRed Knowledge Inc](https://img.shields.io/badge/BY-NouchiX_SecRed_Knowledge-gold?style=for-the-badge)](https://nouchix.com)
-[![SDVOSB Certified](https://img.shields.io/badge/SDVOSB-VETERAN--OWNED-green?style=for-the-badge)](https://nouchix.com)
+[![SDVOSB-Eligible](https://img.shields.io/badge/SDVOSB--ELIGIBLE-VETERAN--OWNED-green?style=for-the-badge)](https://nouchix.com)
 [![FIPS 204 / FIPS 203 PQC](https://img.shields.io/badge/PQC-ML--DSA--65_|_ML--KEM--768-cyan?style=for-the-badge)](https://nouchix.com)
 [![Pentest Certified 58/58](https://img.shields.io/badge/PENTEST-58%2F58_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
 [![Release v4.2.0](https://img.shields.io/badge/RELEASE-v4.2.0-blueviolet?style=for-the-badge)](https://github.com/nouchix/khepra-trust-os/releases/tag/v4.2.0)
@@ -11,7 +11,7 @@
 **Sovereign Bare-Metal & osquery Fleet Manager for CMMC / STIG Compliance Audits**  
 *Layer 3a of the KHEPRA Trust OS (KTOS) Four-Layer Sovereign Architecture*
 
-Developed by **SecRed Knowledge Inc.** (operating as **NouchiX**), an SDVOSB (Service-Disabled Veteran-Owned Small Business, Delaware C-Corp EIN 99-0529252).  
+Developed by **SecRed Knowledge Inc.** (operating as **NouchiX**), an SDVOSB-eligible (Service-Disabled Veteran-Owned Small Business, Delaware C-Corp EIN 99-0529252).  
 Founder & CEO: **Souhimbou "Cyber" Doh Kone** — Army National Guard Signal Corps (25S SATCOM), Active Secret Clearance, M.S. Digital Forensics & Cybersecurity (University at Albany, NSA CAE-CDE).
 
 ---
@@ -146,7 +146,7 @@ A privileged execution supervisor running as a systemd service that transforms g
 | **Community** | **$0 / Free** (Open-Core) | `kphr_com_...` | Developer / Student | 500 Credits, 4 Core Trust Modules (Passport, Attest, Replay, Score), 9 Base Tools, Local SQLite Ledger. |
 | **Platform** | **$499 / mo** (Self-Serve) | `kphr_platform_...` | Security Engineer / Growth Team | 3,000 Credits/mo, OmniScan (50+ detectors across 8 lanes), Shadow AI Discovery, Plugin4Shell, STIGViewer API, OCSF SIEM Stream. |
 | **Enterprise** | **$2,999 / mo** | `kphr_enterprise_...` | CISO / SOC Lead | 15,000 Credits/mo, Full Agentic SOC, SEKHEM L7 PQC-WAF, PTY Enclave Supervisor, ASAF Remediation Daemon, Z3 SMT Formal Proof. |
-| **Sovereign** | **$45K – $250K / yr** (SDVOSB up to $5M) | `kphr_sov_...` | DIB Contractor / Prime / C3PAO | **Unlimited Bare-Metal & Air-Gapped**, osquery Remote Fleet, C3PAO Audit Defense, Custom CKLB Exports, Zero Egress Guarantee. |
+| **Sovereign** | **$45K – $250K / yr** (SDVOSB-eligible up to $5M) | `kphr_sov_...` | DIB Contractor / Prime / C3PAO | **Unlimited Bare-Metal & Air-Gapped**, osquery Remote Fleet, C3PAO Audit Defense, Custom CKLB Exports, Zero Egress Guarantee. |
 
 ---
 
@@ -227,7 +227,7 @@ go build -ldflags="-s -w" -o bin/agent.exe ./cmd/agent
 
 - **Company:** SecRed Knowledge Inc. (operating as NouchiX)
 - **Corporate Structure:** Delaware C-Corporation, EIN 99-0529252
-- **Socio-Economic Status:** Service-Disabled Veteran-Owned Small Business (SDVOSB)
+- **Socio-Economic Status:** Service-Disabled Veteran-Owned Small Business (SDVOSB-eligible)
 - **Federal Procurement:** Eligible for SDVOSB sole-source awards up to $5M under FAR 19.1406
 - **Intellectual Property:** USPTO Provisional Patent Application #73565085 (*KHEPRA Protocol*), held by SOUHIMBOU DOH KONE LLC and exclusively licensed to SecRed Knowledge Inc.
 - **Cage Code & SAM.gov UEI:** Available upon request to verified defense contractors and contracting officers.

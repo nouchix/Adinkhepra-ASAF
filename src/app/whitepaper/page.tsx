@@ -333,7 +333,7 @@ export default function WhitepaperPage() {
       <footer className="border-t border-white/5 py-8 px-6">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-xs font-mono text-slate-700">
-            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · SDVOSB · contact@nouchix.com
+            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · SDVOSB-Eligible · contact@nouchix.com
           </div>
           <div className="flex gap-4 text-xs font-mono text-slate-700">
             <a href="https://github.com/nouchix/pqc-khepra-mcp" className="hover:text-slate-400 transition-colors">GitHub</a>

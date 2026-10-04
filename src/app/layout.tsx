@@ -3,12 +3,12 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'KTOS — Proof Over Promises for AI Agents That Touch Production | NouchiX',
-  description: 'The Cryptographic Proof & Execution Gate for AI Agents. Zero-trust agent passports, PQC-MCP runtime mediation, host-level PTY enclaves, and ML-DSA-65 signed evidence objects (AEOs) verified independently.',
-  keywords: 'KTOS, Khepra Trust OS, AI agent execution gate, PQC-MCP, MCP security, post-quantum, ML-DSA-65, FIPS 204, agentic SOC, CMMC, NIST 800-171, False Claims Act, sovereign bare-metal, SecRed, NouchiX, AdinKhepra ASAF, SouHimBou AI',
+  description: 'The execution gate and proof layer for AI agents that touch production. Signed, independently verifiable evidence for every agent action — with CMMC-grade evidence for defense contractors.',
+  keywords: 'KTOS, Khepra Trust OS, AI agent execution gate, PQC-MCP, MCP security, post-quantum, ML-DSA-65, FIPS 204, agentic SOC, NIST 800-171, sovereign bare-metal, SecRed, NouchiX, AdinKhepra ASAF, SouHimBou AI',
   authors: [{ name: 'SecRed Knowledge Inc. d/b/a NouchiX', url: 'https://nouchix.com' }],
   openGraph: {
     title: 'Proof Over Promises for AI Agents That Touch Production | KTOS',
-    description: 'The Cryptographic Proof & Execution Gate for AI Agents. Zero-trust agent passports, PQC-MCP runtime mediation, host-level PTY enclaves, and ML-DSA-65 signed evidence objects (AEOs).',
+    description: 'The execution gate and proof layer for AI agents that touch production. Signed, independently verifiable evidence for every agent action — with CMMC-grade evidence for defense contractors.',
     url: 'https://adinkhepra.com',
     siteName: 'NouchiX — KTOS',
     type: 'website',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'KTOS — Proof Over Promises for AI Agents That Touch Production',
-    description: 'The Cryptographic Proof & Execution Gate for AI Agents. Post-quantum AI trust. Sovereign by design. Patent-pending KHEPRA Protocol.',
+    description: 'The execution gate and proof layer for AI agents that touch production. Signed, independently verifiable evidence for every agent action — with CMMC-grade evidence for defense contractors.',
   },
   robots: {
     index: true,
