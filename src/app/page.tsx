@@ -91,7 +91,7 @@ const TIERS = [
     name: 'Sovereign',
     price: '$45K',
     suffix: '– $250K/yr',
-    tagline: 'Air-gapped. Bare-metal. SDVOSB. Zero egress.',
+    tagline: 'Air-gapped. Bare-metal. SDVOSB-eligible. Zero egress.',
     modules: ['All 12 KTOS modules', 'APDL compiler', 'Iron Bank delivery', 'Assessment evidence engineering'],
     features: [
       '100,000+ Tokenomics credits',
@@ -102,7 +102,7 @@ const TIERS = [
       'APDL compiler + policy editor',
       'Dedicated assessment evidence engineering',
       /* Tactical RF Anti-Jamming: Removed from public copy; available on request. */
-      'SDVOSB sole-source package',
+      'SDVOSB-eligible sole-source package',
       'Iron Bank / k8s deployment',
     ],
     cta: 'Contact Sales',
@@ -135,7 +135,7 @@ const PRODUCTS = [
     ],
     tiers: [
       { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Fleet Hub + ASAF Remediation Daemon + assessment export' },
-      { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3, SDVOSB sole-source eligible' },
+      { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3, SDVOSB-eligible sole-source' },
     ],
     cta: 'Book a CMMC Readiness Call',
     ctaHref: 'https://calendly.com/cybersouhimbou',
@@ -405,6 +405,561 @@ function AnimatedPipeline() {
   )
 }
 
+function ThirdPartyLogosStrip() {
+  const logos = [
+    {
+      name: 'Anthropic',
+      product: 'Claude Code & 3.7',
+      category: 'Frontier AI',
+      color: '#D97706',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#D97706' }}>
+          <path d="M13.79 3.25a.75.75 0 0 0-1.37-.42l-7.5 14a.75.75 0 0 0 .97 1.04l4.5-2.25 2.5 5.5a.75.75 0 0 0 1.4-.46l-2.22-5.78 4.22-2.11a.75.75 0 0 0 .28-1.07l-2.78-8.45z"/>
+          <path d="M12 2a1 1 0 0 1 .92.61l3.5 8.5a1 1 0 0 1-.36 1.22l-4.5 3 2.5 6.5a1 1 0 0 1-1.85.74l-2.7-5.94-4.88 2.44A1 1 0 0 1 3.3 17.7l8-15A1 1 0 0 1 12 2z" opacity="0.3"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'OpenAI',
+      product: 'GPT-4o & Codex',
+      category: 'Frontier AI',
+      color: '#10A37F',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#10A37F' }}>
+          <path d="M20.5 10.2a5.4 5.4 0 0 0-.46-4.38 5.5 5.5 0 0 0-5.75-2.6 5.4 5.4 0 0 0-4.14-1.9 5.5 5.5 0 0 0-5.26 3.82A5.4 5.4 0 0 0 2.5 9a5.5 5.5 0 0 0 1.83 6.06 5.4 5.4 0 0 0 .46 4.38 5.5 5.5 0 0 0 5.75 2.6 5.4 5.4 0 0 0 4.14 1.9 5.5 5.5 0 0 0 5.26-3.82A5.4 5.4 0 0 0 22.3 16a5.5 5.5 0 0 0-1.8-5.8zM12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Google Cloud',
+      product: 'Gemini 2.0 & Vertex',
+      category: 'Cloud & AI',
+      color: '#4285F4',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#4285F4' }}>
+          <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Microsoft Azure',
+      product: 'Copilot & Entra',
+      category: 'Enterprise Cloud',
+      color: '#0078D4',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#0078D4' }}>
+          <path d="M13.05 4.24l-4.5 8.16 5.04 7.36H4.25l6.5-12.72 2.3 4.2zm2.95 2.76l4.25 7.56-6.8 5.2h5.8l3.75-5.2-7-7.56z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Cursor Pro',
+      product: 'AI IDE & Agent',
+      category: 'Developer Agent',
+      color: '#00D4FF',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="2" style={{ color: '#00D4FF' }}>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'MCP',
+      product: 'Model Context Protocol',
+      category: 'Agent Channel',
+      color: '#A78BFA',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#A78BFA' }}>
+          <path d="M7 2a2 2 0 0 0-2 2v2H3a1 1 0 0 0 0 2h2v4H3a1 1 0 0 0 0 2h2v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2h2a1 1 0 0 0 0-2h-2v-4h2a1 1 0 0 0 0-2h-2V4a2 2 0 0 0-2-2H7zm2 4h6v12H9V6z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'AWS Bedrock',
+      product: 'GovCloud & AgentCore',
+      category: 'Hyperscaler',
+      color: '#FF9900',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#FF9900' }}>
+          <path d="M3.5 14.5c4.5 3 12.5 3 17 0 .4-.3.9.2.6.6-4.8 3.8-13.4 3.8-18.2 0-.3-.4.2-.9.6-.6zm14.8-1.3c.3-.4.8-.4 1.1-.1.9.7 1.8 1.8 1.9 2.1.2.3 0 .7-.3.8-.3.1-.7 0-1-.3-.3-.3-.9-.9-1.5-1.5-.2-.3-.2-.7-.2-1zM6.5 4h11c1.4 0 2.5 1.1 2.5 2.5v5c0 1.4-1.1 2.5-2.5 2.5h-11C5.1 14 4 12.9 4 11.5v-5C4 5.1 5.1 4 6.5 4z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'GitHub Copilot',
+      product: 'Workspace & CLI',
+      category: 'Agent Stack',
+      color: '#F3F4F6',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#F3F4F6' }}>
+          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Ollama Sovereign',
+      product: 'Llama 3.3 & Mistral',
+      category: 'Air-Gap Local',
+      color: '#CBD5E1',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="2" style={{ color: '#CBD5E1' }}>
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Docker / K8s',
+      product: 'Bare-Metal & Helm',
+      category: 'Runtime Enclave',
+      color: '#38BDF8',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#38BDF8' }}>
+          <path d="M13 8h2v2h-2zm-3 0h2v2h-2zm-3 0h2v2H7zm6-3h2v2h-2zm-3 0h2v2h-2zM4 11h16c.3 2.5-.5 5-2.2 6.8C16 19.6 13.5 20 11 20c-4.4 0-7.8-2.6-8.8-6.5-.1-.5-.2-1-.2-1.5h2z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Splunk HEC',
+      product: 'OCSF Stream & SIEM',
+      category: 'Enterprise SOC',
+      color: '#F43F5E',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#F43F5E' }}>
+          <path d="M3 4l9 8-9 8h4l9-8-9-8H3zm9 0l9 8-9 8h4l9-8-9-8h-4z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Slack / PagerDuty',
+      product: 'Human Approval Gate',
+      category: 'Incident & SOAR',
+      color: '#10B981',
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" style={{ color: '#10B981' }}>
+          <path d="M5.04 15.13a2.52 2.52 0 0 1-2.52-2.52V5.04A2.52 2.52 0 0 1 5.04 2.52h7.57a2.52 2.52 0 0 1 2.52 2.52v2.52h-2.52V5.04H5.04v7.57h2.52v2.52H5.04zm13.92-6.26a2.52 2.52 0 0 1 2.52 2.52v7.57a2.52 2.52 0 0 1-2.52 2.52h-7.57a2.52 2.52 0 0 1-2.52-2.52v-2.52h2.52v2.52h7.57v-7.57h-2.52v-2.52h2.52z"/>
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <div className="relative py-12 px-6 bg-[rgba(0,212,255,0.015)] border-b border-[rgba(0,212,255,0.08)]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(0,212,255,0.08)] border border-[rgba(0,212,255,0.2)] text-[#00d4ff] text-[11px] font-mono uppercase font-bold tracking-wider mb-2">
+              <Network size={12} /> Unified Control Plane · Works With
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: 'Space Grotesk' }}>
+              Built for Any Model, Agent Runtime &amp; Cloud Enclave
+            </h3>
+          </div>
+          <p className="text-xs text-slate-400 max-w-md leading-relaxed">
+            KTOS brokers execution across your AI agent fleets without vendor lock-in. Encapsulates tool calls, prompts, and shell executions into FIPS 204 ML-DSA-65 signed Agent Evidence Objects.
+          </p>
+        </div>
+
+        {/* Logo Cards Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          {logos.map((l) => (
+            <div
+              key={l.name}
+              className="group p-3.5 rounded-xl bg-slate-900/40 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/80 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="p-1.5 rounded-lg bg-black/40 border border-slate-800/60 group-hover:scale-110 transition-transform">
+                  {l.svg}
+                </div>
+                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">
+                  {l.category}
+                </span>
+              </div>
+              <div>
+                <div className="text-xs font-bold text-slate-200 group-hover:text-white transition-colors">
+                  {l.name}
+                </div>
+                <div className="text-[10px] text-slate-500 font-mono truncate mt-0.5">
+                  {l.product}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Disclaimer */}
+        <p className="text-[10px] text-slate-600 font-mono text-center mt-5">
+          * Logos are trademarks of their respective owners. Listing here reflects integration compatibility and runtime mediation, and does not imply endorsement, sponsorship, or certification by any company shown.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function ArchitecturalControlPlane3D() {
+  const [activeLayer, setActiveLayer] = useState<number>(4)
+
+  const layers = [
+    {
+      num: 4,
+      key: 'layer4',
+      name: 'Layer 4 · KTOS-MCP Master-Kernel',
+      domain: 'mcp.souhimbou.ai',
+      role: 'Agent Channel & Parameter Validation Gate',
+      color: '#00d4ff',
+      summary: 'Intercepts JSON-RPC stdio and mTLS SSE sessions from Claude Code, Cursor, and Antigravity IDE before execution.',
+      specs: [
+        '100 active tools across 10 functional domains',
+        'Strict WriteGate & Non-Human Identity (NHI) passports',
+        'Dihedral D₈ polymorphic parameter scrubbing',
+        'Anti-jailbreak & indirect prompt injection defense',
+      ],
+      tools: ['agent_register', 'aeo_record', 'trust_score', 'passport_issue', 'omni_scan', 'sekhem_guard'],
+    },
+    {
+      num: 3,
+      key: 'layer3',
+      name: 'Layer 3 · Dual Sovereign Engines (ASAF + Agentic SOC)',
+      domain: 'adinkhepra.com · souhimbou.ai',
+      role: 'Autopilot Remediation & Autonomous SOC Supervision',
+      color: '#c9a227',
+      summary: 'Two purpose-built sovereign engines for enterprise defense and compliance automation without external cloud telemetry.',
+      specs: [
+        '3a. AdinKhepra ASAF: Bare-Metal CMMC/STIG Autopilot & APDL Compiler',
+        '3b. KTOS Agentic SOC: Autonomous Flight Recorder & PTY Enclave Supervisor',
+        'Human-gated mirror staging approval before production change',
+        'Signed SOAR playbook library & deterministic replay',
+      ],
+      tools: ['asaf_lint', 'cmmc_assess', 'fim_baseline', 'drift_detect', 'kasa_status', 'playbook_execute'],
+    },
+    {
+      num: 2,
+      key: 'layer2',
+      name: 'Layer 2 · Shared Trust & Compliance Substrate',
+      domain: '36,195 Cross-Framework Mappings',
+      role: 'Post-Quantum Primitives & Immutable DAG Ledger',
+      color: '#a78bfa',
+      summary: 'The mathematical bedrock binding all tool executions to embedded compliance crosswalks and post-quantum cryptographic proofs.',
+      specs: [
+        '36,195 embedded mappings: STIG → CCI → NIST 800-53/171 → CMMC',
+        'FIPS 204 ML-DSA-65 signatures over SHA3-256 digests',
+        'FIPS 203 ML-KEM-768/1024 rotating cryptographic vaults',
+        'Immutable content-addressed DAG ledger with zero-knowledge proof',
+      ],
+      tools: ['dag_write', 'dag_query', 'dag_attestation', 'dag_audit', 'pqc_keygen', 'pqc_sign'],
+    },
+    {
+      num: 1,
+      key: 'layer1',
+      name: 'Layer 1 · KHEPRA Protocol Root of Trust',
+      domain: 'USPTO Provisional Patent #73565085',
+      role: 'Sovereign Hardware & Machine Identity Binding',
+      color: '#f59e0b',
+      summary: 'The sovereign IP moat. Binds non-human cryptographic identities to physical hardware roots of trust, making backdating mathematically impossible.',
+      specs: [
+        'Hardware / OS Non-Human Identity (NHI) non-exportable key binding',
+        'Air-gap native: Zero external API calls, zero telemetry, zero egress',
+        'Adinkra symbolic grammar: Eban (defense) & Nkyinkyim (adaptability)',
+        'Full compatibility with FIPS 140-3 BoringCrypto bare-metal hosts',
+      ],
+      tools: ['khepra_edge_exec', 'dual_anchor', 'attest_ai_policy', 'flight_record'],
+    },
+  ]
+
+  const current = layers.find((l) => l.num === activeLayer) || layers[0]
+
+  return (
+    <div className="mt-20 pt-16 border-t border-[rgba(0,212,255,0.08)]">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+          <Layers size={14} /> Four-Layer Sovereign Membrane · USPTO #73565085
+        </div>
+        <h3 className="text-3xl lg:text-4xl font-black text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+          Architectural Control Plane: Central Governance, Bare-Metal Proof
+        </h3>
+        <p className="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          Decide in one place, verify mathematically everywhere else. KTOS enforces strict execution boundaries where autonomous AI agents touch production.
+        </p>
+      </div>
+
+      {/* 3D Perspective Box */}
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-8 items-center">
+        {/* Left: Interactive 3D Stack */}
+        <div className="lg:col-span-5 space-y-3">
+          <div className="text-xs font-mono text-slate-400 mb-2 uppercase tracking-wider font-semibold">
+            Select Membrane Layer
+          </div>
+          {layers.map((l) => {
+            const isSelected = activeLayer === l.num
+            return (
+              <button
+                key={l.key}
+                onClick={() => setActiveLayer(l.num)}
+                className={`w-full text-left p-4 rounded-xl transition-all duration-300 border flex items-center justify-between ${
+                  isSelected
+                    ? 'bg-slate-900/90 border-[#00d4ff] shadow-[0_0_20px_rgba(0,212,255,0.15)] translate-x-2'
+                    : 'bg-black/30 border-slate-800 hover:border-slate-700 hover:bg-slate-900/40'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className="w-7 h-7 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0"
+                    style={{
+                      background: isSelected ? `${l.color}20` : 'rgba(255,255,255,0.05)',
+                      color: isSelected ? l.color : '#94a3b8',
+                      border: `1px solid ${isSelected ? l.color : 'transparent'}`,
+                    }}
+                  >
+                    L{l.num}
+                  </span>
+                  <div>
+                    <div className="text-xs font-bold text-white tracking-wide">{l.name}</div>
+                    <div className="text-[10px] text-slate-400 font-mono">{l.role}</div>
+                  </div>
+                </div>
+                <ChevronRight size={14} className={isSelected ? 'text-[#00d4ff]' : 'text-slate-600'} />
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Right: 3D Layer Visual Inspector */}
+        <div className="lg:col-span-7">
+          <div
+            className="p-7 rounded-2xl bg-gradient-to-br from-slate-900/95 via-[#090d16] to-[#05070c] border border-slate-800 shadow-2xl relative overflow-hidden"
+            style={{
+              boxShadow: `0 0 35px ${current.color}15, inset 0 1px 0 rgba(255,255,255,0.08)`,
+            }}
+          >
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800/80">
+              <div className="flex items-center gap-2.5">
+                <span
+                  className="px-2.5 py-1 rounded font-mono text-xs font-bold uppercase tracking-wider"
+                  style={{
+                    background: `${current.color}18`,
+                    color: current.color,
+                    border: `1px solid ${current.color}40`,
+                  }}
+                >
+                  LAYER {current.num}
+                </span>
+                <span className="text-xs font-mono text-slate-400">{current.domain}</span>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                <CheckCircle size={11} /> Cryptographically Active
+              </span>
+            </div>
+
+            <h4 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+              {current.name}
+            </h4>
+            <p className="text-xs text-slate-300 leading-relaxed mb-6">{current.summary}</p>
+
+            <div className="mb-6 space-y-2">
+              <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-semibold">
+                Core Architectural Capabilities
+              </div>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {current.specs.map((s, i) => (
+                  <div key={i} className="flex items-start gap-2 p-2 rounded-lg bg-black/40 border border-slate-800/60 text-xs">
+                    <span className="text-[#00d4ff] mt-0.5">✦</span>
+                    <span className="text-slate-300 text-[11px] leading-snug">{s}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Exposed Sovereign MCP Tools
+              </div>
+              <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                {current.tools.map((t) => (
+                  <span key={t} className="px-2 py-1 rounded bg-slate-800/60 border border-slate-700/60 text-[#00d4ff]">
+                    {t}()
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ForensicReplayVisualizer3D() {
+  const [selectedStep, setSelectedStep] = useState(2)
+
+  const steps = [
+    {
+      step: '01',
+      title: 'Agent Intent & Prompt',
+      actor: 'Cursor Pro / Claude Code',
+      badge: 'Intent Ingress',
+      desc: 'Autonomous agent initiates configuration request: "Harden kernel FIPS and auditd for CMMC SC-13 compliance."',
+      payload: {
+        agent_id: 'cursor-pro-session-7a3f',
+        action: 'exec_privileged_cmd',
+        intent: 'harden_kernel_fips',
+        target: 'sysctl:crypto.fips_enabled',
+      },
+      status: 'Captured by PTY Enclave',
+    },
+    {
+      step: '02',
+      title: 'MCP Mediation & SEKHEM WAF',
+      actor: 'KTOS-MCP Super-Kernel',
+      badge: 'L7 PQC Guard',
+      desc: 'SEKHEM PQC-WAF intercepts JSON-RPC payload, applies dihedral D₈ argument scrubbing, validates schema against STIG CAT I rules.',
+      payload: {
+        filter: 'SEKHEM_L7_WAF',
+        algorithm: 'ML-KEM-1024',
+        injection_test: 'CLEAN (0 false passes)',
+        stig_rule: 'V-258029 (CAT I)',
+      },
+      status: 'Validated & Parameter-Scrubbed',
+    },
+    {
+      step: '03',
+      title: 'Staging Mirror & Human Gate',
+      actor: 'AdinKhepra ASAF',
+      badge: 'Human-in-the-Loop',
+      desc: 'Pre-flight dry-run executes in an isolated mirror staging environment. Config diff generated; CISO human gate approves execution.',
+      payload: {
+        diff: '- crypto.fips_enabled = 0\n+ crypto.fips_enabled = 1',
+        gate: 'HUMAN_APPROVAL_REQUIRED',
+        approver: 'CISO / Security Lead',
+        staging_status: 'PASS_NO_REGRESSION',
+      },
+      status: 'Signed Approval Granted',
+    },
+    {
+      step: '04',
+      title: 'PTY Enclave Execution',
+      actor: 'ASAF System Daemon',
+      badge: 'Bare-Metal OS',
+      desc: 'Privileged system daemon executes command on host under CAP_SYS_ADMIN with exact keystroke logging and output capture.',
+      payload: {
+        command: ['sysctl', '-w', 'crypto.fips_enabled=1'],
+        exit_code: 0,
+        output: 'crypto.fips_enabled = 1',
+        enclave: 'PTY_SUPERVISOR_ISOLATED',
+      },
+      status: 'Executed on Bare-Metal',
+    },
+    {
+      step: '05',
+      title: 'FIPS 204 ML-DSA-65 Attestation',
+      actor: 'KTOS Attest Engine',
+      badge: 'Post-Quantum AEO',
+      desc: 'Generates Agent Evidence Object (AEO #00042) binding intent + diff + output, signed with ML-DSA-65 private key.',
+      payload: {
+        aeo_id: 'AEO-2026-00042',
+        symbol: 'Eban (Fortress)',
+        signature: 'ML-DSA-65:7f8a9b1c2d3e... [FIPS 204]',
+        timestamp: '2026-10-04T03:48:00Z',
+      },
+      status: 'Cryptographically Sealed',
+    },
+    {
+      step: '06',
+      title: 'Immutable DAG Anchor & Offline Proof',
+      actor: 'KHEPRA DAG Substrate',
+      badge: 'Zero-Trust Audit',
+      desc: 'AEO is content-addressed into the immutable DAG ledger. Verifiable by third-party auditors using offline verifier without trusting NouchiX.',
+      payload: {
+        node_id: 'sha3-256:d8e9f1a2...',
+        parent_hash: 'sha3-256:a7b8c9d0...',
+        verifier_status: 'VALID (Vendor-Independent)',
+        export: 'OSCAL / SSP / C3PAO-Ready',
+      },
+      status: 'Permanently Anchored',
+    },
+  ]
+
+  const active = steps[selectedStep]
+
+  return (
+    <div className="py-20 px-6 bg-[rgba(0,212,255,0.01)] border-b border-[rgba(0,212,255,0.08)]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(0,212,255,0.08)] border border-[rgba(0,212,255,0.2)] text-[#00d4ff] text-[11px] font-mono uppercase font-bold tracking-wider mb-3">
+            <Activity size={12} /> Reasoning Audit Trail · Deterministic Replay
+          </div>
+          <h3 className="text-3xl lg:text-4xl font-black text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+            Lineage You Can Prove. Step by Step.
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Standard logs tell you an action occurred. Lineation tells you why in their cloud database. KTOS gives you mathematical non-repudiation on your own bare-metal host.
+          </p>
+        </div>
+
+        {/* Step Navigation Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-8">
+          {steps.map((s, idx) => {
+            const isCurrent = selectedStep === idx
+            return (
+              <button
+                key={s.step}
+                onClick={() => setSelectedStep(idx)}
+                className={`p-3 rounded-xl border text-left transition-all duration-200 ${
+                  isCurrent
+                    ? 'bg-slate-900 border-[#00d4ff] shadow-[0_0_15px_rgba(0,212,255,0.15)]'
+                    : 'bg-black/30 border-slate-800 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className={`text-[10px] font-mono font-bold ${isCurrent ? 'text-[#00d4ff]' : 'text-slate-500'}`}>
+                    STEP {s.step}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: isCurrent ? '#00d4ff' : 'rgba(255,255,255,0.2)' }} />
+                </div>
+                <div className="text-xs font-bold text-slate-200 truncate">{s.title}</div>
+                <div className="text-[10px] text-slate-500 font-mono truncate">{s.actor}</div>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Step Detail Card & JSON Inspector */}
+        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+          <div className="lg:col-span-6 p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="px-2.5 py-0.5 rounded bg-[#00d4ff]/10 text-[#00d4ff] border border-[#00d4ff]/30 text-[10px] font-mono font-bold">
+                  {active.badge}
+                </span>
+                <span className="text-xs font-mono text-emerald-400">Status: {active.status}</span>
+              </div>
+              <h4 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                {active.title}
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed mb-4">{active.desc}</p>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Actor: <strong className="text-white">{active.actor}</strong></span>
+              <span className="text-[#c9a227]">FIPS 204 Attested ✓</span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 p-5 rounded-2xl bg-black/80 border border-slate-800 font-mono text-xs overflow-x-auto">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80 text-[11px] text-slate-500">
+              <span className="text-[#00d4ff]">Agent Evidence Object (AEO #00042)</span>
+              <span>JSON Payload</span>
+            </div>
+            <pre className="text-slate-300 leading-relaxed text-[11px]">
+              {JSON.stringify(active.payload, null, 2)}
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function useReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -607,7 +1162,7 @@ export default function KTOSPage() {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-3 mt-8">
-                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Dual-Engine Pentest 58/58', 'CMMC & False Claims Act Defensible', 'SDVOSB'].map(b => (
+                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Dual-Engine Pentest 58/58', 'CMMC & False Claims Act Defensible', 'SDVOSB-Eligible'].map(b => (
                   <span key={b} className="tier-badge px-3 py-1 rounded border text-[10px] text-slate-400 border-slate-700/50">
                     {b}
                   </span>
@@ -655,6 +1210,9 @@ export default function KTOSPage() {
         </div>
       </section>
 
+      {/* ── UNIFIED CONTROL PLANE & ECOSYSTEM LOGOS ──────────────── */}
+      <ThirdPartyLogosStrip />
+
       {/* ── TICKER STRIP ─────────────────────────────────────────── */}
       <div className="relative overflow-hidden bg-[rgba(0,212,255,0.04)] border-y border-[rgba(0,212,255,0.08)] py-3">
         <div className="flex items-center gap-12 animate-[ticker_25s_linear_infinite] whitespace-nowrap px-8"
@@ -662,7 +1220,7 @@ export default function KTOSPage() {
           {Array(3).fill([
             'ML-DSA-65 Signed', 'CMMC L2 Autopilot', 'Zero Egress', 'Air-Gap Native',
             '36K+ Mappings', 'FIPS 204 · FIPS 203', 'Patent Pending #73565085',
-            'OmniScan 50+ Detectors', 'SDVOSB · Veteran-Led', 'KTOS Trust OS'
+            'OmniScan 50+ Detectors', 'SDVOSB-Eligible · Veteran-Led', 'KTOS Trust OS'
           ]).flat().map((t, i) => (
             <span key={i} className="text-xs text-slate-500 font-mono inline-flex items-center gap-3">
               <span className="w-1 h-1 rounded-full bg-[#00d4ff] opacity-50" />
@@ -752,6 +1310,9 @@ export default function KTOSPage() {
               )
             })}
           </div>
+
+          {/* 3D Architectural Control Plane */}
+          <ArchitecturalControlPlane3D />
         </div>
       </section>
 
@@ -926,6 +1487,9 @@ export default function KTOSPage() {
           </div>
         </div>
       </section>
+
+      {/* ── 3D FORENSIC REPLAY & CRYPTOGRAPHIC LINEAGE ──────────── */}
+      <ForensicReplayVisualizer3D />
 
       <div className="section-divider mx-12" />
 
@@ -1119,7 +1683,7 @@ export default function KTOSPage() {
               <div className="mt-3 flex items-center gap-3">
                 <div>
                   <div className="text-sm font-bold text-white">Souhimbou &ldquo;Cyber&rdquo; Doh Kone</div>
-                  <div className="text-xs text-[#c9a227] font-mono">Founder & CEO · Army Signal Corps 25S · SDVOSB</div>
+                  <div className="text-xs text-[#c9a227] font-mono">Founder & CEO · Army Signal Corps 25S · SDVOSB-Eligible</div>
                 </div>
               </div>
             </div>
@@ -1461,7 +2025,7 @@ export default function KTOSPage() {
               </h2>
               <p className="text-slate-300 leading-relaxed mb-4">
                 <strong>SecRed Knowledge Inc. d/b/a NouchiX</strong> is a Service-Disabled
-                Veteran-Owned Small Business (SDVOSB) founded by Army Signal Corps Sergeant
+                Veteran-Owned Small Business (SDVOSB-eligible) founded by Army Signal Corps Sergeant
                 Souhimbou &ldquo;Cyber&rdquo; Doh Kone — 25S SATCOM, active Secret clearance,
                 M.S. Digital Forensics & Cybersecurity (NSA CAE-CDE).
               </p>
@@ -1473,7 +2037,7 @@ export default function KTOSPage() {
               {/* Creds */}
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {[
-                  { label: 'SDVOSB', val: 'EIN 99-0529252' },
+                  { label: 'SDVOSB-Eligible', val: 'EIN 99-0529252' },
                   { label: 'Clearance', val: 'Active Secret' },
                   { label: 'Patent', val: 'USPTO #73565085' },
                   { label: 'Recognition', val: 'F6S Top 10 Finalist' },
@@ -1707,7 +2271,7 @@ export default function KTOSPage() {
               © 2026 SOUHIMBOU DOH KONE LLC · Exclusively licensed to SecRed Knowledge Inc. d/b/a NouchiX
             </div>
             <div className="flex items-center gap-4">
-              <span className="tier-badge text-[10px] text-slate-600">SDVOSB · Army Signal Corps</span>
+              <span className="tier-badge text-[10px] text-slate-600">SDVOSB-Eligible · Army Signal Corps</span>
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-green-500" style={{ boxShadow: '0 0 6px #22c55e' }} />
                 <span className="text-[10px] text-slate-500 font-mono">All systems operational</span>

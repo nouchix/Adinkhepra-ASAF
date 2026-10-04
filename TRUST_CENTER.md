@@ -65,7 +65,7 @@ builds and distributes it, and the organizational controls around it.
 | Operating company | **SecRed Knowledge Inc.** (dba **NouchiX**) |
 | Intellectual-property holder | **SOUHIMBOU DOH KONE LLC** (exclusively licensed to SecRed Knowledge Inc.) |
 | Core patent | **KHEPRA Protocol — U.S. App. No. 63/942,886** |
-| Business classification | SDVOSB (Service-Disabled Veteran-Owned Small Business) <!-- confirm current SAM.gov status --> |
+| Business classification | SDVOSB-eligible (Service-Disabled Veteran-Owned Small Business) <!-- confirm current SAM.gov status --> |
 | Primary domain | nouchix.com |
 | Product domain | adinkhepra.com |
 | Security contact | cybersouhimbou@secredknowledgeinc.tech (PGP: `keys/security_contact.asc`) |
