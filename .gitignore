@@ -57,3 +57,20 @@ Thumbs.db
 
 # Ignore environment files
 *.env
+
+# Key material and sealed artifacts: never commit. Public halves (*.pub)
+# stay trackable. Anything that slips through must be rotated, not just
+# untracked.
+*_kyber
+*_dilithium
+*_ed25519
+*_ecdsa
+*.dilithium
+*.dilithium.bak
+*.sealed
+*.khepra
+master_seed*
+telemetry-keys/
+keys/root-ceremony/
+PASSPHRASES*.txt
+.env_ascii
