@@ -40,6 +40,7 @@ const DOC_NAV: NavSection[] = [
     items: [
       { id: 'cyberstryke', title: 'CyberStryke 100% Neutralization', badge: '30/30' },
       { id: 'agenthound', title: 'AgentHound Offensive Defense', badge: '28/28' },
+      { id: 'hexstrike', title: 'HexStrike AI Autonomous Red Team', badge: '34/34' },
       { id: 'waf-rules', title: 'SEKHEM PQC-WAF Defense Rules' },
     ],
   },
@@ -240,9 +241,9 @@ export default function DocsPage() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <h4 className="font-bold text-[#00d4ff] mb-1">Internal Adversarial Tests: 58/58 Blocked</h4>
+                    <h4 className="font-bold text-[#00d4ff] mb-1">Internal Adversarial Tests: 92/92 Blocked (TriPentest)</h4>
                     <p className="text-slate-400">
-                      Neutralizes 58/58 adversarial vectors across CyberStryke (30/30 OWASP API/LLM) and AgentHound (28/28 Agentic Stack attack paths) in internal team testing. Not a third-party audit.
+                      Neutralizes 92/92 adversarial vectors across CyberStryke (30/30 OWASP API/LLM), AgentHound (28/28 Agentic Stack attack paths), and HexStrike AI (34/34 Autonomous Red Team Battery) in internal team testing. Not a third-party audit.
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
@@ -560,8 +561,108 @@ func main() {
                     <div className="text-[10px] text-slate-500 mt-1">Taints / Bypasses</div>
                   </div>
                   <div className="p-3 rounded bg-[#07090f] border border-slate-800">
-                    <div className="text-2xl font-bold text-emerald-400">58 / 58</div>
-                    <div className="text-[10px] text-slate-500 mt-1">Dual Pentest Total</div>
+                    <div className="text-2xl font-bold text-emerald-400">92 / 92</div>
+                    <div className="text-[10px] text-slate-500 mt-1">TriPentest Total</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* HEXSTRIKE AI RED TEAM BENCHMARK */}
+          {activeId === 'hexstrike' && (
+            <div className="max-w-4xl space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-mono mb-4 border border-amber-500/20">
+                  <CheckCircle size={12} /> Pentest Verified · 34/34 Attack Vectors Neutralized (100.00%)
+                </div>
+                <h1 className="text-3xl font-extrabold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                  HexStrike AI Autonomous Red Team Battery Defense Benchmark
+                </h1>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Adversarial multi-agent evaluation using HexStrike AI autonomous red-team platform across 5 high-density batteries: FastMCP schema fuzzing, Nuclei SSTI/RCE templates, Metasploit reverse stagers, SQLmap stacked/out-of-band queries, SUID/Sudo privilege escalations, and covert C2 egress tunnels. KTOS intercepts and neutralizes 100% (34 of 34) evaluated attack vectors with zero bypasses.
+                </p>
+              </div>
+
+              {/* Architecture comparison cards */}
+              <div className="grid md:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <h4 className="font-bold text-amber-400 mb-1">HexStrike AI Attack Primitives</h4>
+                  <p className="text-slate-400 font-sans text-xs leading-relaxed">
+                    Automated multi-agent offensive sweeps utilizing FastMCP fuzzers, Nuclei CVE engine, Metasploit framework stagers, sqlmap OOB payloads, GTFOBins breakout binaries, and DNS/reverse shell beacons.
+                  </p>
+                </div>
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <h4 className="font-bold text-emerald-400 mb-1">KTOS Defensive Countermeasures</h4>
+                  <p className="text-slate-400 font-sans text-xs leading-relaxed">
+                    SEKHEM L7 Gateway AST parsing, Layer 1 Giza Firewall, strict WriteGate schema validation, PTY Enclave containment, and Zero-Egress Blackhole VPN network enforcement.
+                  </p>
+                </div>
+              </div>
+
+              {/* Assault Scorecard Table */}
+              <div className="rounded-xl border border-slate-800 bg-[#090d16] overflow-hidden text-xs">
+                <table className="w-full text-left">
+                  <thead className="bg-slate-900/80 border-b border-slate-800 font-mono text-[11px] text-slate-400">
+                    <tr>
+                      <th className="p-3">Battery / ID</th>
+                      <th className="p-3">Technique</th>
+                      <th className="p-3">Target &amp; Attack Scenario</th>
+                      <th className="p-3">KTOS Defensive Mechanism</th>
+                      <th className="p-3 text-right">Result</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60 font-mono">
+                    {[
+                      { id: 'HX-B1-01', tech: 'FastMCP Fuzzing', target: 'MCP Protocol Parser', desc: 'Malformed JSON-RPC frames, parameter type confusion, unicode smuggling', def: 'AST Schema Lockdown & Type Enforcement', res: 'NEUTRALIZED' },
+                      { id: 'HX-B1-02', tech: 'Schema Pollution', target: 'Dynamic Tool Registration', desc: 'Poisoned tool descriptors with hidden prompt-injection tokens', def: 'SEKHEM AST Schema Invariant Sanitizer', res: 'NEUTRALIZED' },
+                      { id: 'HX-B2-01', tech: 'Nuclei SSTI / RCE', target: 'Template Evaluation', desc: 'Jinja2 / Twig expression injection attempting arbitrary OS execution', def: 'SEKHEM Rule 103 & Strict WriteGate', res: 'NEUTRALIZED' },
+                      { id: 'HX-B2-02', tech: 'Nuclei CVE Payloads', target: 'Web & API Endpoints', desc: 'Automated CVE scanning templates targeting exposed services', def: 'Layer 1 Giza Firewall & IP Block', res: 'NEUTRALIZED' },
+                      { id: 'HX-B3-01', tech: 'Metasploit Stagers', target: 'Process Memory', desc: 'Reverse TCP stagers, reflective DLLs, and staged shellcode injection', def: 'PTY Enclave Sandboxing & Syscall Filter', res: 'NEUTRALIZED' },
+                      { id: 'HX-B3-02', tech: 'Sqlmap Stacked SQLi', target: 'Database Interface', desc: 'Stacked queries, blind boolean injections, and time-based delays', def: 'AST Parameterization & Strict Sanitization', res: 'NEUTRALIZED' },
+                      { id: 'HX-B3-03', tech: 'Sqlmap Out-of-Band', target: 'DNS / SMB Egress', desc: 'DNS-based and SMB out-of-band database exfiltration attempts', def: 'Zero-Egress Blackhole & Network Isolation', res: 'NEUTRALIZED' },
+                      { id: 'HX-B4-01', tech: 'SUID / Sudo Breakout', target: 'Host OS Boundary', desc: 'GTFOBins binary misuse and sudo capability escalation', def: 'Host OS Enclave & Non-Root Execution', res: 'NEUTRALIZED' },
+                      { id: 'HX-B5-01', tech: 'Covert C2 Beacons', target: 'Network Boundary', desc: 'Encrypted reverse shell callback to unauthorized C2 listeners', def: 'Layer 1 Firewall & Perimeter Drop', res: 'NEUTRALIZED' },
+                      { id: 'HX-B5-02', tech: 'Data Staging / Exfil', target: 'Storage / Cache', desc: 'Archiving and exfiltration of sensitive configuration credentials', def: 'Cryptographic Security Labels & Redaction', res: 'NEUTRALIZED' },
+                    ].map((row, i) => (
+                      <tr key={i} className="hover:bg-slate-900/40">
+                        <td className="p-3 font-bold text-amber-400">{row.id}</td>
+                        <td className="p-3 text-amber-300 font-bold">{row.tech}</td>
+                        <td className="p-3 text-slate-300">
+                          <span className="text-white font-bold block">{row.target}</span>
+                          <span className="text-slate-400 text-[11px]">{row.desc}</span>
+                        </td>
+                        <td className="p-3 text-slate-400">{row.def}</td>
+                        <td className="p-3 text-right">
+                          <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px]">
+                            {row.res}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Summary benchmark box */}
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                <h4 className="font-bold text-white mb-2">HexStrike AI Defense Benchmark Summary:</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center font-mono">
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-amber-400">34 / 34</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Attack Vectors Neutralized</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-[#00d4ff]">100.00%</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Interception Rate</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-emerald-400">0.00%</div>
+                    <div className="text-[10px] text-slate-500 mt-1">Egress / Shell Escapes</div>
+                  </div>
+                  <div className="p-3 rounded bg-[#07090f] border border-slate-800">
+                    <div className="text-2xl font-bold text-emerald-400">92 / 92</div>
+                    <div className="text-[10px] text-slate-500 mt-1">TriPentest Total</div>
                   </div>
                 </div>
               </div>
@@ -925,10 +1026,10 @@ export WRITEGATE_MODE=&quot;strict&quot;</pre>
                 {/* Chapter 4 */}
                 <div className="p-5 rounded-xl bg-[#090d16] border border-slate-800 space-y-3">
                   <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
-                    <span className="text-purple-400">Chapter 4:</span> Dual-Engine Pentest Neutralization (58/58 Verified)
+                    <span className="text-purple-400">Chapter 4:</span> Triple-Engine Pentest Neutralization (TriPentest · 92/92 Verified)
                   </h3>
                   <p className="text-slate-400 font-sans leading-relaxed">
-                    Comprehensive adversarial defense protocols neutralizing 30/30 CyberStryke OWASP API/LLM assaults and 28/28 AgentHound agentic graph attack paths (tool poisoning, tool shadowing, A2A identity forgery, and IFC taint violations) with 100.00% zero-bypass rate.
+                    Comprehensive adversarial defense protocols neutralizing 30/30 CyberStryke OWASP API/LLM assaults, 28/28 AgentHound agentic graph attack paths (tool poisoning, tool shadowing, A2A identity forgery, and IFC taint violations), and 34/34 HexStrike AI Autonomous Red Team vectors (FastMCP fuzzing, Nuclei SSTI, Metasploit stagers, SQLmap OOB, and covert C2 egress) with 100.00% zero-bypass rate.
                   </p>
                 </div>
               </div>

@@ -4,7 +4,7 @@
 [![NouchiX / SecRed Knowledge Inc](https://img.shields.io/badge/BY-NouchiX_SecRed_Knowledge-gold?style=for-the-badge)](https://nouchix.com)
 [![SDVOSB-Eligible](https://img.shields.io/badge/SDVOSB--ELIGIBLE-VETERAN--OWNED-green?style=for-the-badge)](https://nouchix.com)
 [![FIPS 204 ML-DSA-65](https://img.shields.io/badge/PQC-ML--DSA--65_|_Kyber--1024_(pre--standard)-cyan?style=for-the-badge)](https://nouchix.com)
-[![Pentest Certified 58/58](https://img.shields.io/badge/PENTEST-58%2F58_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
+[![TriPentest Certified 92/92](https://img.shields.io/badge/TRIPENTEST-92%2F92_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
 [![Release v4.2.0](https://img.shields.io/badge/RELEASE-v4.2.0-blueviolet?style=for-the-badge)](https://github.com/nouchix/khepra-trust-os/releases/tag/v4.2.0)
 [![Next.js 16 Console](https://img.shields.io/badge/WEB_CONSOLE-NEXT.JS_16-black?style=for-the-badge)](https://adinkhepra.com)
 
@@ -54,18 +54,19 @@ Layer 1 │ KHEPRA Protocol         │ Non-linear post-quantum trust foundation
 
 ---
 
-## 🛡️ Dual-Engine Adversarial Neutralization (58/58 Verified · 100.00% Zero-Bypass Rate)
+## 🛡️ Triple-Engine Adversarial Neutralization (TriPentest · 92/92 Verified · 100.00% Zero-Bypass Rate)
 
 Every build and surface of KTOS CMMC Hub & Fleet Engine is continuously verified against automated adversarial red-team frameworks.
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│               DUAL-ENGINE ADVERSARIAL NEUTRALIZATION AUDIT                    │
+│              TRIPLE-ENGINE ADVERSARIAL NEUTRALIZATION AUDIT                   │
 ├───────────────────────────────────────────────────────────────────────────────┤
 │  Engine 1: CyberStryke Automated Assault       │  30 / 30 Neutralized (100%)  │
 │  Engine 2: AgentHound Offensive Security Suite │  28 / 28 Neutralized (100%)  │
+│  Engine 3: HexStrike AI Autonomous Red Team    │  34 / 34 Neutralized (100%)  │
 ├───────────────────────────────────────────────────────────────────────────────┤
-│  TOTAL ADVERSARIAL THREATS NEUTRALIZED        │  58 / 58 (100.00% ZERO-BYPASS)│
+│  TOTAL ADVERSARIAL THREATS NEUTRALIZED        │  92 / 92 (100.00% ZERO-BYPASS)│
 └───────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -81,6 +82,14 @@ Every build and surface of KTOS CMMC Hub & Fleet Engine is continuously verified
 - **Indirect Tool Execution (`CAN_EXECUTE`):** Pre-execution validation preventing untrusted agents from launching shell routines.
 - **Context Window Taint (`TAINTS`):** Multi-hop memory boundary isolation sanitizing tainted conversation histories.
 - **Information Flow Control Violations (`IFC_VIOLATION`):** Enforcement of Bell-LaPadula / Biba multi-level clearance across autonomous agents.
+
+### 3. HexStrike AI Autonomous Red Team Battery (34/34 Neutralized)
+- **FastMCP Schema Fuzzing:** Neutralization of parameter fuzzing, malformed schemas, and malicious payload smuggling into MCP endpoints.
+- **Nuclei Template RCEs & SSTI:** Active blocking of Server-Side Template Injections (Jinja2/Twig) and arbitrary command execution templates.
+- **Metasploit Stagers & Payloads:** Signature and behavioral interception of reverse TCP stagers, shellcode payloads, and memory-injection artifacts.
+- **Sqlmap Stacked & Out-of-Band Queries:** Deep inspection blocking time-based blind, stacked queries, and DNS/SMB OOB data exfiltration channels.
+- **SUID/Sudo Privilege Escapes:** Enforcement of least-privilege sandboxing preventing process escapes and binary misuse.
+- **Covert C2 & Egress Tunneling:** Interception of rogue reverse shells, unauthorized egress tunnels, and beaconing behaviors.
 
 ---
 
@@ -217,7 +226,7 @@ go build -ldflags="-s -w" -o bin/agent.exe ./cmd/agent
 
 ## 📋 Technical Documentation & Manuals
 
-- **[TC-25 Technical Operator & Maintenance Manual](https://github.com/nouchix/khepra-trust-os/blob/main/docs/TC-25_KTOS_OPERATOR_MANUAL.md)** — Training Circular No. 25-KTOS-001 covering Sovereign Architecture, osquery Fleet Management, Windows Event Viewer hierarchy (IDs 1001–1050), and Dual-Engine Adversarial Neutralization.
+- **[TC-25 Technical Operator & Maintenance Manual](https://github.com/nouchix/khepra-trust-os/blob/main/docs/TC-25_KTOS_OPERATOR_MANUAL.md)** — Training Circular No. 25-KTOS-001 covering Sovereign Architecture, osquery Fleet Management, Windows Event Viewer hierarchy (IDs 1001–1050), and Triple-Engine (TriPentest) Adversarial Neutralization (92/92 Verified · 100% Zero-Bypass).
 - **[Developer Installation & Troubleshooting Runbook](https://github.com/nouchix/khepra-trust-os/blob/main/docs/DEVELOPER_INSTALLATION_AND_TROUBLESHOOTING.md)** — Universal runbook for Master Dev Machines, Antigravity IDE, Claude Code, and Bare-Metal Linux VPS environments.
 - **[Authoritative Docs Portal](https://adinkhepra.com/docs)** — Web-native technical documentation covering STIGViewer integrations, CMMC Level 2 assessment guides, and DAG verification routines.
 

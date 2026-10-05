@@ -88,13 +88,14 @@ test.describe('KTOS Product Surfaces & 4-Tier Commercial Model E2E', () => {
     await expect(page.getByText('Universal 1-Liner Installation')).toBeVisible()
   })
 
-  test('should render Dual-Engine Pentest results (CyberStryke 30/30 + AgentHound 28/28 = 58/58) on home and docs', async ({ page }) => {
+  test('should render Triple-Engine Pentest results (CyberStryke 30/30 + AgentHound 28/28 + HexStrike 34/34 = 92/92) on home and docs', async ({ page }) => {
     // 1. Landing Page Verification
     await page.goto('/')
-    await expect(page.getByText('58 / 58').first()).toBeVisible({ timeout: 10000 })
-    await expect(page.getByText('Dual-Engine Pentest Verification · 58/58 Attacks Neutralized')).toBeVisible()
+    await expect(page.getByText('92 / 92').first()).toBeVisible({ timeout: 10000 })
+    await expect(page.getByText('Triple-Engine Pentest Verification (TriPentest) · 92/92 Attacks Neutralized')).toBeVisible()
     await expect(page.getByText('Engine 1: CyberStryke Automated Assault')).toBeVisible()
     await expect(page.getByText('Engine 2: AgentHound Offensive Security Framework')).toBeVisible()
+    await expect(page.getByText('Engine 3: HexStrike AI Autonomous Red Team')).toBeVisible()
     await expect(page.getByText('MCP Tool Description Poisoning & Shadowing')).toBeVisible()
 
     // 2. Docs Portal Verification
@@ -110,6 +111,11 @@ test.describe('KTOS Product Surfaces & 4-Tier Commercial Model E2E', () => {
     await expect(page.getByText('28 / 28').first()).toBeVisible()
     await expect(page.getByText('POISONED_DESCRIPTION').first()).toBeVisible()
     await expect(page.getByText('CAN_IMPERSONATE').first()).toBeVisible()
+
+    // Check HexStrike AI
+    await page.getByRole('button', { name: /HexStrike AI Autonomous Red Team/i }).click()
+    await expect(page.getByRole('heading', { name: /HexStrike AI Autonomous Red Team Battery Defense Benchmark/i })).toBeVisible()
+    await expect(page.getByText('34 / 34').first()).toBeVisible()
   })
 
   test('should render Proof Over Promises hero headline and 10-vendor comparison matrix', async ({ page }) => {

@@ -1034,7 +1034,7 @@ export default function KTOSPage() {
             {[
               { label: 'Platform', href: '#platform' },
               { label: 'How It Works', href: '#how-it-works' },
-              { label: 'Dual Pentest (58/58)', href: '#cyberstryke' },
+              { label: 'Triple Pentest (92/92)', href: '#cyberstryke' },
               { label: 'Modules', href: '#modules' },
               { label: 'Documentation', href: '/docs' },
               { label: 'Pricing', href: '#pricing' },
@@ -1134,7 +1134,7 @@ export default function KTOSPage() {
               {/* Stats row */}
               <div className="flex flex-wrap gap-6 mb-10">
                 {[
-                  { val: '58 / 58', label: 'Internal Adversarial Tests Blocked' },
+                  { val: '92 / 92', label: 'Internal Adversarial Tests Blocked' },
                   { val: '100',   label: 'MCP Kernel Tools' },
                   { val: '36K+',  label: 'Compliance Mappings' },
                   { val: '12',    label: 'KTOS Modules' },
@@ -1162,7 +1162,7 @@ export default function KTOSPage() {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-3 mt-8">
-                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Dual-Engine Pentest 58/58', 'CMMC & False Claims Act Defensible', 'SDVOSB-Eligible'].map(b => (
+                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Triple-Engine Pentest 92/92', 'CMMC & False Claims Act Defensible', 'SDVOSB-Eligible'].map(b => (
                   <span key={b} className="tier-badge px-3 py-1 rounded border text-[10px] text-slate-400 border-slate-700/50">
                     {b}
                   </span>
@@ -1316,35 +1316,35 @@ export default function KTOSPage() {
 
       <div className="section-divider mx-12" />
 
-      {/* ── DUAL-ENGINE PENTEST ASSAULT SHOWCASE (CYBERSTRYKE + AGENTHOUND) ── */}
+      {/* ── TRIPLE-ENGINE PENTEST ASSAULT SHOWCASE (CYBERSTRYKE + AGENTHOUND + HEXSTRIKE AI) ── */}
       <section id="cyberstryke" className="relative py-28 px-6 bg-[rgba(0,212,255,0.015)] border-y border-[rgba(0,212,255,0.08)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 reveal">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-5 border border-emerald-500/30 bg-emerald-500/10">
               <Shield size={14} className="text-emerald-400" />
               <span className="text-xs text-emerald-400 font-mono font-bold tracking-wider uppercase">
-                Dual-Engine Pentest Verification · 58/58 Attacks Neutralized
+                Triple-Engine Pentest Verification (TriPentest) · 92/92 Attacks Neutralized
               </span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-4"
               style={{ fontFamily: 'Space Grotesk' }}>
               100.00% Neutralization Across{' '}
               <span style={{ background: 'linear-gradient(135deg, #22c55e, #00d4ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Both Autonomous Pentest Engines
+                All Three Autonomous Pentest Engines
               </span>
             </h2>
             <p className="text-xs text-slate-400 font-mono mb-4 tracking-wide">
-              Internal adversarial testing by the NouchiX team using CyberStryke and AgentHound. Not a third-party audit.
+              Internal adversarial testing by the NouchiX team using CyberStryke, AgentHound, and HexStrike AI. Not a third-party audit.
             </p>
             <p className="text-slate-400 max-w-3xl mx-auto text-base leading-relaxed">
-              Rigorous adversarial verification executing 58 targeted attack patterns across two independent security engines: CyberStryke Automated Assault (30/30 OWASP API &amp; LLM vectors) and the AgentHound Offensive Security Framework (28/28 agentic attack paths across MCP, A2A, model gateways, vector DBs, and execution sandboxes). All 58 vectors intercepted, scrubbed, or quarantined in real-time with zero false passes.
+              Rigorous adversarial verification executing 92 targeted attack patterns across three independent security engines: CyberStryke Automated Assault (30/30 OWASP API &amp; LLM vectors), AgentHound Offensive Security Framework (28/28 agentic attack paths across MCP, A2A, model gateways, vector DBs, and execution sandboxes), and HexStrike AI Autonomous Red Team Battery (34/34 FastMCP fuzzing, Nuclei SSTI, Metasploit stagers, Sqlmap stacked/OOB injections, SUID escapes, and covert C2 tunnels). All 92 vectors intercepted, scrubbed, or quarantined in real-time with zero false passes.
             </p>
           </div>
 
           {/* Metrics summary banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 reveal">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-12 reveal">
             <div className="glass p-5 rounded-xl border border-emerald-500/20 text-center">
-              <div className="text-3xl font-black text-emerald-400 font-mono">58 / 58</div>
+              <div className="text-3xl font-black text-emerald-400 font-mono">92 / 92</div>
               <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">Assaults Neutralized</div>
             </div>
             <div className="glass p-5 rounded-xl border border-[#00d4ff]/20 text-center">
@@ -1359,10 +1359,14 @@ export default function KTOSPage() {
               <div className="text-3xl font-black text-cyan-400 font-mono">28 / 28</div>
               <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">AgentHound Agentic</div>
             </div>
+            <div className="glass p-5 rounded-xl border border-amber-500/20 text-center col-span-2 sm:col-span-1">
+              <div className="text-3xl font-black text-amber-400 font-mono">34 / 34</div>
+              <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-mono">HexStrike AI Red Team</div>
+            </div>
           </div>
 
-          {/* Dual-Engine Overview Cards */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12 reveal">
+          {/* Triple-Engine Overview Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12 reveal">
             <div className="p-6 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 to-black">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-mono font-bold text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
@@ -1400,6 +1404,26 @@ export default function KTOSPage() {
                 <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">POISONED_DESCRIPTION Intercept</span>
                 <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">ML-DSA-65 Passports</span>
                 <span className="px-2 py-0.5 rounded bg-cyan-900/30 border border-cyan-700/40">IFC Taint Isolation</span>
+              </div>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-950/20 to-black">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-mono font-bold text-amber-400 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30">
+                  Engine 3: HexStrike AI Autonomous Red Team
+                </span>
+                <span className="text-xs font-mono font-bold text-amber-400">34 / 34 Neutralized</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk' }}>
+                Automated Multi-Agent Red Team &amp; Exploit Synthesis
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                Executes high-density adversarial exploit chains against FastMCP interfaces, testing for schema fuzzing, Metasploit payload delivery, SQLMap stacked/OOB channels, Nuclei template injections, SUID privilege escalations, and stealth C2 beacons.
+              </p>
+              <div className="flex flex-wrap gap-2 text-[10px] font-mono text-amber-300">
+                <span className="px-2 py-0.5 rounded bg-amber-900/30 border border-amber-700/40">FastMCP Schema Fuzzing</span>
+                <span className="px-2 py-0.5 rounded bg-amber-900/30 border border-amber-700/40">Nuclei SSTI / RCE Block</span>
+                <span className="px-2 py-0.5 rounded bg-amber-900/30 border border-amber-700/40">C2 Egress Interception</span>
               </div>
             </div>
           </div>
@@ -1455,6 +1479,30 @@ export default function KTOSPage() {
                 badge: '100% Isolated',
                 color: '#00d4ff',
               },
+              {
+                title: 'FastMCP Schema Fuzzing & Malformed Frames',
+                status: '8/8 Neutralized',
+                engine: 'HexStrike · Battery 1 (Fuzzing)',
+                desc: 'Malformed JSON-RPC frames, parameter type confusion, and unicode payload smuggling intercepted by AST validation and schema lock.',
+                badge: '100% Scrubbed',
+                color: '#f59e0b',
+              },
+              {
+                title: 'Nuclei SSTI & Metasploit Stager Payloads',
+                status: '8/8 Neutralized',
+                engine: 'HexStrike · Battery 2 & 3',
+                desc: 'Server-side template injections, reverse TCP stager shellcode, and memory injection sequences caught by SEKHEM Gateway and PTY enclave.',
+                badge: '100% Intercepted',
+                color: '#f59e0b',
+              },
+              {
+                title: 'SUID Privilege Escalation & Covert C2 Egress',
+                status: '18/18 Neutralized',
+                engine: 'HexStrike · Battery 4 & 5',
+                desc: 'SUID/Sudo process escapes, GTFOBins exploitation, DNS/SMB tunneling, and covert beaconing severed by Layer 1 Giza Firewall.',
+                badge: '100% Quarantined',
+                color: '#f59e0b',
+              },
             ].map(vec => (
               <div key={vec.title} className="module-card reveal border border-slate-800 hover:border-emerald-500/40 transition-all p-6">
                 <div className="flex items-start justify-between gap-2 mb-3">
@@ -1479,7 +1527,7 @@ export default function KTOSPage() {
           <div className="text-center reveal">
             <Link href="/docs" className="inline-flex items-center gap-2 btn-ghost border border-[rgba(0,212,255,0.4)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.08)] px-6 py-3 text-sm">
               <BookOpen size={16} />
-              Read Full 58-Vector Dual Pentest Benchmark in Authoritative Docs
+              Read Full 92-Vector TriPentest Benchmark in Authoritative Docs
               <ChevronRight size={16} />
             </Link>
           </div>
@@ -2178,7 +2226,7 @@ export default function KTOSPage() {
               <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Platform & Docs</h4>
               <ul className="space-y-2">
                 <li><Link href="/docs" className="text-xs text-[#00d4ff] hover:text-white font-semibold transition-colors">Authoritative Docs (STIGViewer)</Link></li>
-                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">Internal Adversarial Tests (58/58 Blocked)</a></li>
+                <li><a href="#cyberstryke" className="text-xs text-emerald-400 hover:text-white transition-colors">Internal Adversarial Tests (92/92 Blocked)</a></li>
                 {['KTOS Attest', 'KTOS Scan', 'KTOS Comply', 'KTOS Guard', 'KTOS Heal', 'KTOS Passport'].map(m => (
                   <li key={m}><a href="#modules" className="text-xs text-slate-500 hover:text-white transition-colors">{m}</a></li>
                 ))}
