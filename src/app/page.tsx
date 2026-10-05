@@ -23,7 +23,7 @@ const MODULES = [
   { id: 'score',    group: 'core',      icon: TrendingUp,  name: 'KTOS Score',    tagline: 'Trust standing',             desc: 'Continuous behavioral trust scoring across agent fleets. Anomaly detection powered by KASA evolutionary algorithm.', color: 'cyan'  },
   // Detection & Boundary
   { id: 'scan',     group: 'detect',    icon: Search,      name: 'KTOS Scan',     tagline: 'OmniScan — 50+ detectors',  desc: '8 scanning lanes: Shadow AI discovery (Ollama/vLLM), Plugin4Shell audit, STIG CAT I/II checks, SBOM/KEV correlation, secret scanning.', color: 'amber' },
-  { id: 'guard',    group: 'detect',    icon: Eye,         name: 'KTOS Guard',    tagline: 'SEKHEM PQC-WAF',            desc: 'Post-quantum L7 WAF with ML-KEM-1024 rotating vaults, polymorphic argument scrubbing, and Kyber-1024 ephemeral sessions.', color: 'amber' },
+  { id: 'guard',    group: 'detect',    icon: Eye,         name: 'KTOS Guard',    tagline: 'SEKHEM PQC-WAF',            desc: 'Post-quantum L7 WAF with rotating CRYSTALS-Kyber-1024 vaults (pre-standard; FIPS 203 ML-KEM-1024 migration in progress) and polymorphic argument scrubbing.', color: 'amber' },
   { id: 'profile',  group: 'detect',    icon: Radio,       name: 'KTOS Profile',  tagline: 'MCP protocol inspection',   desc: 'Deep packet inspection of MCP JSON-RPC sessions. Flags prompt injections, indirect tool abuse, and cross-agent privilege escalation.', color: 'amber' },
   { id: 'enclave',  group: 'detect',    icon: Lock,        name: 'KTOS Enclave',  tagline: 'PTY sandbox supervisor',    desc: 'Canonical PTY supervisor wrapping every AI agent shell session. Keystroke attestation + isolation boundary enforcement.', color: 'amber' },
   // Actuation & Governance
@@ -97,7 +97,7 @@ const TIERS = [
       '100,000+ Tokenomics credits',
       'Everything in Enterprise',
       'Air-gapped static binaries',
-      'FIPS 140-3 (boringcrypto)',
+      'FIPS 140-3 module inheritance (in progress)',
       'Zero-egress enforcement',
       'APDL compiler + policy editor',
       'Dedicated assessment evidence engineering',
@@ -135,7 +135,7 @@ const PRODUCTS = [
     ],
     tiers: [
       { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Fleet Hub + ASAF Remediation Daemon + assessment export' },
-      { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3, SDVOSB-eligible sole-source' },
+      { name: 'Sovereign', price: '$45K', suffix: '– $250K/yr', note: 'Air-gapped, FIPS 140-3 inheritance in progress, SDVOSB-eligible sole-source' },
     ],
     cta: 'Book a CMMC Readiness Call',
     ctaHref: 'https://calendly.com/cybersouhimbou',
@@ -269,7 +269,7 @@ const COMPLY_LINES = [
 
 const GUARD_LINES = [
   { delay: 0,    cls: 't-cyan',  text: '$ ktos guard status --endpoint mcp.souhimbou.ai' },
-  { delay: 700,  cls: 't-dim',   text: '  [✦] SEKHEM PQC-WAF — Active (ML-KEM-1024 vault)' },
+  { delay: 700,  cls: 't-dim',   text: '  [✦] SEKHEM PQC-WAF — Active (Kyber-1024 vault)' },
   { delay: 1400, cls: 't-green', text: '  [✓] This request: ML-DSA-65 attestation verified' },
   { delay: 2100, cls: 't-white', text: '  [→] Scanning last 60s of edge traffic...' },
   { delay: 2800, cls: 't-red',   text: '  [✗] BLOCKED: Prompt injection via tool arg (3 attempts)' },
@@ -277,7 +277,7 @@ const GUARD_LINES = [
   { delay: 4200, cls: 't-amber', text: '  [!] Dihedral D₈ rotation applied — payload scrubbed' },
   { delay: 4900, cls: 't-green', text: '  [✓] 2,847 clean requests passed' },
   { delay: 5600, cls: 't-gold',  text: '  [★] X-Khepra-Trust: Post-Quantum-Protected' },
-  { delay: 6300, cls: 't-gold',  text: '  [★] X-Khepra-Algorithm: ML-DSA-65 + ML-KEM-1024' },
+  { delay: 6300, cls: 't-gold',  text: '  [★] Signed: ML-DSA-65 (FIPS 204)' },
 ]
 
 const CONSOLE_TABS = [
@@ -644,7 +644,7 @@ function ArchitecturalControlPlane3D() {
       specs: [
         '36,195 embedded mappings: STIG → CCI → NIST 800-53/171 → CMMC',
         'FIPS 204 ML-DSA-65 signatures over SHA3-256 digests',
-        'FIPS 203 ML-KEM-768/1024 rotating cryptographic vaults',
+        'Rotating CRYSTALS-Kyber-1024 vaults (FIPS 203 ML-KEM-1024 migration in progress)',
         'Immutable content-addressed DAG ledger with zero-knowledge proof',
       ],
       tools: ['dag_write', 'dag_query', 'dag_attestation', 'dag_audit', 'pqc_keygen', 'pqc_sign'],
@@ -661,7 +661,7 @@ function ArchitecturalControlPlane3D() {
         'Hardware / OS Non-Human Identity (NHI) non-exportable key binding',
         'Air-gap native: Zero external API calls, zero telemetry, zero egress',
         'Adinkra symbolic grammar: Eban (defense) & Nkyinkyim (adaptability)',
-        'Full compatibility with FIPS 140-3 BoringCrypto bare-metal hosts',
+        'Runs on FIPS-mode bare-metal hosts (FIPS 140-3 module inheritance in progress)',
       ],
       tools: ['khepra_edge_exec', 'dual_anchor', 'attest_ai_policy', 'flight_record'],
     },
@@ -815,7 +815,7 @@ function ForensicReplayVisualizer3D() {
       desc: 'SEKHEM PQC-WAF intercepts JSON-RPC payload, applies dihedral D₈ argument scrubbing, validates schema against STIG CAT I rules.',
       payload: {
         filter: 'SEKHEM_L7_WAF',
-        algorithm: 'ML-KEM-1024',
+        algorithm: 'Kyber-1024 (pre-standard)',
         injection_test: 'CLEAN (0 false passes)',
         stig_rule: 'V-258029 (CAT I)',
       },
@@ -1198,10 +1198,8 @@ export default function KTOSPage() {
 
               {/* Badge below terminal */}
               <div className="mt-4 flex items-center gap-3 justify-end">
-                <Image src="/asaf-badge.png" alt="AdinKhepra ASAF Post-Quantum Certified" width={60} height={60}
-                  className="opacity-80 hover:opacity-100 transition-opacity" />
                 <div className="text-right">
-                  <div className="text-xs text-slate-400 font-mono">Post-Quantum Certified</div>
+                  <div className="text-xs text-slate-400 font-mono">Post-Quantum Signed</div>
                   <div className="text-xs text-[#c9a227] font-mono">ML-DSA-65 · FIPS 204</div>
                 </div>
               </div>
@@ -1219,7 +1217,7 @@ export default function KTOSPage() {
           style={{ animation: 'ticker 30s linear infinite' }}>
           {Array(3).fill([
             'ML-DSA-65 Signed', 'CMMC L2 Autopilot', 'Zero Egress', 'Air-Gap Native',
-            '36K+ Mappings', 'FIPS 204 · FIPS 203', 'Patent Pending #73565085',
+            '36K+ Mappings', 'ML-DSA-65 · FIPS 204', 'Patent Pending #73565085',
             'OmniScan 50+ Detectors', 'SDVOSB-Eligible · Veteran-Led', 'KTOS Trust OS'
           ]).flat().map((t, i) => (
             <span key={i} className="text-xs text-slate-500 font-mono inline-flex items-center gap-3">
@@ -1270,7 +1268,7 @@ export default function KTOSPage() {
                 n: '02', icon: Shield, color: '#f59e0b',
                 title: 'Guard',
                 sub: 'KTOS Guard & SEKHEM',
-                body: 'Post-quantum L7 WAF. ML-KEM-1024 rotating vaults. Dihedral D₈ polymorphic argument scrubbing. Zero-day prompt injection blocked.',
+                body: 'Post-quantum L7 WAF. Rotating Kyber-1024 vaults. Dihedral D₈ polymorphic argument scrubbing. Zero-day prompt injection blocked.',
               },
               {
                 n: '03', icon: Search, color: '#a78bfa',
@@ -2123,8 +2121,6 @@ export default function KTOSPage() {
         <div className="hero-blob-cyan" style={{ top: '20%', left: '30%', opacity: 0.6 }} />
         <div className="hero-blob-gold" style={{ bottom: '10%', right: '20%', opacity: 0.5 }} />
         <div className="relative z-10 max-w-3xl mx-auto text-center reveal">
-          <Image src="/asaf-badge.png" alt="Post-Quantum Certified" width={100} height={100}
-            className="mx-auto mb-8 opacity-90" />
           <h2 className="text-4xl lg:text-6xl font-black text-white mb-6"
             style={{ fontFamily: 'Space Grotesk' }}>
             Ready to Prove It?
@@ -2213,9 +2209,7 @@ export default function KTOSPage() {
                 <li>SOUHIMBOU DOH KONE LLC</li>
                 <li>USPTO #73565085 (provisional)</li>
                 <li>EIN 99-0529252 (SecRed)</li>
-                <li className="pt-1 border-t border-slate-800">CNSA 2.0</li>
-                <li>FIPS 203 (ML-KEM)</li>
-                <li>FIPS 204 (ML-DSA)</li>
+                <li className="pt-1 border-t border-slate-800">FIPS 204 (ML-DSA-65)</li>
                 <li>NIST SP 800-171 Rev 2/3</li>
                 <li>CMMC 2.0 Level 2</li>
               </ul>

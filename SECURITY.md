@@ -95,6 +95,6 @@ See full terms: `LICENSE`
 | FIPS 140-3 | FIPS-mode build (BoringCrypto, `GOEXPERIMENT=boringcrypto`) — no CMVP certificate held; validated-module inheritance (Iron Bank / RHEL) planned |
 | NIST 800-53 | Continuous monitoring (CA-7), System Integrity (SI-7) |
 | CMMC 3.0 | Level 2 target; Level 3 for sovereign deployments |
-| NIST PQC | ML-DSA-65 (FIPS 204) + Kyber (FIPS 203) |
+| NIST PQC | ML-DSA-65 (FIPS 204) signatures; CRYSTALS-Kyber-1024 key encapsulation (pre-standard; FIPS 203 ML-KEM-1024 migration in progress) |
 
 *References: [OWASP SAMM](https://owasp.org/www-project-samm/) | [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)*

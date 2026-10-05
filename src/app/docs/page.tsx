@@ -230,7 +230,7 @@ export default function DocsPage() {
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
                     <h4 className="font-bold text-[#00d4ff] mb-1">Post-Quantum Cryptography (PQC)</h4>
                     <p className="text-slate-400">
-                      Standardized ML-DSA-65 (FIPS 204) signatures on all Agent Evidence Objects (AEO) and ML-KEM-768/1024 (FIPS 203) key encapsulation.
+                      ML-DSA-65 (FIPS 204) signatures on all Agent Evidence Objects (AEO); CRYSTALS-Kyber-1024 (pre-standard; FIPS 203 ML-KEM-1024 migration in progress) key encapsulation.
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800">
@@ -706,7 +706,7 @@ func main() {
                   Authentication & Licensing Architecture
                 </h1>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  KTOS enforces an asymmetric post-quantum licensing and authorization model anchored by <strong>FIPS 204 ML-DSA-65</strong> signatures and <strong>FIPS 203 ML-KEM-768</strong> cryptographic encapsulation.
+                  KTOS enforces an asymmetric post-quantum licensing and authorization model anchored by <strong>FIPS 204 ML-DSA-65</strong> signatures, with CRYSTALS-Kyber-1024 (pre-standard; FIPS 203 ML-KEM-1024 migration in progress) key encapsulation.
                 </p>
               </div>
 
@@ -753,7 +753,7 @@ func main() {
                         <td className="p-3.5 text-purple-400 font-bold">$45K–$250K / yr</td>
                         <td className="p-3.5 text-[#00d4ff]"><code>kphr_sov_... / kphr_sovereign_...</code></td>
                         <td className="p-3.5">100,000+ Credits</td>
-                        <td className="p-3.5">Air-Gapped Bare-Metal, FIPS 140-3 BoringCrypto, Zero-Egress Enforcement, APDL Policy Compiler, Tactical RF Spectrum &amp; SDR Enclave.</td>
+                        <td className="p-3.5">Air-Gapped Bare-Metal, FIPS 140-3 module inheritance (in progress), Zero-Egress Enforcement, APDL Policy Compiler, Tactical RF Spectrum &amp; SDR Enclave.</td>
                       </tr>
                     </tbody>
                   </table>

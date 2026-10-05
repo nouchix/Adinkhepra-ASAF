@@ -3,7 +3,7 @@
 [![USPTO Patent Pending #73565085](https://img.shields.io/badge/USPTO_PATENT-PENDING_%2373565085-blue?style=for-the-badge)](https://nouchix.com)
 [![NouchiX / SecRed Knowledge Inc](https://img.shields.io/badge/BY-NouchiX_SecRed_Knowledge-gold?style=for-the-badge)](https://nouchix.com)
 [![SDVOSB-Eligible](https://img.shields.io/badge/SDVOSB--ELIGIBLE-VETERAN--OWNED-green?style=for-the-badge)](https://nouchix.com)
-[![FIPS 204 / FIPS 203 PQC](https://img.shields.io/badge/PQC-ML--DSA--65_|_ML--KEM--768-cyan?style=for-the-badge)](https://nouchix.com)
+[![FIPS 204 ML-DSA-65](https://img.shields.io/badge/PQC-ML--DSA--65_|_Kyber--1024_(pre--standard)-cyan?style=for-the-badge)](https://nouchix.com)
 [![Pentest Certified 58/58](https://img.shields.io/badge/PENTEST-58%2F58_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
 [![Release v4.2.0](https://img.shields.io/badge/RELEASE-v4.2.0-blueviolet?style=for-the-badge)](https://github.com/nouchix/khepra-trust-os/releases/tag/v4.2.0)
 [![Next.js 16 Console](https://img.shields.io/badge/WEB_CONSOLE-NEXT.JS_16-black?style=for-the-badge)](https://adinkhepra.com)
@@ -44,7 +44,7 @@ Layer 3b│ KTOS Agentic SOC        │ Sovereign AI Security Architect & Flight
         │ (SouHimBou AI)          │ $0 / $499 / $2,999/mo self-serve. souhimbou.ai
 ────────┼─────────────────────────┼──────────────────────────────────────────────────
 Layer 2 │ Shared Trust Substrate  │ 36,195 cross-framework compliance mappings
-        │                         │ ML-DSA-65 / ML-KEM-768 PQC (Cloudflare CIRCL)
+        │                         │ ML-DSA-65 / Kyber-1024 PQC (Cloudflare CIRCL)
         │                         │ Immutable DAG attestation & Adinkra symbolic grammar
 ────────┼─────────────────────────┼──────────────────────────────────────────────────
 Layer 1 │ KHEPRA Protocol         │ Non-linear post-quantum trust foundation.

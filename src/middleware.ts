@@ -118,7 +118,6 @@ export function middleware(request: NextRequest) {
 
   // KHEPRA post-quantum attestation headers
   response.headers.set('X-Khepra-Trust', 'Post-Quantum-Protected')
-  response.headers.set('X-Khepra-Algorithm', 'ML-DSA-65+ML-KEM-1024')
   response.headers.set('X-Khepra-Version', '2.1.0')
   response.headers.set('X-NouchiX-Node', 'edge-sekhem')
 

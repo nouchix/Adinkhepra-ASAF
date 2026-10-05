@@ -143,7 +143,7 @@ $env:KHEPRA_MODE="sovereign"
 
 **First stable release. Sovereign binary.**
 
-- ML-DSA-65 (Dilithium) + Kyber-768 — NIST FIPS 204/203
+- ML-DSA-65 (FIPS 204) + Kyber-768 (pre-standard CRYSTALS-Kyber, not FIPS 203)
 - 36,195 compliance control mappings (STIG, NIST 800-171r2, CMMC 2.0, FedRAMP)
 - Godfather Report — dollar-denominated risk findings
 - Tamper-evident DAG with PQC signatures
