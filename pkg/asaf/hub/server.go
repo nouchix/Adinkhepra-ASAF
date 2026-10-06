@@ -55,7 +55,7 @@ func (s *Server) registerRoutes() {
 	s.mux.HandleFunc("/api/v1/fleet/scan", s.hitl.RequireApprovalMiddleware(s.handleStartScan))
 	s.mux.HandleFunc("/api/v1/fleet/scan/stream", s.hitl.RequireApprovalMiddleware(s.handleScanStream))
 
-	// HITL Approval endpoints for testing
+	// HITL approval (signed by the operator key) and revocation
 	s.mux.HandleFunc("/api/v1/hub/approve", s.handleHITLApprove)
 	s.mux.HandleFunc("/api/v1/hub/revoke", s.handleHITLRevoke)
 
@@ -140,13 +140,32 @@ func (s *Server) handleScanStream(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// handleHITLApprove unseals the Hub when the body is an ApprovalRequest signed
+// by the pinned operator key (see cmd/asaf-hitl-sign).
 func (s *Server) handleHITLApprove(w http.ResponseWriter, r *http.Request) {
-	// In production this would require validating a PQC signed payload.
-	s.hitl.Approve("dummy-signature")
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error": "POST a signed approval"}`, http.StatusMethodNotAllowed)
+		return
+	}
+	var req ApprovalRequest
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 64<<10)).Decode(&req); err != nil {
+		http.Error(w, `{"error": "malformed approval"}`, http.StatusBadRequest)
+		return
+	}
+	if err := s.hitl.Approve(req); err != nil {
+		http.Error(w, fmt.Sprintf(`{"error": %q}`, err.Error()), http.StatusForbidden)
+		return
+	}
 	w.Write([]byte(`{"status": "approved", "hitl": true}`))
 }
 
+// handleHITLRevoke re-seals the Hub. Revoking only ever reduces access, so it
+// needs no signature.
 func (s *Server) handleHITLRevoke(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error": "use POST"}`, http.StatusMethodNotAllowed)
+		return
+	}
 	s.hitl.Revoke()
 	w.Write([]byte(`{"status": "revoked", "hitl": false}`))
 }

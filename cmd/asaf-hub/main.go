@@ -7,6 +7,8 @@ import (
 
 	"github.com/nouchix/Adinkhepra-ASAF/pkg/asaf/fleet"
 	"github.com/nouchix/Adinkhepra-ASAF/pkg/asaf/hub"
+	"github.com/nouchix/khepra-pqc/keyfile"
+	"github.com/nouchix/khepra-pqc/sign"
 )
 
 func main() {
@@ -18,7 +20,17 @@ func main() {
 		log.Fatalf("Failed to initialize fleet manager database: %v", err)
 	}
 	defer fleetManager.Close()
-	hitlGuard := hub.NewHITLGuard()
+	// HITL approvals must be signed by the operator key in
+	// ASAF_HITL_OPERATOR_KEY (an ML-DSA-87 public key file written by
+	// `asaf-hitl-sign -keygen`). Without it the Hub stays sealed.
+	operatorKey, err := loadOperatorKey(os.Getenv("ASAF_HITL_OPERATOR_KEY"))
+	if err != nil {
+		log.Fatalf("HITL operator key: %v", err)
+	}
+	if operatorKey == nil {
+		log.Printf("HITL: ASAF_HITL_OPERATOR_KEY not set — Hub approvals are disabled")
+	}
+	hitlGuard := hub.NewHITLGuard(operatorKey)
 	
 	// Create the hub server wrapping the HITL enforcement
 	hubServer := hub.NewServer(fleetManager, hitlGuard)
@@ -35,4 +47,13 @@ func main() {
 	if err := http.ListenAndServe(addr, hubServer); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
+}
+
+// loadOperatorKey reads the pinned HITL operator public key, or returns nil
+// when path is empty.
+func loadOperatorKey(path string) (*sign.PublicKey, error) {
+	if path == "" {
+		return nil, nil
+	}
+	return keyfile.ReadVerifyingKey(path)
 }

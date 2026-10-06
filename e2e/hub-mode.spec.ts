@@ -23,16 +23,26 @@ test.describe('Stargate Hub & Fleet E2E Tests', () => {
         return;
       }
       
+      // Approvals must be signed by the operator key (cmd/asaf-hitl-sign).
+      // Provide one with ASAF_HITL_APPROVAL_JSON to run this test.
+      const approval = process.env.ASAF_HITL_APPROVAL_JSON;
+      if (!approval) {
+        test.skip(true, 'ASAF_HITL_APPROVAL_JSON not set (output of asaf-hitl-sign)');
+        return;
+      }
+
       // Revoke HITL
-      await request.get('http://localhost:8443/api/v1/hub/revoke');
+      await request.post('http://localhost:8443/api/v1/hub/revoke');
       
       // Navigate to the fleet page and attempt a scan
       await page.goto('/fleet');
       await page.getByText('Alpha Zone').click();
       await page.getByText('Start Fleet Scan').click();
       
-      // Approve the Hub via the API
-      const approveRes = await request.get('http://localhost:8443/api/v1/hub/approve');
+      // Approve the Hub with the operator-signed approval
+      const approveRes = await request.post('http://localhost:8443/api/v1/hub/approve', {
+        data: JSON.parse(approval),
+      });
       expect(approveRes.ok()).toBeTruthy();
       
       // Start the scan again

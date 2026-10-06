@@ -62,6 +62,8 @@ Thumbs.db
 # stay trackable. Anything that slips through must be rotated, not just
 # untracked.
 *_kyber
+*_mldsa87
+*_mlkem1024
 *_dilithium
 *_ed25519
 *_ecdsa
