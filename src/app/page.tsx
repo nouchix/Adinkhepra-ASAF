@@ -2238,7 +2238,7 @@ export default function KTOSPage() {
               <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 font-bold">Products</h4>
               <ul className="space-y-2">
                 {[
-                  { label: 'KTOS CMMC Hub & Fleet Engine', href: 'https://adinkhepra.com' },
+                  { label: 'KTOS CMMC Hub & Fleet Engine', href: '/' },
                   { label: 'KTOS Agentic SOC', href: 'https://souhimbou.ai' },
                   { label: 'KTOS-MCP Master-Kernel', href: 'https://mcp.souhimbou.ai' },
                   { label: 'KTOS Platform & Pricing', href: '#pricing' },
