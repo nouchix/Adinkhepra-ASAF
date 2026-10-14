@@ -7,6 +7,7 @@
 [![TriPentest Certified 92/92](https://img.shields.io/badge/TRIPENTEST-92%2F92_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
 [![Release v4.2.0](https://img.shields.io/badge/RELEASE-v4.2.0-blueviolet?style=for-the-badge)](https://github.com/nouchix/khepra-trust-os/releases/tag/v4.2.0)
 [![Next.js 16 Console](https://img.shields.io/badge/WEB_CONSOLE-NEXT.JS_16-black?style=for-the-badge)](https://adinkhepra.com)
+[![smithery badge](https://smithery.ai/badge/nouchix/ktos-mcp)](https://smithery.ai/servers/nouchix/ktos-mcp)
 
 **Sovereign Bare-Metal & osquery Fleet Manager for CMMC / STIG Compliance Audits**  
 *Layer 3a of the KHEPRA Trust OS (KTOS) Four-Layer Sovereign Architecture*
