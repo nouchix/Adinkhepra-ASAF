@@ -407,3 +407,79 @@ body {
   .hero-blob-cyan { width: 300px; height: 300px; }
   .hero-blob-gold { width: 200px; height: 200px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BENTO GRID DEFENSE DESIGN SYSTEM (ui-layouts Benchmark)
+   Surfaces: adinkhepra.com · nouchix.com · souhimbou.ai · jarvis/hud
+   ═══════════════════════════════════════════════════════════════ */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+
+.bento-card {
+  position: relative;
+  background: var(--obsidian-card);
+  border: 1px solid var(--obsidian-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), transparent 40%, rgba(201, 162, 39, 0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 12px 32px -8px rgba(0, 212, 255, 0.15), 0 0 20px rgba(0, 212, 255, 0.08);
+}
+
+.bento-card-gold:hover {
+  border-color: rgba(201, 162, 39, 0.45);
+  box-shadow: 0 12px 32px -8px rgba(201, 162, 39, 0.15), 0 0 20px rgba(201, 162, 39, 0.08);
+}
+
+.bento-col-3  { grid-column: span 3; }
+.bento-col-4  { grid-column: span 4; }
+.bento-col-5  { grid-column: span 5; }
+.bento-col-6  { grid-column: span 6; }
+.bento-col-7  { grid-column: span 7; }
+.bento-col-8  { grid-column: span 8; }
+.bento-col-12 { grid-column: span 12; }
+
+@media (max-width: 1024px) {
+  .bento-col-3,
+  .bento-col-4,
+  .bento-col-5 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-col-3,
+  .bento-col-4,
+  .bento-col-5,
+  .bento-col-6,
+  .bento-col-7,
+  .bento-col-8,
+  .bento-col-12 {
+    grid-column: span 12 !important;
+  }
+}
+

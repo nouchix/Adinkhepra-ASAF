@@ -133,29 +133,71 @@ export async function POST(req: NextRequest) {
         selected: true
       })
     } else {
-      // Subnet simulation & probing for MSP lab range
-      // Generates a responsive subnet view for the target /24
-      const ipPrefix = baseIP.split('.').slice(0, 3).join('.')
-      const sampleHosts = [
-        { hostSuffix: 10, name: 'dc01', ports: [389, 5985, 3389] },
-        { hostSuffix: 15, name: 'idm01', ports: [22, 443] },
-        { hostSuffix: 20, name: 'db01', ports: [1433, 3389] },
-        { hostSuffix: 101, name: 'ws-fin01', ports: [3389] },
-        { hostSuffix: 102, name: 'ws-eng01', ports: [3389] }
-      ]
+      // ── Real Live Hybrid Nmap Scan via JARVIS / Sonar Engine ─────────────
+      let scannedViaJarvis = false
+      try {
+        const jarvisScanRes = await fetch('http://127.0.0.1:45450/api/scanner/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target: cleanCidr,
+            ports: 'common',
+            engine: 'auto',
+            service_detection: true
+          }),
+          signal: AbortSignal.timeout(10000)
+        })
 
-      for (const sh of sampleHosts) {
-        const targetIp = `${ipPrefix}.${sh.hostSuffix}`
-        const { os, stig } = mapPortsToOS(sh.ports)
+        if (jarvisScanRes.ok) {
+          const report = await jarvisScanRes.json()
+          if (report.hosts && report.hosts.length > 0) {
+            for (const h of report.hosts) {
+              const portNumbers = (h.ports || []).map((p: any) => p.port)
+              const { os, stig } = mapPortsToOS(portNumbers)
+              discoveredHosts.push({
+                id: `sonar-${h.ip.replace(/\./g, '-')}`,
+                ip: h.ip,
+                hostname: h.hostname || `${h.ip}.enclave.local`,
+                os: h.os_match || os,
+                stig,
+                ports: portNumbers.length > 0 ? portNumbers.join(', ') : 'None',
+                reachable: h.state === 'up',
+                latencyMs: h.latency_ms || 2.0,
+                selected: true
+              })
+            }
+            scannedViaJarvis = true
+          }
+        }
+      } catch (e) {
+        // Fallback to local subnet probe if JARVIS daemon is unreachable
+      }
+
+      if (!scannedViaJarvis) {
+        // Direct socket sweep on requested IP or base IP
+        const testPorts = [22, 80, 443, 3389, 45450]
+        const openPorts: number[] = []
+        for (const p of testPorts) {
+          const isOpen = await new Promise<boolean>((resolve) => {
+            const s = new net.Socket()
+            s.setTimeout(300)
+            s.on('connect', () => { s.destroy(); resolve(true) })
+            s.on('timeout', () => { s.destroy(); resolve(false) })
+            s.on('error', () => { s.destroy(); resolve(false) })
+            try { s.connect(p, baseIP) } catch { resolve(false) }
+          })
+          if (isOpen) openPorts.push(p)
+        }
+        const { os, stig } = mapPortsToOS(openPorts)
         discoveredHosts.push({
-          id: `sonar-${targetIp.replace(/\./g, '-')}`,
-          ip: targetIp,
-          hostname: `${sh.name}.${targetEnclave.toLowerCase().replace(/[^a-z0-9]/g, '')}.local`,
+          id: `sonar-${baseIP.replace(/\./g, '-')}`,
+          ip: baseIP,
+          hostname: `${baseIP}.live.enclave`,
           os,
           stig,
-          ports: sh.ports.join(', '),
-          reachable: true,
-          latencyMs: Math.floor(Math.random() * 8) + 2,
+          ports: openPorts.length > 0 ? openPorts.join(', ') : 'None open',
+          reachable: openPorts.length > 0,
+          latencyMs: 3.5,
           selected: true
         })
       }
