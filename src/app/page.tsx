@@ -48,8 +48,8 @@ const TIERS = [
     suffix: 'Open-Core Kernel',
     tagline: 'The sovereign trust kernel. 4 Core Trust Modules. Local SQLite Ledger.',
     modules: ['KTOS Attest', 'KTOS Passport', 'KTOS Replay', 'KTOS Score'],
-    features: ['500 Tokenomics credits', '4 core trust modules', '9 base MCP tools', 'Local SQLite ledger', 'ML-DSA-65 signing', 'PQC key generation', 'Flight recorder (7-day)', 'GHCR container image'],
-    cta: 'Get the MCP Server',
+    features: ['500 Tokenomics credits', '4 core trust modules', '14 base MCP tools', 'Local SQLite ledger', 'ML-DSA-65 signing', 'PQC key generation', 'Flight recorder (7-day)', 'GHCR container image'],
+    cta: 'Get Free MCP Server',
     ctaHref: 'https://smithery.ai/servers/skone/pqc-khepra-mcp',
     badge: 'Open Core',
     featured: false,
@@ -2344,10 +2344,13 @@ export default function KTOSPage() {
               <div className="space-y-2">
                 <p className="text-xs text-slate-500 font-mono mb-2">MCP Registry Listings</p>
                 {[
-                  { label: 'Smithery.ai', href: 'https://smithery.ai/servers/skone/pqc-khepra-mcp' },
-                  { label: 'MCP Registry (Anthropic)', href: 'https://registry.modelcontextprotocol.io/?q=khepra' },
+                  { label: 'Smithery.ai (KTOS Master-Kernel)', href: 'https://smithery.ai/servers/nouchix/ktos-mcp' },
+                  { label: 'Smithery.ai (Open-Core)', href: 'https://smithery.ai/servers/skone/pqc-khepra-mcp' },
+                  { label: 'Official MCP Registry', href: 'https://registry.modelcontextprotocol.io/?q=khepra' },
                   { label: 'mcpservers.org', href: 'https://mcpservers.org/servers/nouchix/pqc-khepra-mcp' },
-                  { label: 'Live Endpoint', href: 'https://mcp.souhimbou.ai/' },
+                  { label: 'Cline Marketplace', href: 'https://github.com/cline/mcp-marketplace/issues/1824' },
+                  { label: 'GitHub Packages (GHCR)', href: 'https://ghcr.io/nouchix/pqc-khepra-mcp' },
+                  { label: 'Live Hosted SSE', href: 'https://ktos.souhimbou.ai/sse' },
                 ].map(l => (
                   <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-2 text-xs text-slate-400 hover:text-[#00d4ff] transition-colors font-mono">
