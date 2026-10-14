@@ -1,10 +1,28 @@
 # Binaries are distributed as GitHub Release assets, not committed to the repo.
 # Download from: https://github.com/nouchix/Adinkhepra-ASAF/releases
-bin/*.exe
-bin/*.elf
-bin/adinkhepra-*
-bin/apiserver-*
-bin/licensemock-*
+bin/
+asaf-hub
+*.exe
+*.exe~
+*~
+*.elf
+
+# Keys and Cryptographic material
+bin/keys/
+keys/
+*.pub
+*.key
+
+# Local databases and DAG attestation stores
+hub.db
+*.db
+data/dag/
+data/vulnerabilities.db
+test-results/
+playwright-report/
+.khepra/
+
+
 
 # Build artifacts
 *.o
@@ -33,3 +51,28 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Local environment variables
+.env.*
+
+# Ignore environment files
+*.env
+
+# Key material and sealed artifacts: never commit. Public halves (*.pub)
+# stay trackable. Anything that slips through must be rotated, not just
+# untracked.
+*_kyber
+*_mldsa87
+*_mlkem1024
+*_dilithium
+*_ed25519
+*_ecdsa
+*.dilithium
+*.dilithium.bak
+*.sealed
+*.khepra
+master_seed*
+telemetry-keys/
+keys/root-ceremony/
+PASSPHRASES*.txt
+.env_ascii

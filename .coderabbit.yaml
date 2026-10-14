@@ -1,0 +1,17 @@
+language: "en-US"
+early_access: false
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_instructions:
+    - path: "**/*.ts"
+      instructions: |
+        - Enforce enterprise Next.js security standards.
+        - Ensure sensitive API routes are protected by Auth.
+    - path: "**/*.tsx"
+      instructions: |
+        - Validate enterprise React component security and layout patterns.

@@ -122,8 +122,16 @@ services:
 
   # ─── SOVEREIGN LLM (Ollama) ───────────────────────────────────────────────────
   # Local AI inference — no egress, no API keys, no token costs.
-  # Models are pulled on first start and cached in the volume.
-  # Pull command: docker exec asaf-ollama ollama pull llama3.1:8b
+  #
+  # Models are NOT pulled on first start any more: asaf-network is now
+  # `internal: true`, so this container cannot reach a model registry — which is
+  # the point of an air-gapped deployment. Seed the volume first, on a connected
+  # host:
+  #
+  #   docker compose -f docker-compose.asaf.yml --profile bootstrap run --rm ollama-bootstrap
+  #
+  # then bring the stack up. `docker exec asaf-ollama ollama pull ...` will fail
+  # by design once the stack is running.
   ollama:
     image: ollama/ollama:latest
     container_name: asaf-ollama
@@ -151,6 +159,40 @@ services:
               count: all
               capabilities: [gpu]
         # Remove 'deploy' block entirely if no GPU available
+
+  # ─── MODEL BOOTSTRAP (connected host only) ──────────────────────────────────
+  # One-shot job that fills the ollama-models volume. It is the ONLY service
+  # attached to bootstrap-egress, and it sits behind a profile so it never
+  # starts with the stack — `docker compose up` will not run it.
+  #
+  #   docker compose -f docker-compose.asaf.yml --profile bootstrap run --rm ollama-bootstrap
+  #
+  # Override the model set with OLLAMA_BOOTSTRAP_MODELS="llama3.1:8b mistral:7b".
+  ollama-bootstrap:
+    profiles: ["bootstrap"]
+    image: ollama/ollama:latest
+    container_name: asaf-ollama-bootstrap
+    volumes:
+      - ollama-models:/root/.ollama
+    networks:
+      - bootstrap-egress
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -e
+        ollama serve &
+        server_pid=$$!
+        for _ in $$(seq 1 30); do
+          if ollama list >/dev/null 2>&1; then break; fi
+          sleep 1
+        done
+        for model in $${OLLAMA_BOOTSTRAP_MODELS:-llama3.1:8b}; do
+          echo "pulling $$model"
+          ollama pull "$$model"
+        done
+        kill $$server_pid
+        wait $$server_pid 2>/dev/null || true
+        echo "bootstrap complete — ollama-models volume is seeded"
 
   # ─── SOVEREIGN MCP SERVER ───────────────────────────────────────────────────
   # PQC-Khepra-MCP in KHEPRA_MODE=sovereign.
@@ -218,8 +260,32 @@ volumes:
 networks:
   asaf-network:
     driver: bridge
-    # Internal-only network — containers can reach each other but
-    # khepra-mcp has no internet-facing interface attached.
+    # THE EGRESS CLAIM, ENFORCED.
+    #
+    # This block previously carried only the comment "internal-only network —
+    # khepra-mcp has no internet-facing interface attached", with no `internal`
+    # key. That comment was false. A plain bridge network gets a default route
+    # and a NAT masquerade rule, so every container on it — khepra-mcp included
+    # — could open a connection to anything on the internet, while the file
+    # asserted "zero egress" and "air-gap compatible".
+    #
+    # `internal: true` is what makes those sentences true: Docker omits the
+    # default route and the masquerade rule, so nothing attached here can
+    # originate an outbound connection off-host. Container-to-container traffic
+    # within the project is unaffected.
+    #
+    # NOTE ON PUBLISHED PORTS: `internal` governs egress, not ingress. The
+    # `ports:` mappings above continue to accept inbound connections from the
+    # host. Verify on your Docker version before relying on it in production.
+    #
+    # Model weights must now be seeded before the stack starts — see the
+    # ollama-bootstrap service.
+    internal: true
     ipam:
       config:
         - subnet: 172.30.0.0/16
+
+  # Egress for the `bootstrap` profile only. Nothing in the steady-state stack
+  # attaches to this network.
+  bootstrap-egress:
+    driver: bridge

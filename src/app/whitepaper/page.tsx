@@ -3,19 +3,19 @@ import { Shield, AlertTriangle, FileText, Download, Terminal, ExternalLink, Chec
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'PQC-01-STIG-V1R1 Whitepaper — The World\'s First DoD-Style Post-Quantum Cryptography STIG',
+  title: 'PQC-01-STIG-V1R1 Whitepaper — DoD-Style Post-Quantum Cryptography STIG',
   description: 'NouchiX publishes PQC-01-STIG-V1R1: 12 actionable controls mapped to CCI, NIST 800-53 Rev 5, and CNSA 2.0. The compliance framework gap DISA has not filled. Read the whitepaper.',
   openGraph: {
-    title: 'PQC-01-STIG-V1R1 — The World\'s First PQC STIG',
+    title: 'PQC-01-STIG-V1R1 — DoD-Style PQC STIG',
     description: 'DISA has published zero PQC STIGs. We filled the gap. 12 controls. CCI-mapped. Production-implemented in KHEPRA.',
   },
 }
 
 const CONTROLS = [
-  { id: 'PQC-01-000010', cat: 'CAT I', title: 'CNSA 2.0 Algorithm Approval', nist: 'SC-13', cci: 'CCI-002450', desc: 'RSA, ECDSA, ECDH, and DH are non-compliant for new NSS implementations as of 2025. ML-DSA (FIPS 204), ML-KEM (FIPS 203), AES-256, SHA-384/512 only.' },
-  { id: 'PQC-01-000020', cat: 'CAT I', title: 'ML-DSA Key Strength', nist: 'SC-13', cci: 'CCI-002450', desc: 'Digital signature operations must use ML-DSA-65 (3293-byte public keys) or ML-DSA-87 minimum. ML-DSA-44 is not approved for NSS use.' },
-  { id: 'PQC-01-000030', cat: 'CAT I', title: 'ML-KEM Encapsulation Strength', nist: 'SC-13', cci: 'CCI-002450', desc: 'Key encapsulation must use ML-KEM-768 (1184-byte public keys) or ML-KEM-1024. ML-KEM-512 is not approved for NSS key encapsulation.' },
-  { id: 'PQC-01-000040', cat: 'CAT II', title: 'Hybrid Cryptography During Transition', nist: 'SC-8', cci: 'CCI-002418', desc: 'Systems in active transition (2025–2030) must implement hybrid key exchange combining classical (X25519) + ML-KEM-768. NSA requires both simultaneously.' },
+  { id: 'PQC-01-000010', cat: 'CAT I', title: 'CNSA 2.0 Algorithm Approval', nist: 'SC-13', cci: 'CCI-002450', desc: 'RSA, ECDSA, ECDH, and DH are non-compliant for new NSS implementations as of 2025. ML-KEM-1024 (FIPS 203), ML-DSA-87 (FIPS 204), AES-256 and SHA-384/512 only; LMS/XMSS for software and firmware signing.' },
+  { id: 'PQC-01-000020', cat: 'CAT I', title: 'ML-DSA Key Strength', nist: 'SC-13', cci: 'CCI-002450', desc: 'National security systems must use ML-DSA-87 (CNSA 2.0; 2,592-byte public keys). ML-DSA-65 (1,952-byte public keys) meets FIPS 204 but not CNSA 2.0. ML-DSA-44 is not approved for NSS use.' },
+  { id: 'PQC-01-000030', cat: 'CAT I', title: 'ML-KEM Encapsulation Strength', nist: 'SC-13', cci: 'CCI-002450', desc: 'National security systems must use ML-KEM-1024 (CNSA 2.0; 1,568-byte encapsulation keys). ML-KEM-768 meets FIPS 203 but not CNSA 2.0. ML-KEM-512 is not approved for NSS key encapsulation.' },
+  { id: 'PQC-01-000040', cat: 'CAT II', title: 'Hybrid Cryptography During Transition', nist: 'SC-8', cci: 'CCI-002418', desc: 'Systems in active transition (2025–2030) may use hybrid key exchange that combines a classical algorithm with ML-KEM, for example X25519MLKEM768 in TLS 1.3. NSA permits hybrid during the transition but does not require it; the CNSA 2.0 end state is ML-KEM-1024.' },
   { id: 'PQC-01-000050', cat: 'CAT I', title: 'Key Storage and Protection', nist: 'SC-12', cci: 'CCI-001924', desc: 'ML-DSA and ML-KEM private keys for identity/signing must be in FIPS 140-3 Level 3+ validated HSMs for systems above SECRET or handling CUI requiring NSS protection.' },
   { id: 'PQC-01-000060', cat: 'CAT I', title: 'Constant-Time Implementation', nist: 'SI-7', cci: 'CCI-002696', desc: 'PQC library must have documented constant-time guarantees for all operations involving private key material. Acceptable: liboqs, Cloudflare CIRCL, pq-crystals reference.' },
   { id: 'PQC-01-000070', cat: 'CAT II', title: 'Certificate Chain Validation', nist: 'IA-3', cci: 'CCI-001084', desc: 'System must validate X.509 certificates with id-ml-dsa-65 OID in subjectPublicKeyInfo and signatureAlgorithm fields without error.' },
@@ -63,7 +63,7 @@ export default function WhitepaperPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black leading-tight mb-4">
             PQC-01-STIG-V1R1:<br />
-            <span className="text-[#1a9fe8]">The World's First DoD-Style<br />Post-Quantum Cryptography STIG</span>
+            <span className="text-[#1a9fe8]">DoD-Style<br />Post-Quantum Cryptography STIG</span>
           </h1>
           <p className="text-slate-400 text-lg mb-2">A Technical Whitepaper on Filling the CNSA 2.0 Compliance Gap</p>
           <div className="flex flex-wrap gap-4 text-xs font-mono text-slate-500 mb-8">
@@ -110,7 +110,7 @@ export default function WhitepaperPage() {
             </div>
           </div>
           <p className="text-slate-400 leading-relaxed">
-            This paper introduces <strong className="text-white">PQC-01-STIG-V1R1</strong>, the world's first DoD-style Post-Quantum Cryptography STIG, developed by NouchiX to fill this critical compliance gap.
+            This paper introduces <strong className="text-white">PQC-01-STIG-V1R1</strong>, a comprehensive DoD-style Post-Quantum Cryptography STIG, developed by NouchiX to fill this critical compliance gap.
             We document 12 actionable controls mapped to existing CCI identifiers, NIST 800-53 Rev 5 controls, and CNSA 2.0 requirements.
             We further describe the production implementation of these controls in the KHEPRA MCP Server, including ML-DSA-65 / FIPS 204 attestation on every cryptographic operation,
             offline compliance validation, and Iron Bank-ready containerization.
@@ -211,7 +211,7 @@ export default function WhitepaperPage() {
             {[
               { label: 'ML-DSA-65 attestation', detail: 'On every MCP tool call — tamper-evident DAG chain from session initiation through completion' },
               { label: 'Offline license validation', detail: 'ML-DSA-65 signed license.adinkhepra files — fully air-gap compatible, zero external validation calls' },
-              { label: '36,195 bundled mappings', detail: 'STIG/CCI/NIST 800-53/NIST 800-171/CMMC in-container — no external database calls in any mode' },
+              { label: '19,943 mapped STIG findings', detail: 'DISA STIG findings mapped end-to-end to CMMC practices in-container — no external database calls in any mode' },
               { label: 'Iron Bank compatible', detail: 'Dockerfile.ironbank implements DoD Container Hardening Guide — submitted to Repo One' },
             ].map((f, i) => (
               <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-slate-800/60 bg-slate-900/30">
@@ -233,12 +233,10 @@ export default function WhitepaperPage() {
               </tr></thead>
               <tbody>
                 {[
-                  ['STIG_CCI_Map.csv', '28,639', 'STIG finding ID → CCI identifier'],
-                  ['CCI_to_NIST53.csv', '7,433', 'CCI → NIST 800-53 Rev 5'],
-                  ['NIST53_to_171.csv', '123', 'NIST 800-53 → NIST 800-171'],
-                  ['Total', '36,195', 'Embedded in binary via embed.FS'],
+                  ['CCI_STIG_NIST_CMMC_Complete.csv', '19,943', 'DISA STIG findings mapped end-to-end to CMMC practices'],
+                  ['Canonical Baseline', '19,943', 'Embedded in binary via embed.FS'],
                 ].map(([f, r, c], i) => (
-                  <tr key={i} className={`border-b border-white/5 ${i === 3 ? 'text-[#e5a54b] font-bold' : 'text-slate-300'}`}>
+                  <tr key={i} className={`border-b border-white/5 ${i === 1 ? 'text-[#e5a54b] font-bold' : 'text-slate-300'}`}>
                     <td className="py-2">{f}</td>
                     <td className="py-2 text-right">{r}</td>
                     <td className="py-2 pl-4 text-slate-400">{c}</td>
@@ -333,7 +331,7 @@ export default function WhitepaperPage() {
       <footer className="border-t border-white/5 py-8 px-6">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-xs font-mono text-slate-700">
-            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · SDVOSB · contact@nouchix.com
+            © 2026 SecRed Knowledge Inc. · EIN 99-0529252 · SDVOSB-Eligible · contact@nouchix.com
           </div>
           <div className="flex gap-4 text-xs font-mono text-slate-700">
             <a href="https://github.com/nouchix/pqc-khepra-mcp" className="hover:text-slate-400 transition-colors">GitHub</a>
