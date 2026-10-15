@@ -130,7 +130,8 @@ Remediation policies are declared in a human-readable, machine-verifiable gramma
 control AC-2 {
   require: pam_faillock
   deny = 3
-  unlock_time = 900
+  fail_interval = 900
+  unlock_time = 0  # Requires administrative unlock per DISA STIG SV-257855r925552_rule / CCI-000044
   maps: CMMC.AC.L2-3.1.2, NIST.AC-2, CCI-000048
 }
 ```

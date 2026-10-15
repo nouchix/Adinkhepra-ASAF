@@ -270,7 +270,7 @@ export default function WhitepaperPage() {
   }
 }`}</pre>
           </div>
-          <p className="text-slate-500 text-xs mb-6">Then prompt your AI assistant: <em className="text-slate-300">"Run pqc_stig on my project and tell me if I'm CNSA 2.0 compliant."</em></p>
+          <p className="text-slate-500 text-xs mb-6">Then prompt your AI assistant: <em className="text-slate-300">"Run pqc_stig on my project and check my post-quantum readiness."</em></p>
 
           <a href="https://registry.modelcontextprotocol.io/?q=khepra" target="_blank" rel="noopener noreferrer"
              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-[#e5a54b]/30 bg-[#e5a54b]/8 text-sm font-bold text-[#e5a54b] hover:bg-[#e5a54b]/15 transition-colors">

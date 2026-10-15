@@ -448,12 +448,13 @@ The browser front end is a Next.js application in `src/` (see `src/app/complianc
 control AC-2 {
   require: pam_faillock
   deny = 3
-  unlock_time = 900
+  fail_interval = 900
+  unlock_time = 0  # Requires administrative unlock per DISA STIG SV-257855r925552_rule / CCI-000044
   maps: CMMC.AC.L2-3.1.2, NIST.AC-2, CCI-000048
 }
 ```
 
-Read it line by line. The annotations say this control carries the `Eban` symbol, belongs to CMMC Level 2, applies at the Sovereign tier, and requires a human gate. The body says the account-lockout module must be present, that three failed attempts lock the account, and that it unlocks after 900 seconds. The `maps` line connects the control to the CMMC practice, the NIST 800-53 control and the Control Correlation Identifier it satisfies, which is how one configuration change yields evidence for several frameworks at once.
+Read it line by line. The annotations say this control carries the `Eban` symbol, belongs to CMMC Level 2, applies at the Sovereign tier, and requires a human gate. The body says the account-lockout module must be present, that three failed attempts lock the account within a 900-second window, and that it requires administrative unlock (`unlock_time = 0` per DISA STIG SV-257855). The `maps` line connects the control to the CMMC practice, the NIST 800-53 control and the Control Correlation Identifier it satisfies, which is how one configuration change yields evidence for several frameworks at once.
 
 **Staging.** Before production, the daemon shall produce a diff of the intended change against the current state, so that the approver reviews exactly what will happen.
 
