@@ -326,7 +326,7 @@ export default function DocsPage() {
       "args": [],
       "env": {
         "KHEPRA_MODE": "sovereign",
-        "KHEPRA_LICENSE_KEY": "kphr_master_demo_key",
+        "KHEPRA_LICENSE_KEY": "YOUR_KHEPRA_LICENSE_KEY",
         "WRITEGATE_MODE": "strict"
       }
     }
@@ -335,7 +335,7 @@ export default function DocsPage() {
                   {selectedLang === 'curl' &&
 `curl -X POST https://mcp.souhimbou.ai/tools/call \\
   -H "Content-Type: application/json" \\
-  -H "X-Khepra-Key: kphr_master_demo_key" \\
+  -H "X-Khepra-Key: YOUR_API_KEY" \\
   -d '{
     "jsonrpc": "2.0",
     "id": 1,
