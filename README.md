@@ -3,7 +3,7 @@
 [![USPTO Patent Pending #73565085](https://img.shields.io/badge/USPTO_PATENT-PENDING_%2373565085-blue?style=for-the-badge)](https://nouchix.com)
 [![NouchiX / SecRed Knowledge Inc](https://img.shields.io/badge/BY-NouchiX_SecRed_Knowledge-gold?style=for-the-badge)](https://nouchix.com)
 [![SDVOSB-Eligible](https://img.shields.io/badge/SDVOSB--ELIGIBLE-VETERAN--OWNED-green?style=for-the-badge)](https://nouchix.com)
-[![FIPS 204 ML-DSA-65](https://img.shields.io/badge/PQC-ML--DSA--65_|_Kyber--1024_(pre--standard)-cyan?style=for-the-badge)](https://nouchix.com)
+[![FIPS 204 ML-DSA-87](https://img.shields.io/badge/PQC-ML--DSA--87_|_ML--KEM--1024_(FIPS_203%2F204)-cyan?style=for-the-badge)](https://nouchix.com)
 [![TriPentest Certified 92/92](https://img.shields.io/badge/TRIPENTEST-92%2F92_NEUTRALIZED-brightgreen?style=for-the-badge)](https://nouchix.com)
 [![Release v4.2.0](https://img.shields.io/badge/RELEASE-v4.2.0-blueviolet?style=for-the-badge)](https://github.com/nouchix/khepra-trust-os/releases/tag/v4.2.0)
 [![Next.js 16 Console](https://img.shields.io/badge/WEB_CONSOLE-NEXT.JS_16-black?style=for-the-badge)](https://adinkhepra.com)
@@ -13,7 +13,7 @@
 *Layer 3a of the KHEPRA Trust OS (KTOS) Four-Layer Sovereign Architecture*
 
 Developed by **SecRed Knowledge Inc.** (operating as **NouchiX**), an SDVOSB-eligible (Service-Disabled Veteran-Owned Small Business, Delaware C-Corp EIN 99-0529252).  
-Founder & CEO: **Souhimbou "Cyber" Doh Kone** — Army National Guard Signal Corps (25S SATCOM), Active Secret Clearance, M.S. Digital Forensics & Cybersecurity (University at Albany, NSA CAE-CDE).
+Founder & CEO: **Souhimbou "Cyber" Doh Kone** — Army National Guard Signal Corps (25S SATCOM), Active Secret Clearance, M.S. candidate in Digital Forensics & Cybersecurity (University at Albany, NSA CAE-CDE program, expected Dec 2026).
 
 ---
 
@@ -28,7 +28,7 @@ Under DoD CMMC assessment methodology, a control is **MET** only when three inde
 2. **Interview:** Documented role assignments, operational procedures, and training ledgers.
 3. **Test:** Cryptographic, technical execution-layer proof that the control is active on live infrastructure.
 
-ASAF eliminates audit failure patterns (Paper Tigers, Scope Gaps, Hygiene Decay, History Gaps, and POA&M Ineligibility) by executing live technical verifications, managing cross-platform osquery fleets, and anchoring every remediation to an immutable post-quantum Directed Acyclic Graph (DAG) signed with **ML-DSA-65 (FIPS 204)**.
+ASAF eliminates audit failure patterns (Paper Tigers, Scope Gaps, Hygiene Decay, History Gaps, and POA&M Ineligibility) by executing live technical verifications, managing cross-platform osquery fleets, and anchoring every remediation to an immutable post-quantum Directed Acyclic Graph (DAG) signed with **ML-DSA-87 (FIPS 204)**.
 
 ---
 

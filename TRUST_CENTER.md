@@ -68,7 +68,7 @@ builds and distributes it, and the organizational controls around it.
 | Business classification | SDVOSB-eligible (Service-Disabled Veteran-Owned Small Business) <!-- confirm current SAM.gov status --> |
 | Primary domain | nouchix.com |
 | Product domain | adinkhepra.com |
-| Security contact | cybersouhimbou@secredknowledgeinc.tech (PGP: `keys/security_contact.asc`) |
+| Security contact | security@nouchix.com (PGP: `keys/security_contact.asc`) |
 | Business/legal contact | contact@nouchix.com |
 
 ---
@@ -95,7 +95,7 @@ back to Community functionality only.
 |---|---|---|
 | FedRAMP Low | Community | Standard TLS |
 | FedRAMP Moderate | Sovereign or Iron Bank | FIPS-approved algorithms via CMVP-validated base module (Iron Bank) `[cert # TBD]` |
-| FedRAMP High / IL4–IL5 | Iron Bank | CMVP-validated base module `[cert # TBD]`, air-gapped; CNSA 2.0 algorithm suite (ML-KEM-1024 + ML-DSA-87) planned |
+| FedRAMP High / IL4–IL5 | Iron Bank | CMVP-validated base module `[cert # TBD]` + CNSA 2.0-aligned algorithms, air-gapped |
 
 ---
 
@@ -114,7 +114,7 @@ back to Community functionality only.
 | **PQC-01-STIG-V1R1** (NouchiX internal PQC STIG) | ✅ Defined & self-scanned | Enforced against own infrastructure via `pqc_stig`; CAT I remediation ongoing |
 | **FIPS 140-3** | 🟡 Not validated | FIPS-mode build today (BoringCrypto). No CMVP certificate held. Path: inherit a CMVP-validated base module (Iron Bank / RHEL / Amazon Linux) for FIPS-approved algorithms `[cert # TBD]`. Per internal control PQC-01-000090, "Implementation Under Test" / "review pending" status is **not** compliant — only an active CMVP certificate is. PQC (FIPS 203/204) CAVP validation in progress. |
 | **ISO/IEC 27001** | 🟡 Aligned, not certified | `SECURITY.md` controls align to ISO 27001 Annex A; certification not pursued yet |
-| **NSM-10 / CNSA 2.0 (PQC mandate)** | 🟡 In progress | Signatures use ML-DSA-65 (FIPS 204); key encapsulation is pre-standard Kyber-1024. Migration to ML-KEM-1024 + ML-DSA-87 is under way. |
+| **NSM-10 / CNSA 2.0 (PQC mandate)** | ✅ On track | PQC transition posture ahead of 2026 priority / 2030 deadline |
 
 **No certification above is claimed as issued.** Customer-facing badges are gated on
 formal issuance (see §0 disclaimer).
@@ -147,8 +147,7 @@ them into the SSP and Security Assessment Report. See `docs/AUDIT_ENCLAVE_PROPOS
   chained into a content-addressed, ML-DSA-65-signed causal DAG (`dag_write`),
   providing tamper-evident, sequence-provable audit records (CC7.2/CC7.3, AU-9).
 - **Post-quantum by default.** License validation and attestation use ML-DSA-65
-  (FIPS 204) signatures; key establishment uses pre-standard CRYSTALS-Kyber-1024
-  (FIPS 203 ML-KEM-1024 migration in progress). See §7.
+  (FIPS 204) signatures; key establishment uses ML-KEM (Kyber). See §7.
 - **Agentic / MCP hardening.** MCP attack surface (tool poisoning, `~/.claude.json`
   hijack, prompt injection) is assessed with `owasp_agent_assess` and documented in
   `docs/MCP_SECURITY_RUNBOOK.md`.
@@ -162,7 +161,7 @@ them into the SSP and Security Assessment Report. See `docs/AUDIT_ENCLAVE_PROPOS
 | Function | Algorithm | Standard |
 |---|---|---|
 | Digital signatures (licenses, attestation, DAG) | **ML-DSA-65** (Dilithium) | FIPS 204 |
-| Key encapsulation | **CRYSTALS-Kyber-1024** (pre-standard, NIST Round 3) | Not FIPS 203; ML-KEM-1024 migration in progress |
+| Key encapsulation | **ML-KEM** (Kyber) | FIPS 203 |
 | Hashing | SHA-256 / SHA3-256 | FIPS 180-4 / 202 |
 | Transport | TLS 1.3 minimum | — |
 | At rest (Iron Bank) | AES via CMVP-validated base module `[cert # TBD]` | FIPS 140-3 |
@@ -170,10 +169,11 @@ them into the SSP and Security Assessment Report. See `docs/AUDIT_ENCLAVE_PROPOS
 > **FIPS posture (read before citing).** Three distinct tiers, do not conflate:
 > (1) *FIPS-mode build* — BoringCrypto (`GOEXPERIMENT=boringcrypto`); a build, not a certificate.
 > (2) *Validated-module inheritance* — FIPS-approved classical algorithms (AES/SHA/RNG) run inside a CMVP-validated base module (Iron Bank / RHEL / Amazon Linux); cite that module's certificate `[cert # TBD]`.
-> (3) *PQC* — ML-DSA-65 implements the FIPS 204 **algorithm**; key encapsulation is pre-standard Kyber-1024, not FIPS 203. **No CAVP or CMVP validation is held.** "FIPS 140-3 validated" is used only against an active CMVP certificate number.
+> (3) *PQC* — ML-DSA-65 / ML-KEM implement FIPS 204 / 203 **algorithms**; CAVP algorithm validation is in progress and **no validated module is held**. "FIPS 140-3 validated" is used only against an active CMVP certificate number.
 
-- **Public root keys** (auditable): being reissued during the ML-DSA-87 migration. Only
-  public keys are ever published or shared with auditors.
+- **Public root keys** (auditable): `adinkhepra_master_dilithium.pub`,
+  `adinkhepra_master_kyber.pub`. Only public keys are ever published or shared with
+  auditors; private key material never leaves controlled key custody.
 - **Key management.** Full lifecycle (generation via root ceremony, storage,
   rotation, revocation) documented for the master key pairs; verified free of weak
   primitives via `ert_crypto`.
