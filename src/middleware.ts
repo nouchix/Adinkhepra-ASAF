@@ -107,11 +107,14 @@ export function middleware(request: NextRequest) {
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://agent.souhimbou.ai https://mcp.souhimbou.ai wss://agent.souhimbou.ai",
+      "img-src 'self' data: blob: https: https://i.ytimg.com https://*.youtube.com https://*.ytimg.com",
+      "media-src 'self' https://*.youtube.com https://*.youtube-nocookie.com https://*.googlevideo.com",
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com",
+      "child-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://youtube.com",
+      "connect-src 'self' https://agent.souhimbou.ai https://mcp.souhimbou.ai wss://agent.souhimbou.ai https://*.youtube.com https://*.googlevideo.com",
       "frame-ancestors 'none'",
     ].join('; ')
   )

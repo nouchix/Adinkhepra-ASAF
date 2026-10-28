@@ -1215,10 +1215,10 @@ export default function KTOSPage() {
                 </div>
                 <div className="relative rounded-lg overflow-hidden border border-slate-800 bg-slate-950/80 aspect-video shadow-2xl">
                   <iframe
-                    src="https://www.youtube-nocookie.com/embed/osQ-nbktb40?rel=0&modestbranding=1"
+                    src="https://www.youtube.com/embed/osQ-nbktb40?rel=0&modestbranding=1"
                     title="Souhimbou 'Spencer' Kone — SUNY Albany AI Symposium Keynote"
                     className="w-full h-full object-cover border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                   />
                 </div>
