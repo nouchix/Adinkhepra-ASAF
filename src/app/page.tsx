@@ -9,7 +9,7 @@ import {
   Key, Terminal, Eye, AlertTriangle, Activity,
   Database, Layers, GitBranch, Radio, Fingerprint,
   Search, BookOpen, Repeat, TrendingUp, Menu, X,
-  ExternalLink, ChevronRight
+  ExternalLink, ChevronRight, Play
 } from 'lucide-react'
 
 /* ═══════════════════════════════════════════════════════════════
@@ -57,13 +57,28 @@ const TIERS = [
     gated: false,
   },
   {
+    key: 'starter',
+    name: 'Developer Pro',
+    price: '$49.99',
+    suffix: '/month',
+    tagline: 'Self-serve post-quantum MCP gateway for developers & single-operator teams.',
+    modules: ['+ KTOS Profile', '+ Shadow AI Lite', '+ SEKHEM WAF'],
+    features: ['1,000 Tokenomics credits', 'Everything in Community', 'Real-time Shadow AI discovery (Ollama/vLLM)', 'SEKHEM L7 WAF prompt injection defense', '7-day cloudless DAG audit log', 'Stripe instant self-serve activation'],
+    cta: 'Subscribe via Stripe ($49.99/mo)',
+    ctaHref: 'https://buy.stripe.com/7sY6oH2bM8Fc5x90F59ws03',
+    badge: 'Starter',
+    featured: false,
+    sovereign: false,
+    gated: false,
+  },
+  {
     key: 'platform',
     name: 'Platform',
     price: '$499',
     suffix: '/month',
     tagline: 'Self-serve KTOS — Full OmniScan (50+ Detectors) + threat detection.',
     modules: ['+ KTOS Scan', '+ KTOS Guard', '+ KTOS Profile', '+ KTOS Stream'],
-    features: ['3,000 Tokenomics credits', 'Everything in Community', 'OmniScan (50+ Detectors across 8 lanes)', 'Shadow AI discovery', 'Plugin4Shell audit', 'STIGViewer API integration', 'OCSF SIEM telemetry stream', 'Agent anomaly alerts (Slack/PD)', 'Unlimited DAG history'],
+    features: ['3,000 Tokenomics credits', 'Everything in Starter', 'OmniScan (50+ Detectors across 8 lanes)', 'Shadow AI discovery', 'Plugin4Shell audit', 'STIGViewer API integration', 'OCSF SIEM telemetry stream', 'Agent anomaly alerts (Slack/PD)', 'Unlimited DAG history'],
     cta: 'Subscribe via Stripe (Self-Serve)',
     ctaHref: 'https://buy.stripe.com/aFa7sLaIi6x4cZBevV9ws04',
     badge: 'Most Popular',
@@ -79,12 +94,14 @@ const TIERS = [
     tagline: 'Full Agentic SOC with remediation daemon & SEKHEM L7 PQC-WAF.',
     modules: ['+ KTOS Enclave', '+ KTOS Comply', '+ KTOS Heal', '+ KTOS Prover'],
     features: ['15,000 Tokenomics credits', 'Everything in Platform', 'Full Agentic SOC', 'SEKHEM L7 PQC-WAF', 'PTY Enclave supervisor', 'ASAF Remediation Daemon', 'Z3 SMT formal proof', 'DataLoop self-healing', 'Team seats + RBAC', 'SOC 2 / EU AI Act evidence'],
-    cta: 'Contact Sales',
-    ctaHref: 'mailto:sales@nouchix.com?subject=KTOS%20Enterprise%20Inquiry',
+    cta: 'Subscribe via Stripe ($2,999/mo)',
+    ctaHref: 'https://buy.stripe.com/7sY6oH2bM8Fc5x90F59ws03',
+    secondaryCta: 'Book Architecture Call',
+    secondaryHref: 'https://calendly.com/cybersouhimbou',
     badge: 'Full Agentic SOC',
     featured: false,
     sovereign: false,
-    gated: true,
+    gated: false,
   },
   {
     key: 'sovereign',
@@ -101,12 +118,11 @@ const TIERS = [
       'Zero-egress enforcement',
       'APDL compiler + policy editor',
       'Dedicated assessment evidence engineering',
-      /* Tactical RF Anti-Jamming: Removed from public copy; available on request. */
       'SDVOSB-eligible sole-source package',
       'Iron Bank / k8s deployment',
     ],
-    cta: 'Contact Sales',
-    ctaHref: 'mailto:sales@nouchix.com?subject=Sovereign%20Deployment%20Inquiry',
+    cta: 'Book Sovereign Briefing',
+    ctaHref: 'https://calendly.com/cybersouhimbou',
     badge: 'DoD / DIB',
     featured: false,
     sovereign: true,
@@ -156,11 +172,12 @@ const PRODUCTS = [
       'ML-DSA-65 signed SOAR playbooks · multi-agent orchestration',
     ],
     tiers: [
+      { name: 'Starter', price: '$49.99', suffix: '/month', note: 'Self-serve via Stripe · Shadow AI + SEKHEM WAF' },
       { name: 'Platform', price: '$499', suffix: '/month', note: 'Self-serve via Stripe · OmniScan + Flight Recorder' },
-      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Full SOAR engine, team seats + RBAC' },
+      { name: 'Enterprise', price: '$2,999', suffix: '/month', note: 'Full SOAR engine, team seats + RBAC · Live Stripe Checkout' },
     ],
-    cta: 'Subscribe via Stripe',
-    ctaHref: 'https://buy.stripe.com/aFa7sLaIi6x4cZBevV9ws04',
+    cta: 'Subscribe via Stripe ($2,999/mo)',
+    ctaHref: 'https://buy.stripe.com/7sY6oH2bM8Fc5x90F59ws03',
   },
   {
     key: 'mcp',
@@ -1057,7 +1074,7 @@ export default function KTOSPage() {
               className="btn-ghost text-sm py-2 px-4">
               MCP Registry
             </a>
-            <a href="mailto:cybersouhimbou@secredknowledgeinc.tech?subject=KTOS%20Demo"
+            <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer"
               className="btn-cyan text-sm py-2 px-5">
               Request Demo
             </a>
@@ -1084,7 +1101,7 @@ export default function KTOSPage() {
               className="btn-ghost block text-center text-sm py-2 px-4 mt-2 border border-[rgba(0,212,255,0.25)] text-[#00d4ff]">
               API Documentation
             </a>
-            <a href="mailto:cybersouhimbou@secredknowledgeinc.tech?subject=KTOS%20Demo"
+            <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer"
               className="btn-cyan block text-center text-sm py-2 px-4 mt-2">
               Request Demo
             </a>
@@ -1127,9 +1144,34 @@ export default function KTOSPage() {
               <p className="text-lg text-slate-300 leading-relaxed mb-4 max-w-xl">
                 <strong className="text-white">The Cryptographic Proof & Execution Gate for AI Agents.</strong> Your AI agents write production code, run shell commands, query live databases, and invoke remote MCP tools while your teams trust their output.
               </p>
-              <p className="text-base text-slate-400 leading-relaxed mb-8 max-w-xl">
+              <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
                 KTOS provides an uncompromising execution membrane: zero-trust agent passports, runtime MCP mediation, host-level PTY enclaves, and cryptographic evidence objects (AEOs) your auditors and regulators can verify independently—without trusting our servers.
               </p>
+
+              {/* Three Executive Problem Statements */}
+              <div className="grid sm:grid-cols-3 gap-3 mb-8">
+                <div className="glass rounded-xl p-3 border border-cyan-500/20 bg-cyan-500/5 flex flex-col justify-between">
+                  <div>
+                    <div className="text-[10px] font-mono text-[#00d4ff] font-bold uppercase tracking-wider mb-1">Problem A</div>
+                    <div className="text-xs font-semibold text-white leading-tight mb-1">Preventing FCA &amp; SPRS Fraud</div>
+                    <p className="text-[10px] text-slate-400 leading-relaxed">Proof that submitted scores match live configurations under False Claims Act scrutiny.</p>
+                  </div>
+                </div>
+                <div className="glass rounded-xl p-3 border border-purple-500/20 bg-purple-500/5 flex flex-col justify-between">
+                  <div>
+                    <div className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider mb-1">Problem B</div>
+                    <div className="text-xs font-semibold text-white leading-tight mb-1">Production AI Agent Control</div>
+                    <p className="text-[10px] text-slate-400 leading-relaxed">Host PTY + MCP mediation; signs every agent action with FIPS 204 ML-DSA-87/65.</p>
+                  </div>
+                </div>
+                <div className="glass rounded-xl p-3 border border-amber-500/20 bg-amber-500/5 flex flex-col justify-between">
+                  <div>
+                    <div className="text-[10px] font-mono text-[#c9a227] font-bold uppercase tracking-wider mb-1">Problem C</div>
+                    <div className="text-xs font-semibold text-white leading-tight mb-1">Bilateral CMMC Level 2</div>
+                    <p className="text-[10px] text-slate-400 leading-relaxed">Automates technical STIG baselines while isolating governance for advisory.</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Stats row */}
               <div className="flex flex-wrap gap-6 mb-10">
@@ -1170,8 +1212,38 @@ export default function KTOSPage() {
               </div>
             </div>
 
-            {/* Right: Interactive Console */}
+            {/* Right: Keynote Video & Interactive Console */}
             <div>
+              {/* Featured Keynote Video Player: SUNY Albany AI Symposium */}
+              <div className="glass rounded-xl border border-[rgba(0,212,255,0.3)] p-4 mb-4 relative overflow-hidden bg-gradient-to-br from-[rgba(15,20,32,0.9)] to-[rgba(7,9,15,0.95)]">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold">Keynote Briefing</span>
+                    <span className="text-[10px] font-mono text-slate-400">· SUNY Albany AI Symposium (NSA CAE-CDE)</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#00d4ff] border border-[rgba(0,212,255,0.3)] px-2 py-0.5 rounded">24:18</span>
+                </div>
+                <div className="relative rounded-lg overflow-hidden border border-slate-800 bg-slate-950/80 aspect-video shadow-2xl">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/osQ-nbktb40?rel=0&modestbranding=1"
+                    title="Souhimbou 'Spencer' Kone — SUNY Albany AI Symposium Keynote"
+                    className="w-full h-full object-cover border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mt-2.5 flex items-center justify-between text-[11px]">
+                  <div className="flex items-center gap-1.5 text-slate-400 font-mono text-[10px]">
+                    <Shield size={12} className="text-[#c9a227]" />
+                    <span>FIPS 204 ML-DSA-87 · Zero-Egress Gateway</span>
+                  </div>
+                  <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer" className="text-[#00d4ff] hover:underline font-mono text-[10px] flex items-center gap-1">
+                    Book Briefing with Spencer <ChevronRight size={10} />
+                  </a>
+                </div>
+              </div>
+
               {/* Tab selector */}
               <div className="flex overflow-x-auto gap-1 mb-3 pb-1 scrollbar-hide">
                 {CONSOLE_TABS.map((tab, i) => {
@@ -1228,6 +1300,102 @@ export default function KTOSPage() {
         </div>
         <style>{`@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-33.33%)} }`}</style>
       </div>
+
+      {/* ── FLAGSHIP SCENARIOS (TOP OF HOMEPAGE) ───────────────────── */}
+      <section id="scenarios" className="relative py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+
+          <div className="text-center mb-12 reveal">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4 border border-[rgba(0,212,255,0.15)]">
+              <GitBranch size={12} className="text-[#00d4ff]" />
+              <span className="text-xs text-slate-400 font-mono">Flagship Deployment Scenarios</span>
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-black text-white mb-3"
+              style={{ fontFamily: 'Space Grotesk' }}>
+              Built for the{' '}
+              <span style={{ background: 'linear-gradient(135deg, #00d4ff, #a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                Three Hardest Problems
+              </span>
+            </h2>
+            <p className="text-sm text-slate-400 max-w-2xl mx-auto">
+              Addressing False Claims Act liability, autonomous agent control, and bilateral CMMC Level 2 audit readiness on sovereign bare metal.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              {
+                letter: 'A',
+                title: 'Problem A: Preventing False Claims Act (FCA) & SPRS Fraud',
+                modules: 'Attest + Scan + Comply',
+                color: '#00d4ff',
+                desc: 'Preventing being called out for fraud under the False Claims Act because submitted SPRS scores do not match actual system configurations. Every SPRS score and self-assessment is backed by machine-verified, cryptographically signed evidence: OSCAL SSP, POA&M analysis, and offline verifiable proof bundles ready for a C3PAO.',
+                icon: FileText,
+                stat: (
+                  <span>
+                    DOJ&apos;s cyber-fraud resolutions have more than tripled in each of the past two years. Self-attestation without proof is liability.<sup><a href="#source-3" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[3]</a></sup>
+                  </span>
+                ),
+                note: (
+                  <span className="block mt-2 text-[10px] text-slate-500 font-mono">
+                    In an independent study, 87% of defense contractors scored below 70 on SPRS. KTOS closes the evidence gap.<sup><a href="#source-4" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[4]</a></sup>
+                  </span>
+                ),
+              },
+              {
+                letter: 'B',
+                title: 'Problem B: Production AI Agent Observability & Control',
+                modules: 'Attest + Passport + Score + Replay',
+                color: '#a78bfa',
+                desc: 'Gaining visibility over AI agents in production systems, controlling them in real time, and proving that control with post-quantum cryptography (FIPS 204 ML-DSA-87/65). Intercept tool calls, sandbox shell executions in PTY enclaves, and generate deterministic replay audits for Claude Code, Cursor, and autonomous agent fleets.',
+                icon: Activity,
+                stat: 'Zero trust for AI agents — at the cryptographic layer',
+                note: null,
+              },
+              {
+                letter: 'C',
+                title: 'Problem C: Bilateral CMMC Level 2 Automation',
+                modules: 'Comply + Heal + Guard + Scan',
+                color: '#c9a227',
+                desc: 'Automating technical CMMC controls configurable by machine, while isolating documentation for organizational/governance controls to pass CMMC Level 2. Technical STIG controls (sysctl, PAM, SELinux, auditd) execute via dry-run diffs under human gates; organizational controls stay partitioned for human compliance advisory.',
+                icon: Shield,
+                stat: 'Full CMMC L2 machine baselines — no cloud, no egress',
+                note: null,
+              },
+            ].map((s) => {
+              const Icon = s.icon
+              return (
+                <div key={s.letter} className="module-card reveal flex flex-col h-full"
+                  style={{ borderColor: `${s.color}15` }}>
+                  <div className="flex items-start gap-4 mb-5">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 font-black text-lg"
+                      style={{ background: `${s.color}15`, color: s.color, fontFamily: 'Space Grotesk' }}>
+                      {s.letter}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-base leading-snug">{s.title}</h3>
+                      <div className="text-[10px] font-mono mt-1" style={{ color: s.color }}>
+                        {s.modules}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-sm text-slate-400 leading-relaxed flex-1">{s.desc}</p>
+                  <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.05)]">
+                    <div className="flex items-start gap-2">
+                      <Icon size={12} style={{ color: s.color, marginTop: 2 }} className="shrink-0" />
+                      <span className="text-xs text-slate-500 italic">{s.stat}</span>
+                    </div>
+                    {s.note}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-12" />
+
 
       {/* ── HOW KTOS OPERATES ────────────────────────────────────── */}
       <section id="how-it-works" className="relative py-28 px-6">
@@ -1739,98 +1907,6 @@ export default function KTOSPage() {
 
       <div className="section-divider mx-12" />
 
-      {/* ── FLAGSHIP SCENARIOS ────────────────────────────────────── */}
-      <section className="relative py-28 px-6">
-        <div className="max-w-7xl mx-auto">
-
-          <div className="text-center mb-14 reveal">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-5 border border-[rgba(0,212,255,0.15)]">
-              <GitBranch size={12} className="text-[#00d4ff]" />
-              <span className="text-xs text-slate-400 font-mono">Flagship Deployment Scenarios</span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4"
-              style={{ fontFamily: 'Space Grotesk' }}>
-              Built for the{' '}
-              <span style={{ background: 'linear-gradient(135deg, #00d4ff, #a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Hardest Problems
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6">
-            {[
-              {
-                letter: 'A',
-                title: 'Defensible Self-Attestation',
-                modules: 'Attest + Scan + Comply',
-                color: '#00d4ff',
-                desc: 'Every SPRS score and self-assessment backed by signed, independently verifiable evidence: OSCAL-formatted SSP, POA&M analysis, traceability matrix, and a signed manifest. Ready for a C3PAO the day your prime or contract requires one.',
-                icon: FileText,
-                stat: (
-                  <span>
-                    DOJ&apos;s cyber-fraud resolutions have more than tripled in each of the past two years. Self-attestation without proof is liability.<sup><a href="#source-3" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[3]</a></sup>
-                  </span>
-                ),
-                note: (
-                  <span className="block mt-2 text-[10px] text-slate-500 font-mono">
-                    In an independent 2022 study, 87% of defense contractors scored below 70 on SPRS, the DoD&apos;s own measure of cybersecurity compliance.<sup><a href="#source-4" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[4]</a></sup>
-                  </span>
-                ),
-              },
-              {
-                letter: 'B',
-                title: 'Autonomous Agentic SOC',
-                modules: 'Attest + Passport + Score + Replay',
-                color: '#a78bfa',
-                desc: "Enterprise security teams wrap their Claude, Cursor, and Antigravity agent fleets with KTOS. Every tool call attested. Anomaly scores computed. Incidents replayed forensically. SOAR playbooks staged for human approval.",
-                icon: Activity,
-                stat: 'Zero trust for AI agents — at the cryptographic layer',
-                note: null,
-              },
-              {
-                letter: 'C',
-                title: 'Stargate CMMC Autopilot',
-                modules: 'Comply + Heal + Guard + Scan',
-                color: '#c9a227',
-                desc: "Sovereign air-gapped compliance autopilot. APDL declarations compile to Ansible. PAM, SELinux, kernel FIPS enforced autonomously under a human approval gate. DAG-attested on every execution. Zero telemetry. Bare-metal.",
-                icon: Shield,
-                stat: 'Full CMMC L2 remediation — no cloud, no egress',
-                note: null,
-              },
-            ].map((s) => {
-              const Icon = s.icon
-              return (
-                <div key={s.letter} className="module-card reveal flex flex-col h-full"
-                  style={{ borderColor: `${s.color}10` }}>
-                  <div className="flex items-start gap-4 mb-5">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 font-black text-lg"
-                      style={{ background: `${s.color}15`, color: s.color, fontFamily: 'Space Grotesk' }}>
-                      {s.letter}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-white leading-snug">{s.title}</h3>
-                      <div className="text-[10px] font-mono mt-1" style={{ color: s.color }}>
-                        {s.modules}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-slate-400 leading-relaxed flex-1">{s.desc}</p>
-                  <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.05)]">
-                    <div className="flex items-start gap-2">
-                      <Icon size={12} style={{ color: s.color, marginTop: 2 }} className="shrink-0" />
-                      <span className="text-xs text-slate-500 italic">{s.stat}</span>
-                    </div>
-                    {s.note}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-12" />
-
       {/* ── PRICING ──────────────────────────────────────────────── */}
       <section id="pricing" className="relative py-28 px-6">
         <div className="absolute inset-0 dot-grid-bg opacity-20" />
@@ -1940,7 +2016,7 @@ export default function KTOSPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {TIERS.map((tier) => (
               <div key={tier.key}
                 className={`rounded-xl border p-6 flex flex-col transition-all duration-300 reveal
@@ -1998,27 +2074,37 @@ export default function KTOSPage() {
                 {(tier as any).gated ? (
                   <div className="flex flex-col gap-2 mt-auto">
                     <a href={tier.ctaHref}
+                      target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
+                      rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className={`block text-center py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200
                         ${tier.sovereign ? 'btn-gold' : 'btn-ghost'}`}>
-                      ✉ Email Sales
+                      {tier.cta}
                     </a>
-                    <a href="https://calendly.com/cybersouhimbou"
-                      target="_blank" rel="noopener noreferrer"
-                      className={`block text-center py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-200
-                        ${tier.sovereign ? 'btn-cyan' : 'btn-cyan'}`}>
-                      📅 Book a Call
+                    <a href="mailto:sales@nouchix.com?subject=Sovereign%20Deployment%20Inquiry"
+                      className="block text-center py-2 px-3 rounded-lg text-xs text-slate-400 hover:text-white transition-colors">
+                      ✉ Email Defense Sales
                     </a>
                   </div>
                 ) : (
-                  <a href={tier.ctaHref}
-                    target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
-                    rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className={`block text-center py-3 px-4 rounded-lg font-semibold text-sm transition-all duration-200
-                      ${tier.featured ? 'btn-cyan'
-                        : tier.sovereign ? 'btn-gold'
-                        : 'btn-ghost'}`}>
-                    {tier.cta}
-                  </a>
+                  <div className="flex flex-col gap-2 mt-auto">
+                    <a href={tier.ctaHref}
+                      target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
+                      rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className={`block text-center py-2.5 px-3 rounded-lg font-semibold text-xs transition-all duration-200
+                        ${tier.featured ? 'btn-cyan'
+                          : tier.key === 'enterprise' ? 'btn-cyan'
+                          : tier.sovereign ? 'btn-gold'
+                          : 'btn-ghost'}`}>
+                      {tier.cta}
+                    </a>
+                    {(tier as any).secondaryCta && (
+                      <a href={(tier as any).secondaryHref}
+                        target="_blank" rel="noopener noreferrer"
+                        className="block text-center py-1.5 px-3 rounded-lg text-xs font-mono text-[#00d4ff] hover:bg-[rgba(0,212,255,0.08)] border border-[rgba(0,212,255,0.25)] transition-all">
+                        📅 {(tier as any).secondaryCta}
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             ))}
@@ -2181,7 +2267,7 @@ export default function KTOSPage() {
                   </div>
                 </div>
               </div>
-              <a href="mailto:sales@nouchix.com?subject=MSP%20Partner%20Inquiry%20Groff%20Model" className="btn-ghost w-full py-2.5 text-center text-xs font-mono font-bold flex items-center justify-center gap-1.5 group-hover:border-emerald-500 group-hover:text-white">
+              <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer" className="btn-ghost w-full py-2.5 text-center text-xs font-mono font-bold flex items-center justify-center gap-1.5 group-hover:border-emerald-500 group-hover:text-white">
                 Request MSP RMM Kit <ChevronRight size={14} />
               </a>
             </div>
@@ -2426,7 +2512,7 @@ export default function KTOSPage() {
             Get your SPRS score projection. Walk away with an assessment-ready evidence package.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="mailto:cybersouhimbou@secredknowledgeinc.tech?subject=KTOS%20Demo%20Request"
+            <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer"
               className="btn-cyan inline-flex items-center gap-2 text-base px-8 py-4">
               Request a Demo <ArrowRight size={18} />
             </a>
