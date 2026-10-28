@@ -1049,9 +1049,10 @@ export default function KTOSPage() {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {[
-              { label: 'Platform', href: '#platform' },
+              { label: 'The 3 Problems', href: '#problems' },
+              { label: 'Get Started', href: '#onboarding' },
               { label: 'How It Works', href: '#how-it-works' },
-              { label: 'Triple Pentest (92/92)', href: '#cyberstryke' },
+              { label: 'Assault Benchmark (92/92)', href: '#cyberstryke' },
               { label: 'Modules', href: '#modules' },
               { label: 'Documentation', href: '/docs' },
               { label: 'Pricing', href: '#pricing' },
@@ -1090,13 +1091,16 @@ export default function KTOSPage() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden glass border-t border-[rgba(0,212,255,0.1)] px-6 py-4 space-y-4">
-            {['Platform', 'How It Works', 'Assault Benchmark', 'Modules', 'Documentation', 'Pricing', 'Company'].map(l => (
-              <a key={l} href={l === 'Documentation' ? '/docs' : `#${l.toLowerCase().replace(/ /g, '-')}`}
+            {['The 3 Problems', 'Get Started', 'How It Works', 'Assault Benchmark', 'Modules', 'Documentation', 'Pricing', 'Company'].map(l => {
+              const href = l === 'Documentation' ? '/docs' : l === 'Get Started' ? '#onboarding' : l === 'The 3 Problems' ? '#problems' : `#${l.toLowerCase().replace(/ /g, '-')}`
+              return (
+                <a key={l} href={href}
                 className="block text-sm text-slate-300 hover:text-white"
                 onClick={() => setMobileMenuOpen(false)}>
                 {l}
               </a>
-            ))}
+              )
+            })}
             <a href="/docs"
               className="btn-ghost block text-center text-sm py-2 px-4 mt-2 border border-[rgba(0,212,255,0.25)] text-[#00d4ff]">
               API Documentation
@@ -1126,61 +1130,40 @@ export default function KTOSPage() {
             {/* Left: Copy */}
             <div>
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 border border-[rgba(0,212,255,0.15)]">
-                <span className="status-live text-xs text-slate-300 font-mono">AUTONOMOUS AGENT EXECUTION & POST-QUANTUM ATTESTATION · USPTO #73565085</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 border border-[rgba(0,212,255,0.25)] bg-[rgba(0,212,255,0.06)]">
+                <span className="status-live text-xs text-[#00d4ff] font-mono font-bold tracking-wider">
+                  BUILT FOR THE THREE HARDEST PROBLEMS IN DEFENSE &amp; AI
+                </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.02] tracking-tight mb-6"
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-[1.08] tracking-tight mb-6"
                 style={{ fontFamily: 'Space Grotesk' }}>
-                <span className="text-white">Proof Over Promises</span>
+                <span className="text-white">Built for the Three Hardest Problems:</span>
                 <br />
                 <span style={{
                   background: 'linear-gradient(135deg, #00d4ff, #c9a227)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                }}>for AI Agents That Touch Production.</span>
+                }}>
+                  Addressing False Claims Act liability, autonomous agent control, and bilateral CMMC Level 2 audit readiness on sovereign bare metal.
+                </span>
               </h1>
 
-              <p className="text-lg text-slate-300 leading-relaxed mb-4 max-w-xl">
-                <strong className="text-white">The Cryptographic Proof & Execution Gate for AI Agents.</strong> Your AI agents write production code, run shell commands, query live databases, and invoke remote MCP tools while your teams trust their output.
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-4 max-w-xl">
+                <strong className="text-white">Proof Over Promises for AI Agents &amp; Defense Systems.</strong> Stop guessing your compliance on stale spreadsheets. Stop letting AI coding agents execute shell commands in the dark.
               </p>
-              <p className="text-base text-slate-400 leading-relaxed mb-6 max-w-xl">
-                KTOS provides an uncompromising execution membrane: zero-trust agent passports, runtime MCP mediation, host-level PTY enclaves, and cryptographic evidence objects (AEOs) your auditors and regulators can verify independently—without trusting our servers.
+              <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-8 max-w-xl">
+                NouchiX gives you an uncompromising execution gate: real-time machine checks, automated STIG fixes under human approval, and post-quantum mathematical proof your auditors can verify offline—with zero cloud telemetry.
               </p>
-
-              {/* Three Executive Problem Statements */}
-              <div className="grid sm:grid-cols-3 gap-3 mb-8">
-                <div className="glass rounded-xl p-3 border border-cyan-500/20 bg-cyan-500/5 flex flex-col justify-between">
-                  <div>
-                    <div className="text-[10px] font-mono text-[#00d4ff] font-bold uppercase tracking-wider mb-1">Problem A</div>
-                    <div className="text-xs font-semibold text-white leading-tight mb-1">Preventing FCA &amp; SPRS Fraud</div>
-                    <p className="text-[10px] text-slate-400 leading-relaxed">Proof that submitted scores match live configurations under False Claims Act scrutiny.</p>
-                  </div>
-                </div>
-                <div className="glass rounded-xl p-3 border border-purple-500/20 bg-purple-500/5 flex flex-col justify-between">
-                  <div>
-                    <div className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider mb-1">Problem B</div>
-                    <div className="text-xs font-semibold text-white leading-tight mb-1">Production AI Agent Control</div>
-                    <p className="text-[10px] text-slate-400 leading-relaxed">Host PTY + MCP mediation; signs every agent action with FIPS 204 ML-DSA-87/65.</p>
-                  </div>
-                </div>
-                <div className="glass rounded-xl p-3 border border-amber-500/20 bg-amber-500/5 flex flex-col justify-between">
-                  <div>
-                    <div className="text-[10px] font-mono text-[#c9a227] font-bold uppercase tracking-wider mb-1">Problem C</div>
-                    <div className="text-xs font-semibold text-white leading-tight mb-1">Bilateral CMMC Level 2</div>
-                    <p className="text-[10px] text-slate-400 leading-relaxed">Automates technical STIG baselines while isolating governance for advisory.</p>
-                  </div>
-                </div>
-              </div>
 
               {/* Stats row */}
-              <div className="flex flex-wrap gap-6 mb-10">
+              <div className="flex flex-wrap gap-6 mb-8">
                 {[
-                  { val: '92 / 92', label: 'Internal Adversarial Tests Blocked' },
+                  { val: '92 / 92', label: 'Internal Attacks Neutralized' },
                   { val: '100',   label: 'MCP Kernel Tools' },
                   { val: '36K+',  label: 'Compliance Mappings' },
-                  { val: '12',    label: 'KTOS Modules' },
-                  { val: 'ML-DSA-65', label: 'FIPS 204 Signed' },
+                  { val: '75%',   label: 'Audit Prep Time Cut' },
+                  { val: 'ML-DSA-87', label: 'FIPS 204 Signed' },
                 ].map(s => (
                   <div key={s.val}>
                     <div className="text-2xl font-black text-[#00d4ff]"
@@ -1191,21 +1174,27 @@ export default function KTOSPage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="#modules" className="btn-cyan inline-flex items-center gap-2">
-                  Explore KTOS <ArrowRight size={16} />
+                <a href="#onboarding" className="btn-cyan inline-flex items-center gap-2 px-6 py-3 text-sm font-bold">
+                  Start in 5 Minutes (Zero Cloud Setup) <ArrowRight size={16} />
                 </a>
-                <a href="/docs" className="btn-ghost inline-flex items-center gap-2 border border-[rgba(0,212,255,0.3)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.06)]">
-                  <BookOpen size={16} /> Authoritative Docs
+                <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer" className="btn-ghost inline-flex items-center gap-2 px-6 py-3 text-sm border border-[rgba(0,212,255,0.3)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.08)]">
+                  📅 Book Briefing with Spencer
                 </a>
-                <a href="#pricing" className="btn-ghost inline-flex items-center gap-2">
-                  See Pricing <ChevronDown size={16} />
+                <a href="#problems" className="btn-ghost inline-flex items-center gap-2 px-6 py-3 text-sm text-slate-300">
+                  See the 3 Problems <ChevronDown size={16} />
                 </a>
               </div>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap gap-3 mt-8">
-                {['Zero Cloud Telemetry Required', 'FIPS 204 ML-DSA-65 Signed', 'Triple-Engine Pentest 92/92', 'CMMC & False Claims Act Defensible', 'SDVOSB-Eligible'].map(b => (
-                  <span key={b} className="tier-badge px-3 py-1 rounded border text-[10px] text-slate-400 border-slate-700/50">
+              <div className="flex flex-wrap gap-2.5 mt-8">
+                {[
+                  'Zero Cloud Telemetry Required',
+                  'FIPS 204 ML-DSA-87 Signed',
+                  'Triple-Engine Pentest 92/92 Blocked',
+                  'CMMC & False Claims Act Defensible',
+                  'SDVOSB-Eligible (SBA VetCert Pending)',
+                ].map(b => (
+                  <span key={b} className="tier-badge px-3 py-1 rounded border text-[11px] font-mono text-slate-300 border-slate-700/60 bg-slate-900/60">
                     {b}
                   </span>
                 ))}
@@ -1301,96 +1290,351 @@ export default function KTOSPage() {
         <style>{`@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-33.33%)} }`}</style>
       </div>
 
-      {/* ── FLAGSHIP SCENARIOS (TOP OF HOMEPAGE) ───────────────────── */}
-      <section id="scenarios" className="relative py-20 px-6">
+      {/* ── THE THREE HARDEST PROBLEMS (DEEP DIVE REALITIES) ───────── */}
+      <section id="problems" className="relative py-24 px-6 border-t border-[rgba(0,212,255,0.1)] bg-[rgba(10,14,24,0.7)]">
         <div className="max-w-7xl mx-auto">
 
-          <div className="text-center mb-12 reveal">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4 border border-[rgba(0,212,255,0.15)]">
-              <GitBranch size={12} className="text-[#00d4ff]" />
-              <span className="text-xs text-slate-400 font-mono">Flagship Deployment Scenarios</span>
+          {/* Section Header */}
+          <div className="text-center mb-16 reveal">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4 border border-[rgba(201,162,39,0.3)] bg-[rgba(201,162,39,0.06)]">
+              <AlertTriangle size={14} className="text-[#c9a227]" />
+              <span className="text-xs font-mono uppercase tracking-widest text-[#c9a227] font-bold">
+                The Three Broken-Leg Realities We Solve
+              </span>
             </div>
-            <h2 className="text-3xl lg:text-5xl font-black text-white mb-3"
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4"
               style={{ fontFamily: 'Space Grotesk' }}>
               Built for the{' '}
-              <span style={{ background: 'linear-gradient(135deg, #00d4ff, #a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Three Hardest Problems
+              <span style={{ background: 'linear-gradient(135deg, #00d4ff, #c9a227)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                Three Hardest Realities
               </span>
             </h2>
-            <p className="text-sm text-slate-400 max-w-2xl mx-auto">
-              Addressing False Claims Act liability, autonomous agent control, and bilateral CMMC Level 2 audit readiness on sovereign bare metal.
+            <p className="text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              RegScale&apos;s 2026 industry report revealed that <strong>94% of security leaders know manual compliance is broken</strong>, but <strong>72% are still trapped doing periodic audits on spreadsheets</strong>. Here is why guessing on spreadsheets and trusting AI agents without mathematical proof is costing companies millions in fines, lost contracts, and wasted engineering hours.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-6">
-            {[
-              {
-                letter: 'A',
-                title: 'Problem A: Preventing False Claims Act (FCA) & SPRS Fraud',
-                modules: 'Attest + Scan + Comply',
-                color: '#00d4ff',
-                desc: 'Preventing being called out for fraud under the False Claims Act because submitted SPRS scores do not match actual system configurations. Every SPRS score and self-assessment is backed by machine-verified, cryptographically signed evidence: OSCAL SSP, POA&M analysis, and offline verifiable proof bundles ready for a C3PAO.',
-                icon: FileText,
-                stat: (
-                  <span>
-                    DOJ&apos;s cyber-fraud resolutions have more than tripled in each of the past two years. Self-attestation without proof is liability.<sup><a href="#source-3" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[3]</a></sup>
-                  </span>
-                ),
-                note: (
-                  <span className="block mt-2 text-[10px] text-slate-500 font-mono">
-                    In an independent study, 87% of defense contractors scored below 70 on SPRS. KTOS closes the evidence gap.<sup><a href="#source-4" className="text-[#00d4ff] hover:underline font-mono ml-0.5">[4]</a></sup>
-                  </span>
-                ),
-              },
-              {
-                letter: 'B',
-                title: 'Problem B: Production AI Agent Observability & Control',
-                modules: 'Attest + Passport + Score + Replay',
-                color: '#a78bfa',
-                desc: 'Gaining visibility over AI agents in production systems, controlling them in real time, and proving that control with post-quantum cryptography (FIPS 204 ML-DSA-87/65). Intercept tool calls, sandbox shell executions in PTY enclaves, and generate deterministic replay audits for Claude Code, Cursor, and autonomous agent fleets.',
-                icon: Activity,
-                stat: 'Zero trust for AI agents — at the cryptographic layer',
-                note: null,
-              },
-              {
-                letter: 'C',
-                title: 'Problem C: Bilateral CMMC Level 2 Automation',
-                modules: 'Comply + Heal + Guard + Scan',
-                color: '#c9a227',
-                desc: 'Automating technical CMMC controls configurable by machine, while isolating documentation for organizational/governance controls to pass CMMC Level 2. Technical STIG controls (sysctl, PAM, SELinux, auditd) execute via dry-run diffs under human gates; organizational controls stay partitioned for human compliance advisory.',
-                icon: Shield,
-                stat: 'Full CMMC L2 machine baselines — no cloud, no egress',
-                note: null,
-              },
-            ].map((s) => {
-              const Icon = s.icon
-              return (
-                <div key={s.letter} className="module-card reveal flex flex-col h-full"
-                  style={{ borderColor: `${s.color}15` }}>
-                  <div className="flex items-start gap-4 mb-5">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 font-black text-lg"
-                      style={{ background: `${s.color}15`, color: s.color, fontFamily: 'Space Grotesk' }}>
-                      {s.letter}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-white text-base leading-snug">{s.title}</h3>
-                      <div className="text-[10px] font-mono mt-1" style={{ color: s.color }}>
-                        {s.modules}
-                      </div>
-                    </div>
+          {/* Three Massive Cards */}
+          <div className="space-y-12">
+
+            {/* PROBLEM A: FALSE CLAIMS ACT & SPRS FRAUD */}
+            <div className="p-8 sm:p-10 rounded-2xl glass border border-cyan-500/30 bg-gradient-to-br from-[rgba(15,20,32,0.9)] via-[rgba(10,14,24,0.85)] to-[rgba(7,9,15,0.95)] shadow-2xl reveal">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-[rgba(255,255,255,0.08)]">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center font-black text-2xl text-[#00d4ff]"
+                    style={{ fontFamily: 'Space Grotesk' }}>
+                    A
                   </div>
-                  <p className="text-sm text-slate-400 leading-relaxed flex-1">{s.desc}</p>
-                  <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.05)]">
-                    <div className="flex items-start gap-2">
-                      <Icon size={12} style={{ color: s.color, marginTop: 2 }} className="shrink-0" />
-                      <span className="text-xs text-slate-500 italic">{s.stat}</span>
-                    </div>
-                    {s.note}
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#00d4ff] font-bold">Problem A · False Claims Act &amp; Defense Contracting</span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-white" style={{ fontFamily: 'Space Grotesk' }}>
+                      Preventing False Claims Act Liability &amp; SPRS Score Fraud
+                    </h3>
                   </div>
                 </div>
-              )
-            })}
+                <div className="px-4 py-2 rounded-full border border-red-500/40 bg-red-500/10 text-red-400 font-mono text-xs font-semibold">
+                  Personal Executive Liability · Millions in Fines
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* The Broken-Leg Problem */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold flex items-center gap-1.5">
+                    <AlertTriangle size={14} /> The Broken-Leg Reality
+                  </div>
+                  <h4 className="text-base font-bold text-white">Your Signature is on the Line</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Defense contractors submit SPRS scores to the government under penalty of the False Claims Act. But in independent testing, <strong>87% of defense suppliers score below 70</strong>, and their submitted scores do not match their actual computer systems.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    The Department of Justice Civil Cyber-Fraud Initiative is holding executives personally liable—forcing settlements like Aerojet Rocketdyne ($9M) and MorseCorp ($4.6M) for submitting unverified compliance numbers.
+                  </p>
+                </div>
+
+                {/* The Cost of the Old Way */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
+                    <FileText size={14} /> The Old Way (RegScale 2026 Data)
+                  </div>
+                  <h4 className="text-base font-bold text-white">Spreadsheets Are an Auditor Trap</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    RegScale&apos;s 2026 report reveals that <strong>72% of companies still rely on once-a-year manual spreadsheets</strong>. Teams waste thousands of engineering hours taking screenshots that prove nothing.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    When the DCMA DIBCAC or a C3PAO auditor tests your systems, manual spreadsheets collapse because anyone can edit a spreadsheet. If your live machines don&apos;t match what you attested, you face contract termination, debarment, and fraud investigations.
+                  </p>
+                </div>
+
+                {/* The NouchiX Solution */}
+                <div className="space-y-3 p-6 rounded-xl border border-cyan-500/30 bg-cyan-500/5">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#00d4ff] font-bold flex items-center gap-1.5">
+                    <CheckCircle size={14} /> The NouchiX Solution
+                  </div>
+                  <h4 className="text-base font-bold text-white">Continuous Machine Proof</h4>
+                  <p className="text-sm text-slate-200 leading-relaxed">
+                    NouchiX runs automated machine probes directly against your live operating systems (Windows, RHEL, Ubuntu, macOS). Every check is sealed with post-quantum math (ML-DSA-87 / FIPS 204) into an unchangeable ledger.
+                  </p>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    When auditors examine your systems, you don&apos;t guess. You export a complete OSCAL evidence package proving your SPRS score matches live machines right now.
+                  </p>
+                  <div className="pt-2 text-xs font-mono text-[#00d4ff] font-semibold space-y-1">
+                    <div>✓ Zero personal FCA liability</div>
+                    <div>✓ 100% audit-admissible proof · Zero cloud egress</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* PROBLEM B: PRODUCTION AI AGENT CONTROL */}
+            <div className="p-8 sm:p-10 rounded-2xl glass border border-purple-500/30 bg-gradient-to-br from-[rgba(15,20,32,0.9)] via-[rgba(10,14,24,0.85)] to-[rgba(7,9,15,0.95)] shadow-2xl reveal">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-[rgba(255,255,255,0.08)]">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/40 flex items-center justify-center font-black text-2xl text-purple-400"
+                    style={{ fontFamily: 'Space Grotesk' }}>
+                    B
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold">Problem B · Autonomous AI Observability &amp; Security</span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-white" style={{ fontFamily: 'Space Grotesk' }}>
+                      Production AI Agent Observability &amp; Control
+                    </h3>
+                  </div>
+                </div>
+                <div className="px-4 py-2 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 font-mono text-xs font-semibold">
+                  Zero Trust for AI Coding Agents · Host PTY Enclaves
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* The Broken-Leg Problem */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold flex items-center gap-1.5">
+                    <AlertTriangle size={14} /> The Broken-Leg Reality
+                  </div>
+                  <h4 className="text-base font-bold text-white">Who Let the AI Into Production?</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Engineers are using AI coding agents (Claude Code, Cursor, Devin, Antigravity) that write code, run shell commands, and query live databases at machine speed.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    If an agent hallucinates a destructive flag (like <code>rm -rf</code>), leaks proprietary source code, or executes an unbounded billing loop, centralized SaaS logs only alert you hours after the disaster has happened.
+                  </p>
+                </div>
+
+                {/* The Cost of the Old Way */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
+                    <Eye size={14} /> The Old Way
+                  </div>
+                  <h4 className="text-base font-bold text-white">Screenshots Can&apos;t Go to Court</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Traditional monitoring relies on cloud logs and vendor dashboards. But anyone with admin rights can edit or backdate a cloud log.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    When an auditor or regulatory investigator asks what your AI did, you cannot hand them screenshots. You have zero mathematical proof of what the agent was told, what it touched, and who approved it.
+                  </p>
+                </div>
+
+                {/* The NouchiX Solution */}
+                <div className="space-y-3 p-6 rounded-xl border border-purple-500/30 bg-purple-500/5">
+                  <div className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold flex items-center gap-1.5">
+                    <CheckCircle size={14} /> The NouchiX Solution
+                  </div>
+                  <h4 className="text-base font-bold text-white">The Host-Level Execution Gate</h4>
+                  <p className="text-sm text-slate-200 leading-relaxed">
+                    KTOS sits directly between what the AI wants to do and what actually runs on your computer. It intercepts commands at the terminal (PTY) and MCP layer before execution.
+                  </p>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Dangerous actions route to a staged diff requiring cryptographic human sign-off. Every single tool call and command is sealed with FIPS 204 ML-DSA-87 into an immutable ledger with sub-millisecond latency.
+                  </p>
+                  <div className="pt-2 text-xs font-mono text-purple-300 font-semibold space-y-1">
+                    <div>✓ 100% visibility over AI agents</div>
+                    <div>✓ Instant kill-switch · 92/92 test attacks blocked</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* PROBLEM C: BILATERAL CMMC AUTOMATION */}
+            <div className="p-8 sm:p-10 rounded-2xl glass border border-amber-500/30 bg-gradient-to-br from-[rgba(15,20,32,0.9)] via-[rgba(10,14,24,0.85)] to-[rgba(7,9,15,0.95)] shadow-2xl reveal">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-[rgba(255,255,255,0.08)]">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center font-black text-2xl text-[#c9a227]"
+                    style={{ fontFamily: 'Space Grotesk' }}>
+                    C
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#c9a227] font-bold">Problem C · CMMC Level 2 &amp; DISA STIG Compliance</span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-white" style={{ fontFamily: 'Space Grotesk' }}>
+                      Bilateral CMMC Level 2 Automation
+                    </h3>
+                  </div>
+                </div>
+                <div className="px-4 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 font-mono text-xs font-semibold">
+                  Cuts 75% of Audit Drag · Saves $100K+ in Consulting
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* The Broken-Leg Problem */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold flex items-center gap-1.5">
+                    <AlertTriangle size={14} /> The Broken-Leg Reality
+                  </div>
+                  <h4 className="text-base font-bold text-white">The $300K Consulting Money Pit</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Passing a CMMC Level 2 audit (110 NIST SP 800-171 practices) routinely takes <strong>12 to 18 months and $100K to $300K in consulting fees</strong>.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Why? Because 75% of consultant hours are burned on repetitive grunt work: manually checking registry keys, password lockout rules, sysctl settings, and hunting down IT logs across dozens of machines.
+                  </p>
+                </div>
+
+                {/* The Cost of the Old Way */}
+                <div className="space-y-3">
+                  <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
+                    <Repeat size={14} /> The Old Way (RegScale 2026 Data)
+                  </div>
+                  <h4 className="text-base font-bold text-white">Manual Grunt Work Kills Real Security</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    RegScale&apos;s 2026 report reveals that only 4% of organizations have fully automated their compliance. The other 96% drown in manual checklists.
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Human fatigue causes a 60%+ error rate in manual evidence gathering, and configurations drift out of compliance within days after the consultant leaves.
+                  </p>
+                </div>
+
+                {/* The NouchiX Solution */}
+                <div className="space-y-3 p-6 rounded-xl border border-amber-500/30 bg-amber-500/5">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#c9a227] font-bold flex items-center gap-1.5">
+                    <CheckCircle size={14} /> The NouchiX Solution
+                  </div>
+                  <h4 className="text-base font-bold text-white">Bilateral Machine Separation</h4>
+                  <p className="text-sm text-slate-200 leading-relaxed">
+                    We divide CMMC into what machines do and what humans do. NouchiX automates the <strong>75% of technical STIG controls</strong> that computers can configure themselves (PAM, sysctl, SELinux, auditd, registry) with staged diffs under human gates.
+                  </p>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    We leave organizational policies (visitor badges, training) to human advisors. Months of manual audit prep are compressed into days, with zero cloud telemetry.
+                  </p>
+                  <div className="pt-2 text-xs font-mono text-[#c9a227] font-semibold space-y-1">
+                    <div>✓ Cuts audit prep time by 75%</div>
+                    <div>✓ Eliminates human error · Saves $100K+ in consulting</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
+        </div>
+      </section>
+
+      {/* ── CUSTOMER ONBOARDING (GET STARTED IN 5 MINUTES) ──────────── */}
+      <section id="onboarding" className="relative py-24 px-6 border-t border-[rgba(0,212,255,0.1)] bg-[rgba(7,9,15,0.9)]">
+        <div className="max-w-7xl mx-auto">
+
+          <div className="text-center mb-16 reveal">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4 border border-[rgba(0,212,255,0.25)] bg-[rgba(0,212,255,0.06)]">
+              <Zap size={14} className="text-[#00d4ff]" />
+              <span className="text-xs font-mono uppercase tracking-widest text-[#00d4ff] font-bold">
+                Zero Cloud Friction · Instant Verification
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4"
+              style={{ fontFamily: 'Space Grotesk' }}>
+              How to Get Started in{' '}
+              <span style={{ background: 'linear-gradient(135deg, #00d4ff, #22c55e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                Under 5 Minutes
+              </span>
+            </h2>
+            <p className="text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              No lengthy sales calls. No cloud account setup. No credit card required to test the open-core kernel. Everything runs locally on your own machine.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="p-8 rounded-2xl glass border border-[rgba(255,255,255,0.08)] bg-[rgba(15,20,32,0.6)] flex flex-col justify-between reveal">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-4xl font-black text-[#00d4ff]" style={{ fontFamily: 'Space Grotesk' }}>01</span>
+                  <span className="text-xs font-mono text-slate-400 border border-slate-700 px-2.5 py-1 rounded">Takes 30 Seconds</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+                  Download or Pull the Tool
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  Run the open-core kernel directly in your terminal with one command, or download our single static binary for Windows and Linux.
+                </p>
+                <div className="p-3.5 rounded-lg bg-black/60 border border-slate-800 font-mono text-xs text-[#00d4ff] mb-4 overflow-x-auto">
+                  <code>npx @souhimbou/pqc-khepra-mcp</code>
+                </div>
+              </div>
+              <div className="text-xs font-mono text-slate-400">
+                ✓ 100% local · Zero external cloud egress
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="p-8 rounded-2xl glass border border-[rgba(0,212,255,0.3)] bg-[rgba(15,20,32,0.8)] flex flex-col justify-between reveal">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-4xl font-black text-[#22c55e]" style={{ fontFamily: 'Space Grotesk' }}>02</span>
+                  <span className="text-xs font-mono text-slate-400 border border-slate-700 px-2.5 py-1 rounded">Takes 60 Seconds</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+                  Run Your First Scan or Add to AI
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  Check your operating system against live DISA STIG baselines, or add KTOS to your Claude Desktop or Cursor Pro settings in two clicks.
+                </p>
+                <div className="p-3.5 rounded-lg bg-black/60 border border-slate-800 font-mono text-xs text-emerald-400 mb-4 overflow-x-auto">
+                  <code>ktos scan --target localhost</code>
+                </div>
+              </div>
+              <div className="text-xs font-mono text-slate-400">
+                ✓ Intercepts tool calls · Detects rogue local LLMs
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="p-8 rounded-2xl glass border border-[rgba(201,162,39,0.3)] bg-[rgba(15,20,32,0.6)] flex flex-col justify-between reveal">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-4xl font-black text-[#c9a227]" style={{ fontFamily: 'Space Grotesk' }}>03</span>
+                  <span className="text-xs font-mono text-slate-400 border border-slate-700 px-2.5 py-1 rounded">Under 3 Minutes</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk' }}>
+                  Get Real Mathematical Proof
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  Instantly see your real SPRS score projection, failing controls, and dollar exposure. Export a signed OSCAL package auditors can verify offline.
+                </p>
+                <div className="p-3.5 rounded-lg bg-black/60 border border-slate-800 font-mono text-xs text-[#c9a227] mb-4 overflow-x-auto">
+                  <code>[✓] Signature Valid: ML-DSA-87 (FIPS 204)</code>
+                </div>
+              </div>
+              <div className="text-xs font-mono text-slate-400">
+                ✓ Ready for DCMA DIBCAC or C3PAO evaluation
+              </div>
+            </div>
+          </div>
+
+          {/* Quickstart Callouts */}
+          <div className="mt-12 p-6 rounded-2xl glass border border-[rgba(0,212,255,0.2)] bg-[rgba(15,20,32,0.7)] flex flex-wrap items-center justify-between gap-6 reveal">
+            <div>
+              <h4 className="text-lg font-bold text-white">Ready to see it run on your own systems?</h4>
+              <p className="text-xs text-slate-400 mt-1">Start self-serve for $49.99/mo or schedule a 1-on-1 architecture walkthrough with founder Spencer Kone.</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://buy.stripe.com/7sY6oH2bM8Fc5x90F59ws03" target="_blank" rel="noopener noreferrer" className="btn-cyan px-5 py-2.5 text-xs font-bold">
+                Subscribe via Stripe ($49.99/mo)
+              </a>
+              <a href="https://calendly.com/cybersouhimbou" target="_blank" rel="noopener noreferrer" className="btn-ghost px-5 py-2.5 text-xs border border-[rgba(0,212,255,0.3)] text-[#00d4ff]">
+                📅 Book 15-Min Walkthrough
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -1429,32 +1673,32 @@ export default function KTOSPage() {
               {
                 n: '01', icon: Fingerprint, color: '#00d4ff',
                 title: 'Intercept',
-                sub: 'KTOS Enclave & Profile',
-                body: 'Captures AI agent intent and MCP JSON-RPC calls before execution. Canonical PTY supervisor with keystroke attestation.',
+                sub: 'Catch Every Action First',
+                body: 'Catches what the AI agent or engineer is trying to run before it touches your computer. Intercepts terminal commands and MCP tool calls in real time.',
               },
               {
                 n: '02', icon: Shield, color: '#f59e0b',
                 title: 'Guard',
-                sub: 'KTOS Guard & SEKHEM',
-                body: 'Post-quantum L7 WAF. Rotating Kyber-1024 vaults. Dihedral D₈ polymorphic argument scrubbing. Zero-day prompt injection blocked.',
+                sub: 'Block Dangerous Attacks',
+                body: 'Stops prompt injections, malicious scripts, and unauthorized commands from running. Protects against rogue commands and secret leakage.',
               },
               {
                 n: '03', icon: Search, color: '#a78bfa',
                 title: 'Scan',
-                sub: 'KTOS Scan & OmniScan',
-                body: 'OmniScan 8-lane sweep: Shadow AI discovery, Plugin4Shell audit, STIG CAT I/II, SBOM/KEV correlation, and secret scanning across the full asset boundary.',
+                sub: 'Sweep for Security Holes',
+                body: 'Automatically scans your live operating system for missing STIG settings, vulnerabilities, and unauthorized local AI models like Ollama.',
               },
               {
                 n: '04', icon: Zap, color: '#22c55e',
                 title: 'Remediate',
-                sub: 'KTOS Heal & Comply',
-                body: 'Closed-loop ASAF engine applying host remediations under a human gate. APDL declarations compile to Ansible. FIPS kernel enforced.',
+                sub: 'Human-Approved Fixes',
+                body: 'Stages exact configuration fixes so you can review and approve them with one click. Automates technical STIGs without breaking production.',
               },
               {
                 n: '05', icon: Database, color: '#c9a227',
                 title: 'Attest',
-                sub: 'KTOS Attest & Stream',
-                body: 'Every state change anchored in ML-DSA-65 signed DAG ledger. Streaming OCSF findings to Splunk and Axonius. Assessment-ready evidence (self-assessment or C3PAO).',
+                sub: 'Proof That Cannot Be Faked',
+                body: 'Stamps every action and system check with post-quantum math (ML-DSA-87) into an unchangeable record your auditors can verify offline.',
               },
             ].map((step) => {
               const Icon = step.icon
