@@ -50,7 +50,7 @@ const TIERS = [
     modules: ['KTOS Attest', 'KTOS Passport', 'KTOS Replay', 'KTOS Score'],
     features: ['500 Tokenomics credits', '4 core trust modules', '14 base MCP tools', 'Local SQLite ledger', 'ML-DSA-65 signing', 'PQC key generation', 'Flight recorder (7-day)', 'GHCR container image'],
     cta: 'Get Free MCP Server',
-    ctaHref: 'https://smithery.ai/servers/skone/pqc-khepra-mcp',
+    ctaHref: 'https://github.com/nouchix/pqc-khepra-mcp',
     badge: 'Open Core',
     featured: false,
     sovereign: false,
